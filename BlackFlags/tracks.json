@@ -1,0 +1,50 @@
+{
+    "setMenuTracks": true,
+    "setGameTracks": false,
+    "songsMenu": [
+        {
+            "trackName": "01 Capitán Morgan",
+            "songName": "Captain Morgan's Revenge",
+            "description": "Alestorm 2008"
+        },
+        {
+            "trackName": "02 Bandera Negra",
+            "songName": "Al Abordaje",
+            "description": "Mago de Oz, del álbum Bandera Negra - 2021"
+        },
+        {
+            "trackName": "03 Drunken Sailor",
+            "songName": "Drunken Sailor",
+            "description": "Thunderclash, del disco  Tales of the Sea - 2015"
+        },
+        {
+            "trackName": "04 La Canción del Pirata",
+            "songName": "La Canción del Pirata",
+            "description": "Tierra Santa, del álbum Tierras de leyenda - 2000"
+        },
+        {
+            "trackName": "05 Que el Viento Sople a tu Favor",
+            "songName": "Que el Viento Sople a tu Favor",
+            "description": "Mago de Oz, del álbum Atlantia - 2010"
+        },
+        {
+            "trackName": "06 Nancy, The Tavern Wench",
+            "songName": "Nancy The Tavern Wench",
+            "description": "Versión Battleheart - 2008"
+        },
+        {
+            "trackName": "07 Rumbo al Sol",
+            "songName": "Rumbo al Sol",
+            "description": "Iberian Wolves - 2017"
+        },
+        {
+            "trackName": "08 The Tempest",
+            "songName": "The Tempest",
+            "description": "The Real Mckenzies, del álbum Westwinds - 2012"
+        }
+    ],
+    "songsGame": [
+        "canción1",
+        "canción2"
+    ]
+}

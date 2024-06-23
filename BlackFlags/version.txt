@@ -1,0 +1,28 @@
+0.030
+- Nueva ventana de selección de dificultad al crear una nueva partida.
+- Ahora se puede establecer la dificultad del juego.
+- Escena de aviso legal y PEGI
+- Los ajustes de audio ahora permiten activar y desactivar pistas.
+- Sonidos responsive en elementos UI.
+- Opción de ajustar sonido para TEA (evitar sobreestimulación)
+- La configuración de ajustes de audio es ahora serializada.
+- Se han incluido algunas opciones gráficas: modo de luz nocturna (tonos blancos más cálidos) y activar/desactivar postprocesado.
+- Se ha introducido texto adaptable por ajustes. Se puede modificar fuente y tamaoñ de texto.
+- ¡Ahora se pueden cargar mods! ¡Alucinante :D!
+- A través de los mods se puede:
+   * modificar el fondo de pantalla de carga
+   * cambiar textos de carga
+   * fondo de menú (imagen, opacidad, posición y escala)
+   * desplazar cámara de menú
+   * cambiar la música de menú y de juego.
+   * fuentes de texto, siempre que sean compatibles. Las fuentes de texto están precargadas dentro del juego en Resources. Se pueden utilizar las fuentes: Caligraf 1435, Cardinal, PiratesBay, y sylfaen.
+
+
+Puedes seguir las notificaciones de las actualizaciones en itch:
+https://eloy-ruiz.itch.io/
+
+Más información:
+gmail: eloyruiz@profesorado.cei.es
+twitter @eloynomano
+
+Sed malos OwO

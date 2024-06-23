@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - DestroyAfterALoad
+  - KeyPoint
+  - KingdomDutch
+  - KingdomFrance
+  - KingdomPortugal
+  - KingdomBritain
+  - KingdomSpain
+  - MinimapUIBox
+  - BattleCam
+  - Pirate
+  - Wall
+  - TrackContainer
+  - Delivery
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Postprocessing
+  - Water
+  - UI
+  - KeyPoint
+  - Minimap_CITY
+  - Minimap_TOWN
+  - Minimap_NAT
+  - Minimap_SMUG
+  - Minimap_PIRATE
+  - Minimap
+  - Postprocessing2
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0

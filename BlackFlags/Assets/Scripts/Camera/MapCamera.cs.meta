@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e651f2630037e3b499fe511c1ec144c2
+labels:
+- Camera
+- MapLevel
+- Mechanics
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 90
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,4 @@
+Volume_Music 0
+Volume_Ambience 0
+Volume_Effects 0
+Volume_Voices 0

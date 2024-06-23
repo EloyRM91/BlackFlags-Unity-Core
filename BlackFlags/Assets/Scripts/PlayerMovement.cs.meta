@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e6c055983f4d83442989b4d9af7648c7
+labels:
+- MapLevel
+- Mechanics
+- Player
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

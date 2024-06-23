@@ -1,0 +1,5 @@
+SuggestTutorial False
+ShowAdvisorPanel False
+AutoSkipDialog False
+ShowDialog False
+AdaptForTEA False

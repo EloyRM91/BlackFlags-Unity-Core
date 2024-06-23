@@ -1,0 +1,2 @@
+Postprocessing False
+NighLighting False

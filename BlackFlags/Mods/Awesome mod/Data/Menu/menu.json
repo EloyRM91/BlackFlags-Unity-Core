@@ -1,0 +1,12 @@
+{
+    "showFlag": true,
+    "customMenu": true,
+    "cameraDistance": 0.0,
+    "opacity": 1,
+    "xOffset": -25.0,
+    "yOffset": 12.0,
+    "zOffset": -80,
+    "xReScaled": 1.65,
+    "yRescaled": 0.85,
+    "zRescaled": 1.0
+}
