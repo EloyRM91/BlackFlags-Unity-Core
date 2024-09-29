@@ -56,6 +56,9 @@ public class MapCamera : MonoBehaviour
 
         //Minimap:
         _minimapFrame = transform.GetChild(0).GetChild(0);
+
+        //Events:
+        View3D.Focus += FocusOnTarget;
     }
     void Update()
     {

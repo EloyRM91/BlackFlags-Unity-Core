@@ -9,6 +9,12 @@ namespace UI.WorldMap
         [SerializeField] protected Transform _target;
         public static Camera cam;
 
+        public Transform Target {
+            get {
+                return _target;
+            }
+        }
+
         protected virtual void Update()
         {
             SetUIPosition();
