@@ -12,11 +12,17 @@ namespace Utilities.UI
 		protected virtual void Start() { _buttonImage = GetComponent<Image>(); }
 		public virtual void OnPointerEnter(PointerEventData eventData)
 		{
+			if(_highlighted != null)
+            {
 			_buttonImage.sprite = _highlighted;
+            }
 		}
 		public virtual void OnPointerExit(PointerEventData eventData)
         {
+			if(_notHighlighted != null)
+            {
 			_buttonImage.sprite = _notHighlighted;
+            }
 		}
 	}
 }

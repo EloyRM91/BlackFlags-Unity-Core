@@ -35,8 +35,14 @@ public class PlayerExplorer : MonoBehaviour
     private void ArriveToPort(KeyPoint k)
     {
         GetComponent<SphereCollider>().enabled = false;
-        if(visibleConvoys.Count != 1)
+        if(visibleConvoys.Count > 0)
         {
+
+            foreach (Transform visibleConvoy in visibleConvoys)
+            {
+                print(visibleConvoy);
+            }
+
             foreach (Transform visibleConvoy in visibleConvoys)
             {
                 if(visibleConvoy != null)
@@ -80,7 +86,7 @@ public class PlayerExplorer : MonoBehaviour
                 convoy.Appear();
                 other.transform.GetChild(0).gameObject.SetActive(true);
             }
-            if(other.gameObject != gameObject)
+            if(other.gameObject != gameObject && !other.CompareTag("Respawn")) 
             {
                 visibleConvoys.Add(other.transform);
                 var AI = other.GetComponent<AI_Pirate>();

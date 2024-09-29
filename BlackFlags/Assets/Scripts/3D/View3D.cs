@@ -19,6 +19,7 @@ public class View3D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] private Transform camPivot;
     [SerializeField] private Vector3 sunPivot;
     private bool inside;
+    private bool canFocusOnTarget = true;
 
     //3D View Models
     [Header("Ship Models - CIVIC/MERCHANT")] 
@@ -32,6 +33,10 @@ public class View3D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     //singleton
     private static View3D instance;
+
+    //Events
+    public delegate void FocusOnTarget(Transform target);
+    public static FocusOnTarget Focus;
 
     //Parameters
     private bool playerSelected, pressing;
@@ -57,7 +62,19 @@ public class View3D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     void Update()
     {
-        if (Input.GetMouseButton(2))
+        if(Input.GetMouseButton(0))
+        {
+            if (inside && !playerSelected && canFocusOnTarget)
+            {
+                canFocusOnTarget = false;
+                //System.Action rest = () => { canFocusOnTarget = true; };
+                //rest.Invoke();
+                //Invoke(rest.Invoke(), 0.3f);
+                //Invoke(() => { canFocusOnTarget = true; }, 0.3f);
+                Invoke("DummyDelay", 0.1f);
+            }
+        }
+        else if (Input.GetMouseButton(2))
         {
             if (inside && playerSelected && !pressing)
             {
@@ -115,6 +132,11 @@ public class View3D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             View3D_Port.SetActive(false);
             playerOnPortCam.SetActive(false);
         }
+    }
+    private void DummyDelay()
+    {
+        canFocusOnTarget = true;
+        Focus(UISelector.instance.Target);
     }
     /// <summary>
     /// NPC ship view Camera is activated

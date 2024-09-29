@@ -22,7 +22,7 @@ public class FlagMaker : MonoBehaviour
     [SerializeField] private Image[] images;
 
     //Scenic Flag
-    [SerializeField] private Renderer _flagRenderer;
+    [SerializeField] private Renderer[] _flagsRenderers;
 
     //CReate and Serialize Texture
     Texture2D selected1, selected2;
@@ -51,7 +51,7 @@ public class FlagMaker : MonoBehaviour
                 else
                     _index1 += val;
                 images[0].sprite = _a1_Preview[_index1];
-                _flagRenderer.materials[0].SetTexture("_MainTex",_a1[_index1]);
+                _flagsRenderers[0].materials[0].SetTexture("_MainTex",_a1[_index1]);
                 break;
             case 1:
                 if (val == 1 && _index1 == _b1.Length - 1)
@@ -61,7 +61,7 @@ public class FlagMaker : MonoBehaviour
                 else
                     _index1 += val;
                 images[0].sprite = _b1_Preview[_index1];
-                _flagRenderer.materials[0].SetTexture("_MainTex", _b1[_index1]);
+                _flagsRenderers[0].materials[0].SetTexture("_MainTex", _b1[_index1]);
                 break;
         }
         SetFlag();
@@ -78,7 +78,7 @@ public class FlagMaker : MonoBehaviour
                 else
                     _index2 += val;
                 images[1].sprite = _a2_Preview[_index2];
-                _flagRenderer.materials[1].SetTexture("_MainTex", _a2[_index2]);
+                _flagsRenderers[0].materials[1].SetTexture("_MainTex", _a2[_index2]);
                 break;
             case 1:
                 if (val == 1 && _index2 == _b2.Length - 1)
@@ -88,7 +88,7 @@ public class FlagMaker : MonoBehaviour
                 else
                     _index2 += val;
                 images[1].sprite = _b2_Preview[_index2];
-                _flagRenderer.materials[1].SetTexture("_MainTex", _b2[_index2]);
+                _flagsRenderers[0].materials[1].SetTexture("_MainTex", _b2[_index2]);
                 break;     
         }
         SetFlag();
@@ -140,12 +140,20 @@ public class FlagMaker : MonoBehaviour
         switch (currentConfig)
         {
             case 0:
-                _flagRenderer.materials[0].SetTexture("_MainTex", _a1[_index1]);
-                _flagRenderer.materials[1].SetTexture("_MainTex", _a2[_index2]);
+                for (int i = 0; i < _flagsRenderers.Length; i++)
+                {
+                    _flagsRenderers[i].materials[0].SetTexture("_MainTex", _a1[_index1]);
+                    _flagsRenderers[i].materials[1].SetTexture("_MainTex", _a2[_index2]);
+                }
+
                 break;
             case 1:
-                _flagRenderer.materials[0].SetTexture("_MainTex", _b1[_index1]);
-                _flagRenderer.materials[1].SetTexture("_MainTex", _b2[_index2]);
+                for (int i = 0; i < _flagsRenderers.Length; i++)
+                {
+                    _flagsRenderers[i].materials[0].SetTexture("_MainTex", _b1[_index1]);
+                    _flagsRenderers[i].materials[1].SetTexture("_MainTex", _b2[_index2]);
+                }
+
                 break;
         }
         selected1 = currentConfig == 0 ? (Texture2D)_a1[_index1] : (Texture2D)_b1[_index1];

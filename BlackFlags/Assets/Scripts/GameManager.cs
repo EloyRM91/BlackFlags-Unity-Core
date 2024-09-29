@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.IO; //test
 using UnityEngine;
 
 //Mechanics
@@ -59,7 +60,7 @@ public class GameManager : MonoBehaviour
         //Singleton
         gm = this;
         //LoadDatabase
-        WorldGenerator.Initialize();  //TODO: En el futuro esto se tendría que hacer en la pantalla de carga
+        WorldGenerator.Initialize();  //TODO: En el futuro esto se tendrï¿½a que hacer en la pantalla de carga
         createCurrentsMap();
 
         //Set MatController parameters
@@ -159,15 +160,47 @@ public class GameManager : MonoBehaviour
     //Game's currents map
     public void createCurrentsMap()
     {
-        string path = PersistentGameSettings.currentMod == null ? Application.streamingAssetsPath : PersistentGameSettings.currentMod.ModStreaming;
+        string path = (
+            PersistentGameSettings.currentMod == null ? 
+            Application.streamingAssetsPath : PersistentGameSettings.currentMod.ModStreaming
+        ) + "/";
 
 #if UNITY_EDITOR
         path = "";
 #endif
         path += "CurrentsMapData.json";
-        print(path);
 
-        currentsMapData = Serialization.SerializationUtils.LoadCurrentsMap(path);
+       //Testeo de ruta: 
+// StreamWriter outputFile = new StreamWriter(Path.Combine(Application.streamingAssetsPath, "HOLAAAAAA.txt"));
+// outputFile.WriteLine("path: " + path);
+// outputFile.WriteLine("State:");
+        // outputFile.Close();   
+        // try //!BUILD:  este try no funciona en la build
+        // {
+            currentsMapData = Serialization.SerializationUtils.LoadCurrentsMap(path);
+            // outputFile.WriteLine("success");
+        // }
+        // catch (System.Exception e)
+        // {
+        //     if(PersistentGameSettings.currentMod != null)
+        //     {
+        //         outputFile.WriteLine(e);
+        //         Debug.LogError(e);
+
+        //         try {
+        //             //Si falla la ruta del mod, usa la ruta por defecto.
+        //             path = Application.streamingAssetsPath + "/CurrentsMapData.json";
+        //             currentsMapData = Serialization.SerializationUtils.LoadCurrentsMap(path);
+        //             Debug.LogWarning("GameManagerError: Error al cargar el mapa de corrientes del mod. Se ha cargado el mapa estÃ¡ndar");
+        //         }
+        //         catch(System.Exception ee)
+        //         {
+        //             Debug.LogError("GameManagerError: Error al cargar el mapa de corrientes");
+        //             Debug.LogError(ee);
+        //         }
+        //     }
+        // }
+        // outputFile.Close();    
     }
 
     public float getCurrentEffect(Transform target)
@@ -195,10 +228,10 @@ public class GameManager : MonoBehaviour
         //print(currentAngle);
         //print(target.transform.rotation.eulerAngles.y);
 
-        //Diferencia de ángulo entre el barco y la corriente
+        //Diferencia de Ã¡ngulo entre el barco y la corriente
         var dif = Mathf.Abs(Mathf.DeltaAngle(currentAngle, target.transform.rotation.eulerAngles.y));
 
-        //Cálculo de la fuerza de corriente en base a la diferencia de ángulo con el barco
+        //CÃ¡lculo de la fuerza de corriente en base a la diferencia de ï¿½ngulo con el barco
         print(dif);
         print(Mathf.Clamp(1 - dif / 30, -1, 1) * currentsMapData.arrows[j, i].dragStrength);
         return Mathf.Clamp(1 - dif / 30, -1, 1) * currentsMapData.arrows[j, i].dragStrength;

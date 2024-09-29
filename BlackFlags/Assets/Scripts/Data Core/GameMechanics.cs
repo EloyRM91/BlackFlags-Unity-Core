@@ -18,7 +18,7 @@ namespace GameMechanics.Data
     [System.Serializable] public enum E_CurrentDrag_TYPE { None = 0, Calm = 1, Light = 2, Moderate = 3, Strong = 4, Extreme = 5}
 
     [System.Serializable]
-    public class BoundingBox
+    public struct BoundingBox
     {
         public float minX, maxX, minZ, maxZ;
 
@@ -32,7 +32,7 @@ namespace GameMechanics.Data
     }
 
     [System.Serializable]
-    public class CurrentArrow
+    public struct CurrentArrow
     {
         public int direction;
         public int dragStrength;
@@ -58,7 +58,7 @@ namespace GameMechanics.Data
         {
             bufferValue = bufferValue == "0" ? "00" : bufferValue;
             this.direction = (int)char.GetNumericValue(bufferValue[0]);
-            this.direction = (int)char.GetNumericValue(bufferValue[1]);
+            this.dragStrength = (int)char.GetNumericValue(bufferValue[1]);
         }
     }
 
