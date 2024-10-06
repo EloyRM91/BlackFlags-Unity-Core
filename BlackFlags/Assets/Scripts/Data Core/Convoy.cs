@@ -34,6 +34,7 @@ namespace GameMechanics.Ships
         //protected NavMeshAgent _thisAgent;
         public NavMeshPath path;
         protected Vector3 _destination;
+        protected int pathProgressIndex = 0;
 
         //Raycast
         protected Ray _clickRay;
@@ -169,7 +170,8 @@ namespace GameMechanics.Ships
         public float CalculateRouteTime()
         {
             var time = 0f;
-            for (int i = 0; i < path.corners.Length - 1; i++)
+            time += Vector3.Distance(transform.position, path.corners[pathProgressIndex]) / convoySpeed;
+            for (int i = pathProgressIndex; i < path.corners.Length - 1; i++)
             {
                 time += Vector3.Distance(path.corners[i], path.corners[i + 1]) / convoySpeed;
             }
