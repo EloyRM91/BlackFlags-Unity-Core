@@ -187,13 +187,20 @@ namespace GameMechanics.Ships
             float C3 = Mathf.Pow(C1, 2) - 4 * C2;
             if (C3 < 0)
             {
-               //No solution
+                //No solution
                 return transform.position + target.transform.forward * 15;
             }
             else
             {
                 //Destination
-                float t = 2 * D / (C1 + Mathf.Sqrt(C3));
+                float t = Mathf.Abs(2 * D / (C1 + Mathf.Sqrt(C3)));
+
+                if(t < 0)
+                {
+                    //No solution
+                    return transform.position + target.transform.forward * 15;
+                }
+
                 return target.transform.position + target.transform.forward * t * target.convoySpeed;
             }
         }
