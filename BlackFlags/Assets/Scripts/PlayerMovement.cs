@@ -242,6 +242,7 @@ public class PlayerMovement : Convoy
                 }
                 else //the hit is out of vision, go to map point
                 {
+                    thisConvoyTarget = null;
                     CreatePath(_clickHit.point);
                 }
             }
@@ -328,12 +329,12 @@ public class PlayerMovement : Convoy
             {
                 print("no puede interceptar en ruta actual con una intercepci�n perfecta as� que busca la mejor ruta optativa");
                 Stop();
-                byte i = 5;
+                byte i = 16;
                 var targetPos = thisConvoyTarget.transform.position;
                 var dir = thisConvoyTarget.transform.forward;
                 while (i > 0)
                 {
-
+                    print(i);
                     if (CanGoTo(targetPos + dir * i))
                     {
                         CreatePath(targetPos + dir * i);

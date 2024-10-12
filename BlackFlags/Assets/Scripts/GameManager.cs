@@ -219,7 +219,7 @@ public class GameManager : MonoBehaviour
 
         if(currentsMapData.arrows[j, i].direction == 0) 
         {
-            print("no hay corriente");
+            // print("no hay corriente");
             return 0;
         }
 
@@ -232,8 +232,8 @@ public class GameManager : MonoBehaviour
         var dif = Mathf.Abs(Mathf.DeltaAngle(currentAngle, target.transform.rotation.eulerAngles.y));
 
         //Cálculo de la fuerza de corriente en base a la diferencia de �ngulo con el barco
-        print(dif);
-        print(Mathf.Clamp(1 - dif / 30, -1, 1) * currentsMapData.arrows[j, i].dragStrength);
+        // print(dif);
+        // print(Mathf.Clamp(1 - dif / 30, -1, 1) * currentsMapData.arrows[j, i].dragStrength);
         return Mathf.Clamp(1 - dif / 30, -1, 1) * currentsMapData.arrows[j, i].dragStrength;
     }
 }
