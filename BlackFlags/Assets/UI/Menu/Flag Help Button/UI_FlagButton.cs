@@ -5,6 +5,8 @@ using UnityEngine.UI;
 /// </summary>
 public class UI_FlagButton : MonoBehaviour
 {
+    [SerializeField] private GameObject[] lockerElements;
+
     void Start()
     {
         GetComponent<Button>().onClick.AddListener(Click);
@@ -12,12 +14,25 @@ public class UI_FlagButton : MonoBehaviour
 
     private void Click()
     {
-        transform.parent.GetComponent<Animator>().SetTrigger("Click");
-        Invoke("SetOff", 4);
+        if(CanSetOff())
+        {
+            transform.parent.GetComponent<Animator>().SetTrigger("Click");
+            Invoke("SetOff", 4);
+        }
     }
 
     private void SetOff()
     {
         Destroy(gameObject);
+    }
+
+    private bool CanSetOff()
+    {
+        for (int i = 0; i < lockerElements.Length; i++)
+        {
+            if(lockerElements[i].activeSelf)
+                return false;
+        }
+        return true;
     }
 }
