@@ -10554,7 +10554,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 295595684}
   m_OnClick:
     m_PersistentCalls:
@@ -12094,7 +12094,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 353697966}
   m_OnClick:
     m_PersistentCalls:
@@ -40963,6 +40963,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a1c6527ef77b154e9f55a745fda6cf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockerElements:
+  - {fileID: 46123680}
 --- !u!114 &1612528842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48040,7 +48042,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "versi\xF3n: 0.031"
+  m_Text: "versi\xF3n: 0.0315"
 --- !u!222 &2003618626
 CanvasRenderer:
   m_ObjectHideFlags: 0
