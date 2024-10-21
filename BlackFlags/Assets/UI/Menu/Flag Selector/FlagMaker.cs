@@ -2,6 +2,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 //using UnityEngine.CoreModule;
+using GameMechanics.Data;
 
 /// <summary>
 /// The Flagmaker class manages the player's flag design and create new textures from sprites.

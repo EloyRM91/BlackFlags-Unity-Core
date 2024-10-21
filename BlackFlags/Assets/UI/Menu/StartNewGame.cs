@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering.PostProcessing;
 using GameMechanics.Mechanics;
+using GameMechanics.Data;
 
 namespace GameSettings.Core
 {

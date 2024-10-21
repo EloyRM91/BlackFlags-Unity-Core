@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 //Mechanics
 using GameMechanics.WorldCities;
+using GameMechanics.Data;
 
 namespace UI.WorldMap
 {
