@@ -292,7 +292,7 @@ namespace GameMechanics.Data
         //Current character inventory
         [SerializeField] public List<InventoryItemStacking> SmugglerInventory;
         //Resource spawn ratio by category
-        private int[] SmugglerGenerationRatio = new int[4];
+        public int[] SmugglerGenerationRatio = new int[4];
         //This character base ratio
         public int ratio = 1;
 

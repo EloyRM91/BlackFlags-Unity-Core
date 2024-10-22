@@ -8,6 +8,10 @@ using GameMechanics.WorldCities;
 using System.IO;
 using GameSettings.Core;
 
+//Serialization:
+using System;
+using System.Runtime.Serialization.Formatters.Binary;
+
 namespace GameMechanics.Data
 {
     public class PersistentGameData : Persistent
@@ -189,11 +193,269 @@ namespace GameMechanics.Data
             currentSceneIsTutorial = val;
         }
 #endregion
+    }
+}
 
-#region SERIALIZATION STRUCTURE - SAVE + LOAD
+namespace GameMechanics.save 
+{
+    #region SERIALIZATION STRUCTURES
 
+    [Serializable]
+    public abstract class SerializationConverter 
+    {
+        public float[] ConvertV3(Vector3 vector)
+        {
+            return new float[3] { vector.x, vector.y, vector.z };
+        }
+
+        public float[] ConvertV2(Vector2 vector)
+        {
+            return new float[2] { vector.x, vector.y };
+        }
+
+        public Vector3 ToVector3(float[] values)
+        {
+            return new Vector3(values[0], values[1], values [2]);
+        }
+
+        public Vector2 ToVector2(float[] values)
+        {
+            return new Vector3(values[0], values[1]);
+        }
+    }
+
+    [Serializable]
+    public abstract class SerializableKeyPoint : SerializationConverter
+    {
+        public string cityName;
+        public bool revealed;
+    }
+
+    [Serializable]
+    public abstract class SerializableSettlement : SerializableKeyPoint
+    {
+        public SerializableResource[] exports;
+    }
+
+    [Serializable]
+    public class SerializableCity : SerializableSettlement
+    {
+        public int population;
+    }
+
+    [Serializable]
+    public class SerializableTown : SerializableSettlement
+    {
+        public int population;
+    }
+
+    [Serializable]
+    public class SerializableSumgglersPost : SerializableSettlement
+    {
+
+    }
+
+    [Serializable]
+    public class SerializablePirateShelter : SerializableSettlement
+    {
+
+    }
+
+    [Serializable]
+    public class SerializableResource : SerializationConverter
+    {
+        public byte key;
+
+        public SerializableResource(Resource r)
+        {
+            key = r.Key;
+        }
+    }
+
+    [Serializable]
+    public class SerializableInventoryStacking : SerializationConverter
+    {
+        public SerializableResource resource;
+        public int amount;
+
+        public SerializableInventoryStacking(Resource r, int n)
+        { 
+            resource = new SerializableResource(r); 
+            amount = n; 
+        }
+
+        public SerializableInventoryStacking(SerializableResource r, int n)
+        {
+            resource = r;
+            amount = n;
+        }
+
+        public SerializableInventoryStacking(InventoryItemStacking inv)
+        {
+            resource = new SerializableResource(inv.resource);
+            amount = inv.amount;
+        }
+    }
+
+    [Serializable]
+    public class SerializableCharacter : SerializationConverter
+    {
+        public string characterName;
+        public float friendshipLevel;
+        public bool hasMetPlayer;
+    }
+
+    [Serializable]
+    public class SerializableSmuggler : SerializableCharacter
+    {
+        public SerializableResource[] smugglerOffer;
+        public SerializableInventoryStacking[] smugglerInventory;
+        private int[] smugglerGenerationRatio;
+
+        public SerializableSmuggler(SerializableResource[] smugglerOffer, SerializableInventoryStacking[] smugglerInventory, int[] smugglerGenerationRatio)
+        {
+            this.smugglerOffer = smugglerOffer;
+            this.smugglerInventory = smugglerInventory;
+            this.smugglerGenerationRatio = smugglerGenerationRatio;
+        }
+
+        public SerializableSmuggler(Smuggler character)
+        {
+            characterName = character.GetCharacterName();
+
+            var inventory = character.SmugglerInventory;
+            smugglerInventory = new SerializableInventoryStacking[inventory.Count];
+
+            for (int i = 0; i < inventory.Count; i++)
+            {
+                smugglerInventory[i] = new SerializableInventoryStacking(inventory[i]);
+            }
+
+            smugglerGenerationRatio = character.SmugglerGenerationRatio;
+        }
+    }
 
 #endregion
+
+#region SAVE GAME
+
+    [Serializable]
+    public class savedFile : SerializationConverter
+    {
+        public string playerName;
+        public string playerShipName;
+        public int playerGold;
+
+        public savedFile()
+        {
+            playerName = PersistentGameData._GData_PlayerName;
+            playerShipName = PersistentGameData._GData_ShipName;
+            playerGold = PersistentGameData._GData_Gold;
+        }
     }
+
+    [Serializable]
+    public class SerializationUtilities : SerializationConverter
+    {
+        protected string getFileExtension()
+        {
+            var currentMod = PersistentGameSettings.currentMod;
+
+            if (currentMod == null)
+            {
+                return ".pirate";
+            }
+            else if (currentMod.gameLogic != null)
+            {
+                //extersión de partidas guardadas del mod:
+                var ext = currentMod.gameLogic.modFileExt;
+                if (ext != string.Empty)
+                {
+                    return ext;
+                }
+                else
+                {
+                    return ".mod";
+                }
+            }
+            else
+            {
+                return ".mod";
+            }
+        }
+
+        protected string getRoute()
+        {
+            var currentMod = PersistentGameSettings.currentMod;
+            if (currentMod == null)
+            {
+                //Ruta por del juego vanilla:
+                return Directory.GetCurrentDirectory() + "/Saves/";
+            }
+            else
+            {
+                //Ruta del directorio del mod
+                return currentMod.ModPath + "Data/Saves/";
+            }
+        }
+    }
+
+    [Serializable]
+    public class SavedGameBinaryFormat : SerializationUtilities
+    {
+        public savedFile savedFile;
+
+        public SavedGameBinaryFormat(savedFile savedFile)
+        {
+            this.savedFile = savedFile;
+        }
+
+        public void SaveGame(string fileName, bool overWrite = false)
+        {
+            var path = getRoute() + fileName + getFileExtension();
+            Debug.Log("saving: " + path);
+
+            if (File.Exists(path) && !overWrite)
+            {
+                //Vamos a sobreescribir, lanzamos aviso al jugador
+
+                //Ahora mismo lo que voy a hacer es sobreescribir:
+                SaveGame(fileName, true);
+            }
+            else
+            {
+                var binaryFormatter = new BinaryFormatter();
+                var stream = new FileStream(path, FileMode.Create);
+
+                //Serialización:
+                binaryFormatter.Serialize(stream, this.savedFile);
+                stream.Close();
+            }
+
+        }
+    }
+
+    [Serializable]
+    public class LoaderBinaryFormat : SerializationUtilities
+    {
+        public savedFile LoadGame(string fileName)
+        {
+            var path = getRoute() + fileName + getFileExtension();
+            Debug.Log(path);
+            if (File.Exists(path))
+            {
+                var binaryFormatter = new BinaryFormatter();
+                var stream = new FileStream(path, FileMode.Open);
+                Debug.Log("entra aquí");
+                savedFile result = binaryFormatter.Deserialize(stream) as savedFile;
+                stream.Close();
+                return result;
+            }
+            return null;
+        }
+    }
+
+    #endregion
+
 }
 

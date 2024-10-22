@@ -13,6 +13,9 @@ using Generation.Generators;
 using Generation.Ships;
 using GameMechanics.AI;
 
+//Save & Load
+using GameMechanics.save;
+
 //
 using GameSettings.Core;
 
@@ -75,6 +78,8 @@ public class GameManager : MonoBehaviour
         PersistentGameData.CallUpdate();
         PersistentGameData._GData_Reputation = 55;
         ShipInventory.Crew = 5;
+
+        LoadGame("hola");
     }
 
     //Generation
@@ -236,4 +241,30 @@ public class GameManager : MonoBehaviour
         // print(Mathf.Clamp(1 - dif / 30, -1, 1) * currentsMapData.arrows[j, i].dragStrength);
         return Mathf.Clamp(1 - dif / 30, -1, 1) * currentsMapData.arrows[j, i].dragStrength;
     }
+
+#region SAVE & LOAD
+
+    public void SaveGame(string fileName)
+    {
+        var savedGameBinaryFormat = new SavedGameBinaryFormat(new savedFile());
+        savedGameBinaryFormat.SaveGame(fileName);
+    }
+
+    public void LoadGame(string fileName)
+    {
+        var loaderBinaryFormat = new LoaderBinaryFormat();
+        savedFile savedGameData = loaderBinaryFormat.LoadGame(fileName);
+
+        if(savedGameData != null)
+        {
+            print(savedGameData.playerGold);
+            print(savedGameData.playerName);
+            print(savedGameData.playerShipName);
+        }
+        else
+        {
+            Debug.LogError("Dummy Error");
+        }
+    }
+#endregion
 }
