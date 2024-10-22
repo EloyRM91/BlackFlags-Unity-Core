@@ -20,10 +20,10 @@ namespace GameSettings.Core
 
         //Settings
         public static bool
-            _playTutorial, //¿Preguntar al jugador si desea jugar a la tutorial antes de iniciar partida o campaña?
-            _advisorPanel, //¿Mostrar consejos y ayudas durante el juego?
-            _autoSkipDialog, //¿Saltar diálogos en secuencia automáticamente?
-            _showDialogs; //¿Mostrar diálogos?
+            _playTutorial, //ï¿½Preguntar al jugador si desea jugar a la tutorial antes de iniciar partida o campaï¿½a?
+            _advisorPanel, //ï¿½Mostrar consejos y ayudas durante el juego?
+            _autoSkipDialog, //ï¿½Saltar diï¿½logos en secuencia automï¿½ticamente?
+            _showDialogs; //ï¿½Mostrar diï¿½logos?
 
         //Mods
         public static ModData currentMod = null;
@@ -122,6 +122,7 @@ namespace GameSettings.Core
             ModData.GetJsonFile(File.ReadAllText(Path.Combine(directory, "Data/Menu/menu.json")), out currentMod.jsonMenu);
             ModData.GetJsonFile(File.ReadAllText(Path.Combine(directory, "Fonts/styles.json")), out currentMod.jsonFonts);
             ModData.GetJsonFile(File.ReadAllText(Path.Combine(directory, "Music/tracks.json")), out currentMod.jsonTracks);
+            ModData.GetJsonFile(File.ReadAllText(Path.Combine(directory, "Data/gameData.json")), out currentMod.gameLogic);
         }
 
     }
@@ -157,6 +158,7 @@ namespace GameSettings.Core
         public JSON_Menu jsonMenu;
         public JSON_Fonts jsonFonts;
         public JSON_Tracks jsonTracks;
+        public JSON_GameData gameLogic;
 
         public ModData(string directory)
         {
@@ -173,7 +175,7 @@ namespace GameSettings.Core
             }
             else
             {
-                modVersion = "versión: ??????";
+                modVersion = "versiï¿½n: ??????";
             }
 
             path = directory + "readme.txt";
@@ -311,6 +313,19 @@ namespace GameSettings.Mods
         {
             setMenuTracks = false;
             setGameTracks = false;
+        }
+    }
+
+    /// <summary>
+    /// Clase donde se almancela cualquier cambio en la lÃ³gica de juego del mod
+    /// </summary>
+    public class JSON_GameData : JSON_MOD
+    {
+        public string modFileExt = ".mod";
+
+        public JSON_GameData(string modFileExt)
+        {
+            this.modFileExt = modFileExt;
         }
     }
 

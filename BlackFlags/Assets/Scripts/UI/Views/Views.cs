@@ -1,5 +1,6 @@
 using UnityEngine;
 using GameMechanics.Utilities;
+using GameMechanics.Data;
 
 public abstract class UI_ScenicView<T> : SingletonBehaviour<T> where T : MonoBehaviour
 {

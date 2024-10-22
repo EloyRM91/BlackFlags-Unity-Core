@@ -7,6 +7,9 @@ using UnityEditor;
 using UnityEngine.UI;
 using System.IO;
 
+//Game Data
+using GameMechanics.Data;
+
 public class SceneManager : MonoBehaviour
 {
     [SerializeField] private Sprite tutorialAvatar;

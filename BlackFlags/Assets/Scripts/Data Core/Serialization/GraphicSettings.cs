@@ -59,8 +59,7 @@ namespace GameSettings.VFX
         {
             
             if (File.Exists(path))
-            {
-                
+            { 
                 var reader = new StreamReader(path);
 
                 Postprocessing = reader.ReadLine().Split(' ')[1] == "True";
