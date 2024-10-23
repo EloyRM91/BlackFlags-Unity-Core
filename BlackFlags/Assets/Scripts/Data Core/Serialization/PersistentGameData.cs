@@ -110,7 +110,7 @@ namespace GameMechanics.Data
             //Initialize a sample player name
             _GData_PlayerName = "Guybrush Threepwood";
             //Initialize a sample ship name
-            _GData_ShipName = "Seren�ssima";
+            _GData_ShipName = "Sereníssima";
         }
 
 #region EVENTS
@@ -221,6 +221,11 @@ namespace GameMechanics.save
         public Vector2 ToVector2(float[] values)
         {
             return new Vector3(values[0], values[1]);
+        }
+
+        public float[] ConvertQuaternion(Quaternion rot)
+        {
+            return new float[] { rot.x, rot.y, rot.z, rot.w};
         }
     }
 
@@ -335,22 +340,140 @@ namespace GameMechanics.save
         }
     }
 
-#endregion
+    [Serializable]
+    public class SerializableShip : SerializationConverter
+    {
+        // Clave numérica de tipo de barco:
+        // 0 - Coastal Sloop
+        // 1 - Continental Sloop
+        // 2 - Military Balander
+        // 3 - Two Mastles Felucca
+        // 4 - Mistic Felucca
+        // 5 - One-Mastled Tartain
+        // 6 - Two-MastledTartain
+        // 7 - 12 cannons brig
+        // 8 - 16 cannons brig
+        // 9 - 10 cannons Lugger
+        // 10 - 14 cannons Lugger
+        // 11 - Shooner Polacre
+        // 12 - Polacre
+        // 13 - Corvette
+        // 14 - 26 Cannons-Frigate
+        // 15 - Military Frigate
+        // 16 - Little Gallion / Galeoncete
+        // 17 - Gallion
+        // 18 - Dutch Gallion
+        // 19 - Flyboat
+        // 20 - Urca
 
-#region SAVE GAME
+        // Clave numérica de Mejoras en el barco:
+        // 0 - Boardingnets - Redes de Abordaje
+        // 1 - Copperhull - Planchas de Cobre
+        // 2 - Overblindsail - Sobrecebadera
+        // 3 - Boatswainlocker - Pañol de Contramaestre
+        // 4 - Staysail - Estay de Mesana
+        // 5 - Flyingjib - Foque volante
+        // 6 - Foremaststay - Estay de Trinquete
+        // 7 - Lateenyard - Segunda Entena
+
+        //Clave numérica de Variantes de Barcos:
+        // 100 - Roundbrig - Bergantín Redondo
+        // 101 - Snowbrig - Bergantín de Esnón
+        // 102 - Xebec - Jabeque-Polacra
+        // 103 - Barque - Bribarca
+
+        public string shipName;
+        public string captainName;
+        public int shipType;
+        public string variant;
+        public string[] shipImprovements;
+
+        public SerializableShip(Ship ship)
+        {
+            shipName = ship.name_Ship;
+            captainName = ship.name_Captain;
+            shipType = ship.GetSubClassID();
+            variant = ship.GetVariantKey();
+            shipImprovements = ship.GetCurrentImprovementsKeys();
+        }
+    }
+
+    #endregion
+
+    #region SAVE GAME
 
     [Serializable]
     public class savedFile : SerializationConverter
     {
+        //Basic Game Data & Game Settings
+
+        public DateTime WorldDate; // fecha de la partida
+        //public DateTime startingDate; //fecha inicial de la partida;
+        public uint playedTime; //tiempo de juego en segundos;
+        public float deltaWorldDate; // el contador para llegar al próximo día
+        public int marketTimer; // contador para actualizar mercados.
+
+        public GameDifficulty settings_gameDifficulty;
+        public bool settings_MoreEvents;
+        public bool settings_AggresiveKingdoms;
+        public bool settings_AgressivePatrols;
+        public int IDCounter; //contador de elementos que hemos creado (indica el siguiente valor de clave primaria cuando instanciamos algo)
+
+        //Player's basic Data
+
         public string playerName;
         public string playerShipName;
+
+        public SerializableShip playerShipData;
         public int playerGold;
+        public float playerReputation;
+        public float[] playerPosition;
+        public float[] playerRotation;
+        public bool playerIsInPort;
+        public uint portID; //el id del destino del jugador
+        public float[] playerDestination; //posición del destino
+
+
+        //Player's Inventory & Crew
+        public byte crew;
+        public byte[] moraleModifiers;
+        public byte[] setupGuns; //armamento montado
+
+        //Cities and KeyPoints
+
+        //Ships in Game
+
 
         public savedFile()
         {
+            var player = GameObject.FindWithTag("Player").transform;
+            var playerMovement = player.GetComponent<PlayerMovement>();
+
+            //Basic Game Data
+            WorldDate = TimeManager.WorldDate;
+            playedTime = TimeManager.instance.PlayedTime;
+            deltaWorldDate = TimeManager.instance.Timer;
+            marketTimer = TimeManager.instance.Counter20;
+
+            settings_gameDifficulty = PersistentGameData._GData_Difficulty;
+            settings_MoreEvents = PersistentGameData._GDATA_MoreEvents;
+            settings_AggresiveKingdoms = PersistentGameData._GDATA_AgressiveKingdoms;
+            settings_AgressivePatrols = PersistentGameData._GDATA_AlwaysAttack;
+
             playerName = PersistentGameData._GData_PlayerName;
             playerShipName = PersistentGameData._GData_ShipName;
+            playerShipData = new SerializableShip(PlayerMovement.playership);
             playerGold = PersistentGameData._GData_Gold;
+            playerReputation = PersistentGameData._GData_Reputation;
+
+            playerPosition = ConvertV3(player.position);
+            playerRotation = ConvertQuaternion(player.rotation);
+            playerIsInPort = PlayerMovement.IsInPort();
+            portID = 0;
+            playerDestination = ConvertV3(playerMovement.GetDestination());
+
+            crew = (byte)ShipInventory.Crew;
+            moraleModifiers = MoraleModifier.ActiveModifiers;
         }
     }
 

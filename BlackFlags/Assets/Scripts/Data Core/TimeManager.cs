@@ -17,7 +17,7 @@ namespace GameMechanics.Data
     public class TimeManager : MonoBehaviour
     {
         //Singleton
-        private static TimeManager instance;
+        public static TimeManager instance;
 
         //Calendar time
         public static DateTime WorldDate;
@@ -52,7 +52,11 @@ namespace GameMechanics.Data
         private byte currentIndex = 2;
         private static float _currentspeed = 1;
         private float timer = 0;
+        public float Timer { get { return timer;}}
+        private float playedTime = 0;
+        public uint PlayedTime { get { return (uint)playedTime; } }
         private int counter20;
+        public int Counter20 { get { return counter20; } }
 
         private void Awake()
         {
@@ -68,6 +72,10 @@ namespace GameMechanics.Data
         {
             WorldDate = new DateTime(1719, 10, 20);
             NewDay(WorldDate);
+        }
+        private void Update()
+        {
+            playedTime += Time.deltaTime;
         }
         private void LateUpdate()
         {

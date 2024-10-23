@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
         //Singleton
         gm = this;
         //LoadDatabase
-        WorldGenerator.Initialize();  //TODO: En el futuro esto se tendr�a que hacer en la pantalla de carga
+        WorldGenerator.Initialize();  //TODO: En el futuro esto se tendría que hacer en la pantalla de carga
         createCurrentsMap();
 
         //Set MatController parameters
@@ -236,7 +236,7 @@ public class GameManager : MonoBehaviour
         //Diferencia de ángulo entre el barco y la corriente
         var dif = Mathf.Abs(Mathf.DeltaAngle(currentAngle, target.transform.rotation.eulerAngles.y));
 
-        //Cálculo de la fuerza de corriente en base a la diferencia de �ngulo con el barco
+        //Cálculo de la fuerza de corriente en base a la diferencia de ángulo con el barco
         // print(dif);
         // print(Mathf.Clamp(1 - dif / 30, -1, 1) * currentsMapData.arrows[j, i].dragStrength);
         return Mathf.Clamp(1 - dif / 30, -1, 1) * currentsMapData.arrows[j, i].dragStrength;
@@ -257,9 +257,7 @@ public class GameManager : MonoBehaviour
 
         if(savedGameData != null)
         {
-            print(savedGameData.playerGold);
-            print(savedGameData.playerName);
-            print(savedGameData.playerShipName);
+            print(savedGameData.playerShipData.shipType);
         }
         else
         {

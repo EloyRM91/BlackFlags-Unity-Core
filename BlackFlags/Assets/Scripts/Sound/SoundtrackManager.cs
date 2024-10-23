@@ -17,7 +17,7 @@ namespace GameMechanics.Sound
             try
             {
                 var pathFile = GetPath<T>();
-                print(pathFile);
+                //print(pathFile);
 
                 StreamReader sr = new StreamReader(pathFile);
 

@@ -19,8 +19,9 @@ namespace GameMechanics.Ships
         protected UIShipSprites _thisConvoySpriteController;
 
         //Serialization
-        public int ID;
-        public static int IDCounter;
+        private int _ID;
+        public int ID { get { return ID; } }
+        private static int IDCounter = 1; // El id 0 es el id del jugador;
 
         //This Convoy Data
         public float convoySpeed;
@@ -45,15 +46,15 @@ namespace GameMechanics.Ships
         public delegate void VoidEvent(); // this entity did something, like arriving to destination
         public delegate void DestinationEvent(Vector3 destination); //this entity has set a destination
 
+#region Interface: As Selectable
         //As an IsSelectable implementer
-        #region Interface: As Selectable
         public virtual void OnMouseEnter() { }
         public virtual void OnMouseExit() { }
         public virtual void OnMouseDown() { }
 #endregion
 
         //------------ BODY
-        protected virtual void Start() { }
+        protected virtual void Start() { SetID();}
 
         // HUD Pooling
         public void GetSprite(EntityType_KINGDOM k, byte n)
@@ -78,13 +79,13 @@ namespace GameMechanics.Ships
         #region serialization
         public void SetID()
         {
-            ID = IDCounter;
+            _ID = IDCounter;
             IDCounter++;
         }
 
         public void SetID(int val)
         {
-            ID = val;
+            _ID = val;
             if (val > IDCounter) IDCounter = val;
         }
 
@@ -222,7 +223,7 @@ namespace GameMechanics.Ships
             float sawSpeed = 0;
             yield return new WaitForSeconds(0.1f);
             bool tick = true;
-            float t = 0;
+            float t;
             while (true)
             {
                 if(Time.timeScale == 20)

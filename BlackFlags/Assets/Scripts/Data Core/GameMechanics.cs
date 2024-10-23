@@ -5,6 +5,8 @@ using GameMechanics.Data;
 //Generation
 using Generation.Ships;
 
+using System.Linq;
+
 namespace GameMechanics.Data
 {
     //Ship Units
@@ -132,36 +134,36 @@ namespace GameMechanics.Ships
     [System.Serializable]
     public abstract class Ship
     {
-        //Características
+        //CaracterÃ­sticas
         protected static readonly Dictionary<string, Modifier> D_Characteristics = new Dictionary<string, Modifier>()
         {
-            {"OneMastle", new Modifier("Un Mástil", "La nave es más vulnerable al desarbolado en un combate prolongado", new float[10]{ 0,0,0,0,0,0,0,0,0, -5}) },
-            {"TwoMastles", new Modifier("Dos Mástiles", "La nave tiene una arboladura de trinquete y mesana", new float[10]{ 0,0,0,0,0,0,0,0,0, 10}) },
-            {"ThreeMastles", new Modifier("Tres Mástiles", "Nave de tres palos, lo que permite mayor velamen", new float[10]{ 0,0,0,0,0,0,0,0,0, 15}) },
+            {"OneMastle", new Modifier("Un MÃ¡stil", "La nave es mÃ¡s vulnerable al desarbolado en un combate prolongado", new float[10]{ 0,0,0,0,0,0,0,0,0, -5}) },
+            {"TwoMastles", new Modifier("Dos MÃ¡stiles", "La nave tiene una arboladura de trinquete y mesana", new float[10]{ 0,0,0,0,0,0,0,0,0, 10}) },
+            {"ThreeMastles", new Modifier("Tres MÃ¡stiles", "Nave de tres palos, lo que permite mayor velamen", new float[10]{ 0,0,0,0,0,0,0,0,0, 15}) },
             {"BlindSail", new Modifier("Cebadera", "Una vela Cebadera reduce la visibilidad", new float[10]{ 0,0,0,0,-0.65f,0,0,0,0,0}) },
-            {"Platform", new Modifier("Cofa", "Una cofa permite mayor alcance de visión", new float[10]{ 0,0,0,0,2,0,0,0,0,0}) },
-            {"Quarterdeck", new Modifier("Alcázar", "Una sobrecubierta entre mayor y mesana confiere una mejor defensa", new float[10]{ 0,0,0,0,0.5f,0,0,0,10,0}) },
+            {"Platform", new Modifier("Cofa", "Una cofa permite mayor alcance de visiÃ³n", new float[10]{ 0,0,0,0,2,0,0,0,0,0}) },
+            {"Quarterdeck", new Modifier("AlcÃ¡zar", "Una sobrecubierta entre mayor y mesana confiere una mejor defensa", new float[10]{ 0,0,0,0,0.5f,0,0,0,10,0}) },
             {"Poopdeck", new Modifier("Toldilla", "Una sobrecubierta entre mesana y popa confiere una mejor defensa", new float[10]{ 0,0,0,0,1.5f,0,0,0,10,0}) }
         };
         //Mejoras
         protected static readonly Dictionary<string, Improvement> D_Improvements = new Dictionary<string, Improvement>()
         {
-            {"Boardingnets", new Improvement("Redes de Abordaje", "Redes de soga endurecida ideadas para defenderse de un abordaje", new float[10]{ 0,0,0,0,0,0,0,0,10,0}, 3000)},
-            {"Copperhull", new Improvement("Planchas de Cobre", "Un recubrimiento en la obra viva aumenta la velocidad, pero también el mantenimiento", new float[10]{ .2f,.8f,.2f,.8f,0,0,0,90,0,0}, 35000) },
-            {"Overblindsail", new Improvement("Sobrecebadera", "Una verga montada en bauprés sobre la cebadera, que mejora la velocidad a barlovento, pero afecta al coste de mantenimiento y la visibilidad", new float[10]{ 0,0,.2f,.4f,-0.3f,1,0,15,0,0}, 4500) },
-            {"Boatswainlocker", new Improvement("Pañol de Contramaestre", "Redistribuyendo el espacio en el sollado se puede preparar un espacio del barco para herramientas y mantenimiento", new float[10]{ 0,0,0,0,0,0,0,-10,0,0},7000) },
-            {"Staysail", new Improvement("Estay de Mesana", "Un estay añade más superficie vélica al barco", new float[10]{ 0,.1f,.2f,.3f,0,1,0,10,0,5},3500) },
-            {"Flyingjib", new Improvement("Foque volante", "Un foque adicional añade más superficie de velamen", new float[10]{ 0,.1f,.2f,.3f,-0.1f,1,0,10,0,5},3500) },
-            {"Foremaststay", new Improvement("Estay de Trinquete", "Un estay añade más superficie vélica al barco", new float[10]{ 0,.1f,.2f,.3f,0,1,0,10,0,5},3000) },
-            {"Lateenyard", new Improvement("Segunda Entena", "Una entena corta de reemplazo, ideada para rizar con mal tiempo y sustituir a la principal", new float[10]{ 0,0,0,0,0,1,0,-5,0,6},2700) },
+            {"Boardingnets", new Improvement(0, "Redes de Abordaje", "Redes de soga endurecida ideadas para defenderse de un abordaje", new float[10]{ 0,0,0,0,0,0,0,0,10,0}, 3000)},
+            {"Copperhull", new Improvement(1, "Planchas de Cobre", "Un recubrimiento en la obra viva aumenta la velocidad, pero tambiÃ©n el mantenimiento", new float[10]{ .2f,.8f,.2f,.8f,0,0,0,90,0,0}, 35000) },
+            {"Overblindsail", new Improvement(2, "Sobrecebadera", "Una verga montada en bauprÃ©s sobre la cebadera, que mejora la velocidad a barlovento, pero afecta al coste de mantenimiento y la visibilidad", new float[10]{ 0,0,.2f,.4f,-0.3f,1,0,15,0,0}, 4500) },
+            {"Boatswainlocker", new Improvement(3, "PaÃ±ol de Contramaestre", "Redistribuyendo el espacio en el sollado se puede preparar un espacio del barco para herramientas y mantenimiento", new float[10]{ 0,0,0,0,0,0,0,-10,0,0},7000) },
+            {"Staysail", new Improvement(4, "Estay de Mesana", "Un estay aÃ±ade mÃ¡s superficie vÃ©lica al barco", new float[10]{ 0,.1f,.2f,.3f,0,1,0,10,0,5},3500) },
+            {"Flyingjib", new Improvement(5, "Foque volante", "Un foque adicional aÃ±ade mÃ¡s superficie de velamen", new float[10]{ 0,.1f,.2f,.3f,-0.1f,1,0,10,0,5},3500) },
+            {"Foremaststay", new Improvement(6, "Estay de Trinquete", "Un estay aÃ±ade mÃ¡s superficie vÃ©lica al barco", new float[10]{ 0,.1f,.2f,.3f,0,1,0,10,0,5},3000) },
+            {"Lateenyard", new Improvement(7, "Segunda Entena", "Una entena corta de reemplazo, ideada para rizar con mal tiempo y sustituir a la principal", new float[10]{ 0,0,0,0,0,1,0,-5,0,6},2700) },
         };
         //Variantes
         protected static readonly Dictionary<string, Improvement> D_Variants = new Dictionary<string, Improvement>()
         {
-            {"Roundbrig", new Improvement("Bergantín Redondo", "Un tipo de bergantín en el que la vela mayor es la redonda montada sobre trinquete, y que atrapa más el barlovento",new float[10]{ -0.3f,-0.4f,0.3f,0.5f,0,-2,-4,20,0,0},5500) },
-            {"Snowbrig", new Improvement("Bergantín de Esnón", "Un tipo de bergantín que porta un mástil de esnón, lo que facilita las maniobras de la vela cangreja", new float[10]{ 0,0,0.2f,0.3f,0,-1,5,15,0,9}, 9900) },
-            {"Xebec", new Improvement("Jabeque polacra", "Polacra con vela de jabeque en trinquete, muy utilizado por piratas del Mediterráneo", new float[10]{ 0.4f,0.4f,-0.4f,-0.6f,0,-2,13,-10,0,0},4100) },
-            {"Barque", new Improvement("Bribarca", "Barco de tres palos, similar a la fragata, con velas redondas en los dos primeros mástiles", new float[10]{ 0.5f,0.5f,-0.4f,-0.8f,0,-1,8,-10,0,0},4000) },
+            {"Roundbrig", new Improvement(100, "BergantÃ­n Redondo", "Un tipo de bergantÃ­n en el que la vela mayor es la redonda montada sobre trinquete, y que atrapa mÃ¡s el barlovento",new float[10]{ -0.3f,-0.4f,0.3f,0.5f,0,-2,-4,20,0,0},5500) },
+            {"Snowbrig", new Improvement(101, "BergantÃ­n de EsnÃ³n", "Un tipo de bergantÃ­n que porta un mÃ¡stil de esnÃ³n, lo que facilita las maniobras de la vela cangreja", new float[10]{ 0,0,0.2f,0.3f,0,-1,5,15,0,9}, 9900) },
+            {"Xebec", new Improvement(102, "Jabeque polacra", "Polacra con vela de jabeque en trinquete, muy utilizado por piratas del MediterrÃ¡neo", new float[10]{ 0.4f,0.4f,-0.4f,-0.6f,0,-2,13,-10,0,0},4100) },
+            {"Barque", new Improvement(103, "Bribarca", "Barco de tres palos, similar a la fragata, con velas redondas en los dos primeros mÃ¡stiles", new float[10]{ 0.5f,0.5f,-0.4f,-0.8f,0,-1,8,-10,0,0},4000) },
         };
 
         //Common data for all ship classes
@@ -170,13 +172,41 @@ namespace GameMechanics.Ships
             visibility_BaseValue = 3,
             sailsHealth_BaseValue = 40,
             boardingDefence = 100;
+        public List<Improvement> currentImprovements = new List<Improvement>();
 
         //Virtual methods: Basic Data
+        public virtual int GetSubClassID() { return 0; }
         public virtual List<Modifier> GetCharacteristics() { return null; }
         public virtual List<Improvement> GetVariants() { return null; }
         public virtual string GetVariantName() { return null; }
+        public virtual string GetVariantKey() { return null; }
+        public virtual int GetVariantId() { return -1; }
         public virtual string GetModelName() { return null; }
         public virtual string GetSubClassName() { return null; }
+        public virtual Improvement[] GetAvailableImprovements() { return new Improvement[0]; }
+        public virtual string[] GetAvailableImprovementsKeys() { return new string[0]; }
+        public virtual int[] GetAvailableImprovementsIDs() { return null; }
+        public Improvement[] GetCurrentImprovements() { return currentImprovements.ToArray(); }
+        public virtual string[] GetCurrentImprovementsKeys() 
+        {
+            var keys = new string[currentImprovements.Count];
+            for (int i = 0; i < keys.Length; i++)
+            {
+                var myKey = D_Improvements.FirstOrDefault(x => x.Value.key == i).Key;
+            }
+            return keys;
+        }    
+        public virtual int[] GetCurrentImprovementsIDs() 
+        {
+            var keys = new int[currentImprovements.Count];
+            for (int i = 0; i < keys.Length; i++)
+            {
+                keys[i] = currentImprovements[i].key;
+            }
+            return keys;
+        }
+
+
 
         //Virtual methods: Parameters
         public virtual float GetMinUpwindSpeed() { return 0; }
@@ -206,7 +236,7 @@ namespace GameMechanics.Ships
     //--------------------------------
     #region SHIP MAIN CLASSES
     /// <summary>
-    /// Raider / Embarcación menor: A minor group of ships with several common parameters
+    /// Raider / EmbarcaciÃ³n menor: A minor group of ships with several common parameters
     /// Parameters: Ship Type Class (ShipType_CLASS), Stability(float[]), Maneuverability (float[])
     ///  ** Constructors: None (abtract)
     /// </summary>
@@ -273,7 +303,19 @@ namespace GameMechanics.Ships
         private static readonly float maneuverability = 100;
 
         //Improvements & Variants
-        protected static List<Improvement> improvements = new List<Improvement>() { D_Improvements["Flyingjib"], D_Improvements["Foremaststay"] };
+        //protected static List<Improvement> improvements = new List<Improvement>() { D_Improvements["Flyingjib"], D_Improvements["Foremaststay"] };
+        protected static Improvement[] improvements = new Improvement[] { D_Improvements["Flyingjib"], D_Improvements["Foremaststay"] };
+        public override Improvement[] GetAvailableImprovements() { return improvements; }
+        public override string[] GetAvailableImprovementsKeys() { return new string[] { "Flyingjib", "Foremaststay" }; }
+        public override int[] GetAvailableImprovementsIDs()
+        {
+            var keys = new int[improvements.Length];
+            for (int i = 0; i < improvements.Length; i++)
+            {
+                keys[i] = improvements[i].key;
+            }
+            return keys;
+        }
 
         //As describable:
         public override string GetModelName() { return name_Model; }
@@ -303,7 +345,6 @@ namespace GameMechanics.Ships
         private static readonly float maneuverability = 85;
 
         //Improvements & Variants
-        protected static List<Improvement> improvements = new List<Improvement>() {  };
 
         //As describable:
         public override string GetModelName() { return name_Model; }
@@ -332,7 +373,19 @@ namespace GameMechanics.Ships
         private static readonly float maneuverability = 90;
 
         //Improvements & Variants
-        protected static List<Improvement> improvements = new List<Improvement>() { D_Improvements["Lateenyard"] };
+        //protected static List<Improvement> improvements = new List<Improvement>() { D_Improvements["Lateenyard"] };
+        protected static Improvement[] improvements = new Improvement[] { D_Improvements["Lateenyard"] };
+        public override Improvement[] GetAvailableImprovements() { return improvements; }
+        public override string[] GetAvailableImprovementsKeys() { return new string[] { "Lateenyard" }; }
+        public override int[] GetAvailableImprovementsIDs()
+        {
+            var keys = new int[improvements.Length];
+            for (int i = 0; i < improvements.Length; i++)
+            {
+                keys[i] = improvements[i].key;
+            }
+            return keys;
+        }
 
         //As describable:
         public override string GetModelName() { return name_Model; }
@@ -345,7 +398,7 @@ namespace GameMechanics.Ships
         public override float GetManeuverability() { return maneuverability; }
     }
     /// <summary>
-    /// Brigantine / Bergantín: A subfamily of early fighter ships with common characteristics
+    /// Brigantine / BergantÃ­n: A subfamily of early fighter ships with common characteristics
     /// Parameters: Model type (Shiptype_MODEL), Model Name (string), Speed (float) and Base Maneuverability (float), Improvements (List)
     ///  ** Constructors: Empty
     /// </summary>
@@ -353,7 +406,7 @@ namespace GameMechanics.Ships
     {
         //THIS MODEL BASIC DATA
         public static readonly ShipType_MODEL model = ShipType_MODEL.MODEL_Brig;
-        private static readonly string name_Model = "Bergantín";
+        private static readonly string name_Model = "BergantÃ­n";
         private static readonly float speed_UpwindMIN = 2;
         private static readonly float speed_UpwindMAX = 7;
         private static readonly float speed_SmoothwindMIN = 4;
@@ -361,7 +414,20 @@ namespace GameMechanics.Ships
         private static readonly float maneuverability = 80;
 
         //Improvements & Variants
-        protected static List<Improvement> improvements = new List<Improvement>() { D_Improvements["Boardingnets"], D_Improvements["Staysail"] };
+        //protected static List<Improvement> improvements = new List<Improvement>() { D_Improvements["Boardingnets"], D_Improvements["Staysail"] };
+        protected static Improvement[] improvements = new Improvement[] { D_Improvements["Boardingnets"], D_Improvements["Staysail"] };
+        public override Improvement[] GetAvailableImprovements() { return improvements; }
+        public override string[] GetAvailableImprovementsKeys() { return new string[] { "Boardingnets", "Staysail" }; }
+        public override int[] GetAvailableImprovementsIDs()
+        {
+            var keys = new int[improvements.Length];
+            for (int i = 0; i < improvements.Length; i++)
+            {
+                keys[i] = improvements[i].key;
+            }
+            return keys;
+        }
+
         private static List<Improvement> variants = new List<Improvement>() { D_Variants["Roundbrig"], D_Variants["Snowbrig"] };
         public override List<Improvement> GetVariants() { return variants; }
 
@@ -392,7 +458,19 @@ namespace GameMechanics.Ships
         private static readonly float maneuverability = 80;
 
         //Improvements & Variants
-        protected static List<Improvement> improvements = new List<Improvement>() { D_Improvements["Boardingnets"], D_Improvements["Boatswainlocker"] };
+        //protected static List<Improvement> improvements = new List<Improvement>() { D_Improvements["Boardingnets"], D_Improvements["Boatswainlocker"] };
+        protected static Improvement[] improvements = new Improvement[] { D_Improvements["Boardingnets"], D_Improvements["Boatswainlocker"] };
+        public override Improvement[] GetAvailableImprovements() { return improvements; }
+        public override string[] GetAvailableImprovementsKeys() { return new string[] { "Boardingnets", "Boatswainlocker" }; }
+        public override int[] GetAvailableImprovementsIDs()
+        {
+            var keys = new int[improvements.Length];
+            for (int i = 0; i < improvements.Length; i++)
+            {
+                keys[i] = improvements[i].key;
+            }
+            return keys;
+        }
 
         //As describable:
         public override string GetModelName() { return name_Model; }
@@ -422,7 +500,20 @@ namespace GameMechanics.Ships
         private static readonly float maneuverability = 80;
 
         //Improvements & Variants
-        protected static List<Improvement> improvements = new List<Improvement>() { D_Improvements["Lateenyard"] };
+        //protected static List<Improvement> improvements = new List<Improvement>() { D_Improvements["Lateenyard"] };
+        protected static Improvement[] improvements = new Improvement[] { D_Improvements["Lateenyard"] };
+        public override Improvement[] GetAvailableImprovements() { return improvements; }
+        public override string[] GetAvailableImprovementsKeys() { return new string[] { "Lateenyard" }; }
+        public override int[] GetAvailableImprovementsIDs()
+        {
+            var keys = new int[improvements.Length];
+            for (int i = 0; i < improvements.Length; i++)
+            {
+                keys[i] = improvements[i].key;
+            }
+            return keys;
+        }
+
         private static List<Improvement> variants = new List<Improvement>() { D_Variants["Xebec"] };
         public override List<Improvement> GetVariants() { return variants; }
 
@@ -453,7 +544,19 @@ namespace GameMechanics.Ships
         private static readonly float maneuverability = 65;
 
         //Improvements & Variants
-        protected static List<Improvement> improvements = new List<Improvement>() { D_Improvements["Boardingnets"], D_Improvements["Boatswainlocker"], D_Improvements["Copperhull"], D_Improvements["Staysail"] };
+        //protected static List<Improvement> improvements = new List<Improvement>() { D_Improvements["Boardingnets"], D_Improvements["Boatswainlocker"], D_Improvements["Copperhull"], D_Improvements["Staysail"] };
+        protected static Improvement[] improvements = new Improvement[] { D_Improvements["Boardingnets"], D_Improvements["Boatswainlocker"], D_Improvements["Copperhull"], D_Improvements["Staysail"] };
+        public override Improvement[] GetAvailableImprovements() { return improvements; }
+        public override string[] GetAvailableImprovementsKeys() { return new string[] { "Boardingnets", "Boatswainlocker", "Copperhull", "Staysail" }; }
+        public override int[] GetAvailableImprovementsIDs()
+        {
+            var keys = new int[improvements.Length];
+            for (int i = 0; i < improvements.Length; i++)
+            {
+                keys[i] = improvements[i].key;
+            }
+            return keys;
+        }
 
         //As describable:
         public override string GetModelName() { return name_Model; }
@@ -483,7 +586,20 @@ namespace GameMechanics.Ships
         private static readonly float maneuverability = 75;
 
         //Improvements & Variants
-        private static List<Improvement> improvements = new List<Improvement>() { D_Improvements["Boardingnets"], D_Improvements["Boatswainlocker"], D_Improvements["Copperhull"]};
+        //private static List<Improvement> improvements = new List<Improvement>() { D_Improvements["Boardingnets"], D_Improvements["Boatswainlocker"], D_Improvements["Copperhull"]};
+        protected static Improvement[] improvements = new Improvement[] { D_Improvements["Boardingnets"], D_Improvements["Boatswainlocker"], D_Improvements["Copperhull"] };
+        public override Improvement[] GetAvailableImprovements() { return improvements; }
+        public override string[] GetAvailableImprovementsKeys() { return new string[] { "Boardingnets", "Boatswainlocker", "Copperhull" }; }
+        public override int[] GetAvailableImprovementsIDs()
+        {
+            var keys = new int[improvements.Length];
+            for (int i = 0; i < improvements.Length; i++)
+            {
+                keys[i] = improvements[i].key;
+            }
+            return keys;
+        }
+
         private static List<Improvement> variants = new List<Improvement>() { D_Variants["Barque"] };
         public override List<Improvement> GetVariants() { return variants; }
 
@@ -498,7 +614,7 @@ namespace GameMechanics.Ships
         public override float GetManeuverability() { return maneuverability; }
     }
     /// <summary>
-    /// Gallion / Galeón: A subfamily of cargo ships with common characteristics
+    /// Gallion / GaleÃ³n: A subfamily of cargo ships with common characteristics
     /// Parameters: Model type (Shiptype_MODEL), Model Name (string), Speed (float) and Base Maneuverability (float), Improvements (List)
     ///  ** Constructors: Empty
     /// </summary>
@@ -506,7 +622,7 @@ namespace GameMechanics.Ships
     {
         //THIS MODEL BASIC DATA
         public static readonly ShipType_MODEL model = ShipType_MODEL.MODEL_Gallion;
-        private static readonly string name_Model = "Galeón";
+        private static readonly string name_Model = "GaleÃ³n";
         private static readonly float speed_UpwindMIN = 0;
         private static readonly float speed_UpwindMAX = 3;
         private static readonly float speed_SmoothwindMIN = 1;
@@ -514,7 +630,19 @@ namespace GameMechanics.Ships
         private static readonly float maneuverability = 45;
 
         //Improvements & Variants
-        private static List<Improvement> improvements = new List<Improvement>() { D_Improvements["Overblindsail"], D_Improvements["Boatswainlocker"] };
+        //private static List<Improvement> improvements = new List<Improvement>() { D_Improvements["Overblindsail"], D_Improvements["Boatswainlocker"] };
+        protected static Improvement[] improvements = new Improvement[] { D_Improvements["Overblindsail"], D_Improvements["Boatswainlocker"] };
+        public override Improvement[] GetAvailableImprovements() { return improvements; }
+        public override string[] GetAvailableImprovementsKeys() { return new string[] { "Overblindsail", "Boatswainlocker" }; }
+        public override int[] GetAvailableImprovementsIDs()
+        {
+            var keys = new int[improvements.Length];
+            for (int i = 0; i < improvements.Length; i++)
+            {
+                keys[i] = improvements[i].key;
+            }
+            return keys;
+        }
 
         //As describable:
         public override string GetModelName() { return name_Model; }
@@ -543,7 +671,19 @@ namespace GameMechanics.Ships
         private static readonly float maneuverability = 40;
 
         //Improvements & Variants
-        private static List<Improvement> improvements = new List<Improvement>() { D_Improvements["Overblindsail"], D_Improvements["Boatswainlocker"] };
+        //private static List<Improvement> improvements = new List<Improvement>() { D_Improvements["Overblindsail"], D_Improvements["Boatswainlocker"] };
+        protected static Improvement[] improvements = new Improvement[] { D_Improvements["Overblindsail"], D_Improvements["Boatswainlocker"] };
+        public override Improvement[] GetAvailableImprovements() { return improvements; }
+        public override string[] GetAvailableImprovementsKeys() { return new string[] { "Overblindsail", "Boatswainlocker" }; }
+        public override int[] GetAvailableImprovementsIDs()
+        {
+            var keys = new int[improvements.Length];
+            for (int i = 0; i < improvements.Length; i++)
+            {
+                keys[i] = improvements[i].key;
+            }
+            return keys;
+        }
 
         //As describable:
         public override string GetModelName() { return name_Model; }
@@ -573,7 +713,20 @@ namespace GameMechanics.Ships
         private static readonly float maneuverability = 55;
 
         //Improvements & Variants
-        private static List<Improvement> improvements = new List<Improvement>() { D_Improvements["Boardingnets"], D_Improvements["Boatswainlocker"], D_Improvements["Copperhull"] };
+        //private static List<Improvement> improvements = new List<Improvement>() { D_Improvements["Boardingnets"], D_Improvements["Boatswainlocker"], D_Improvements["Copperhull"] };
+        protected static Improvement[] improvements = new Improvement[] { D_Improvements["Boardingnets"], D_Improvements["Boatswainlocker"], D_Improvements["Copperhull"] };
+        public override Improvement[] GetAvailableImprovements() { return improvements; }
+        public override string[] GetAvailableImprovementsKeys() { return new string[] { "Boardingnets", "Boatswainlocker", "Copperhull" }; }
+        public override int[] GetAvailableImprovementsIDs()
+        {
+            var keys = new int[improvements.Length];
+            for (int i = 0; i < improvements.Length; i++)
+            {
+                keys[i] = improvements[i].key;
+            }
+            return keys;
+        }
+
         //As describable:
         public override string GetModelName() { return name_Model; }
 
@@ -586,7 +739,7 @@ namespace GameMechanics.Ships
     }
     #endregion
     //--------------------------------
-    // SUBCATEGORÍAS
+    // SUBCATEGORÃAS
     //--------------------------------
     #region SUBCATEGORY
     /// <summary>
@@ -604,6 +757,7 @@ namespace GameMechanics.Ships
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
+        public override int GetSubClassID() { return 0; }
         public override string GetSubClassName() { return name_subModel; }
         public override int[] GetPowerCapacity() { return artilleryCapacity; }
         public override int[] GetCrewData() { return new int[2] { minCrew, maxCrew }; }
@@ -639,6 +793,7 @@ namespace GameMechanics.Ships
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
+        public override int GetSubClassID() { return 1; }
         public override string GetSubClassName() { return name_subModel; }
         public override int[] GetPowerCapacity() { return artilleryCapacity; }
         public override int[] GetCrewData() { return new int[2] { minCrew, maxCrew }; }
@@ -674,6 +829,7 @@ namespace GameMechanics.Ships
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
+        public override int GetSubClassID() { return 2; }
         public override string GetSubClassName() { return name_subModel; }
         public override int[] GetPowerCapacity() { return artilleryCapacity; }
         public override int[] GetCrewData() { return new int[2] { minCrew, maxCrew }; }
@@ -709,6 +865,7 @@ namespace GameMechanics.Ships
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
+        public override int GetSubClassID() { return 3; }
         public override string GetSubClassName() { return name_subModel; }
         public override int[] GetPowerCapacity() { return artilleryCapacity; }
         public override int[] GetCrewData() { return new int[2] { minCrew, maxCrew }; }
@@ -730,20 +887,21 @@ namespace GameMechanics.Ships
         }
     }
     /// <summary>
-    /// Mistic Felucca / Místico: A kind of felucca ship
+    /// Mistic Felucca / MÃ­stico: A kind of felucca ship
     /// Parameters: Capacity (int), Crew (int), mantainence (int), Artillery (int[4])
     ///  ** Constructors: Empty
     /// </summary>
     [System.Serializable]
     public class ShipSubCategory_MisticFelucca : ShipModel_Felucca
     {
-        private static readonly string name_subModel = "Místico de Tres Palos";
+        private static readonly string name_subModel = "MÃ­stico de Tres Palos";
         private static readonly int capacity = 30, minCrew = 10, maxCrew = 27, manteinance = 16;
         private static readonly List<Modifier> characteristics = new List<Modifier>() { D_Characteristics["ThreeMastles"] };
         private static readonly int[] artilleryCapacity = new int[4] { 6, 8, 0, 0 };
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
+        public override int GetSubClassID() { return 4; }
         public override string GetSubClassName() { return name_subModel; }
         public override int[] GetPowerCapacity() { return artilleryCapacity; }
         public override int[] GetCrewData() { return new int[2] { minCrew, maxCrew }; }
@@ -779,6 +937,7 @@ namespace GameMechanics.Ships
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
+        public override int GetSubClassID() { return 5; }
         public override string GetSubClassName() { return name_subModel; }
         public override int[] GetPowerCapacity() { return artilleryCapacity; }
         public override int[] GetCrewData() { return new int[2] { minCrew, maxCrew }; }
@@ -814,6 +973,7 @@ namespace GameMechanics.Ships
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
+        public override int GetSubClassID() { return 6; }
         public override string GetSubClassName() { return name_subModel; }
         public override int[] GetPowerCapacity() { return artilleryCapacity; }
         public override int[] GetCrewData() { return new int[2] { minCrew, maxCrew }; }
@@ -836,7 +996,7 @@ namespace GameMechanics.Ships
     }
     [System.Serializable]
     /// <summary>
-    /// 12 cannons brig / Bergantín de 12 cañones: A kind of brigantine ship
+    /// 12 cannons brig / BergantÃ­n de 12 caÃ±ones: A kind of brigantine ship
     /// Parameters: Capacity (int), Crew (int), mantainence (int), Artillery (int[4])
     ///  ** Constructors:
     ///         public ShipSubCategory_12Brig(EntityType_KINGDOM k)
@@ -844,7 +1004,7 @@ namespace GameMechanics.Ships
     /// </summary>
     public class ShipSubCategory_12Brig : ShipModel_Brigantine
     {
-        private static readonly string name_subModel = "Bergantín de 14 cañones";
+        private static readonly string name_subModel = "BergantÃ­n de 14 caÃ±ones";
         private static readonly int capacity = 55, minCrew = 13, maxCrew = 38, manteinance = 40;
         private static readonly List<Modifier> characteristics = new List<Modifier>() { D_Characteristics["TwoMastles"], D_Characteristics["Platform"] };
         private static readonly int[] artilleryCapacity = new int[4] { 4, 10, 4, 0 };
@@ -852,9 +1012,19 @@ namespace GameMechanics.Ships
         //This ship variant modifier
         public Improvement variant;
         public override string GetVariantName() { var str = variant == null ? null : variant.mod_Name; return str; }
+        public override string GetVariantKey()
+        {
+            var strKey = variant == null ? null : D_Variants.FirstOrDefault(x => x.Value.key == variant.key).Key;
+            return strKey;
+        }
+        public override int GetVariantId()
+        {
+            var k = variant == null ? -1 : variant.key; return k;
+        }
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
+        public override int GetSubClassID() { return 7; }
         public override string GetSubClassName() { return name_subModel; }
         public override int[] GetPowerCapacity() { return artilleryCapacity; }
         public override int[] GetCrewData() { return new int[2] { minCrew, maxCrew }; }
@@ -893,7 +1063,7 @@ namespace GameMechanics.Ships
         }
     }
     /// <summary>
-    /// 16 cannons brig / Bergantín de 16 cañones: A kind of brigantine ship
+    /// 16 cannons brig / BergantÃ­n de 16 caÃ±ones: A kind of brigantine ship
     /// Parameters: Capacity (int), Crew (int), mantainence (int), Artillery (int[4])
     ///  ** Constructors:
     ///         public ShipSubCategory_16Brig(EntityType_KINGDOM k)
@@ -902,7 +1072,7 @@ namespace GameMechanics.Ships
     [System.Serializable]
     public class ShipSubCategory_16Brig : ShipModel_Brigantine
     {
-        private static readonly string name_subModel = "Bergantín de 16 cañones";
+        private static readonly string name_subModel = "BergantÃ­n de 16 caÃ±ones";
         private static readonly int capacity = 80, minCrew = 15, maxCrew = 45, manteinance = 55;
         private static readonly List<Modifier> characteristics = new List<Modifier>() { D_Characteristics["TwoMastles"], D_Characteristics["Platform"] };
         private static readonly int[] artilleryCapacity = new int[4] { 6, 10, 6, 0 };
@@ -910,9 +1080,19 @@ namespace GameMechanics.Ships
         //This ship variant modifier
         public Improvement variant;
         public override string GetVariantName() { var str = variant == null ? null : variant.mod_Name;  return str; }
+        public override string GetVariantKey()
+        {
+            var strKey = variant == null ? null : D_Variants.FirstOrDefault(x => x.Value.key == variant.key).Key;
+            return strKey;
+        }
+        public override int GetVariantId()
+        {
+            var k = variant == null ? -1 : variant.key; return k;
+        }
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
+        public override int GetSubClassID() { return 8; }
         public override string GetSubClassName() { return name_subModel; }
         public override int[] GetPowerCapacity() { return artilleryCapacity; }
         public override int[] GetCrewData() { return new int[2] { minCrew, maxCrew }; }
@@ -951,20 +1131,21 @@ namespace GameMechanics.Ships
         }
     }
     /// <summary>
-    /// 10 cannons Lugger / Lugre de 10 cañones: A kind of lugger ship
+    /// 10 cannons Lugger / Lugre de 10 caÃ±ones: A kind of lugger ship
     /// Parameters: Capacity (int), Crew (int), mantainence (int), Artillery (int[4])
     ///  ** Constructors: Empty
     /// </summary>
     [System.Serializable]
     public class ShipSubCategory_10Lugger : ShipModel_Lugger
     {
-        private static readonly string name_subModel = "Lugre de 10 cañones";
+        private static readonly string name_subModel = "Lugre de 10 caÃ±ones";
         private static readonly int capacity = 60, minCrew = 11, maxCrew = 40, manteinance = 70;
         private static readonly List<Modifier> characteristics = new List<Modifier>() { D_Characteristics["TwoMastles"], D_Characteristics["Platform"] };
         private static readonly int[] artilleryCapacity = new int[4] { 4, 6, 4, 0 };
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
+        public override int GetSubClassID() { return 9; }
         public override string GetSubClassName() { return name_subModel; }
         public override int[] GetPowerCapacity() { return artilleryCapacity; }
         public override int[] GetCrewData() { return new int[2] { minCrew, maxCrew }; }
@@ -986,20 +1167,21 @@ namespace GameMechanics.Ships
         }
     }
     /// <summary>
-    /// 14 cannons Lugger / Lugre de 14 cañones: A kind of lugger ship
+    /// 14 cannons Lugger / Lugre de 14 caÃ±ones: A kind of lugger ship
     /// Parameters: Capacity (int), Crew (int), mantainence (int), Artillery (int[4])
     ///  ** Constructors: Empty
     /// </summary>
     [System.Serializable]
     public class ShipSubCategory_14Lugger : ShipModel_Lugger
     {
-        private static readonly string name_subModel = "Lugre de 14 cañones";
+        private static readonly string name_subModel = "Lugre de 14 caÃ±ones";
         private static readonly int capacity = 85, minCrew = 14, maxCrew = 44, manteinance = 80;
         private static readonly List<Modifier> characteristics = new List<Modifier>() { D_Characteristics["TwoMastles"], D_Characteristics["Platform"] };
         private static readonly int[] artilleryCapacity = new int[4] { 6, 10, 4, 0 };
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
+        public override int GetSubClassID() { return 10; }
         public override string GetSubClassName() { return name_subModel; }
         public override int[] GetPowerCapacity() { return artilleryCapacity; }
         public override int[] GetCrewData() { return new int[2] { minCrew, maxCrew }; }
@@ -1038,9 +1220,19 @@ namespace GameMechanics.Ships
         //This ship variant modifier
         public Improvement variant;
         public override string GetVariantName() { var str = variant == null ? null : variant.mod_Name; return str; }
+        public override string GetVariantKey()
+        {
+            var strKey = variant == null ? null : D_Variants.FirstOrDefault(x => x.Value.key == variant.key).Key;
+            return strKey;
+        }
+        public override int GetVariantId()
+        {
+            var k = variant == null ? -1 : variant.key; return k;
+        }
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
+        public override int GetSubClassID() { return 11; }
         public override string GetSubClassName() { return name_subModel; }
         public override int[] GetPowerCapacity() { return artilleryCapacity; }
         public override int[] GetCrewData() { return new int[2] { minCrew, maxCrew }; }
@@ -1092,9 +1284,19 @@ namespace GameMechanics.Ships
         //This ship variant modifier
         public Improvement variant;
         public override string GetVariantName() { var str = variant == null ? null : variant.mod_Name; return str; }
+        public override string GetVariantKey()
+        {
+            var strKey = variant == null ? null : D_Variants.FirstOrDefault(x => x.Value.key == variant.key).Key;
+            return strKey;
+        }
+        public override int GetVariantId()
+        {
+            var k = variant == null ? -1 : variant.key; return k;
+        }
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
+        public override int GetSubClassID() { return 12; }
         public override string GetSubClassName() { return name_subModel; }
         public override int[] GetPowerCapacity() { return artilleryCapacity; }
         public override int[] GetCrewData() { return new int[2] { minCrew, maxCrew }; }
@@ -1147,9 +1349,19 @@ namespace GameMechanics.Ships
         //This ship variant modifier
         public Improvement variant;
         public override string GetVariantName() { var str = variant == null ? null : variant.mod_Name; return str; }
+        public override string GetVariantKey()
+        {
+            var strKey = variant == null ? null : D_Variants.FirstOrDefault(x => x.Value.key == variant.key).Key;
+            return strKey;
+        }
+        public override int GetVariantId()
+        {
+            var k = variant == null ? -1 : variant.key; return k;
+        }
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
+        public override int GetSubClassID() { return 13; }
         public override string GetSubClassName() { return name_subModel; }
         public override int[] GetPowerCapacity() { return artilleryCapacity; }
         public override int[] GetCrewData() { return new int[2] { minCrew, maxCrew }; }
@@ -1181,20 +1393,21 @@ namespace GameMechanics.Ships
         }
     }
     /// <summary>
-    /// 26 Cannons-Frigate / Fragata de 26 cañones: A kind of frigate ship
+    /// 26 Cannons-Frigate / Fragata de 26 caÃ±ones: A kind of frigate ship
     /// Parameters: Capacity (int), Crew (int), mantainence (int), Artillery (int[4])
     ///  ** Constructors: Empty
     /// </summary>
     [System.Serializable]
     public class ShipSubCategory_26Frigate : ShipModel_Frigate
     {
-        private static readonly string name_subModel = "Fragata de 26 cañones";
+        private static readonly string name_subModel = "Fragata de 26 caÃ±ones";
         private static readonly int capacity = 200, minCrew = 16, maxCrew = 55, manteinance = 140;
         private static readonly List<Modifier> characteristics = new List<Modifier>() { D_Characteristics["ThreeMastles"], D_Characteristics["Platform"]};
         private static readonly int[] artilleryCapacity = new int[4] { 6, 0, 20, 6 };
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
+        public override int GetSubClassID() { return 14; }
         public override string GetSubClassName() { return name_subModel; }
         public override int[] GetPowerCapacity() { return artilleryCapacity; }
         public override int[] GetCrewData() { return new int[2] { minCrew, maxCrew }; }
@@ -1230,6 +1443,7 @@ namespace GameMechanics.Ships
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
+        public override int GetSubClassID() { return 15; }
         public override string GetSubClassName() { return name_subModel; }
         public override int[] GetPowerCapacity() { return artilleryCapacity; }
         public override int[] GetCrewData() { return new int[2] { minCrew, maxCrew }; }
@@ -1265,6 +1479,7 @@ namespace GameMechanics.Ships
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
+        public override int GetSubClassID() { return 16; }
         public override string GetSubClassName() { return name_subModel; }
         public override int[] GetPowerCapacity() { return artilleryCapacity; }
         public override int[] GetCrewData() { return new int[2] { minCrew, maxCrew }; }
@@ -1286,20 +1501,21 @@ namespace GameMechanics.Ships
         }
     }
     /// <summary>
-    /// Gallion / Galeón: A kind of gallion ship
+    /// Gallion / GaleÃ³n: A kind of gallion ship
     /// Parameters: Capacity (int), Crew (int), mantainence (int), Artillery (int[4])
     ///  ** Constructors: Empty
     /// </summary>
     [System.Serializable]
     public class ShipSubCategory_Gallion : ShipModel_Gallion
     {
-        private static readonly string name_subModel = "Galeón";
+        private static readonly string name_subModel = "GaleÃ³n";
         private static readonly int capacity = 650, minCrew = 16, maxCrew = 110, manteinance = 260;
         private static readonly List<Modifier> characteristics = new List<Modifier>() { D_Characteristics["ThreeMastles"], D_Characteristics["Platform"], D_Characteristics["Quarterdeck"], D_Characteristics["Poopdeck"], D_Characteristics["BlindSail"] };
         private static readonly int[] artilleryCapacity = new int[4] { 8, 0, 10, 40 };
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
+        public override int GetSubClassID() { return 17; }
         public override string GetSubClassName() { return name_subModel; }
         public override int[] GetPowerCapacity() { return artilleryCapacity; }
         public override int[] GetCrewData() { return new int[2] { minCrew, maxCrew }; }
@@ -1321,20 +1537,21 @@ namespace GameMechanics.Ships
         }
     }
     /// <summary>
-    /// Dutch Gallion / Galeón Holandés: A kind of gallion ship
+    /// Dutch Gallion / GaleÃ³n HolandÃ©s: A kind of gallion ship
     /// Parameters: Capacity (int), Crew (int), mantainence (int), Artillery (int[4])
     ///  ** Constructors: Empty
     /// </summary>
     [System.Serializable]
     public class ShipSubCategory_DutchGallion : ShipModel_Gallion
     {
-        private static readonly string name_subModel = "Galeón Holandés";
+        private static readonly string name_subModel = "GaleÃ³n HolandÃ©s";
         private static readonly int capacity = 550, minCrew = 14, maxCrew = 65, manteinance = 180;
         private static readonly List<Modifier> characteristics = new List<Modifier>() { D_Characteristics["ThreeMastles"], D_Characteristics["Platform"], D_Characteristics["Quarterdeck"], D_Characteristics["Poopdeck"], D_Characteristics["BlindSail"] };
         private static readonly int[] artilleryCapacity = new int[4] { 8, 0, 16, 8 };
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
+        public override int GetSubClassID() { return 18; }
         public override string GetSubClassName() { return name_subModel; }
         public override int[] GetPowerCapacity() { return artilleryCapacity; }
         public override int[] GetCrewData() { return new int[2] { minCrew, maxCrew }; }
@@ -1370,6 +1587,7 @@ namespace GameMechanics.Ships
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
+        public override int GetSubClassID() { return 19; }
         public override string GetSubClassName() { return name_subModel; }
         public override int[] GetPowerCapacity() { return artilleryCapacity; }
         public override int[] GetCrewData() { return new int[2] { minCrew, maxCrew }; }
@@ -1408,6 +1626,7 @@ namespace GameMechanics.Ships
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
+        public override int GetSubClassID() { return 20; }
         public override string GetSubClassName() { return name_subModel; }
         public override int[] GetPowerCapacity() { return artilleryCapacity; }
         public override int[] GetCrewData() { return new int[2] { minCrew, maxCrew }; }
@@ -1482,9 +1701,11 @@ namespace GameMechanics.Ships
     /// </summary>
     public class Improvement : Modifier
     {
+        public int key;
         public int improvementPrice;
-        public Improvement(string n, string d, float[] values, int price) : base( n, d, values)
+        public Improvement(int k, string n, string d, float[] values, int price) : base( n, d, values)
         {
+            key = k;
             improvementPrice = price;
         }
     }

@@ -4,9 +4,20 @@ namespace GameMechanics.Data
 {
     public class MoraleModifier : MonoBehaviour
     {
+        public byte modifierID;
         public float[] modifiers; //modificador de moral, velocidad, y eficacia en abordaje
         public string description;
         private static List<MoraleModifier> activeModifiers = new List<MoraleModifier>();
+        public static byte[] ActiveModifiers {
+            get {
+                var ids = new byte[activeModifiers.Count];
+                for (int i = 0; i < ids.Length; i++)
+                {
+                    ids[i] = activeModifiers[i].modifierID;
+                }
+                return ids; 
+            }
+        }
 
         public delegate void UpdateValue();
         public static UpdateValue onSpeedModifier;

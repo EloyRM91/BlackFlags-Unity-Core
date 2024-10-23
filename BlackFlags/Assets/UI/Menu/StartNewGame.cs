@@ -110,7 +110,7 @@ namespace GameSettings.Core
             {
                 case GameDifficulty.easy:
                     //_TEXT_Gold.text += 1100;
-                    _Text_SelectedDifficulty.text += "Fácil";
+                    _Text_SelectedDifficulty.text += "Fï¿½cil";
                     _wavingEffect.amplitude = 0.1f;
                     break;
                 case GameDifficulty.normal:
@@ -120,7 +120,7 @@ namespace GameSettings.Core
                     break;
                 case GameDifficulty.hard:
                     //_TEXT_Gold.text += 450;
-                    _Text_SelectedDifficulty.text += "Difícil";
+                    _Text_SelectedDifficulty.text += "Difï¿½cil";
                     _wavingEffect.amplitude = 0.25f;
                     break;
                 case GameDifficulty.nightmare:
@@ -140,11 +140,11 @@ namespace GameSettings.Core
                     $"Dificultad para aumentar la amistad con personajes: {(PersistentGameData._GData_FriendshipModier >= 0 ? "+" : "")}{PersistentGameData._GData_FriendshipModier * 100}%\n" +
                     $"Beneficio por contrabando: {(PersistentGameData._GData_TradeModifier >= 0 ? "+" : "")}{PersistentGameData._GData_TradeModifier * 100}%\n" +
                     $"Actividad de patrullas y corsarios: {(level == GameDifficulty.easy ? "baja" : level == GameDifficulty.normal ? "normal" : "alta")}\n" +
-                    $"Moral de la tripulación: {(PersistentGameData._GData_MoraleModifier >= 0 ? "+" : "")}{PersistentGameData._GData_MoraleModifier * 100}%";
+                    $"Moral de la tripulaciï¿½n: {(PersistentGameData._GData_MoraleModifier >= 0 ? "+" : "")}{PersistentGameData._GData_MoraleModifier * 100}%";
             }
             else
             {
-                _Text_Modifiers.text = "En modo \"Pesadilla\" la dificultad de comerciar, entablar amistades en el bajo mundo y satisfacer la vida a bordo será máxima, y además la moral a bordo no puede superar el 90% y las patrullas y corsarios siempre atacan.";
+                _Text_Modifiers.text = "En modo \"Pesadilla\" la dificultad de comerciar, entablar amistades en el bajo mundo y satisfacer la vida a bordo serï¿½ mï¿½xima, y ademï¿½s la moral a bordo no puede superar el 90% y las patrullas y corsarios siempre atacan.";
             }
 
             //Vista de dificultad

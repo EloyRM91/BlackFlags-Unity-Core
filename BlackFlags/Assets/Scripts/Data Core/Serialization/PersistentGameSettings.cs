@@ -20,10 +20,10 @@ namespace GameSettings.Core
 
         //Settings
         public static bool
-            _playTutorial, //�Preguntar al jugador si desea jugar a la tutorial antes de iniciar partida o campa�a?
-            _advisorPanel, //�Mostrar consejos y ayudas durante el juego?
-            _autoSkipDialog, //�Saltar di�logos en secuencia autom�ticamente?
-            _showDialogs; //�Mostrar di�logos?
+            _playTutorial, // ¿Preguntar al jugador si desea jugar a la tutorial antes de iniciar partida o campaña?
+            _advisorPanel, // ¿Mostrar consejos y ayudas durante el juego?
+            _autoSkipDialog, //¿Saltar diálogos en secuencia automáticamente?
+            _showDialogs; // ¿Mostrar diálogos?
 
         //Mods
         public static ModData currentMod = null;
@@ -175,7 +175,7 @@ namespace GameSettings.Core
             }
             else
             {
-                modVersion = "versi�n: ??????";
+                modVersion = "versión: ??????";
             }
 
             path = directory + "readme.txt";

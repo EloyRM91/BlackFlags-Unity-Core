@@ -66,7 +66,8 @@ public class PlayerMovement : Convoy
     protected override void Start()
     {
         canMove = true;
-        base.Start();
+        //base.Start();
+        SetID(0);
         //Set physics layer mask
         _layerMask = LayerMask.GetMask("KeyPoint", "Default", "Water");
         //Set player ship class
@@ -279,7 +280,7 @@ public class PlayerMovement : Convoy
         mask = 1 << NavMesh.GetAreaFromName("Ocean");
         if (NavMesh.SamplePosition(position, out _hit, 1, mask))
         {
-            print("oc�ano");
+            print("océano");
             return _hit.mask;
         }
         return 0;
@@ -327,7 +328,7 @@ public class PlayerMovement : Convoy
             }
             else if (thisConvoyTarget != null)
             {
-                print("no puede interceptar en ruta actual con una intercepci�n perfecta as� que busca la mejor ruta optativa");
+                print("no puede interceptar en ruta actual con una intercepción perfecta así que busca la mejor ruta optativa");
                 Stop();
                 byte i = 16;
                 var targetPos = thisConvoyTarget.transform.position;
@@ -365,7 +366,7 @@ public class PlayerMovement : Convoy
         //Calculate Time now
         _remainingTime = CalculateRouteTime();
         _EVENT_refreshRouteTime(_remainingTime);
-        //print($"Tiempo: {_remainingTime} d�as");
+        //print($"Tiempo: {_remainingTime} días");
 
         GameManager.gm.getCurrentEffect(transform);
     }
@@ -414,7 +415,7 @@ public class PlayerMovement : Convoy
                 }   
                 else //llega a destino
                 {
-                    //Borra la l�nea de rumbo trazado
+                    //Borra la línea de rumbo trazado
                     ClearDrawing();
                     //Avisa a los crossmap que ya no hay un destino
                     ArriveToDestination();
@@ -546,7 +547,7 @@ public class PlayerMovement : Convoy
             shelter.convoysInThisPort.Add(this);
         }
         _EVENT_ArriveToPort(currentPort);
-        Dissappear(); //Parche para que el barco desaparezca, ya que llamar a este m�todo desde el explorer no hace nada
+        Dissappear(); //Parche para que el barco desaparezca, ya que llamar a este método desde el explorer no hace nada
         GetComponent<BoxCollider>().enabled = false;
     }
     private void ExitCity()
