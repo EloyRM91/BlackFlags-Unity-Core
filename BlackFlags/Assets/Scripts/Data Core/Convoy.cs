@@ -19,9 +19,10 @@ namespace GameMechanics.Ships
         protected UIShipSprites _thisConvoySpriteController;
 
         //Serialization
-        private int _ID;
-        public int ID { get { return ID; } }
-        private static int IDCounter = 1; // El id 0 es el id del jugador;
+        private ushort _ID;
+        public ushort ID { get { return ID; } }
+        private static ushort IDCounter = 1; // El id 0 es el id del jugador;
+        public static ushort IDConvoyCounter { get { return IDCounter; } }
 
         //This Convoy Data
         public float convoySpeed;
@@ -30,6 +31,7 @@ namespace GameMechanics.Ships
         public bool isOnTarget; //is this group being intercepted?
         public KeyPoint currentPort;
         private Sequence sequence;
+        public virtual Convoy ConvoyTarget { get { return null; } }
 
         //Navmesh
         //protected NavMeshAgent _thisAgent;
@@ -83,7 +85,7 @@ namespace GameMechanics.Ships
             IDCounter++;
         }
 
-        public void SetID(int val)
+        public void SetID(ushort val)
         {
             _ID = val;
             if (val > IDCounter) IDCounter = val;

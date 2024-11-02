@@ -55,8 +55,8 @@ namespace GameMechanics.Data
         public float Timer { get { return timer;}}
         private float playedTime = 0;
         public uint PlayedTime { get { return (uint)playedTime; } }
-        private int counter20;
-        public int Counter20 { get { return counter20; } }
+        private byte counter20;
+        public byte Counter20 { get { return counter20; } }
 
         private void Awake()
         {

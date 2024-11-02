@@ -257,11 +257,16 @@ public class GameManager : MonoBehaviour
 
         if(savedGameData != null)
         {
-            print(savedGameData.playerShipData.shipType);
+            //print(savedGameData.onLoadGuns[0] + " " + savedGameData.onLoadGuns[1] + " " + savedGameData.onLoadGuns[2] + " " + savedGameData.onLoadGuns[3]);
+            //print(savedGameData.onEquipmentGuns[0] + " " + savedGameData.onEquipmentGuns[1] + " " + savedGameData.onEquipmentGuns[2] + " " + savedGameData.onEquipmentGuns[3]);
+            //print(savedGameData.onUseWeaponsSlots[0] + " " + savedGameData.onUseWeaponsSlots[1] + " " + savedGameData.onUseWeaponsSlots[2] + " " + savedGameData.onUseWeaponsSlots[3]);
+
+            print(savedGameData.inventoryItems[0]);
+            print(savedGameData.surplus[0]);
         }
         else
         {
-            Debug.LogError("Dummy Error");
+            Debug.LogError("File not found");
         }
     }
 #endregion

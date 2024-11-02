@@ -23,6 +23,11 @@ namespace GameMechanics.WorldCities
     {
         #region VARIABLES
         //Data & performance
+        private ushort keyPointID;
+        public ushort KeyPointID { get { return keyPointID; } }
+        private static ushort IDCounter;
+        public static ushort IDKeyPointCounter { get { return IDCounter; } }
+
         public string cityName;
         [SerializeField] private Sprite spriteNonSelected, spriteHighlighted;
         [SerializeField] private GameObject linkedUIBanner;
@@ -33,6 +38,12 @@ namespace GameMechanics.WorldCities
         public delegate void Selection();
         public static event Selection KPSelected;
         #endregion
+
+        void Awake()
+        {
+            keyPointID = IDCounter;
+            IDCounter++;
+        }
 
         //Unselect
         public static void Unselect()

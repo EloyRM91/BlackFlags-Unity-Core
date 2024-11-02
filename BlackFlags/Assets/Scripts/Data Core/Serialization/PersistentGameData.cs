@@ -411,13 +411,14 @@ namespace GameMechanics.save
         //public DateTime startingDate; //fecha inicial de la partida;
         public uint playedTime; //tiempo de juego en segundos;
         public float deltaWorldDate; // el contador para llegar al próximo día
-        public int marketTimer; // contador para actualizar mercados.
+        public byte marketTimer; // contador para actualizar mercados.
 
         public GameDifficulty settings_gameDifficulty;
         public bool settings_MoreEvents;
         public bool settings_AggresiveKingdoms;
         public bool settings_AgressivePatrols;
-        public int IDCounter; //contador de elementos que hemos creado (indica el siguiente valor de clave primaria cuando instanciamos algo)
+        public ushort IDCounter; //contador de entidades que hemos creado (indica el siguiente valor de clave primaria cuando instanciamos algo)
+        public ushort IDKeyPointCounter; //Contador de ubicaciones en el mundo creadas (ciudades, puntos de misión, etc);
 
         //Player's basic Data
 
@@ -430,14 +431,26 @@ namespace GameMechanics.save
         public float[] playerPosition;
         public float[] playerRotation;
         public bool playerIsInPort;
-        public uint portID; //el id del destino del jugador
+        public int portID; //id del puerto destino del jugador
+        public int targetID; //id del barco o convoy siendo pereguido por el jugador
         public float[] playerDestination; //posición del destino
-
 
         //Player's Inventory & Crew
         public byte crew;
         public byte[] moraleModifiers;
-        public byte[] setupGuns; //armamento montado
+        public float
+            moraleSupplies,
+            moralePillage,
+            moraleResting,
+            moraleGlobal;
+        public int disentryCounter;
+
+        public byte[] onLoadGuns; //armamento en bodega (no equipado)
+        public byte[] onEquipmentGuns; //armamaneto montado 
+        public byte[] onUseWeaponsSlots; //huecos de armamento usados;
+
+        public int[] inventoryItems;
+        public float[] surplus;
 
         //Cities and KeyPoints
 
@@ -459,6 +472,8 @@ namespace GameMechanics.save
             settings_MoreEvents = PersistentGameData._GDATA_MoreEvents;
             settings_AggresiveKingdoms = PersistentGameData._GDATA_AgressiveKingdoms;
             settings_AgressivePatrols = PersistentGameData._GDATA_AlwaysAttack;
+            IDCounter = Convoy.IDConvoyCounter;
+            IDKeyPointCounter = KeyPoint.IDKeyPointCounter;
 
             playerName = PersistentGameData._GData_PlayerName;
             playerShipName = PersistentGameData._GData_ShipName;
@@ -469,11 +484,23 @@ namespace GameMechanics.save
             playerPosition = ConvertV3(player.position);
             playerRotation = ConvertQuaternion(player.rotation);
             playerIsInPort = PlayerMovement.IsInPort();
-            portID = 0;
+            portID = playerMovement.GetCurrentPort() ? playerMovement.GetCurrentPort().KeyPointID : -1;
+            targetID = playerMovement.ConvoyTarget ? playerMovement.ConvoyTarget.ID : -1;
             playerDestination = ConvertV3(playerMovement.GetDestination());
 
             crew = (byte)ShipInventory.Crew;
             moraleModifiers = MoraleModifier.ActiveModifiers;
+            moraleSupplies = ShipInventory.Morale_Supplies;
+            moralePillage = ShipInventory.Morale_Pillage;
+            moraleResting = ShipInventory.Morale_Resting;
+            moraleGlobal = ShipInventory.Morale_Global;
+
+            onLoadGuns = ShipInventory.instance.onLoad;
+            onEquipmentGuns = ShipInventory.instance.equipment;
+            onUseWeaponsSlots = ShipInventory.instance.onUseWeaponsSlots;
+
+            inventoryItems = ShipInventory.Items;
+            surplus = ShipInventory.Surplus;
         }
     }
 
@@ -569,7 +596,6 @@ namespace GameMechanics.save
             {
                 var binaryFormatter = new BinaryFormatter();
                 var stream = new FileStream(path, FileMode.Open);
-                Debug.Log("entra aquí");
                 savedFile result = binaryFormatter.Deserialize(stream) as savedFile;
                 stream.Close();
                 return result;

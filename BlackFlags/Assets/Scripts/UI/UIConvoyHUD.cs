@@ -513,7 +513,7 @@ namespace UI.WorldMap
         private void RefreshArmoryInventory()
         {
             var onLoadArmory = ShipInventory.Items;
-            var equipment = ShipInventory.equipment;
+            var equipment = ShipInventory.instance.equipment;
             //row 1
             _TEXT_Guns_ONLOAD.text = onLoadArmory[16].ToString();
             //row 2
@@ -532,8 +532,8 @@ namespace UI.WorldMap
 
         private void RefreshEquipmentRow(byte index)
         {
-            var onLoadArmory = ShipInventory.onLoad[index];
-            var equipment = ShipInventory.equipment[index];
+            var onLoadArmory = ShipInventory.instance.onLoad[index];
+            var equipment = ShipInventory.instance.equipment[index];
             Text t1, t2;
             switch (index)
             {

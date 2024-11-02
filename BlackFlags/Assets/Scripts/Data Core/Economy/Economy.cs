@@ -22,9 +22,9 @@ namespace GameMechanics.Data
 
             //BIENES COMERCIALES
             {6, new Resource("Cacao", 0.1f, 180, ResourceType.tradingGoods, 6) },
-            {7, new Resource("Café", 0.1f, 160,ResourceType.tradingGoods, 7) },
-            {8, new Resource("Azúcar", 0.1f, 180, ResourceType.tradingGoods, 8)},
-            {9, new Resource ("Algodón", 0.07f, 170, ResourceType.tradingGoods, 9) },
+            {7, new Resource("CafÃ©", 0.1f, 160,ResourceType.tradingGoods, 7) },
+            {8, new Resource("AzÃºcar", 0.1f, 180, ResourceType.tradingGoods, 8)},
+            {9, new Resource ("AlgodÃ³n", 0.07f, 170, ResourceType.tradingGoods, 9) },
             {10, new Resource("Tabaco",0.07f, 220, ResourceType.tradingGoods, 10) },
             {11, new Resource("Tinte", 0.1f, 230, ResourceType.tradingGoods, 11) },
             {12, new Resource("Sal", 0.12f, 190, ResourceType.tradingGoods, 12) },
@@ -37,9 +37,9 @@ namespace GameMechanics.Data
             //ARMAMENTO
             {16, new Resource("Armas de mano", 0.03f, 160, ResourceType.weapons, 16) },
             {17, new Resource("Falconete", 0.1f, 320, ResourceType.weapons, 17) },
-            {18, new Resource("Cañón de 8 libras", 0.3f, 900, ResourceType.weapons, 18) },
-            {19, new Resource("Cañón de 12 libras", 0.6f, 1300, ResourceType.weapons, 19) },
-            {20, new Resource("Cañón de 24 libras", 0.9f, 2500, ResourceType.weapons, 20) },
+            {18, new Resource("CaÃ±Ã³n de 8 libras", 0.3f, 900, ResourceType.weapons, 18) },
+            {19, new Resource("CaÃ±Ã³n de 12 libras", 0.6f, 1300, ResourceType.weapons, 19) },
+            {20, new Resource("CaÃ±Ã³n de 24 libras", 0.9f, 2500, ResourceType.weapons, 20) },
         };
 
         //Armory
@@ -47,17 +47,17 @@ namespace GameMechanics.Data
         {
             //NOMBRES DE ARMAS
             {0, "armas de mano" },
-            {1, "cañones de 8 libras" },
-            {2, "cañones de 12 libras" },
-            {3, "cañones de 24 libras" },
+            {1, "caÃ±ones de 8 libras" },
+            {2, "caÃ±ones de 12 libras" },
+            {3, "caÃ±ones de 24 libras" },
         };
 
         //Initial resources
-        protected static readonly Dictionary<LevelOfDifficulty, int[]> D_InitialResources = new Dictionary<LevelOfDifficulty, int[]>()
+        protected static readonly Dictionary<LevelOfDifficulty, ushort[]> D_InitialResources = new Dictionary<LevelOfDifficulty, ushort[]>()
         {
-            {LevelOfDifficulty.easy, new int[21] {8,6,0,5,2,10,0,0,0,0,0,0,0,0,0,0,7,2,4,0,0} },
-            {LevelOfDifficulty.normal, new int[21] {6,2,0,6,0,8,0,0,0,0,0,0,0,0,0,0,6,2,2,0,0} },
-            {LevelOfDifficulty.hard, new int[21] {5,0,0,5,0,7,0,0,0,0,0,0,0,0,0,0,5,4,2,0,0} }
+            {LevelOfDifficulty.easy, new ushort[21] {8,6,0,5,2,10,0,0,0,0,0,0,0,0,0,0,7,2,4,0,0} },
+            {LevelOfDifficulty.normal, new ushort[21] {6,2,0,6,0,8,0,0,0,0,0,0,0,0,0,0,6,2,2,0,0} },
+            {LevelOfDifficulty.hard, new ushort[21] {5,0,0,5,0,7,0,0,0,0,0,0,0,0,0,0,5,4,2,0,0} }
         };
         public static Resource GetResource(byte index)
         {

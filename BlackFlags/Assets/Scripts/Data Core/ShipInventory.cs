@@ -7,7 +7,7 @@ namespace GameMechanics.Data
     public class ShipInventory : EconomyBehaviour
     {
         //Singleton
-        private static ShipInventory instance;
+        public static ShipInventory instance;
 
         //Ship data
         public int maxCapacity;
@@ -18,7 +18,7 @@ namespace GameMechanics.Data
         
 
         //Morale and crew
-        private int crew;
+        private ushort crew;
         private int[] moralBySupplies = new int[6];
         private float morale_BYSUPPLIES, morale_BYPILLAGE, morale_BYRESTING, morale_GLOBAL;
 
@@ -81,16 +81,16 @@ namespace GameMechanics.Data
         {
             get { return instance.averageCost; }
         }
-        public static int Crew
+        public static ushort Crew
         {
             get { return instance.crew; }
             set { instance.crew = value; }
         }
 
-        public static int[] onLoad = new int[4];
-        public static int[] equipment = new int[4];
-        public static int[] onUseWeaponsSlots = new int[4];
-        private static int[] armoryCapacity = new int[4];
+        public byte[] onLoad = new byte[4];
+        public byte[] equipment = new byte[4];
+        public byte[] onUseWeaponsSlots = new byte[4];
+        //private int[] armoryCapacity = new int[4];
 
         //Events
         public delegate void OnEquipmentChange(byte index);
@@ -128,7 +128,7 @@ namespace GameMechanics.Data
             maxCapacity = PersistentGameData._GData_PlayerShip.GetCapacity();
             StartingInventory(LevelOfDifficulty.easy);
             StartingArmory();
-            armoryCapacity = PlayerMovement.playership.GetPowerCapacity();
+            //armoryCapacity = PlayerMovement.playership.GetPowerCapacity();
             UpdateLoad();
 
             morale_BYSUPPLIES = 0.8f;
@@ -189,7 +189,7 @@ namespace GameMechanics.Data
             {
                 for (byte i = 0; i < 6; i++)
                 {
-                    var consumptionValue = crew * D_SupplyConsumption[i] / 15f;
+                    float consumptionValue = crew * D_SupplyConsumption[i] / 15f;
                     //Coste de mantenimiento por navegar:
                     if (i == 6) consumptionValue += PersistentGameData._GData_PlayerShip.GetManteinance() / 45;
 
@@ -377,7 +377,7 @@ namespace GameMechanics.Data
                 float v2 = items[index] * averageCost[index];
 
                 //Modifica inventario
-                items[index] += amount;
+                items[index] += (ushort)amount;
                 shipLoad += additionalWeight;
 
                 //Nuevo coste promedio
@@ -385,7 +385,7 @@ namespace GameMechanics.Data
 
                 if (index >= 17)
                 {
-                    onLoad[index - 17] += amount;
+                    onLoad[index - 17] += (byte)amount;
                 }
 
                 if (updateLoad != null) updateLoad();
@@ -395,7 +395,7 @@ namespace GameMechanics.Data
         {
             amount = items[index] >= amount ? amount : items[index];
 
-            items[index] -= Math.Abs(amount);
+            items[index] -= (ushort)Math.Abs(amount);
             shipLoad -= shipLoad + D_WorldResources[index].weight * amount;
 
             if (index >= 17)
@@ -450,7 +450,7 @@ namespace GameMechanics.Data
                 {
                     if (onLoad[index] < amount)
                     {
-                        var amountToSetOff = AmountToReduce - onLoad[index];
+                        byte amountToSetOff = (byte)(AmountToReduce - onLoad[index]);
                         equipment[index] -= amountToSetOff;
                     }
 
@@ -461,21 +461,25 @@ namespace GameMechanics.Data
                 }
 
                 //Get backup
-                int[] equipmentBackUp = equipment;
+                byte[] equipmentBackUp = equipment;
 
                 //ResetAll
                 for (byte i = 0; i < 4; i++)
                 {
                     onUseWeaponsSlots[i] = 0;
                     equipment[i] = 0;
-                    onLoad[i] = items[i + 17];
+                    onLoad[i] = (byte)items[i + 17];
                     ToEquipment(i, (byte)equipmentBackUp[i]);
                 }
             }
         } 
         public static void ToLoad(byte index, byte amount)
         {
-            if(equipment[index] >= amount)
+            var onLoad = instance.onLoad;
+            var equipment = instance.equipment;
+            var onUseWeaponsSlots = instance.onUseWeaponsSlots;
+            var armoryCapacity = PlayerMovement.playership.GetPowerCapacity();
+            if (equipment[index] >= amount)
             {
 
                 if (equipment[index] == onUseWeaponsSlots[index]) //I'm not using other calibber racks  
@@ -519,9 +523,13 @@ namespace GameMechanics.Data
 
         public static void ToEquipment(byte index, byte amount)
         {
+            var onLoad = instance.onLoad;
+            var equipment = instance.equipment;
+            var onUseWeaponsSlots = instance.onUseWeaponsSlots;
+            var armoryCapacity = PlayerMovement.playership.GetPowerCapacity();
+
             int ncaliber = index;
             var slotsVal = onUseWeaponsSlots[index] + amount;
-            //byte newAmount;
 
             if (onLoad[index] > 0)
             {
@@ -530,8 +538,8 @@ namespace GameMechanics.Data
                     if (slotsVal <= armoryCapacity[index]) // if ship has capacity to install all demanded weapons
                     {
                         equipment[index] += amount;
-                        onLoad[index] = onLoad[index] - amount;
-                        onUseWeaponsSlots[index] = onUseWeaponsSlots[index] + amount;
+                        onLoad[index] = (byte)(onLoad[index] - amount);
+                        onUseWeaponsSlots[index] = (byte)(onUseWeaponsSlots[index] + amount); //no tendremos problemas de desbordamiento porque ningún barco va a tener más de 256 cañones
                         OnEquipmentEditRefresh(index);
                         //print($"{onUseWeaponsSlots[0]}  {onUseWeaponsSlots[1]}  {onUseWeaponsSlots[2]}  {onUseWeaponsSlots[3]} // {equipment[index]}");
                     }
@@ -548,7 +556,7 @@ namespace GameMechanics.Data
                                 {
                                     equipment[index] += amount;
                                     onLoad[index] -= amount;
-                                    onUseWeaponsSlots[ncaliber] = onUseWeaponsSlots[ncaliber] + amount;
+                                    onUseWeaponsSlots[ncaliber] = (byte)(onUseWeaponsSlots[ncaliber] + amount); //no tendremos problemas de desbordamiento porque ningún barco va a tener más de 256 cañones
                                     OnEquipmentEditRefresh(index);
                                     //print($"{onUseWeaponsSlots[0]}  {onUseWeaponsSlots[1]}  {onUseWeaponsSlots[2]}  {onUseWeaponsSlots[3]} // {equipment[index]}");
                                     return;

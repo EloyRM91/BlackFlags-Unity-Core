@@ -27,6 +27,7 @@ public class PlayerMovement : Convoy
     public static bool canMove = true;
     private static bool inPort;
     private ConvoyNPC thisConvoyTarget = null;
+    public override Convoy ConvoyTarget { get { return thisConvoyTarget; } }
 
     //Route Data
     private static float _remainingTime = 0;
@@ -61,7 +62,7 @@ public class PlayerMovement : Convoy
     //GetData
     public ConvoyNPC GetTarget() { return thisConvoyTarget; }
     public float GetTime() { return _remainingTime; }
-    //public KeyPoint GetCurrentPort() { return currentPort; }
+    public KeyPoint GetCurrentPort() { return currentPort; }
 
     protected override void Start()
     {
@@ -129,7 +130,7 @@ public class PlayerMovement : Convoy
                 {
                     if (UIMinimap.GetGraphicRaycastResultST()) //hit on minimap
                     {
-                        print("le doy al minimapa");
+                        //print("le doy al minimapa");
                         TryToGetDestination(_minimapCamera);
                     }
                     else //hit on terrain
