@@ -50,12 +50,11 @@ public class SceneManager : MonoBehaviour
     {
         PersistentGameData.SetAsTutorial(val);
         if(val) PersistentGameData._GData_PlayerAvatar = tutorialAvatar;
-
     }
 
     //---- MENU ITEM
 #if UNITY_EDITOR
-    [MenuItem("Escenas/Menú")]
+    [MenuItem("Escenas/MenÃº")]
     static void OpenMenu()
     {
         //Open the Scene in the Editor (do not enter Play Mode)
@@ -85,7 +84,7 @@ public class SceneManager : MonoBehaviour
                 if(line != null)
                 {
                     _TXT_versionLabel.text += line;
-                    _TXT_versionText.text = "Cambios en esta versión: \n\n";
+                    _TXT_versionText.text = "Cambios en esta versiï¿½n: \n\n";
 
                     while ((line = sr.ReadLine()) != null)
                     {

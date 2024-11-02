@@ -62,8 +62,7 @@ public class GameManager : MonoBehaviour
     {
         //Singleton
         gm = this;
-        //LoadDatabase
-        WorldGenerator.Initialize();  //TODO: En el futuro esto se tendría que hacer en la pantalla de carga
+        
         createCurrentsMap();
 
         //Set MatController parameters
@@ -79,7 +78,7 @@ public class GameManager : MonoBehaviour
         PersistentGameData._GData_Reputation = 55;
         ShipInventory.Crew = 5;
 
-        LoadGame("hola");
+        //LoadGame("hola");
     }
 
     //Generation

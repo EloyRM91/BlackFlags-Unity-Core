@@ -16,8 +16,8 @@ public class WorldGenerator
     {
         #region VARIABLES
         // SQ
-        private static IDataReader reader;
-        private static IDbConnection dbcon;
+        //private static IDataReader reader;
+        //private static IDbConnection dbcon;
         //Nombres de embarcaciones
         private static ShipList
             _names_Merchants_SPAIN = new ShipList(),
@@ -63,7 +63,7 @@ public class WorldGenerator
             thisdBConn.Open();
             return thisdBConn;
         }
-        private static IDataReader RunReader(string tableName)
+        private static IDataReader RunReader(IDbConnection dbcon, string tableName)
         {
             IDbCommand cmdRead = dbcon.CreateCommand();
             cmdRead.CommandText = "SELECT * FROM " + tableName; // query
@@ -130,10 +130,10 @@ public class WorldGenerator
             path = "URI=file:C:/users/" + System.Environment.UserName + "/Desktop/";
 #endif
             //Open database
-            dbcon = OpenDB(path + "DB_ShipNames.db");
+            IDbConnection dbcon = OpenDB(path + "DB_ShipNames.db");
             for (int i = 0; i < lists.Length; i++)
             {
-                reader = RunReader(tables[i]);
+                IDataReader reader = RunReader(dbcon, tables[i]);
                 while (reader.Read())
                 {
                     str = reader[0].ToString();
@@ -171,8 +171,8 @@ public class WorldGenerator
                 "t_BRITAIN"
             };
             //Open database
-            dbcon = OpenDB(path + "DB_ShipSpawns.db");
-            reader = RunReader(tables[index]);
+            IDbConnection dbcon = OpenDB(path + "DB_ShipSpawns.db");
+            IDataReader reader = RunReader(dbcon, tables[index]);
             while (reader.Read())
             {
                 statistics.Add(DataSplit(reader[0].ToString()));
@@ -200,8 +200,8 @@ public class WorldGenerator
             path = "URI=file:C:/users/" + System.Environment.UserName + "/Desktop/";
 #endif
             //Open dataase
-            dbcon = OpenDB(path + "DB_ShipSpawns.db");
-            reader = RunReader(tableName);
+            IDbConnection dbcon = OpenDB(path + "DB_ShipSpawns.db");
+            IDataReader reader = RunReader(dbcon, tableName);
             while (reader.Read())
             {
                 statistics.Add(DataSplit(reader[0].ToString()));
@@ -242,10 +242,10 @@ public class WorldGenerator
 #if UNITY_EDITOR
             path = "URI=file:C:/users/" + System.Environment.UserName + "/Desktop/";
 #endif
-            dbcon = OpenDB(path + "DB_CharacterNames.db");
+            IDbConnection dbcon = OpenDB(path + "DB_CharacterNames.db");
             for (int i = 0; i < lists.Length; i++)
             {
-                reader = RunReader(tables[i]);
+                IDataReader reader = RunReader(dbcon, tables[i]);
                 
                 while (reader.Read())
                 {

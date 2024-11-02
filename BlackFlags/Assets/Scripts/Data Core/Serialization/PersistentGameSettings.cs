@@ -27,6 +27,10 @@ namespace GameSettings.Core
 
         //Mods
         public static ModData currentMod = null;
+
+        //Loading Saved Game
+        public static bool loadingFile = false;
+        public static string selectedFileName;
         #endregion
         protected override void Awake()
         {

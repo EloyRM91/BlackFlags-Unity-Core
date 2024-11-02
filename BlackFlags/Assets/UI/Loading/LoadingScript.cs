@@ -8,6 +8,11 @@ using GameSettings.Core;
 using UnityEngine.Networking;
 using GameMechanics.Sound;
 
+//Initial Data + Load
+using Generation.Generators;
+using GameMechanics.save;
+
+
 namespace GameSettings.Loading
 {
     public class LoadingScript : MonoBehaviour
@@ -36,7 +41,6 @@ namespace GameSettings.Loading
 #endregion
         void OnEnable()
         {
-
             //Use custom data when a mod has been loaded:
             var mod = PersistentGameSettings.currentMod;
             if (mod != null)
@@ -84,6 +88,23 @@ namespace GameSettings.Loading
             else
             {
                 Invoke("Load", 0.3f); //Dummy patch
+            }
+        }
+
+        void Awake()
+        {
+            //LoadDatabase
+            WorldGenerator.Initialize();
+
+            if(PersistentGameSettings.loadingFile)
+            {
+                //Load saved file data
+                var fileName = PersistentGameSettings.selectedFileName;
+
+                var loaderBinaryFormat = new LoaderBinaryFormat();
+                savedFile savedGameData = loaderBinaryFormat.LoadGame(fileName);
+
+                //todo: hacer cosas con los datos obtenidos
             }
         }
 

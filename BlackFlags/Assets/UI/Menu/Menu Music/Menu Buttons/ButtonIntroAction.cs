@@ -12,7 +12,7 @@ public class ButtonIntroAction : MonoBehaviour
         KeywordResponsive = true;
         GetComponent<Button>().interactable = true;
     }
-    void Start()
+    protected virtual void Start()
     {
         GetComponent<Button>().onClick.AddListener(() => Action());
     }

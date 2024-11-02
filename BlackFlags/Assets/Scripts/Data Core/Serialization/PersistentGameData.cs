@@ -424,6 +424,8 @@ namespace GameMechanics.save
 
         public string playerName;
         public string playerShipName;
+        public byte[] playerFlag;
+        public byte[] playerAvatar;
 
         public SerializableShip playerShipData;
         public int playerGold;
@@ -477,6 +479,9 @@ namespace GameMechanics.save
 
             playerName = PersistentGameData._GData_PlayerName;
             playerShipName = PersistentGameData._GData_ShipName;
+            playerFlag = PersistentGameData._GData_PlayerFlag.texture.EncodeToPNG();
+            playerAvatar = PersistentGameData._GData_PlayerAvatar.texture.EncodeToPNG();
+
             playerShipData = new SerializableShip(PlayerMovement.playership);
             playerGold = PersistentGameData._GData_Gold;
             playerReputation = PersistentGameData._GData_Reputation;

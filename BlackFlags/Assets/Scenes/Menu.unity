@@ -32541,7 +32541,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cargar Partida
+  m_Text: Continuar Partida
   fontType: 1
 --- !u!222 &1235819653
 CanvasRenderer:
@@ -34465,6 +34465,7 @@ GameObject:
   - component: {fileID: 1322351722}
   - component: {fileID: 1322351721}
   - component: {fileID: 1322351725}
+  - component: {fileID: 1322351726}
   m_Layer: 5
   m_Name: Button - Load
   m_TagString: Untagged
@@ -34551,14 +34552,14 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 1322351723}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2146726041}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
+      - m_Target: {fileID: 836395597}
+        m_TargetAssemblyTypeName: SceneManager, Assembly-CSharp
+        m_MethodName: IsTutorial
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -34566,12 +34567,13 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2045880200}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1895428978}
+        m_TargetAssemblyTypeName: GameMechanics.Sound.AmbienceBehaviour`1[[GameMechanics.Sound.Music,
+          Assembly-CSharp
+        m_MethodName: ExitFromCurrentScene
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -34630,6 +34632,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03508874334f2ae438f3cb4e3f7e7783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1322351726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322351719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36c0d571665c00449891431bfbfd18f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelTo: 0
 --- !u!1 &1325247037
 GameObject:
   m_ObjectHideFlags: 0
