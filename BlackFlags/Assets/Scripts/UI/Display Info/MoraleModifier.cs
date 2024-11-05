@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using GameSettings.Core;
 namespace GameMechanics.Data
 {
     public class MoraleModifier : MonoBehaviour
@@ -21,15 +22,6 @@ namespace GameMechanics.Data
 
         public delegate void UpdateValue();
         public static UpdateValue onSpeedModifier;
-
-        private void OnEnable()
-        {
-            //cosas
-        }
-        private void OnDisable()
-        {
-            //cosas
-        }
 
         public static void Add(MoraleModifier mod)
         {

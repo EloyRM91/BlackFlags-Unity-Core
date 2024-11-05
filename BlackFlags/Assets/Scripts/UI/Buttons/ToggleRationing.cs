@@ -12,6 +12,7 @@ namespace UI.WorldMap
     {
         //Toggle parameters
         [SerializeField] private int index;
+        public int Index { get { return index; } }
         private int itemIndex;
 
         //Components
@@ -22,10 +23,29 @@ namespace UI.WorldMap
         private static Color unlocked = new Color(0.169f, 0.169f, 0.169f, 1);
 
         private bool lockedByTiming;
+        public bool LockedByTiming
+        {
+            get { return lockedByTiming; }
+            set
+            {
+                lockedByTiming = value;
+
+            }
+        }
         private DateTime unlockerDate;
+        public DateTime UnlockerDate { 
+            get { return unlockerDate; } 
+            set { 
+                unlockerDate = value;
+                CheckLockDate(TimeManager.GetDate());
+            }
+        }
 
         private void Awake()
         {
+            //Add this component to TimeManager's list
+            //unity no sabe hacer esto si el objeto está desactivado
+
             //Is this toggle rationing rum or meat?
             itemIndex = index == 10 ? 4 : 2;
 
@@ -36,13 +56,27 @@ namespace UI.WorldMap
             //Events
             TimeManager.NewDay += CheckLockDate;
         }
-        private void OnEnable()
+        protected void OnEnable()
         {
             CheckLockDate(TimeManager.GetDate());
             if (ShipInventory.Items[itemIndex] + ShipInventory.Surplus[itemIndex] == 0)
             {
                 toggle.interactable = false;
             }
+            else if(LockedByTiming)
+            {
+                toggle.isOn = true;
+                toggle.interactable = !LockedByTiming;
+            }
+            else if (index == 10)
+            {
+                toggle.isOn = ShipInventory.instance.rationingRum;
+            }
+            else if(index == 11)
+            {
+                toggle.isOn = ShipInventory.instance.rationingMeat;
+            }
+
             label.color = toggle.interactable ? unlocked : locked;
         }
         protected override void Start()
@@ -88,6 +122,10 @@ namespace UI.WorldMap
                         lockedByTiming = false;
                     }
                     
+                }
+                else
+                {
+                    lockedByTiming = true;
                 }
             }
         }

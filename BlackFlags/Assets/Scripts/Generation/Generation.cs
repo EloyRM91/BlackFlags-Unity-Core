@@ -48,6 +48,8 @@ public class WorldGenerator
             _names_NPC_DUTCH = new List<string>[2] { new List<string>(), new List<string>() },
             _names_NPC_BRITAIN = new List<string>[2] { new List<string>(), new List<string>() },
             _overNames = new List<string>[2] { new List<string>(), new List<string>() };
+        private static bool initializationDone;
+        public static bool InitializationDone { get { return initializationDone; } }
         #endregion
 
         #region DB Loading
@@ -56,6 +58,7 @@ public class WorldGenerator
             var modding = PersistentGameSettings.currentMod != null;
             GetShipNamesLists(modding);
             GetCharacterNamesLists(modding);
+            initializationDone = true;
         }
         private static IDbConnection OpenDB(string dir)
         {
@@ -229,6 +232,7 @@ public class WorldGenerator
                 _names_NPC_BRITAIN,
                 _overNames
             };
+
             //Database tables
             var tables = new string[]
             {

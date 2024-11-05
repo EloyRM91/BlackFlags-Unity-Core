@@ -5,13 +5,18 @@ using System;
 
 public class ButtonLoadLastSavedGame : ButtonIntroAction
 {
-    protected override void Start()
+    protected override void OnEnable()
     {
-        if(Directory.GetFiles(GetDirectory()).Length == 0)
+        base.OnEnable();
+
+        if (Directory.GetFiles(GetDirectory()).Length == 0)
         {
             GetComponent<Button>().interactable = false;
         }
-        else
+    }
+    protected override void Start()
+    {
+        if(Directory.GetFiles(GetDirectory()).Length != 0)
         {
             base.Start();
         }

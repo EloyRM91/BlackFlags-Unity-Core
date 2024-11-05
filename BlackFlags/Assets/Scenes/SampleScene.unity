@@ -37153,6 +37153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 10
+  lockedByTiming: 0
 --- !u!1 &206340817
 GameObject:
   m_ObjectHideFlags: 0
@@ -42206,6 +42207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 11
+  lockedByTiming: 0
 --- !u!1 &254191309
 GameObject:
   m_ObjectHideFlags: 0
@@ -203108,6 +203110,9 @@ MonoBehaviour:
   - {fileID: 348327381}
   - {fileID: 1765987337}
   - {fileID: 1228918842}
+  onLoad: 00000000
+  equipment: 00000000
+  onUseWeaponsSlots: 00000000
 --- !u!1 &1335614610
 GameObject:
   m_ObjectHideFlags: 0

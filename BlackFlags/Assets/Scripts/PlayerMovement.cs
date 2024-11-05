@@ -8,6 +8,9 @@ using GameMechanics.WorldCities;
 using GameMechanics.Ships;
 using GameMechanics.Data;
 
+//Load
+using GameSettings.Core;
+
 /// <summary>
 /// The player's input and movement controller
 /// </summary>
@@ -66,45 +69,79 @@ public class PlayerMovement : Convoy
 
     protected override void Start()
     {
-        canMove = true;
-        //base.Start();
         SetID(0);
+        if (PersistentGameSettings.loadingFile)
+        {
+            var container = GameObject.FindWithTag("PersistentDataContainer");
+            if (container.TryGetComponent<PersistentSavedFileContainer>(out PersistentSavedFileContainer c))
+            {
+                var currentLoadedData = c.savedFile;
+                if (!c.ignoreInventoryData)
+                {
+                    canMove = currentLoadedData.playerCanMove;
+                    inPort = currentLoadedData.playerIsInPort;
+
+                    playership = PersistentGameData._GData_PlayerShip;
+                    playerShipName = PersistentGameData._GData_ShipName;
+                    playerName = PersistentGameData._GData_PlayerName;
+
+                    print(playership.GetSubClassName());
+                    print(canMove);
+
+                    //Restore player's position
+                    var pos = currentLoadedData.playerPosition;
+                    transform.position = new Vector3(pos[0], pos[1], pos[2]);
+
+                    var rot = currentLoadedData.playerRotation;
+                    transform.rotation = new Quaternion(rot[0], rot[1], rot[2], rot[3]);
+                }
+            }
+
+        } else
+        {
+            canMove = true;
+            //base.Start();
+
+            //Set player ship class
+            if (PersistentGameData.currentSceneIsTutorial)
+            {
+                playership = new ShipSubCategory_MilitaryBalander();
+                playerShipName = "Joraique";
+                playerName = "Mariel Espinosa";
+            }
+            else
+            {
+                playership = PersistentGameData._GData_PlayerShip;
+                playerShipName = PersistentGameData._GData_ShipName;
+                playerName = PersistentGameData._GData_PlayerName;
+            }
+            playership.name_Ship = playerShipName;
+            playership.name_Captain = playerName;
+
+            //Start on Port
+            inPort = true;
+            GetComponent<BoxCollider>().enabled = false;
+            _clickRay.origin = transform.position + Vector3.up * 3;
+            _clickRay.direction = Vector3.up * -1;
+            if (Physics.Raycast(_clickRay, out _clickHit, 10, _layerMask))
+            {
+                if (_clickHit.collider.CompareTag("KeyPoint"))
+                    currentPort = _clickHit.transform.GetComponent<KeyPoint>();
+            }
+        }
+
         //Set physics layer mask
         _layerMask = LayerMask.GetMask("KeyPoint", "Default", "Water");
-        //Set player ship class
-        if (PersistentGameData.currentSceneIsTutorial)
-        {
-            playership = new ShipSubCategory_MilitaryBalander();
-            playerShipName = "Joraique";
-            playerName = "Mariel Espinosa";
-        }
-        else
-        {
-            playership = PersistentGameData._GData_PlayerShip;
-            playerShipName = PersistentGameData._GData_ShipName;
-            playerName = PersistentGameData._GData_PlayerName;
-        }
-        playership.name_Ship = playerShipName;
-        playership.name_Captain = playerName;
-
 
         //Link the player banner
         _thisConvoySpriteController = UI.WorldMap.PoolingShipSprites.GetPlayerSprite();
+
         //set the model's sprites
         _thisConvoySpriteController.SetSpritesSet(playership.GetSpriteIndex());
+        _thisConvoySpriteController.SetSprite();
+
         //Parameters
         SetPlayerParameters();
-
-        //Start on Port
-        inPort = true;
-        GetComponent<BoxCollider>().enabled = false;
-        _clickRay.origin = transform.position + Vector3.up * 3;
-        _clickRay.direction = Vector3.up * -1;
-        if (Physics.Raycast(_clickRay, out _clickHit, 10, _layerMask))
-        {
-            if (_clickHit.collider.CompareTag("KeyPoint"))
-                currentPort = _clickHit.transform.GetComponent<KeyPoint>();
-        }
 
         //Events 
         MoraleModifier.onSpeedModifier += SetPlayerParameters;

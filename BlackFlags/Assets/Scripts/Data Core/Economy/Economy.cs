@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using GameSettings.Core;
+
 namespace GameMechanics.Data
 {
     //Load Ship State
@@ -53,11 +55,12 @@ namespace GameMechanics.Data
         };
 
         //Initial resources
-        protected static readonly Dictionary<LevelOfDifficulty, ushort[]> D_InitialResources = new Dictionary<LevelOfDifficulty, ushort[]>()
+        protected static readonly Dictionary<GameDifficulty, ushort[]> D_InitialResources = new Dictionary<GameDifficulty, ushort[]>()
         {
-            {LevelOfDifficulty.easy, new ushort[21] {8,6,0,5,2,10,0,0,0,0,0,0,0,0,0,0,7,2,4,0,0} },
-            {LevelOfDifficulty.normal, new ushort[21] {6,2,0,6,0,8,0,0,0,0,0,0,0,0,0,0,6,2,2,0,0} },
-            {LevelOfDifficulty.hard, new ushort[21] {5,0,0,5,0,7,0,0,0,0,0,0,0,0,0,0,5,4,2,0,0} }
+            {GameDifficulty.easy, new ushort[21] {8,6,0,5,2,10,0,0,0,0,0,0,0,0,0,0,7,2,4,0,0} },
+            {GameDifficulty.normal, new ushort[21] {6,2,0,6,0,8,0,0,0,0,0,0,0,0,0,0,6,2,2,0,0} },
+            {GameDifficulty.hard, new ushort[21] {5,0,0,5,0,7,0,0,0,0,0,0,0,0,0,0,5,4,2,0,0} },
+            {GameDifficulty.nightmare, new ushort[21] {5,0,0,3,0,5,0,0,0,0,0,0,0,0,0,0,5,4,2,0,0} }
         };
         public static Resource GetResource(byte index)
         {
@@ -132,6 +135,6 @@ namespace GameMechanics.Data
     }
     public enum ResourceType { consumible = 0, tradingGoods = 1 , luxury = 2, weapons = 3, Any}
 
-    public enum LevelOfDifficulty { easy = 0, normal = 1, hard = 2}
+    // public enum LevelOfDifficulty { easy = 0, normal = 1, hard = 2, nightmare = 3}
 }
 

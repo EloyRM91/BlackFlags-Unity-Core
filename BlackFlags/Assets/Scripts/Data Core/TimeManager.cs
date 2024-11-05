@@ -3,11 +3,20 @@ using System.Collections;
 using UnityEngine;
 //Date Time
 using System;
+using System.Collections.Generic;
 //Mechanics
 using GameMechanics.Sound;
+//Load Data
+using GameSettings.Core;
 
 namespace GameMechanics.Data
 {
+    //public class Rationing
+    //{
+    //    public int index;
+    //    public DateTime timeUntilUnlock;
+    //}
+
     /// <summary>
     /// A calendar manager class
     /// Parameters: World Date (DateTime), Current Speed (float)
@@ -24,6 +33,8 @@ namespace GameMechanics.Data
 
         //Refs
         [SerializeField] private GameObject pausePanel;
+        //private ToggleRationing[] rationingManagers;
+        //public ToggleRationing[] RationingManagers { get { return rationingManagers; } }
 
         //Events
         public delegate void OnDateChange(DateTime date);
@@ -47,7 +58,6 @@ namespace GameMechanics.Data
         /// </summary>
         //public static OnTimeScaleChange onTimeScaleChange;
 
-
         private float[] _speed = new float[] {0, 0.5f, 1, 2, 5, 20};  //Speed modes: (x0 = pause)
         private byte currentIndex = 2;
         private static float _currentspeed = 1;
@@ -57,6 +67,11 @@ namespace GameMechanics.Data
         public uint PlayedTime { get { return (uint)playedTime; } }
         private byte counter20;
         public byte Counter20 { get { return counter20; } }
+
+        //public void AddToRationingList(ToggleRationing newRationingElement)
+        //{
+        //    rationingManagers.Add(newRationingElement);
+        //}
 
         private void Awake()
         {
@@ -70,8 +85,51 @@ namespace GameMechanics.Data
         }
         private void Start()
         {
-            WorldDate = new DateTime(1719, 10, 20);
-            NewDay(WorldDate);
+            if (PersistentGameSettings.loadingFile)
+            {
+                var rationingToggles = GameObject.FindObjectsOfType<UI.WorldMap.ToggleRationing>(true);
+                var container = GameObject.FindWithTag("PersistentDataContainer");
+                if (container.TryGetComponent(out PersistentSavedFileContainer c))
+                {
+                    var currentLoadedData = c.savedFile;
+
+                    WorldDate = currentLoadedData.WorldDate;
+                    NewDay(WorldDate);
+                    timer = currentLoadedData.deltaWorldDate;
+                    counter20 = currentLoadedData.marketTimer;
+
+                    //Establece fecha de desbloqueo de racionamiento de ron y de carne:
+                    for (int i = 0; i < rationingToggles.Length; i++)
+                    {
+                        var ratToggle = rationingToggles[i];
+                        if (ratToggle.Index == 10)
+                        {
+                            if(currentLoadedData.rationingRum)
+                            {
+                                ratToggle.LockedByTiming = currentLoadedData.rationingRum_TimerLock;
+                                ratToggle.UnlockerDate = currentLoadedData.unlockDate_RumRationing;
+                            }
+                        }
+                        else if (ratToggle.Index == 11)
+                        {
+                            if (currentLoadedData.rationingMeat)
+                            {
+                                ratToggle.LockedByTiming = currentLoadedData.rationingMeat_TimerLock;
+                                ratToggle.UnlockerDate = currentLoadedData.unlockDate_MeatRationing;
+                            }
+                        }
+                    }
+
+                    //Hemos terminado de cargar los datos
+                    c.OnLoadedCalendar();
+                }
+            }
+            else
+            {
+                WorldDate = new DateTime(1719, 10, 20);
+                NewDay(WorldDate);
+            }
+
         }
         private void Update()
         {

@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 using GameMechanics.Data;
+using GameSettings.Core;
+
 using DG.Tweening;
 public class WorldEvents : MonoBehaviour
 {
@@ -35,7 +38,14 @@ public class WorldEvents : MonoBehaviour
             }
         };
 
-        OpenEvent(0, PersistentGameData._GData_PlayerAvatar, PersistentGameData._GData_PlayerFlag);
+        if(PersistentGameSettings.loadingFile)
+        {
+            //algo
+        }
+        else
+        {
+            OpenEvent(0, PersistentGameData._GData_PlayerAvatar, PersistentGameData._GData_PlayerFlag);
+        }
 
         //----EVENTS
         UIMap.clearPanels += Close;

@@ -245,14 +245,14 @@ public class GameManager : MonoBehaviour
 
     public void SaveGame(string fileName)
     {
-        var savedGameBinaryFormat = new SavedGameBinaryFormat(new savedFile());
+        var savedGameBinaryFormat = new SavedGameBinaryFormat(new SavedFile());
         savedGameBinaryFormat.SaveGame(fileName);
     }
 
     public void LoadGame(string fileName)
     {
         var loaderBinaryFormat = new LoaderBinaryFormat();
-        savedFile savedGameData = loaderBinaryFormat.LoadGame(fileName);
+        SavedFile savedGameData = loaderBinaryFormat.LoadGame(fileName);
 
         if(savedGameData != null)
         {

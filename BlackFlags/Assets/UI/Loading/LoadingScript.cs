@@ -10,6 +10,7 @@ using GameMechanics.Sound;
 
 //Initial Data + Load
 using Generation.Generators;
+using GameMechanics.Data;
 using GameMechanics.save;
 
 
@@ -41,6 +42,12 @@ namespace GameSettings.Loading
 #endregion
         void OnEnable()
         {
+            //LoadDatabase
+            if (!WorldGenerator.InitializationDone)
+            {
+                WorldGenerator.Initialize();
+            }
+
             //Use custom data when a mod has been loaded:
             var mod = PersistentGameSettings.currentMod;
             if (mod != null)
@@ -93,18 +100,23 @@ namespace GameSettings.Loading
 
         void Awake()
         {
-            //LoadDatabase
-            WorldGenerator.Initialize();
-
             if(PersistentGameSettings.loadingFile)
             {
                 //Load saved file data
-                var fileName = PersistentGameSettings.selectedFileName;
-
+                var file = PersistentGameSettings.selectedFileName;
+                var fileName = file.Split('.')[0];
                 var loaderBinaryFormat = new LoaderBinaryFormat();
-                savedFile savedGameData = loaderBinaryFormat.LoadGame(fileName);
+                SavedFile savedGameData = loaderBinaryFormat.LoadGame(fileName);
 
-                //todo: hacer cosas con los datos obtenidos
+                if (savedGameData != null)
+                {
+                    //todo: hacer cosas con los datos obtenidos
+                    PersistentGameData.getDataFromSavedFile(savedGameData);
+                }
+                else
+                {
+                    Application.Quit();
+                }
             }
         }
 

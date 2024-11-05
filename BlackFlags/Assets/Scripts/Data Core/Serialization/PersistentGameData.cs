@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections.Generic;
+
 //Mechanics
 using GameMechanics.Ships;
 using GameMechanics.Data;
@@ -11,6 +13,7 @@ using GameSettings.Core;
 //Serialization:
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
+using GameMechanics.save;
 
 namespace GameMechanics.Data
 {
@@ -192,16 +195,57 @@ namespace GameMechanics.Data
         {
             currentSceneIsTutorial = val;
         }
-#endregion
+        #endregion
+
+#region SET DATA
+        public static void getDataFromSavedFile(SavedFile savedFile)
+        {
+            _GData_PlayerName = savedFile.playerName;
+            _GData_ShipName = savedFile.playerShipName;
+            _GData_PlayerShip = GetShipDataFromSerializedInfo(savedFile.playerShipData);
+            _GData_Gold = savedFile.playerGold;
+
+            _GData_PlayerFlag = instance.GetSpriteFromBytes(savedFile.playerFlag, 600, 400);
+            _GData_PlayerAvatar = instance.GetSpriteFromBytes(savedFile.playerAvatar, 300, 300);
+
+            _GData_Difficulty = savedFile.settings_gameDifficulty;
+            _GDATA_MoreEvents = savedFile.settings_MoreEvents;
+            _GDATA_AgressiveKingdoms = savedFile.settings_AggresiveKingdoms;
+            _GDATA_AlwaysAttack = savedFile.settings_AgressivePatrols;
+
+            //Creamos una instancia contenedora de los datos que no se destruya al cargar la escena y permita seguir cargando datos.
+            var fileContainer = instance.gameObject.AddComponent<PersistentSavedFileContainer>();
+            fileContainer.savedFile = savedFile;
+        }
+
+        private Sprite GetSpriteFromBytes(byte[] bytes, ushort witdh, ushort height)
+        {
+            var flagTex = new Texture2D(witdh, height);
+            flagTex.LoadRawTextureData(bytes);
+            flagTex.Apply();
+            return Sprite.Create(flagTex, new Rect(0, 0, witdh, height), new Vector2(0, 0), 1);
+        }
+
+        public static Ship GetShipDataFromSerializedInfo(SerializableShip shipData)
+        {
+            return shipData.GetShipFromSerializedData();
+        }
+
+        public static Ship GetShipDataFromSerializedInfo(SavedFile savedFile)
+        {
+            var shipData = savedFile.playerShipData;
+            return GetShipDataFromSerializedInfo(shipData);
+        }
+        #endregion
     }
 }
 
-namespace GameMechanics.save 
+namespace GameMechanics.save
 {
     #region SERIALIZATION STRUCTURES
 
     [Serializable]
-    public abstract class SerializationConverter 
+    public abstract class SerializationConverter
     {
         public float[] ConvertV3(Vector3 vector)
         {
@@ -215,7 +259,7 @@ namespace GameMechanics.save
 
         public Vector3 ToVector3(float[] values)
         {
-            return new Vector3(values[0], values[1], values [2]);
+            return new Vector3(values[0], values[1], values[2]);
         }
 
         public Vector2 ToVector2(float[] values)
@@ -225,7 +269,7 @@ namespace GameMechanics.save
 
         public float[] ConvertQuaternion(Quaternion rot)
         {
-            return new float[] { rot.x, rot.y, rot.z, rot.w};
+            return new float[] { rot.x, rot.y, rot.z, rot.w };
         }
     }
 
@@ -284,9 +328,9 @@ namespace GameMechanics.save
         public int amount;
 
         public SerializableInventoryStacking(Resource r, int n)
-        { 
-            resource = new SerializableResource(r); 
-            amount = n; 
+        {
+            resource = new SerializableResource(r);
+            amount = n;
         }
 
         public SerializableInventoryStacking(SerializableResource r, int n)
@@ -396,6 +440,90 @@ namespace GameMechanics.save
             variant = ship.GetVariantKey();
             shipImprovements = ship.GetCurrentImprovementsKeys();
         }
+
+        public Ship GetShipFromSerializedData() {
+
+            Ship newShip;
+            switch(shipType)
+            {
+                case 0:
+                    newShip = new ShipSubCategory_CoastalSloop();
+                    break;
+                case 1:
+                    newShip = new ShipSubCategory_ContinentalSloop();
+                    break;
+                case 2:
+                    newShip = new ShipSubCategory_MilitaryBalander();
+                    break;
+                case 3:
+                    newShip = new ShipSubCategory_TwoMastlesFelucca();
+                    break;
+                case 4:
+                    newShip = new ShipSubCategory_MisticFelucca();
+                    break;
+                case 5:
+                    newShip = new ShipSubCategory_TwoMastlesTartain();
+                    break;
+                case 6:
+                    newShip = new ShipSubCategory_ThreeMastlesTartain();
+                    break;
+                case 7:
+                    newShip = new ShipSubCategory_12Brig();
+                    newShip.SetVariant(variant);
+                    break;
+                case 8:
+                    newShip = new ShipSubCategory_16Brig();
+                    newShip.SetVariant(variant);
+                    break;
+                case 9:
+                    newShip = new ShipSubCategory_10Lugger();
+                    break;
+                case 10:
+                    newShip = new ShipSubCategory_14Lugger();
+                    break;
+                case 11:
+                    newShip = new ShipSubCategory_ShoonerPolacre();
+                    newShip.SetVariant(variant);
+                    break;
+                case 12:
+                    newShip = new ShipSubCategory_Polacre();
+                    newShip.SetVariant(variant);
+                    break;
+                case 13:
+                    newShip = new ShipSubCategory_Corvette();
+                    break;
+                case 14:
+                    newShip = new ShipSubCategory_26Frigate();
+                    break;
+                case 15:
+                    newShip = new ShipSubCategory_MilitaryFrigate();
+                    break;
+                case 16:
+                    newShip = new ShipSubCategory_LittleGallion();
+                    break;
+                case 17:
+                    newShip = new ShipSubCategory_Gallion();
+                    break;
+                case 18:
+                    newShip = new ShipSubCategory_DutchGallion();
+                    break;
+                case 19:
+                    newShip = new ShipSubCategory_Flyboat();
+                    break;
+                case 21:
+                    newShip = new ShipSubCategory_Urca();
+                    newShip.SetVariant(variant); //En el futuro se introducirá el paquebote como variante de la urca
+                    break;
+                default:
+                    newShip = new ShipSubCategory_CoastalSloop();
+                    break;
+            }
+            newShip.name_Ship = shipName;
+            newShip.name_Ship = captainName;
+
+            newShip.SetImprovementsFromKeys(shipImprovements);
+            return newShip;
+        }
     }
 
     #endregion
@@ -403,7 +531,7 @@ namespace GameMechanics.save
     #region SAVE GAME
 
     [Serializable]
-    public class savedFile : SerializationConverter
+    public class SavedFile : SerializationConverter
     {
         //Basic Game Data & Game Settings
 
@@ -422,44 +550,58 @@ namespace GameMechanics.save
 
         //Player's basic Data
 
-        public string playerName;
-        public string playerShipName;
-        public byte[] playerFlag;
-        public byte[] playerAvatar;
+        public string 
+            playerName,
+            playerShipName;
+        public byte[] 
+            playerFlag,
+            playerAvatar;
 
         public SerializableShip playerShipData;
         public int playerGold;
         public float playerReputation;
         public float[] playerPosition;
         public float[] playerRotation;
-        public bool playerIsInPort;
-        public int portID; //id del puerto destino del jugador
-        public int targetID; //id del barco o convoy siendo pereguido por el jugador
+        public bool
+            playerIsInPort,
+            playerCanMove;
+        public int 
+            portID, //id del puerto destino del jugador
+            targetID; //id del barco o convoy siendo pereguido por el jugador
         public float[] playerDestination; //posición del destino
 
         //Player's Inventory & Crew
         public byte crew;
         public byte[] moraleModifiers;
+        public bool
+            rationingRum,
+            rationingMeat,
+            rationingRum_TimerLock,
+            rationingMeat_TimerLock;
+        public DateTime
+            unlockDate_RumRationing,
+            unlockDate_MeatRationing;
         public float
             moraleSupplies,
             moralePillage,
             moraleResting,
             moraleGlobal;
-        public int disentryCounter;
 
-        public byte[] onLoadGuns; //armamento en bodega (no equipado)
-        public byte[] onEquipmentGuns; //armamaneto montado 
-        public byte[] onUseWeaponsSlots; //huecos de armamento usados;
+        public byte[]
+            onLoadGuns, //armamento en bodega (no equipado)
+            onEquipmentGuns, //armamaneto montado 
+            onUseWeaponsSlots; //huecos de armamento usados;
 
         public int[] inventoryItems;
         public float[] surplus;
+        public int disentryCounter;
 
         //Cities and KeyPoints
 
         //Ships in Game
 
 
-        public savedFile()
+        public SavedFile()
         {
             var player = GameObject.FindWithTag("Player").transform;
             var playerMovement = player.GetComponent<PlayerMovement>();
@@ -479,8 +621,14 @@ namespace GameMechanics.save
 
             playerName = PersistentGameData._GData_PlayerName;
             playerShipName = PersistentGameData._GData_ShipName;
-            playerFlag = PersistentGameData._GData_PlayerFlag.texture.EncodeToPNG();
-            playerAvatar = PersistentGameData._GData_PlayerAvatar.texture.EncodeToPNG();
+            //playerFlag = PersistentGameData._GData_PlayerFlag.texture.EncodeToPNG();
+            //playerAvatar = PersistentGameData._GData_PlayerAvatar.texture.EncodeToPNG();
+
+            //Testing:
+            //File.WriteAllBytes(Application.dataPath + "/../SavedScreen.png", playerFlag);
+
+            //playerFlag = PersistentGameData._GData_PlayerFlag.texture.GetRawTextureData();
+            //playerAvatar = PersistentGameData._GData_PlayerAvatar.texture.GetRawTextureData();
 
             playerShipData = new SerializableShip(PlayerMovement.playership);
             playerGold = PersistentGameData._GData_Gold;
@@ -489,12 +637,50 @@ namespace GameMechanics.save
             playerPosition = ConvertV3(player.position);
             playerRotation = ConvertQuaternion(player.rotation);
             playerIsInPort = PlayerMovement.IsInPort();
+            playerCanMove = PlayerMovement.canMove;
             portID = playerMovement.GetCurrentPort() ? playerMovement.GetCurrentPort().KeyPointID : -1;
             targetID = playerMovement.ConvoyTarget ? playerMovement.ConvoyTarget.ID : -1;
             playerDestination = ConvertV3(playerMovement.GetDestination());
 
             crew = (byte)ShipInventory.Crew;
             moraleModifiers = MoraleModifier.ActiveModifiers;
+            disentryCounter = ShipInventory.disentryCounter;
+            rationingRum = ShipInventory.instance.rationingRum;
+            rationingMeat = ShipInventory.instance.rationingMeat;
+
+            if(rationingRum || rationingMeat)
+            {
+                //var toggles = TimeManager.instance.RationingManagers;
+                var toggles = GameObject.FindObjectsOfType<UI.WorldMap.ToggleRationing>(true);
+
+                if (rationingRum )
+                {
+                    for (int i = 0; i < toggles.Length; i++)
+                    {
+                        var ratToggle = toggles[i];
+                        if (ratToggle.Index == 10)
+                        {
+                            unlockDate_RumRationing = ratToggle.UnlockerDate;
+                            rationingRum_TimerLock = ratToggle.LockedByTiming;
+                            break;
+                        }
+                    }
+                }
+                if (rationingMeat)
+                {
+                    for (int i = 0; i < toggles.Length; i++)
+                    {
+                        var ratToggle = toggles[i];
+                        if (ratToggle.Index == 11)
+                        {
+                            unlockDate_MeatRationing = ratToggle.UnlockerDate;
+                            rationingMeat_TimerLock = ratToggle.LockedByTiming;
+                            break;
+                        }
+                    }
+                }
+            }
+
             moraleSupplies = ShipInventory.Morale_Supplies;
             moralePillage = ShipInventory.Morale_Pillage;
             moraleResting = ShipInventory.Morale_Resting;
@@ -506,6 +692,7 @@ namespace GameMechanics.save
 
             inventoryItems = ShipInventory.Items;
             surplus = ShipInventory.Surplus;
+
         }
     }
 
@@ -558,9 +745,9 @@ namespace GameMechanics.save
     [Serializable]
     public class SavedGameBinaryFormat : SerializationUtilities
     {
-        public savedFile savedFile;
+        public SavedFile savedFile;
 
-        public SavedGameBinaryFormat(savedFile savedFile)
+        public SavedGameBinaryFormat(SavedFile savedFile)
         {
             this.savedFile = savedFile;
         }
@@ -590,10 +777,13 @@ namespace GameMechanics.save
         }
     }
 
+#endregion
+
+#region LOAD
     [Serializable]
     public class LoaderBinaryFormat : SerializationUtilities
     {
-        public savedFile LoadGame(string fileName)
+        public SavedFile LoadGame(string fileName)
         {
             var path = getRoute() + fileName + getFileExtension();
             Debug.Log(path);
@@ -601,7 +791,7 @@ namespace GameMechanics.save
             {
                 var binaryFormatter = new BinaryFormatter();
                 var stream = new FileStream(path, FileMode.Open);
-                savedFile result = binaryFormatter.Deserialize(stream) as savedFile;
+                SavedFile result = binaryFormatter.Deserialize(stream) as SavedFile;
                 stream.Close();
                 return result;
             }

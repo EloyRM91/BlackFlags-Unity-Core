@@ -135,7 +135,7 @@ namespace GameMechanics.Ships
     public abstract class Ship
     {
         //Características
-        protected static readonly Dictionary<string, Modifier> D_Characteristics = new Dictionary<string, Modifier>()
+        public static readonly Dictionary<string, Modifier> D_Characteristics = new Dictionary<string, Modifier>()
         {
             {"OneMastle", new Modifier("Un Mástil", "La nave es más vulnerable al desarbolado en un combate prolongado", new float[10]{ 0,0,0,0,0,0,0,0,0, -5}) },
             {"TwoMastles", new Modifier("Dos Mástiles", "La nave tiene una arboladura de trinquete y mesana", new float[10]{ 0,0,0,0,0,0,0,0,0, 10}) },
@@ -146,7 +146,7 @@ namespace GameMechanics.Ships
             {"Poopdeck", new Modifier("Toldilla", "Una sobrecubierta entre mesana y popa confiere una mejor defensa", new float[10]{ 0,0,0,0,1.5f,0,0,0,10,0}) }
         };
         //Mejoras
-        protected static readonly Dictionary<string, Improvement> D_Improvements = new Dictionary<string, Improvement>()
+        public static readonly Dictionary<string, Improvement> D_Improvements = new Dictionary<string, Improvement>()
         {
             {"Boardingnets", new Improvement(0, "Redes de Abordaje", "Redes de soga endurecida ideadas para defenderse de un abordaje", new float[10]{ 0,0,0,0,0,0,0,0,10,0}, 3000)},
             {"Copperhull", new Improvement(1, "Planchas de Cobre", "Un recubrimiento en la obra viva aumenta la velocidad, pero también el mantenimiento", new float[10]{ .2f,.8f,.2f,.8f,0,0,0,90,0,0}, 35000) },
@@ -158,7 +158,7 @@ namespace GameMechanics.Ships
             {"Lateenyard", new Improvement(7, "Segunda Entena", "Una entena corta de reemplazo, ideada para rizar con mal tiempo y sustituir a la principal", new float[10]{ 0,0,0,0,0,1,0,-5,0,6},2700) },
         };
         //Variantes
-        protected static readonly Dictionary<string, Improvement> D_Variants = new Dictionary<string, Improvement>()
+        public static readonly Dictionary<string, Improvement> D_Variants = new Dictionary<string, Improvement>()
         {
             {"Roundbrig", new Improvement(100, "Bergantín Redondo", "Un tipo de bergantín en el que la vela mayor es la redonda montada sobre trinquete, y que atrapa más el barlovento",new float[10]{ -0.3f,-0.4f,0.3f,0.5f,0,-2,-4,20,0,0},5500) },
             {"Snowbrig", new Improvement(101, "Bergantín de Esnón", "Un tipo de bergantín que porta un mástil de esnón, lo que facilita las maniobras de la vela cangreja", new float[10]{ 0,0,0.2f,0.3f,0,-1,5,15,0,9}, 9900) },
@@ -206,8 +206,6 @@ namespace GameMechanics.Ships
             return keys;
         }
 
-
-
         //Virtual methods: Parameters
         public virtual float GetMinUpwindSpeed() { return 0; }
         public virtual float GetMaxUpwindSpeed() { return 0; }
@@ -229,6 +227,26 @@ namespace GameMechanics.Ships
             var str = shipmodel.GetVariantName() == null ? shipmodel.GetSubClassName() : shipmodel.GetVariantName();
             return str;
         }
+
+        //Setters
+        public List<Improvement> GetImprovementsFromKeys(string[] keys)
+        {
+            var improvements = new List<Improvement>();
+            for (int i = 0; i < keys.Length; i++)
+            {
+                var imprStr = keys[i];
+                improvements.Add(Ship.D_Improvements[imprStr]);
+            }
+            return improvements;
+        }
+
+        public void SetImprovementsFromKeys(string[] keys)
+        {
+            currentImprovements = GetImprovementsFromKeys(keys);
+        }
+
+        public virtual void SetVariant(string key) { }
+
     }
 
     //--------------------------------
@@ -1021,6 +1039,10 @@ namespace GameMechanics.Ships
         {
             var k = variant == null ? -1 : variant.key; return k;
         }
+        public override void SetVariant(string key) 
+        {
+            variant = D_Variants[key];
+        }
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
@@ -1046,6 +1068,7 @@ namespace GameMechanics.Ships
         }
 
         //Contructors
+        public ShipSubCategory_12Brig() { }
         public ShipSubCategory_12Brig(EntityType_KINGDOM k)
         {
             if(k == EntityType_KINGDOM.KINGDOM_Dutch || k == EntityType_KINGDOM.KINGDOM_Britain)
@@ -1089,6 +1112,10 @@ namespace GameMechanics.Ships
         {
             var k = variant == null ? -1 : variant.key; return k;
         }
+        public override void SetVariant(string key)
+        {
+            variant = D_Variants[key];
+        }
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
@@ -1114,6 +1141,7 @@ namespace GameMechanics.Ships
         }
 
         //Contructors
+        public ShipSubCategory_16Brig() { }
         public ShipSubCategory_16Brig(EntityType_KINGDOM k)
         {
             if (k == EntityType_KINGDOM.KINGDOM_Dutch || k == EntityType_KINGDOM.KINGDOM_Britain)
@@ -1229,6 +1257,10 @@ namespace GameMechanics.Ships
         {
             var k = variant == null ? -1 : variant.key; return k;
         }
+        public override void SetVariant(string key)
+        {
+            variant = D_Variants[key];
+        }
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
@@ -1254,6 +1286,7 @@ namespace GameMechanics.Ships
         }
 
         //Contructors
+        public ShipSubCategory_ShoonerPolacre() { }
         public ShipSubCategory_ShoonerPolacre(EntityType_KINGDOM k)
         {
             if (k == EntityType_KINGDOM.KINGDOM_Spain || k == EntityType_KINGDOM.KINGDOM_France)
@@ -1293,6 +1326,10 @@ namespace GameMechanics.Ships
         {
             var k = variant == null ? -1 : variant.key; return k;
         }
+        public override void SetVariant(string key)
+        {
+            variant = D_Variants[key];
+        }
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }
@@ -1318,6 +1355,7 @@ namespace GameMechanics.Ships
         }
 
         //Contructors
+        public ShipSubCategory_Polacre() { }
         public ShipSubCategory_Polacre(EntityType_KINGDOM k)
         {
             if (k == EntityType_KINGDOM.KINGDOM_Spain || k == EntityType_KINGDOM.KINGDOM_France)
@@ -1357,6 +1395,10 @@ namespace GameMechanics.Ships
         public override int GetVariantId()
         {
             var k = variant == null ? -1 : variant.key; return k;
+        }
+        public override void SetVariant(string key)
+        {
+            variant = D_Variants[key];
         }
 
         //Overriding:
@@ -1623,6 +1665,20 @@ namespace GameMechanics.Ships
 
         //This ship variant modifier
         public Improvement variant;
+        public override string GetVariantName() { var str = variant == null ? null : variant.mod_Name; return str; }
+        public override string GetVariantKey()
+        {
+            var strKey = variant == null ? null : D_Variants.FirstOrDefault(x => x.Value.key == variant.key).Key;
+            return strKey;
+        }
+        public override int GetVariantId()
+        {
+            var k = variant == null ? -1 : variant.key; return k;
+        }
+        public override void SetVariant(string key)
+        {
+            variant = D_Variants[key];
+        }
 
         //Overriding:
         public override List<Modifier> GetCharacteristics() { return characteristics; }

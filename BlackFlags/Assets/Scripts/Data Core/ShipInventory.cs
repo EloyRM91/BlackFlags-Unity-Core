@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+using GameSettings.Core;
+
 namespace GameMechanics.Data
 {
     public class ShipInventory : EconomyBehaviour
@@ -24,8 +26,9 @@ namespace GameMechanics.Data
 
         //Morale: Modifiers and Rationing
         [SerializeField] private MoraleModifier[] modifiers;
+        public MoraleModifier[] Modifiers { get { return modifiers; } }
         public static int disentryCounter;
-        public static bool rationingRum, rationingMeat;
+        public bool rationingRum, rationingMeat;
 
         public static float Morale_Supplies
         {
@@ -126,15 +129,69 @@ namespace GameMechanics.Data
         private void Start()
         {
             maxCapacity = PersistentGameData._GData_PlayerShip.GetCapacity();
-            StartingInventory(LevelOfDifficulty.easy);
-            StartingArmory();
-            //armoryCapacity = PlayerMovement.playership.GetPowerCapacity();
-            UpdateLoad();
+            if (PersistentGameSettings.loadingFile)
+            {
+                var container = GameObject.FindWithTag("PersistentDataContainer");
+                if (container.TryGetComponent<PersistentSavedFileContainer>(out PersistentSavedFileContainer c))
+                {
+                    var currentLoadedData = c.savedFile;
+                    if(!c.ignoreInventoryData)
+                    {
+                        items = currentLoadedData.inventoryItems;
+                        surplus = currentLoadedData.surplus;
+                        UpdateLoad();
+                        morale_BYSUPPLIES = currentLoadedData.moraleSupplies;
+                        morale_BYRESTING = currentLoadedData.moraleResting;
+                        morale_BYPILLAGE = currentLoadedData.moralePillage;
+                        morale_GLOBAL = currentLoadedData.moraleGlobal;
 
-            morale_BYSUPPLIES = 0.8f;
-            morale_BYRESTING = 0.7f;
-            morale_BYPILLAGE = 0.3f;
-            SetMorale_Global();
+                        //Hemos terminado de cargar los datos
+                        c.OnLoadInventory();
+                    }
+                    else
+                    {
+                        StartingInventory(PersistentGameData._GData_Difficulty);
+                        StartingArmory();
+                        //armoryCapacity = PlayerMovement.playership.GetPowerCapacity();
+                        UpdateLoad();
+
+                        morale_BYSUPPLIES = 0.8f;
+                        morale_BYRESTING = 0.7f;
+                        morale_BYPILLAGE = 0.3f;
+                        SetMorale_Global();
+                    }
+
+                    if(!c.ignoreMoraleData)
+                    {
+                        var modifiersList = currentLoadedData.moraleModifiers;
+
+                        for (int i = 0; i < modifiersList.Length; i++)
+                        {
+                            var modifierIndex = modifiersList[i];
+                            MoraleModifier.Add(modifiers[modifierIndex]);
+                        }
+
+                        //Hemos terminado de cargar los datos
+                        c.OnLoadMorale();
+                    }
+                    else
+                    {
+                        c.OnImportantDataLoaded();
+                    }
+                }     
+            }
+            else
+            {
+                StartingInventory(PersistentGameData._GData_Difficulty);
+                StartingArmory();
+                //armoryCapacity = PlayerMovement.playership.GetPowerCapacity();
+                UpdateLoad();
+
+                morale_BYSUPPLIES = 0.8f;
+                morale_BYRESTING = 0.7f;
+                morale_BYPILLAGE = 0.3f;
+                SetMorale_Global();
+            }
         }
 
         private void OnDestroy()
@@ -144,7 +201,7 @@ namespace GameMechanics.Data
         }
 
         //Initialize and deserialization
-        private void StartingInventory(LevelOfDifficulty level)
+        private void StartingInventory(GameDifficulty level)
         {
             //items = D_InitialResources[level];
             Array.Copy(D_InitialResources[level], items, 21);
@@ -310,8 +367,15 @@ namespace GameMechanics.Data
             if (isOn) MoraleModifier.Add(instance.modifiers[modifierIndex]);
             else MoraleModifier.Remove(instance.modifiers[modifierIndex]);
 
-
-
+            //todo: esto se puede reffactorizar (ya tengo el array de modificadores, esto es una redundancia para agilizar)
+            if(modifierIndex == 10 )
+            {
+                instance.rationingRum = isOn;
+            }
+            else if(modifierIndex == 11)
+            {
+                instance.rationingMeat = isOn;
+            }
 
             if (updateMorale != null) updateMorale();
         }

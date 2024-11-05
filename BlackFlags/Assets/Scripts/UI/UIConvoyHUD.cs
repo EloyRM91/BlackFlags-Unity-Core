@@ -634,7 +634,7 @@ namespace UI.WorldMap
             var lookAng = Quaternion.LookRotation(target.position - playerRef.transform.position);
 
             var targetRot = target.rotation.eulerAngles.y;
-            print($"{targetRot} --- {target.rotation.eulerAngles.y}" );
+            //print($"{targetRot} --- {target.rotation.eulerAngles.y}" );
 
             return target.rotation.eulerAngles.y - lookAng.eulerAngles.y;
 

@@ -6,7 +6,7 @@ public class ButtonIntroAction : MonoBehaviour
     public int panelTo;
     private bool KeywordResponsive = true;
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         CancelInvoke();
         KeywordResponsive = true;
