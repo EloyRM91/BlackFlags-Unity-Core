@@ -19712,6 +19712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1094eb84338675046996b72835810651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tagKey: 0
   nationalFlag: {fileID: 2100000, guid: 175912b33930f764d894d58e27cefe09, type: 2}
   thisKingdom: 3
   roleFleetsSpawnStatistics:
@@ -37153,7 +37154,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 10
-  lockedByTiming: 0
 --- !u!1 &206340817
 GameObject:
   m_ObjectHideFlags: 0
@@ -42207,7 +42207,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 11
-  lockedByTiming: 0
 --- !u!1 &254191309
 GameObject:
   m_ObjectHideFlags: 0
@@ -56477,6 +56476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1094eb84338675046996b72835810651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tagKey: 0
   nationalFlag: {fileID: 2100000, guid: 566b4decf1903354985d525624d93cf9, type: 2}
   thisKingdom: 1
   roleFleetsSpawnStatistics:
@@ -74912,6 +74912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1094eb84338675046996b72835810651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tagKey: 0
   nationalFlag: {fileID: 2100000, guid: b80620b579781b14ead2daaf3d9375c5, type: 2}
   thisKingdom: 0
   roleFleetsSpawnStatistics:
@@ -106251,7 +106252,7 @@ GameObject:
   - component: {fileID: 601851262}
   - component: {fileID: 601851261}
   m_Layer: 0
-  m_Name: Minimap Button 3 (1)
+  m_Name: Minimap Button 2 - currents
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106273,7 +106274,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.78229713, y: 0.3275633}
   m_AnchorMax: {x: 0.81900007, y: 0.3864177}
-  m_AnchoredPosition: {x: 15.099976, y: 21.300003}
+  m_AnchoredPosition: {x: 345.1, y: -25.6}
   m_SizeDelta: {x: -16.9483, y: -11.6209}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &601851261
@@ -112185,6 +112186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1094eb84338675046996b72835810651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tagKey: 0
   nationalFlag: {fileID: 2100000, guid: fd49bb23c3c55414791e0b1261bd5b86, type: 2}
   thisKingdom: 4
   roleFleetsSpawnStatistics:
@@ -193813,6 +193815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1094eb84338675046996b72835810651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tagKey: 0
   nationalFlag: {fileID: 2100000, guid: d129a1dd73323ba4f9588194b151f857, type: 2}
   thisKingdom: 2
   roleFleetsSpawnStatistics:
@@ -203110,6 +203113,8 @@ MonoBehaviour:
   - {fileID: 348327381}
   - {fileID: 1765987337}
   - {fileID: 1228918842}
+  rationingRum: 0
+  rationingMeat: 0
   onLoad: 00000000
   equipment: 00000000
   onUseWeaponsSlots: 00000000
@@ -252634,6 +252639,8 @@ MonoBehaviour:
   - {fileID: 70006446}
   - {fileID: 671163679}
   - {fileID: 102509723}
+  - {fileID: 2069406422}
+  - {fileID: 601851260}
 --- !u!1 &1815233540
 GameObject:
   m_ObjectHideFlags: 0
@@ -288350,7 +288357,7 @@ GameObject:
   - component: {fileID: 2069406424}
   - component: {fileID: 2069406423}
   m_Layer: 0
-  m_Name: Minimap Button 1 (1)
+  m_Name: Minimap Button 1 - terrain type
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -288372,7 +288379,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.74600005, y: 0.3275633}
   m_AnchorMax: {x: 0.78229713, y: 0.3864177}
-  m_AnchoredPosition: {x: 8.053467, y: 21.345642}
+  m_AnchoredPosition: {x: 338.0537, y: -25.554352}
   m_SizeDelta: {x: -16.1067, y: -11.5297}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2069406423
