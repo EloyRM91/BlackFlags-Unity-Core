@@ -23,10 +23,11 @@ namespace GameMechanics.Data
     public class Kingdom : MonoBehaviour
     {
         #region VARIABLES
+        //public static  ushort kingdomsCount = 5;
         //this kingdom parameters
         public ushort tagKey; // El indentificador de este país
         public Material nationalFlag;
-        [SerializeField] public EntityType_KINGDOM thisKingdom;
+        //[SerializeField] public EntityType_KINGDOM thisKingdom;
         public float[] roleFleetsSpawnStatistics; // ????
         [SerializeField] private byte _CountryBaseStrength; // spawn capacity
         [SerializeField] private List<Settlement> countryPossessions;
@@ -48,7 +49,7 @@ namespace GameMechanics.Data
         {
             //Generator of this country, with its own ratio spawns according to database values.
             //TODO: En el futuro esto se tendría que hacer en la pantalla de carga, al menos la parte de la lectura de la bbdd
-            shipsGenerator = WorldGenerator.GetShipSpawnData((int)thisKingdom, PersistentGameSettings.currentMod != null);
+            shipsGenerator = WorldGenerator.GetShipSpawnData(tagKey, PersistentGameSettings.currentMod != null);
         }
         private void Start()
         {
@@ -71,9 +72,10 @@ namespace GameMechanics.Data
         {
             return atWarWith.Contains(k);
         }
-        public bool IsAtWarWith(EntityType_KINGDOM k)
+        //public bool IsAtWarWith(EntityType_KINGDOM k)
+        public bool IsAtWarWith(ushort kingdom)
         {
-            return atWarWith.Find(s => s.thisKingdom == k);
+            return atWarWith.Find(s => s.tagKey == kingdom);
         }
 
         //Generation
@@ -94,9 +96,9 @@ namespace GameMechanics.Data
                         newConvoy.AddComponent<AI_LocalMerchant>();
                     }
 
-                    var ship = shipsGenerator.GenerateShipData(ShipType_ROLE.LocalMerchant, thisKingdom);
-                    ship.name_Ship = WorldGenerator.GiveShipName(thisKingdom, ShipType_ROLE.LocalMerchant, GenerationMode.Random);
-                    ship.name_Captain = WorldGenerator.GetCharacterName(thisKingdom);
+                    var ship = shipsGenerator.GenerateShipData(ShipType_ROLE.LocalMerchant, tagKey);
+                    ship.name_Ship = WorldGenerator.GiveShipName(tagKey, ShipType_ROLE.LocalMerchant, GenerationMode.Random);
+                    ship.name_Captain = WorldGenerator.GetCharacterName(tagKey);
                     data.thisConvoyShips = new Ship[1] { ship };
                     data.SetConvoyData();
                 }
@@ -118,9 +120,9 @@ namespace GameMechanics.Data
                         newPatrol.AddComponent<AI_Patrol>();
                     }
 
-                    var ship = shipsGenerator.GenerateShipData(ShipType_ROLE.Patrol, thisKingdom);
-                    ship.name_Ship = WorldGenerator.GiveShipName(thisKingdom, ShipType_ROLE.Patrol, GenerationMode.Random);
-                    ship.name_Captain = WorldGenerator.GetCharacterName(thisKingdom);
+                    var ship = shipsGenerator.GenerateShipData(ShipType_ROLE.Patrol, tagKey);
+                    ship.name_Ship = WorldGenerator.GiveShipName(tagKey, ShipType_ROLE.Patrol, GenerationMode.Random);
+                    ship.name_Captain = WorldGenerator.GetCharacterName(tagKey);
                     data.thisConvoyShips = new Ship[1] { ship };
                     data.SetConvoyData();
                 }
@@ -139,9 +141,9 @@ namespace GameMechanics.Data
                 data.thisConvoyShips = new Ship[Random.Range(2, 5)];
                 for (int i = 0; i < data.thisConvoyShips.Length; i++)
                 {
-                    var ship = shipsGenerator.GenerateShipData(ShipType_ROLE.Merchant, thisKingdom);
-                    ship.name_Ship = WorldGenerator.GiveShipName(thisKingdom, ShipType_ROLE.Merchant, GenerationMode.Random);
-                    ship.name_Captain = WorldGenerator.GetCharacterName(thisKingdom);
+                    var ship = shipsGenerator.GenerateShipData(ShipType_ROLE.Merchant, tagKey);
+                    ship.name_Ship = WorldGenerator.GiveShipName(tagKey, ShipType_ROLE.Merchant, GenerationMode.Random);
+                    ship.name_Captain = WorldGenerator.GetCharacterName(tagKey);
                     data.thisConvoyShips[i] = ship;
                 }
                 data.SetConvoyData();

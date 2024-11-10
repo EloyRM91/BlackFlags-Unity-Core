@@ -288,7 +288,8 @@ namespace GameMechanics.AI
         {
             SetStateAs_AtPort();
         }
-        public void CreatePirateCharacter(EntityType_KINGDOM k)
+        //public void CreatePirateCharacter(EntityType_KINGDOM k)
+        public void CreatePirateCharacter(ushort k)
         {
             //pirateCharacter = new Pirate(Random.Range(16, 90), k); //Karma aleatorio?
             pirateCharacter = new Pirate(k);

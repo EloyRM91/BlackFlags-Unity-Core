@@ -50,7 +50,7 @@ public class UIMap : MonoBehaviour //, UIDetectable
     [SerializeField] private GameObject _WINDOW_Settlement;
     // Vista de recursos de asentamiento
     [SerializeField] private GameObject _PANEL_ExportsData;
-    //Vista de información extendida
+    //Vista de informaciÃ³n extendida
     [SerializeField] private GameObject _PANEL_CityDtata;
     //Vista de requistos
     [SerializeField] private GameObject _PANEL_Requirements;
@@ -58,9 +58,9 @@ public class UIMap : MonoBehaviour //, UIDetectable
     [SerializeField] private GameObject _PANEL_ShelterData;
 
     //----
-    // PANEL DE INFORMACIÓN DEL MUNDO
+    // PANEL DE INFORMACIÃ“N DEL MUNDO
     //----
-    [Header("Ventana de Información del Mundo")]
+    [Header("Ventana de InformaciÃ³n del Mundo")]
     [SerializeField] private GameObject _WINDOWS_WorldInfoPanel;
     [SerializeField] private Image[] _IMGS_WorldInfoSection;
     [SerializeField] private GameObject[] _PANELS_WorldInfoPanels;
@@ -70,9 +70,9 @@ public class UIMap : MonoBehaviour //, UIDetectable
     [SerializeField] private Image customFlag;
     // -- Lista de ciudades
     List<MB_City> revealedCities;
-        // -- Botón: Ordenar por población
+        // -- BotÃ³n: Ordenar por poblaciÃ³n
     private bool ascending = false;
-        // -- Botón: Ordenar por población
+        // -- BotÃ³n: Ordenar por poblaciÃ³n
     private bool az = true;
         // -- Dropdown: Ordenar por recursos
     [SerializeField] private Dropdown _DROPDOWN_resourceCityFilter;
@@ -94,7 +94,7 @@ public class UIMap : MonoBehaviour //, UIDetectable
     [SerializeField] private MeshRenderer flagRenderer;
 
     //----
-    // MENÚ
+    // MENÃš
     //----
     [SerializeField]
     private GameObject
@@ -180,7 +180,8 @@ public class UIMap : MonoBehaviour //, UIDetectable
     }
     //Data Geters
     public Sprite GetFlag(int i) { return _flags[i]; }
-    public Sprite GetFlag(EntityType_KINGDOM k) { return _flags[(int)k]; }
+    //public Sprite GetFlag(EntityType_KINGDOM k) { return _flags[(int)k]; }
+    public Sprite GetFlag(ushort kingdom) { return _flags[kingdom]; }
     public Sprite GetFlag(string tag)
     {
         switch (tag)
@@ -307,7 +308,10 @@ public class UIMap : MonoBehaviour //, UIDetectable
             var targetKingdom = targetCity.transform.parent.parent.GetComponent<Kingdom>();
             DisplayBasicInfo(targetCity, 0, true);
             _TEXT_type.text = "Ciudad " + targetKingdom.GENTILISM_FEMSIN;
-            _IMG_SettlementFlag.sprite = _flags[(int)targetKingdom.thisKingdom];
+            //! desde la v0.033 ya no se utiliza el enumerador EntityType_KINGDOM
+            //! (los mods podrÃ¡n incluir otros reinos que no sean los establecidos)
+            //_IMG_SettlementFlag.sprite = _flags[(int)targetKingdom.thisKingdom];
+            _IMG_SettlementFlag.sprite = _flags[targetKingdom.tagKey];
 
             //City advanced info
             SetResourcesCityDisplay(targetCity);
@@ -324,12 +328,15 @@ public class UIMap : MonoBehaviour //, UIDetectable
             var targetKingdom = targetTown.transform.parent.parent.GetComponent<Kingdom>();
             DisplayBasicInfo(targetTown, 1, true);
             _TEXT_type.text = "Villa " + targetKingdom.GENTILISM_FEMSIN;
-            _IMG_SettlementFlag.sprite = _flags[(int)targetKingdom.thisKingdom];
+            //! desde la v0.033 ya no se utiliza el enumerador EntityType_KINGDOM
+            //! (los mods podrÃ¡n incluir otros reinos que no sean los establecidos)
+            //_IMG_SettlementFlag.sprite = _flags[(int)targetKingdom.thisKingdom];
+            _IMG_SettlementFlag.sprite = _flags[targetKingdom.tagKey];
 
             //City advanced info
             SetResourcesCityDisplay(targetTown);
             _PANEL_CityDtata.SetActive(true);
-            _TEXT_SettlementInfo.text = "Las villas y pueblos carecen de patrullas y están despro-\ntegidos. ¡Podemos sembrar el caos y divertirnos, Yahaharl!";
+            _TEXT_SettlementInfo.text = "Las villas y pueblos carecen de patrullas y estÃ¡n despro-\ntegidos. Â¡Podemos sembrar el caos y divertirnos, Yahaharl!";
             _TEXT_Population.text = targetTown.population.ToString();
             _PANEL_ShelterData.SetActive(false);
         }
@@ -375,7 +382,7 @@ public class UIMap : MonoBehaviour //, UIDetectable
             _PANEL_CityDtata.SetActive(false);
             _TEXT_Requirements.text = SetRequirements(shelter);
             _PANEL_ShelterData.SetActive(true);
-            _TEXT_ShelterInfo.text = "Una colonia sin gobierno ni ley que permite descanso y refugio para piratas. ¡Y fulanas, muchas fulanas!";
+            _TEXT_ShelterInfo.text = "Una colonia sin gobierno ni ley que permite descanso y refugio para piratas. Â¡Y fulanas, muchas fulanas!";
         }
     }
     private void SetResourcesCityDisplay(Settlement target)
@@ -549,8 +556,8 @@ public class UIMap : MonoBehaviour //, UIDetectable
         MatController.RunTiming();
         //Set panel values
         _TEXT_CityViewName.text = k.cityName;
-        //! desde la v0.032 ya no se utilizan tags. En lugar de eso, vamos a usar
-        //! un identificador (los mods podrán otros reinos que no sean los establecidos)
+        //! desde la v0.033 ya no se utilizan tags. En lugar de eso, vamos a usar
+        //! un identificador (los mods podrÃ¡n incluir otros reinos que no sean los establecidos)
         //Kingdom thisKingdom = GameManager.gm.GetKingdombyTag(k.transform.parent.tag);
         Kingdom thisKingdom = null;
         var container = k.transform.parent;
@@ -559,7 +566,7 @@ public class UIMap : MonoBehaviour //, UIDetectable
             thisKingdom = container.parent.GetComponent<Kingdom>();
         }
         _TEXT_CityViewDomain.text = $"Dominio {thisKingdom.GENTILISM_MALESIN}";
-        _TEXT_CityViewPopulation.text = $"Población - {k.population}";
+        _TEXT_CityViewPopulation.text = $"PoblaciÃ³n - {k.population}";
         //Set Flag
         flagRenderer.material = thisKingdom.nationalFlag;
         //Show port city

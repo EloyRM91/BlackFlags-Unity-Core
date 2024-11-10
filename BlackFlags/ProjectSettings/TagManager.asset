@@ -18,6 +18,7 @@ TagManager:
   - TrackContainer
   - Delivery
   - PersistentDataContainer
+  - Kingdoms
   layers:
   - Default
   - TransparentFX

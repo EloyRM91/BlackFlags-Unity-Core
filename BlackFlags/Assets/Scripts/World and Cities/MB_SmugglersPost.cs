@@ -50,7 +50,8 @@ namespace GameMechanics.WorldCities
                             tradingResources.Add(ar);
                     }
                 }
-                var newSmuggler = new Smuggler((EntityType_KINGDOM)Random.Range(0,5), tradingResources);
+                var KingdomsContainer = GameObject.FindWithTag("Kingdoms").transform;
+                var newSmuggler = new Smuggler((ushort)Random.Range(0, KingdomsContainer.childCount), tradingResources);
 
                 foreach (Resource res in newSmuggler.SmugglerOffer)
                 {

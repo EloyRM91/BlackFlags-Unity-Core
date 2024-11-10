@@ -47,11 +47,11 @@ namespace UI.WorldMap
         [SerializeField] private Button _Button_FocusCam, _ButtonSetAsTarget;
         [Header("Botones del display horizontal")]
         [SerializeField] private Button[] displayButtons;
-        [Header("Paneles de display de información")]
+        [Header("Paneles de display de informaciï¿½n")]
         [SerializeField] private GameObject[] displayViews;
         
         //Inventory
-        [Header("Recursos y Vista de Mercancía")]
+        [Header("Recursos y Vista de Mercancï¿½a")]
         [SerializeField] private Text _TEXT_CurrentPlayerLoad;
         [SerializeField] private Text _TEXT_ShipCapacity;
         [SerializeField] private Transform _resourcesContainer;
@@ -65,17 +65,17 @@ namespace UI.WorldMap
             _TEXT_Guns_ONLOAD,
             //Falconetes -- Carga / Equipados
             _TEXT_Falconets_ONLOAD, _TEXT_Falconets_EQ,
-            //Cañones de ocho libras -- Carga / Equipados
+            //Caï¿½ones de ocho libras -- Carga / Equipados
             _TEXT_8lbCannons_ONLOAD, _TEXT_8lbCannons_EQ,
-            //Cañones de doce libras -- Carga / Equipados
+            //Caï¿½ones de doce libras -- Carga / Equipados
             _TEXT_12lbCannons_ONLOAD, _TEXT_12lbCannons_EQ,
-            //Cañones de 24 libras -- Carga / Equipados
+            //Caï¿½ones de 24 libras -- Carga / Equipados
             _TEXT_24lbCannons_ONLOAD, _TEXT_24lbCannons_EQ; 
         [SerializeField] private Transform _weaponsContainer;
 
         //Crew and morale:
         [SerializeField] private Image
-            //Barra de moral por alimentación y bebida
+            //Barra de moral por alimentaciï¿½n y bebida
             _FILLER_MoraleSupplies,
             //Barra de moral por saqueo y pillaje
             _FILLER_MoralePillage,
@@ -232,8 +232,8 @@ namespace UI.WorldMap
                 npcSelected();
 
                 //This convoy's data
-                //! desde la v0.032 ya no se utilizan tags. En lugar de eso, vamos a usar
-                //! un identificador (los mods podrán otros reinos que no sean los establecidos)
+                //! desde la v0.033 ya no se utilizan tags. En lugar de eso, vamos a usar
+                //! un identificador (los mods podrï¿½n incluir otros reinos que no sean los establecidos)
                 //var kingdom = GameManager.gm.GetKingdombyTag(convoy.transform.tag);
                 Kingdom kingdom = null;
                 if (!convoy.transform.CompareTag("Pirate"))
@@ -286,7 +286,7 @@ namespace UI.WorldMap
                 PlayerData();
                 //Convoy name
                 _Text_Role.text = "Respetable pirata";
-                //Vista de embarcación
+                //Vista de embarcaciï¿½n
                 var t = playerRef.GetTime();
                 SetPlayerRouteText(t);
 
@@ -318,7 +318,7 @@ namespace UI.WorldMap
 
         private void SetConvoyCaptainInDisplay(ConvoyNPC convoy)
         {
-            _TEXT_CaptainName.text = "Capitán " + convoy.thisConvoyShips[0].name_Captain;
+            _TEXT_CaptainName.text = "Capitï¿½n " + convoy.thisConvoyShips[0].name_Captain;
         }
         public void ActivateDisplayPanel()
         {
@@ -370,7 +370,7 @@ namespace UI.WorldMap
             _IMG_ShipImage.sprite = ShipsSprites[ship.GetSpriteIndex() - 1];
             _TEXT_ShipName.text = ship.name_Ship;
             _TEXT_ShipModel.text = Ship.GetCompleteName(ship);
-            _TEXT_CaptainName.text = "Capitán " + ship.name_Captain;
+            _TEXT_CaptainName.text = "Capitï¿½n " + ship.name_Captain;
             _TEXT_ShipCapacity.text = $"Carga: ? -- {ship.GetCapacity()} toneladas";
             _Text_Speed.text = $"{ship.GetMinSmoothSpeed()} nudos.";
         }
@@ -383,14 +383,14 @@ namespace UI.WorldMap
             var ang2 = Quaternion.Angle(playerRot, dirRot);
 
             //Are both ships geting closer?
-            _Text_Destination.text = (ang1 > 90 && ang2 < 90) || (ang1 > 60 && ang2 < 40) ? "Acercándose" : "Alejándose";
+            _Text_Destination.text = (ang1 > 90 && ang2 < 90) || (ang1 > 60 && ang2 < 40) ? "Acercï¿½ndose" : "Alejï¿½ndose";
 
             //Is Player chasing?
             if (ang1 < 45 && ang2 < 45) 
-                _Text_Destination.text = playerRef.convoySpeed > convoy.convoySpeed ? "Acercándose (por velocidad)" : "Alejándose (por velocidad)";
+                _Text_Destination.text = playerRef.convoySpeed > convoy.convoySpeed ? "Acercï¿½ndose (por velocidad)" : "Alejï¿½ndose (por velocidad)";
             //Is Player being chase?
             else if (ang1 > 145 && ang2 > 145)
-                _Text_Destination.text = convoy.convoySpeed > playerRef.convoySpeed ? "Acercándose (por velocidad)" : "Alejándose (por velocidad)";
+                _Text_Destination.text = convoy.convoySpeed > playerRef.convoySpeed ? "Acercï¿½ndose (por velocidad)" : "Alejï¿½ndose (por velocidad)";
         }
 #region SHOW PLAYER DATA
         private void PlayerData()
@@ -400,7 +400,7 @@ namespace UI.WorldMap
             _IMG_Flag.sprite = PersistentGameData._GData_PlayerAvatar;
             _TEXT_ShipName.text = PlayerMovement.playerShipName;
             _TEXT_ShipModel.text = Ship.GetCompleteName(ship);
-            _TEXT_CaptainName.text = "Capitán " + PlayerMovement.playerName;
+            _TEXT_CaptainName.text = "Capitï¿½n " + PlayerMovement.playerName;
             _Text_Speed.text = $"{ship.GetMinSmoothSpeed()} nudos.";
             _TEXT_CurrentPlayerLoad.text = $"{ShipInventory.shipLoad} / {ship.GetCapacity()} ton";
             _TEXT_ShipCapacity.text = $"{ShipInventory.shipLoad} / {ship.GetCapacity()} ton";
@@ -411,7 +411,7 @@ namespace UI.WorldMap
             if (_convoyTarget == playerRef)
             {
                 var txt = playerRef.currentPort != null ? playerRef.currentPort.cityName : "Mar Caribe";
-                txt += routeTime == 1 ? $" - {routeTime} día." : $" - {routeTime} días.";
+                txt += routeTime == 1 ? $" - {routeTime} dï¿½a." : $" - {routeTime} dï¿½as.";
                 _Text_Destination.text = txt;
             }
         }
@@ -639,7 +639,7 @@ namespace UI.WorldMap
         /// <returns></returns>
         private static float GetRelativeAngle(Transform target)
         {
-            //Ángulo entre player y barco observado
+            //ï¿½ngulo entre player y barco observado
             var lookAng = Quaternion.LookRotation(target.position - playerRef.transform.position);
 
             var targetRot = target.rotation.eulerAngles.y;

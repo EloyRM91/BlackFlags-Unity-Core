@@ -4,6 +4,7 @@ using UnityEngine; using System.Collections.Generic;
 using GameMechanics.Data;
 //Generation
 using Generation.Ships;
+using Generation.Generators;
 
 using System.Linq;
 
@@ -11,7 +12,7 @@ namespace GameMechanics.Data
 {
     //Ship Units
     [System.Serializable] public enum ShipType_ROLE { LocalMerchant = 0, Merchant = 1, Corsair = 2, Patrol = 3, Military = 4, Pirate = 5 }
-    [System.Serializable] public enum EntityType_KINGDOM { KINGDOM_Spain = 0, KINGDOM_Portugal = 1, KINGDOM_France = 2, KINGDOM_Dutch = 3, KINGDOM_Britain = 4 }
+    //[System.Serializable] public enum EntityType_KINGDOM { KINGDOM_Spain = 0, KINGDOM_Portugal = 1, KINGDOM_France = 2, KINGDOM_Dutch = 3, KINGDOM_Britain = 4 }
     [System.Serializable] public enum ShipType_CLASS { Raider = 0, EarlyFighter = 1, HeavyFighter = 2, CargoShip = 3, CLASS_Warship = 4 }
     [System.Serializable] public enum ShipType_MODEL { MODEL_Sloop = 0, MODEL_Felucca = 1, MODEL_Tartain = 2, MODEL_Brig = 3, MODEL_Lugger = 4, MODEL_Polacre = 5, MODEL_Corvette = 6, MODEL_Frigate = 7, MODEL_Gallion = 8, MODEL_Flyboat = 9, MODEL_URCA = 10 }
 
@@ -1069,9 +1070,11 @@ namespace GameMechanics.Ships
 
         //Contructors
         public ShipSubCategory_12Brig() { }
-        public ShipSubCategory_12Brig(EntityType_KINGDOM k)
+        //public ShipSubCategory_12Brig(EntityType_KINGDOM k)
+        public ShipSubCategory_12Brig(ushort kingdom)
         {
-            if(k == EntityType_KINGDOM.KINGDOM_Dutch || k == EntityType_KINGDOM.KINGDOM_Britain)
+            //if(k == EntityType_KINGDOM.KINGDOM_Dutch || k == EntityType_KINGDOM.KINGDOM_Britain)
+            if(WorldGenerator.variantsPerKingdom_Brig[kingdom]) //!esto hay que modificarlo en el caso de los mods
             {
                 if (Random.Range(0, 3) == 0) variant = D_Variants["Snowbrig"];
             }
@@ -1142,9 +1145,11 @@ namespace GameMechanics.Ships
 
         //Contructors
         public ShipSubCategory_16Brig() { }
-        public ShipSubCategory_16Brig(EntityType_KINGDOM k)
+        //public ShipSubCategory_16Brig(EntityType_KINGDOM k)
+        public ShipSubCategory_16Brig(ushort kingdom)
         {
-            if (k == EntityType_KINGDOM.KINGDOM_Dutch || k == EntityType_KINGDOM.KINGDOM_Britain)
+            //if (k == EntityType_KINGDOM.KINGDOM_Dutch || k == EntityType_KINGDOM.KINGDOM_Britain)
+            if(WorldGenerator.variantsPerKingdom_Brig[kingdom])
             {
                 if (Random.Range(0, 3) == 0) variant = D_Variants["Snowbrig"];
             }
@@ -1287,9 +1292,11 @@ namespace GameMechanics.Ships
 
         //Contructors
         public ShipSubCategory_ShoonerPolacre() { }
-        public ShipSubCategory_ShoonerPolacre(EntityType_KINGDOM k)
+        //public ShipSubCategory_ShoonerPolacre(EntityType_KINGDOM k)
+        public ShipSubCategory_ShoonerPolacre(ushort kingdom)
         {
-            if (k == EntityType_KINGDOM.KINGDOM_Spain || k == EntityType_KINGDOM.KINGDOM_France)
+            //if (k == EntityType_KINGDOM.KINGDOM_Spain || k == EntityType_KINGDOM.KINGDOM_France)
+            if(WorldGenerator.variantsPerKingdom_Polacre[kingdom])
             {
                 if (Random.Range(0, 3) != 0) variant = D_Variants["Xebec"];
             }
@@ -1356,9 +1363,11 @@ namespace GameMechanics.Ships
 
         //Contructors
         public ShipSubCategory_Polacre() { }
-        public ShipSubCategory_Polacre(EntityType_KINGDOM k)
+        //public ShipSubCategory_Polacre(EntityType_KINGDOM k)
+        public ShipSubCategory_Polacre(ushort kingdom)
         {
-            if (k == EntityType_KINGDOM.KINGDOM_Spain || k == EntityType_KINGDOM.KINGDOM_France)
+            //if (k == EntityType_KINGDOM.KINGDOM_Spain || k == EntityType_KINGDOM.KINGDOM_France)
+            if (WorldGenerator.variantsPerKingdom_Polacre[kingdom])
             {
                 if (Random.Range(0, 3) != 0) variant = D_Variants["Xebec"];
             }

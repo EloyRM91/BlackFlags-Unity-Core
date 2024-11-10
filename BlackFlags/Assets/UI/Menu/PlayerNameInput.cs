@@ -12,7 +12,7 @@ public class PlayerNameInput : MonoBehaviour
 {
     #region VARIABLES
     //Selection
-    private int _currentSel = 4;
+    private ushort _currentSel = 4;
 
     //Button's Actions
     //--- Selection
@@ -44,14 +44,15 @@ public class PlayerNameInput : MonoBehaviour
         }
 #endif
 
-        _inputField.text = WorldGenerator.GetCharacterName(EntityType_KINGDOM.KINGDOM_Britain);
+        //_inputField.text = WorldGenerator.GetCharacterName(EntityType_KINGDOM.KINGDOM_Britain);
+        _inputField.text = WorldGenerator.GetCharacterName(_currentSel);
     }
 
     public void Select(int val)
     {
         if(val != _currentSel)
         {
-            _currentSel = val;
+            _currentSel = (ushort)val;
             _selectionBox.position = positions[_currentSel].position;
             _currentSelection.sprite = _imgs[_currentSel];
             _shipNationSelection.sprite = _imgs[_currentSel];
@@ -71,10 +72,11 @@ public class PlayerNameInput : MonoBehaviour
         n1.text = "Bandera Negra de " + _inputField.text;
         _resumeText.text = _inputField.text;
         PersistentGameData._GData_PlayerName = _inputField.text;
-        PersistentGameData._GDataPlayerNation = (EntityType_KINGDOM)_currentSel;
+        PersistentGameData._GDataPlayerNation = _currentSel;
     }
     public void GetRandomName()
     {
-        _inputField.text = WorldGenerator.GetCharacterName((EntityType_KINGDOM)_currentSel);
+        //_inputField.text = WorldGenerator.GetCharacterName((EntityType_KINGDOM)_currentSel);
+        _inputField.text = WorldGenerator.GetCharacterName(_currentSel);
     }
 }

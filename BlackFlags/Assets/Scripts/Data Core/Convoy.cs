@@ -59,11 +59,12 @@ namespace GameMechanics.Ships
         protected virtual void Start() { SetID();}
 
         // HUD Pooling
-        public void GetSprite(EntityType_KINGDOM k, byte n)
+        //public void GetSprite(EntityType_KINGDOM k, byte n)
+        public void GetSprite(ushort kingdom, byte n)
         {
             _thisConvoySpriteController = PoolingShipSprites.GetSprite();
             _thisConvoySpriteController.SetAsTarget(transform);
-            _thisConvoySpriteController.SetValues(UIMap.ui.GetFlag(k), n, GetComponent<ClassAI>());
+            _thisConvoySpriteController.SetValues(UIMap.ui.GetFlag(kingdom), n, GetComponent<ClassAI>());
         }
         public void GetSprite(string tag, byte n)
         {
@@ -93,17 +94,17 @@ namespace GameMechanics.Ships
 
 #endregion
         // Basic
-        public void SetTag(EntityType_KINGDOM kingdom)
-        {
-            switch (kingdom)
-            {
-                case EntityType_KINGDOM.KINGDOM_Spain: gameObject.tag = "KingdomSpain"; break;
-                case EntityType_KINGDOM.KINGDOM_Portugal: gameObject.tag = "KingdomPortugal"; break;
-                case EntityType_KINGDOM.KINGDOM_France: gameObject.tag = "KingdomFrance"; break;
-                case EntityType_KINGDOM.KINGDOM_Dutch: gameObject.tag = "KingdomDutch"; break;
-                case EntityType_KINGDOM.KINGDOM_Britain: gameObject.tag = "KingdomBritain"; break;
-            }
-        }
+        //public void SetTag(EntityType_KINGDOM kingdom)
+        //{
+        //    switch (kingdom)
+        //    {
+        //        case EntityType_KINGDOM.KINGDOM_Spain: gameObject.tag = "KingdomSpain"; break;
+        //        case EntityType_KINGDOM.KINGDOM_Portugal: gameObject.tag = "KingdomPortugal"; break;
+        //        case EntityType_KINGDOM.KINGDOM_France: gameObject.tag = "KingdomFrance"; break;
+        //        case EntityType_KINGDOM.KINGDOM_Dutch: gameObject.tag = "KingdomDutch"; break;
+        //        case EntityType_KINGDOM.KINGDOM_Britain: gameObject.tag = "KingdomBritain"; break;
+        //    }
+        //}
         public void SetTag(string tag)
         {
             gameObject.tag = tag;

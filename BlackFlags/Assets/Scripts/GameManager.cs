@@ -98,7 +98,9 @@ public class GameManager : MonoBehaviour
                 AI_Pirate ??= newCPirate.AddComponent<AI_Pirate>();
 
                 //Set Convoy's Data
-                var pirateOrigin = Random.Range(0, 2) == 1 ? EntityType_KINGDOM.KINGDOM_Britain : (EntityType_KINGDOM)Random.Range(0, 4);
+                //todo: en caso de mods, hay que cambiar esto (por ahora se tomará Gran Bretaña como ptarget principal)
+                var kingdomsCount = GameObject.FindWithTag("Kingdoms").transform.childCount;
+                ushort pirateOrigin = Random.Range(0, 2) == 1 ? (ushort) 4 : (ushort) Random.Range(0, kingdomsCount);
                 AI_Pirate.CreatePirateCharacter(pirateOrigin);
 
                 var pirate = newCPirate.GetComponent<AI_Pirate>().pirateCharacter;
@@ -144,8 +146,8 @@ public class GameManager : MonoBehaviour
         //}
         //return null;
 
-        //! desde la v0.032 ya no se utilizan tags. En lugar de eso, vamos a usar
-        //! un identificador (los mods podrán otros reinos que no sean los establecidos)
+        //! desde la v0.033 ya no se utilizan tags. En lugar de eso, vamos a usar
+        //! un identificador (los mods podrán incluir otros reinos que no sean los establecidos)
 
         for (int i = 0; i < Kingdoms.Length; i++)
         {

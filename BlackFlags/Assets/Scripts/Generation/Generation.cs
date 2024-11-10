@@ -19,34 +19,52 @@ public class WorldGenerator
         //private static IDataReader reader;
         //private static IDbConnection dbcon;
         //Nombres de embarcaciones
-        private static ShipList
-            _names_Merchants_SPAIN = new ShipList(),
-            _names_Merchants_PORTUGAL = new ShipList(),
-            _names_Merchants_FRANCE = new ShipList(),
-            _names_Merchants_DUTCH = new ShipList(),
-            _names_Merchants_BRITAIN = new ShipList(),
-            _names_Corsairs_SPAIN = new ShipList(),
-            _names_Corsairs_PORTUGAL = new ShipList(),
-            _names_Corsairs_FRANCE = new ShipList(),
-            _names_Corsairs_DUTCH = new ShipList(),
-            _names_Corsairs_BRITAIN = new ShipList(),
-            _names_Military_SPAIN = new ShipList(),
-            _names_Military_PORTUGAL = new ShipList(),
-            _names_Military_FRANCE = new ShipList(),
-            _names_Military_DUTCH = new ShipList(),
-            _names_Military_BRITAIN = new ShipList(),
-            _names_Pirate_SPAIN = new ShipList(),
-            _names_Pirate_PORTUGAL = new ShipList(),
-            _names_Pirate_FRANCE = new ShipList(),
-            _names_Pirate_DUTCH = new ShipList(),
-            _names_Pirate_BRITAIN = new ShipList();
+        private static ShipList[]
+            _names_Merchants_AllCountries,
+            _names_Corsairs_AllCountries,
+            _names_Pirate_AllCountries,
+            _names_Military_AllCountries;
+        private static string[] ship_Prenames = new string[5] 
+        {
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            "HMS"
+        };
+
+        public static bool[]
+            variantsPerKingdom_Brig = new bool[5] { false, false, false, true, true },
+             variantsPerKingdom_Polacre = new bool[5] { true, false, true, false, false };
+        //private static ShipList
+        //    _names_Merchants_SPAIN = new ShipList(),
+        //    _names_Merchants_PORTUGAL = new ShipList(),
+        //    _names_Merchants_FRANCE = new ShipList(),
+        //    _names_Merchants_DUTCH = new ShipList(),
+        //    _names_Merchants_BRITAIN = new ShipList(),
+        //    _names_Corsairs_SPAIN = new ShipList(),
+        //    _names_Corsairs_PORTUGAL = new ShipList(),
+        //    _names_Corsairs_FRANCE = new ShipList(),
+        //    _names_Corsairs_DUTCH = new ShipList(),
+        //    _names_Corsairs_BRITAIN = new ShipList(),
+        //    _names_Military_SPAIN = new ShipList(),
+        //    _names_Military_PORTUGAL = new ShipList(),
+        //    _names_Military_FRANCE = new ShipList(),
+        //    _names_Military_DUTCH = new ShipList(),
+        //    _names_Military_BRITAIN = new ShipList(),
+        //    _names_Pirate_SPAIN = new ShipList(),
+        //    _names_Pirate_PORTUGAL = new ShipList(),
+        //    _names_Pirate_FRANCE = new ShipList(),
+        //    _names_Pirate_DUTCH = new ShipList(),
+        //    _names_Pirate_BRITAIN = new ShipList();
         //Nombres y apellidos de personajes NPC
+        private static List<string>[][] _names_NPC_AllCountries;
         private static List<string>[]
-            _names_NPC_SPAIN = new List<string>[2] { new List<string>(), new List<string>()},
-            _names_NPC_PORTUGAL = new List<string>[2] { new List<string>(), new List<string>() },
-            _names_NPC_FRANCE = new List<string>[2] { new List<string>(), new List<string>() },
-            _names_NPC_DUTCH = new List<string>[2] { new List<string>(), new List<string>() },
-            _names_NPC_BRITAIN = new List<string>[2] { new List<string>(), new List<string>() },
+            //_names_NPC_SPAIN = new List<string>[2] { new List<string>(), new List<string>()},
+            //_names_NPC_PORTUGAL = new List<string>[2] { new List<string>(), new List<string>() },
+            //_names_NPC_FRANCE = new List<string>[2] { new List<string>(), new List<string>() },
+            //_names_NPC_DUTCH = new List<string>[2] { new List<string>(), new List<string>() },
+            //_names_NPC_BRITAIN = new List<string>[2] { new List<string>(), new List<string>() },
             _overNames = new List<string>[2] { new List<string>(), new List<string>() };
         private static bool initializationDone;
         public static bool InitializationDone { get { return initializationDone; } }
@@ -56,6 +74,31 @@ public class WorldGenerator
         public static void Initialize()
         {
             var modding = PersistentGameSettings.currentMod != null;
+
+            ushort kingdomsCount = 5;
+
+            if(modding)
+            {
+                //todo
+                //kingdomsCount = algo;
+            }
+
+            _names_Merchants_AllCountries = new ShipList[kingdomsCount];
+            _names_Corsairs_AllCountries = new ShipList[kingdomsCount];
+            _names_Military_AllCountries = new ShipList[kingdomsCount];
+            _names_Pirate_AllCountries = new ShipList[kingdomsCount];
+            _names_NPC_AllCountries = new List<string>[kingdomsCount][];
+
+            for (int i = 0; i < kingdomsCount; i++)
+            {
+                _names_Merchants_AllCountries[i] = new ShipList();
+                _names_Corsairs_AllCountries[i] = new ShipList();
+                _names_Military_AllCountries[i] = new ShipList();
+                _names_Pirate_AllCountries[i] = new ShipList();
+
+                _names_NPC_AllCountries[i] = new List<string>[2] { new List<string>(), new List<string>() };
+            };
+
             GetShipNamesLists(modding);
             GetCharacterNamesLists(modding);
             initializationDone = true;
@@ -84,27 +127,28 @@ public class WorldGenerator
             var path = "URI=file:" + (isMod ?
                 PersistentGameSettings.currentMod.ModStreaming 
                 : Application.streamingAssetsPath + "/");
+            //todo: esta lista se usa en caso de que no carguemos ningún mod
             var lists = new ShipList[] {
-                _names_Merchants_SPAIN,
-                _names_Merchants_PORTUGAL,
-                _names_Merchants_FRANCE,
-                _names_Merchants_DUTCH,
-                _names_Merchants_BRITAIN,
-                _names_Corsairs_SPAIN,
-                _names_Corsairs_PORTUGAL,
-                _names_Corsairs_FRANCE,
-                _names_Corsairs_DUTCH,
-                _names_Corsairs_BRITAIN,
-                _names_Military_SPAIN,
-                _names_Military_PORTUGAL,
-                _names_Military_FRANCE,
-                _names_Military_DUTCH,
-                _names_Military_BRITAIN,
-                _names_Pirate_SPAIN,
-                _names_Pirate_PORTUGAL,
-                _names_Pirate_FRANCE,
-                _names_Pirate_DUTCH,
-                _names_Pirate_BRITAIN
+                _names_Merchants_AllCountries[0],
+                _names_Merchants_AllCountries[1],
+                _names_Merchants_AllCountries[2],
+                _names_Merchants_AllCountries[3],
+                _names_Merchants_AllCountries[4],
+                _names_Corsairs_AllCountries[0],
+                _names_Corsairs_AllCountries[1],
+                _names_Corsairs_AllCountries[2],
+                _names_Corsairs_AllCountries[3],
+                _names_Corsairs_AllCountries[4],
+                _names_Military_AllCountries[0],
+                _names_Military_AllCountries[1],
+                _names_Military_AllCountries[2],
+                _names_Military_AllCountries[3],
+                _names_Military_AllCountries[4],
+                _names_Pirate_AllCountries[0],
+                _names_Pirate_AllCountries[1],
+                _names_Pirate_AllCountries[2],
+                _names_Pirate_AllCountries[3],
+                _names_Pirate_AllCountries[4],
             };
             //Database tables
             var tables = new string[] {
@@ -225,15 +269,21 @@ public class WorldGenerator
                 : Application.streamingAssetsPath + "/");
             var lists = new List<string>[][]
             {
-                _names_NPC_SPAIN,
-                _names_NPC_PORTUGAL,
-                _names_NPC_FRANCE,
-                _names_NPC_DUTCH,
-                _names_NPC_BRITAIN,
+                //_names_NPC_SPAIN,
+                //_names_NPC_PORTUGAL,
+                //_names_NPC_FRANCE,
+                //_names_NPC_DUTCH,
+                //_names_NPC_BRITAIN,
+                _names_NPC_AllCountries[0],
+                _names_NPC_AllCountries[1],
+                _names_NPC_AllCountries[2],
+                _names_NPC_AllCountries[3],
+                _names_NPC_AllCountries[4],
                 _overNames
             };
 
             //Database tables
+            //todo: si cargamos un mod, leemos el nombre de las tablas de un json
             var tables = new string[]
             {
                 "t_SPAIN",
@@ -247,6 +297,9 @@ public class WorldGenerator
             path = "URI=file:C:/users/" + System.Environment.UserName + "/Desktop/";
 #endif
             IDbConnection dbcon = OpenDB(path + "DB_CharacterNames.db");
+            //todo: esto no va a funcionar
+            //! 1º no puedo saber a priori el tamaño de la lista si cargo un mod
+            //! 2º crear estructura de inicialización de las listas
             for (int i = 0; i < lists.Length; i++)
             {
                 IDataReader reader = RunReader(dbcon, tables[i]);
@@ -286,125 +339,154 @@ public class WorldGenerator
         //_________________________________________________________
 
         #region USING DATA
-        public static string GiveShipName(EntityType_KINGDOM kingdom, ShipType_ROLE role, GenerationMode mode = GenerationMode.Sequence)
+        //public static string GiveShipName(EntityType_KINGDOM kingdom, ShipType_ROLE role, GenerationMode mode = GenerationMode.Sequence)
+        public static string GiveShipName(ushort kingdom, ShipType_ROLE role, GenerationMode mode = GenerationMode.Sequence)
         {
             ShipList list = new ShipList();
-            string pref = "";
-            //int val;
-            switch (kingdom)
-            {
-                case EntityType_KINGDOM.KINGDOM_Spain:
-                    switch (role)
-                    {
-                        case ShipType_ROLE.Corsair:
-                            list = _names_Corsairs_SPAIN;
-                            break;
-                        case ShipType_ROLE.Patrol:
-                            list = Random.Range(0, 10) == 0 ? _names_Merchants_SPAIN : _names_Corsairs_SPAIN;
-                            break;
-                        case ShipType_ROLE.Military:
-                            list = Random.Range(0, 10) == 0 ? _names_Corsairs_SPAIN : _names_Military_SPAIN;
-                            break;
-                        case ShipType_ROLE.Pirate:
-                            list = Random.Range(0, 10) == 0 ? _names_Corsairs_SPAIN : _names_Pirate_SPAIN;
-                            break;
-                        default: 
-                            list = _names_Merchants_SPAIN;
-                            break;
+            string pref = ship_Prenames[kingdom];
 
-                    }
+            switch (role)
+            {
+                case ShipType_ROLE.Corsair:
+                    list = _names_Corsairs_AllCountries[kingdom];
+                    pref = "";
                     break;
-                case EntityType_KINGDOM.KINGDOM_Portugal:
-                    switch (role)
-                    {
-                        case ShipType_ROLE.Corsair:
-                            list = _names_Corsairs_PORTUGAL;
-                            break;
-                        case ShipType_ROLE.Patrol:
-                            list = Random.Range(0, 10) == 0 ? _names_Merchants_PORTUGAL : _names_Corsairs_PORTUGAL;
-                            break;
-                        case ShipType_ROLE.Military:
-                            list = Random.Range(0, 10) == 0 ? _names_Corsairs_PORTUGAL : _names_Military_PORTUGAL;
-                            break;
-                        case ShipType_ROLE.Pirate:
-                            list = Random.Range(0, 10) == 0 ? _names_Corsairs_PORTUGAL : _names_Pirate_PORTUGAL;
-                            break;
-                        default:
-                            list = _names_Merchants_PORTUGAL;
-                            break;
-                    }
+                case ShipType_ROLE.Patrol:
+                    list = Random.Range(0, 10) == 0 ? _names_Merchants_AllCountries[kingdom] : _names_Corsairs_AllCountries[kingdom];
                     break;
-                case EntityType_KINGDOM.KINGDOM_France:
-                    switch (role)
-                    {
-                        case ShipType_ROLE.Corsair:
-                            list = _names_Corsairs_FRANCE;
-                            break;
-                        case ShipType_ROLE.Patrol:
-                            list = Random.Range(0, 10) == 0 ? _names_Merchants_FRANCE : _names_Corsairs_FRANCE;
-                            break;
-                        case ShipType_ROLE.Military:
-                            list = Random.Range(0, 10) == 0 ? _names_Corsairs_FRANCE : _names_Military_FRANCE;
-                            break;
-                        case ShipType_ROLE.Pirate:
-                            list = Random.Range(0, 10) == 0 ? _names_Corsairs_FRANCE : _names_Pirate_FRANCE;
-                            break;
-                        default:
-                            list = _names_Merchants_FRANCE;
-                            break;
-                    }
+                case ShipType_ROLE.Military:
+                    list = Random.Range(0, 10) == 0 ? _names_Corsairs_AllCountries[kingdom] : _names_Military_AllCountries[kingdom];
                     break;
-                case EntityType_KINGDOM.KINGDOM_Dutch:
-                    switch (role)
-                    {
-                        case ShipType_ROLE.LocalMerchant:
-                            list = _names_Merchants_DUTCH;
-                            break;
-                        case ShipType_ROLE.Merchant:
-                            pref = "VOC ";
-                            list = _names_Merchants_DUTCH;
-                            break;
-                        case ShipType_ROLE.Corsair:
-                            list = _names_Corsairs_DUTCH;
-                            break;
-                        case ShipType_ROLE.Patrol:
-                            list = Random.Range(0, 10) == 0 ? _names_Merchants_DUTCH : _names_Corsairs_DUTCH;
-                            break;
-                        case ShipType_ROLE.Military:
-                            list = Random.Range(0, 10) == 0 ? _names_Corsairs_DUTCH : _names_Military_DUTCH;
-                            break;
-                        case ShipType_ROLE.Pirate:
-                            list = Random.Range(0, 10) == 0 ? _names_Corsairs_DUTCH : _names_Pirate_DUTCH;
-                            break;
-                    }
+                case ShipType_ROLE.Pirate:
+                    list = Random.Range(0, 10) == 0 ? _names_Corsairs_AllCountries[kingdom] : _names_Pirate_AllCountries[kingdom];
+                    pref = "";
                     break;
-                case EntityType_KINGDOM.KINGDOM_Britain:
-                    switch (role)
-                    {
-                        case ShipType_ROLE.LocalMerchant:
-                            list = _names_Merchants_BRITAIN;
-                            break;
-                        case ShipType_ROLE.Merchant:
-                            pref = "HMS ";
-                            list = _names_Merchants_BRITAIN;
-                            break;
-                        case ShipType_ROLE.Corsair:
-                            list = _names_Corsairs_BRITAIN;
-                            break;
-                        case ShipType_ROLE.Patrol:
-                            pref = "HMS ";
-                            list = Random.Range(0, 10) == 0 ? _names_Merchants_BRITAIN : _names_Corsairs_BRITAIN;
-                            break;
-                        case ShipType_ROLE.Military:
-                            pref = "HMS ";
-                            list = Random.Range(0, 10) == 0 ? _names_Corsairs_BRITAIN : _names_Military_BRITAIN;
-                            break;
-                        case ShipType_ROLE.Pirate:
-                            list = Random.Range(0, 10) == 0 ? _names_Corsairs_BRITAIN : _names_Pirate_BRITAIN;
-                            break;
-                    }
+                case ShipType_ROLE.Merchant:
+                    list = _names_Merchants_AllCountries[kingdom];
                     break;
+                default:
+                    list = _names_Merchants_AllCountries[kingdom];
+                    pref = "";
+                    break;
+
             }
+
+
+
+            //switch (kingdom)
+            //{
+            //    case EntityType_KINGDOM.KINGDOM_Spain:
+            //        switch (role)
+            //        {
+            //            case ShipType_ROLE.Corsair:
+            //                list = _names_Corsairs_SPAIN;
+            //                break;
+            //            case ShipType_ROLE.Patrol:
+            //                list = Random.Range(0, 10) == 0 ? _names_Merchants_SPAIN : _names_Corsairs_SPAIN;
+            //                break;
+            //            case ShipType_ROLE.Military:
+            //                list = Random.Range(0, 10) == 0 ? _names_Corsairs_SPAIN : _names_Military_SPAIN;
+            //                break;
+            //            case ShipType_ROLE.Pirate:
+            //                list = Random.Range(0, 10) == 0 ? _names_Corsairs_SPAIN : _names_Pirate_SPAIN;
+            //                break;
+            //            default: 
+            //                list = _names_Merchants_SPAIN;
+            //                break;
+
+            //        }
+            //        break;
+            //    case EntityType_KINGDOM.KINGDOM_Portugal:
+            //        switch (role)
+            //        {
+            //            case ShipType_ROLE.Corsair:
+            //                list = _names_Corsairs_PORTUGAL;
+            //                break;
+            //            case ShipType_ROLE.Patrol:
+            //                list = Random.Range(0, 10) == 0 ? _names_Merchants_PORTUGAL : _names_Corsairs_PORTUGAL;
+            //                break;
+            //            case ShipType_ROLE.Military:
+            //                list = Random.Range(0, 10) == 0 ? _names_Corsairs_PORTUGAL : _names_Military_PORTUGAL;
+            //                break;
+            //            case ShipType_ROLE.Pirate:
+            //                list = Random.Range(0, 10) == 0 ? _names_Corsairs_PORTUGAL : _names_Pirate_PORTUGAL;
+            //                break;
+            //            default:
+            //                list = _names_Merchants_PORTUGAL;
+            //                break;
+            //        }
+            //        break;
+            //    case EntityType_KINGDOM.KINGDOM_France:
+            //        switch (role)
+            //        {
+            //            case ShipType_ROLE.Corsair:
+            //                list = _names_Corsairs_FRANCE;
+            //                break;
+            //            case ShipType_ROLE.Patrol:
+            //                list = Random.Range(0, 10) == 0 ? _names_Merchants_FRANCE : _names_Corsairs_FRANCE;
+            //                break;
+            //            case ShipType_ROLE.Military:
+            //                list = Random.Range(0, 10) == 0 ? _names_Corsairs_FRANCE : _names_Military_FRANCE;
+            //                break;
+            //            case ShipType_ROLE.Pirate:
+            //                list = Random.Range(0, 10) == 0 ? _names_Corsairs_FRANCE : _names_Pirate_FRANCE;
+            //                break;
+            //            default:
+            //                list = _names_Merchants_FRANCE;
+            //                break;
+            //        }
+            //        break;
+            //    case EntityType_KINGDOM.KINGDOM_Dutch:
+            //        switch (role)
+            //        {
+            //            case ShipType_ROLE.LocalMerchant:
+            //                list = _names_Merchants_DUTCH;
+            //                break;
+            //            case ShipType_ROLE.Merchant:
+            //                pref = "VOC ";
+            //                list = _names_Merchants_DUTCH;
+            //                break;
+            //            case ShipType_ROLE.Corsair:
+            //                list = _names_Corsairs_DUTCH;
+            //                break;
+            //            case ShipType_ROLE.Patrol:
+            //                list = Random.Range(0, 10) == 0 ? _names_Merchants_DUTCH : _names_Corsairs_DUTCH;
+            //                break;
+            //            case ShipType_ROLE.Military:
+            //                list = Random.Range(0, 10) == 0 ? _names_Corsairs_DUTCH : _names_Military_DUTCH;
+            //                break;
+            //            case ShipType_ROLE.Pirate:
+            //                list = Random.Range(0, 10) == 0 ? _names_Corsairs_DUTCH : _names_Pirate_DUTCH;
+            //                break;
+            //        }
+            //        break;
+            //    case EntityType_KINGDOM.KINGDOM_Britain:
+            //        switch (role)
+            //        {
+            //            case ShipType_ROLE.LocalMerchant:
+            //                list = _names_Merchants_BRITAIN;
+            //                break;
+            //            case ShipType_ROLE.Merchant:
+            //                pref = "HMS ";
+            //                list = _names_Merchants_BRITAIN;
+            //                break;
+            //            case ShipType_ROLE.Corsair:
+            //                list = _names_Corsairs_BRITAIN;
+            //                break;
+            //            case ShipType_ROLE.Patrol:
+            //                pref = "HMS ";
+            //                list = Random.Range(0, 10) == 0 ? _names_Merchants_BRITAIN : _names_Corsairs_BRITAIN;
+            //                break;
+            //            case ShipType_ROLE.Military:
+            //                pref = "HMS ";
+            //                list = Random.Range(0, 10) == 0 ? _names_Corsairs_BRITAIN : _names_Military_BRITAIN;
+            //                break;
+            //            case ShipType_ROLE.Pirate:
+            //                list = Random.Range(0, 10) == 0 ? _names_Corsairs_BRITAIN : _names_Pirate_BRITAIN;
+            //                break;
+            //        }
+            //        break;
+            //}
             return pref + list.GetName(mode);
         }
 
@@ -423,30 +505,42 @@ public class WorldGenerator
             }
         }
 
-        public static string GetCharacterName(EntityType_KINGDOM country, bool isPirate = false)
+        //public static string GetCharacterName(EntityType_KINGDOM country, bool isPirate = false)
+        public static string GetCharacterName(ushort country, bool isPirate = false)
         {
-            string str = string.Empty;
-            switch (country)
+            var str = string.Empty;
+            if(isPirate)
             {
-                case EntityType_KINGDOM.KINGDOM_Spain:
-                    str = _names_NPC_SPAIN[0][Random.Range(0, _names_NPC_SPAIN[0].Count)] + " " + _names_NPC_SPAIN[1][Random.Range(0, _names_NPC_SPAIN[1].Count)];
-                    break;
-                case EntityType_KINGDOM.KINGDOM_Portugal:
-                    str = _names_NPC_PORTUGAL[0][Random.Range(0, _names_NPC_PORTUGAL[0].Count)] + " " + _names_NPC_PORTUGAL[1][Random.Range(0, _names_NPC_PORTUGAL[1].Count)];
-                    break;
-                case EntityType_KINGDOM.KINGDOM_France:
-                    str = _names_NPC_FRANCE[0][Random.Range(0, _names_NPC_FRANCE[0].Count)] + " " + _names_NPC_FRANCE[1][Random.Range(0, _names_NPC_FRANCE[1].Count)];
-                    break;
-                case EntityType_KINGDOM.KINGDOM_Dutch:
-                    str = _names_NPC_DUTCH[0][Random.Range(0, _names_NPC_DUTCH[0].Count)] + " " + _names_NPC_DUTCH[1][Random.Range(0, _names_NPC_DUTCH[1].Count)];
-                    break;
-                case EntityType_KINGDOM.KINGDOM_Britain:
-                    str = _names_NPC_BRITAIN[0][Random.Range(0, _names_NPC_BRITAIN[0].Count)] + " " + _names_NPC_BRITAIN[1][Random.Range(0, _names_NPC_BRITAIN[1].Count)];
-                    break;
-            }
-            if (isPirate)
                 str = Random.Range(0, 3) == 2 ? str + " " + _overNames[1][Random.Range(0, _overNames[1].Count)] : str;
-            return str;     
+            }
+            else
+            {
+                var namesList = _names_NPC_AllCountries[country];
+                str = namesList[0][Random.Range(0, namesList[0].Count)] + " " + namesList[1][Random.Range(0, namesList[1].Count)];
+            }
+            return str;
+
+            //switch (country)
+            //{
+            //    case EntityType_KINGDOM.KINGDOM_Spain:
+            //        str = _names_NPC_SPAIN[0][Random.Range(0, _names_NPC_SPAIN[0].Count)] + " " + _names_NPC_SPAIN[1][Random.Range(0, _names_NPC_SPAIN[1].Count)];
+            //        break;
+            //    case EntityType_KINGDOM.KINGDOM_Portugal:
+            //        str = _names_NPC_PORTUGAL[0][Random.Range(0, _names_NPC_PORTUGAL[0].Count)] + " " + _names_NPC_PORTUGAL[1][Random.Range(0, _names_NPC_PORTUGAL[1].Count)];
+            //        break;
+            //    case EntityType_KINGDOM.KINGDOM_France:
+            //        str = _names_NPC_FRANCE[0][Random.Range(0, _names_NPC_FRANCE[0].Count)] + " " + _names_NPC_FRANCE[1][Random.Range(0, _names_NPC_FRANCE[1].Count)];
+            //        break;
+            //    case EntityType_KINGDOM.KINGDOM_Dutch:
+            //        str = _names_NPC_DUTCH[0][Random.Range(0, _names_NPC_DUTCH[0].Count)] + " " + _names_NPC_DUTCH[1][Random.Range(0, _names_NPC_DUTCH[1].Count)];
+            //        break;
+            //    case EntityType_KINGDOM.KINGDOM_Britain:
+            //        str = _names_NPC_BRITAIN[0][Random.Range(0, _names_NPC_BRITAIN[0].Count)] + " " + _names_NPC_BRITAIN[1][Random.Range(0, _names_NPC_BRITAIN[1].Count)];
+            //        break;
+            //}
+            //if (isPirate)
+            //    str = Random.Range(0, 3) == 2 ? str + " " + _overNames[1][Random.Range(0, _overNames[1].Count)] : str;
+            //return str;     
         }
 
         #endregion
@@ -460,13 +554,14 @@ namespace Generation.Ships
     public class ShipGenerator
     {
         private ShipSpawner_ByRole[] Generators = new ShipSpawner_ByRole[5];
-        public Ship GenerateShipData(ShipType_ROLE r, EntityType_KINGDOM k)
+        //public Ship GenerateShipData(ShipType_ROLE r, EntityType_KINGDOM k)
+        public Ship GenerateShipData(ShipType_ROLE r, ushort kingdom)
         {
             if(r == ShipType_ROLE.Pirate)
             {
-                return Generators[3].CreateShip(r, k);
+                return Generators[3].CreateShip(r, kingdom);
             }
-            return Generators[(int)r].CreateShip(r, k);
+            return Generators[(int)r].CreateShip(r, kingdom);
         }
 
         private static readonly Dictionary<ShipType_CLASS, ShipType_MODEL[]> modelsByClass = new Dictionary<ShipType_CLASS, ShipType_MODEL[]>()
@@ -510,7 +605,8 @@ namespace Generation.Ships
             /// <param name="r"></param>
             /// <param name="k"></param>
             /// <returns></returns>
-            public abstract Ship CreateShip(ShipType_ROLE r, EntityType_KINGDOM k);
+            //public abstract Ship CreateShip(ShipType_ROLE r, EntityType_KINGDOM k);
+            public abstract Ship CreateShip(ShipType_ROLE r, ushort kingdom);
 
             protected int GetRandomIndex(Spawner[] probabilities)
             {
@@ -561,10 +657,11 @@ namespace Generation.Ships
             /// <param name="r"></param>
             /// <param name="k"></param>
             /// <returns></returns>
-            public override Ship CreateShip(ShipType_ROLE r, EntityType_KINGDOM k)
+            //public override Ship CreateShip(ShipType_ROLE r, EntityType_KINGDOM k)
+            public override Ship CreateShip(ShipType_ROLE r, ushort kingdom)
             {
                 var i = GetRandomIndex(subClassSpawners);
-                return subClassSpawners[i].CreateShip(r, k);
+                return subClassSpawners[i].CreateShip(r, kingdom);
             }
         }
         private class ShipSpawner_ByClass : Spawner
@@ -585,10 +682,10 @@ namespace Generation.Ships
             /// <param name="r"></param>
             /// <param name="k"></param>
             /// <returns></returns>
-            public override Ship CreateShip(ShipType_ROLE r, EntityType_KINGDOM k)
+            public override Ship CreateShip(ShipType_ROLE r, ushort kingdom)
             {
                 var i = GetRandomIndex(subClassSpawners);
-                return subClassSpawners[i].CreateShip(r, k);
+                return subClassSpawners[i].CreateShip(r, kingdom);
             }
         }
         private class ShipSpawner_ByModel: Spawner
@@ -606,7 +703,7 @@ namespace Generation.Ships
             /// <param name="r"></param>
             /// <param name="k"></param>
             /// <returns></returns>
-            public override Ship CreateShip(ShipType_ROLE r, EntityType_KINGDOM k)
+            public override Ship CreateShip(ShipType_ROLE r, ushort kingdom)
             {
                 //Debug.Log(model.ToString());
                 switch (model)
@@ -710,15 +807,15 @@ namespace Generation.Ships
                         switch (r)
                         {
                             case ShipType_ROLE.LocalMerchant:
-                                return new ShipSubCategory_12Brig(k);
+                                return new ShipSubCategory_12Brig(kingdom);
                             default:
                                 if (Random.Range(0, 3) == 0)
                                 {
-                                    return new ShipSubCategory_16Brig(k);
+                                    return new ShipSubCategory_16Brig(kingdom);
                                 }
                                 else
                                 {
-                                    return new ShipSubCategory_12Brig(k);
+                                    return new ShipSubCategory_12Brig(kingdom);
                                 }
 
                         }
@@ -741,15 +838,15 @@ namespace Generation.Ships
                         switch (r)
                         {
                             case ShipType_ROLE.LocalMerchant:
-                                return new ShipSubCategory_ShoonerPolacre(k);
+                                return new ShipSubCategory_ShoonerPolacre(kingdom);
                             default:
                                 if (Random.Range(0, 3) == 0)
                                 {
-                                    return new ShipSubCategory_ShoonerPolacre(k);
+                                    return new ShipSubCategory_ShoonerPolacre(kingdom);
                                 }
                                 else
                                 {
-                                    return new ShipSubCategory_Polacre(k);
+                                    return new ShipSubCategory_Polacre(kingdom);
                                 }
                         }
                     case ShipType_MODEL.MODEL_Corvette:
@@ -768,7 +865,7 @@ namespace Generation.Ships
                             case ShipType_ROLE.Military:
                                 return new ShipSubCategory_Gallion();
                             default:
-                                if(k == EntityType_KINGDOM.KINGDOM_Dutch)
+                                if(kingdom == 3) //todo: y en caso de mods?
                                 {
                                     return new ShipSubCategory_DutchGallion();
                                 }

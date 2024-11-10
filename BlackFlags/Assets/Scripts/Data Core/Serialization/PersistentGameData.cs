@@ -31,7 +31,8 @@ namespace GameMechanics.Data
         //----
         //Player Values
         public static string _GData_PlayerName;
-        public static EntityType_KINGDOM _GDataPlayerNation;
+        //public static EntityType_KINGDOM _GDataPlayerNation;
+        public static ushort _GDataPlayerNation;
         public static Sprite _GData_PlayerFlag;
         public static Sprite _GData_PlayerAvatar;
 

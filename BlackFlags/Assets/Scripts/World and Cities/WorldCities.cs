@@ -204,8 +204,8 @@ namespace GameMechanics.WorldCities
         /// <returns></returns>
         public override Settlement NewDestinationFromThisPort(ushort tag, bool onlyCities = false, int dis = 100)
         {
-            //! desde la v0.032 ya no se utilizan tags. En lugar de eso, vamos a usar
-            //! un identificador (los mods podr·n otros reinos que no sean los establecidos)
+            //! desde la v0.033 ya no se utilizan tags. En lugar de eso, vamos a usar
+            //! un identificador (los mods podr√°n incluir otros reinos que no sean los establecidos)
             Kingdom kingdom = GameManager.gm.GetKingdombyTag(tag);
 
 

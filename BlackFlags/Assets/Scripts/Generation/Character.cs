@@ -20,23 +20,26 @@ namespace GameMechanics.Data
     public abstract class BASE_Character
     {
         //Salutations
-        protected static Dictionary<EntityType_KINGDOM, string> D_Hello = new Dictionary<EntityType_KINGDOM, string>()
+        //protected static Dictionary<EntityType_KINGDOM, string> D_Hello = new Dictionary<EntityType_KINGDOM, string>()
+        //todo: en el caso de cargar un mod, el diccionario se debe sobre-escribir
+        protected static Dictionary<ushort, string> D_Hello = new Dictionary<ushort, string>()
         {
-            {EntityType_KINGDOM.KINGDOM_Spain, "Buen día," },
-            {EntityType_KINGDOM.KINGDOM_Portugal, "Bom Dia," },
-            {EntityType_KINGDOM.KINGDOM_France, "Bonjour," },
-            {EntityType_KINGDOM.KINGDOM_Dutch, "Goedendag," },
-            {EntityType_KINGDOM.KINGDOM_Britain, "How do you do?,"}
+            {0, "Buen día," },
+            {1, "Bom Dia," },
+            {2, "Bonjour," },
+            {3, "Goedendag," },
+            {4, "How do you do?,"}
         };
 
 
         public string CharacterName;
-        public ushort kingdomTag;
+        public ushort kingdomTag = 9999;
         public string GetCharacterName()
         {
             return CharacterName;
         }
-        public void SetNameByGeneration(EntityType_KINGDOM nationality, bool isPirate = false)
+        //public void SetNameByGeneration(EntityType_KINGDOM nationality, bool isPirate = false)
+        public void SetNameByGeneration(ushort nationality, bool isPirate = false)
         {
             CharacterName = WorldGenerator.GetCharacterName(nationality, isPirate);
         }
@@ -350,7 +353,7 @@ namespace GameMechanics.Data
                 if (Random.Range(0, 3) != 0)
                 {
                     //return D_Hello[GameManager.gm.GetKingdombyTag(currentPort.transform.parent.tag).thisKingdom];
-                    return D_Hello[(EntityType_KINGDOM)kingdomTag];
+                    return D_Hello[kingdomTag];
                 }
             //}
             return "Saludos,";
@@ -389,10 +392,10 @@ namespace GameMechanics.Data
         //    GetEvents();
         //}
         //Constructor
-        public Smuggler(EntityType_KINGDOM country, List<Resource> resources)
+        public Smuggler(ushort countryTag, List<Resource> resources)
         {
-            kingdomTag = (ushort)country; //! esto es temporal (el enumerador debe de dejar de usarse)
-            SetNameByGeneration(country);
+            kingdomTag = countryTag; //! esto es temporal (el enumerador debe de dejar de usarse)
+            SetNameByGeneration(kingdomTag);
             SmugglerOffer = resources;
             SmugglerInventory = new List<InventoryItemStacking>();
             SetFriendshipLevel();
@@ -658,7 +661,8 @@ namespace GameMechanics.Data
             _pirateList.Add(this);
         }
         //Constructor
-        public Pirate (int karma, EntityType_KINGDOM country)
+        //public Pirate (int karma, EntityType_KINGDOM country)
+        public Pirate(int karma, ushort country)
         {
             SetNameByGeneration(country, true);
             reputation = karma;
@@ -669,15 +673,17 @@ namespace GameMechanics.Data
         //Constructor
         public Pirate ()
         {
-            var n = Random.Range(0, 6);
-            var country = n > 3 ? EntityType_KINGDOM.KINGDOM_Britain : (EntityType_KINGDOM)n;
+            var n = (ushort)Random.Range(0, 6);
+            //todo: en caso de mods, hay que cambiar esto (por ahora se tomará Gran Bretaña como ptarget principal)
+            ushort country = n > 3 ? (ushort) 4 : n; //todo: en mods esto podrá variar
             SetNameByGeneration(country, true);
             SetRandomAttributes();
             SetFriendshipLevel();
             _pirateList.Add(this);
         }
         //Constructor
-        public Pirate( EntityType_KINGDOM country)
+        //public Pirate( EntityType_KINGDOM country)
+        public Pirate(ushort country)
         {
             SetNameByGeneration(country, true);
             SetRandomAttributes();
@@ -719,7 +725,8 @@ namespace GameMechanics.Data
             CharacterName = name;
         }
         //Constructor
-        public Criminal(EntityType_KINGDOM country)
+        //public Criminal(EntityType_KINGDOM country)
+        public Criminal(ushort country)
         {
             SetNameByGeneration(country, true);
         }
@@ -896,7 +903,8 @@ namespace GameMechanics.Data
         {
             CharacterName = name;
         }
-        public RetiredCaptain(EntityType_KINGDOM country)
+        //public RetiredCaptain(EntityType_KINGDOM country)
+        public RetiredCaptain(ushort country)
         {
             SetNameByGeneration(country);
             CharacterName += CharacterName.Split(' ')[0] + " El Viejo";
