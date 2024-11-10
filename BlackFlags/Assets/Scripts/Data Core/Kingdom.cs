@@ -24,6 +24,7 @@ namespace GameMechanics.Data
     {
         #region VARIABLES
         //this kingdom parameters
+        public ushort tagKey; // El indentificador de este país
         public Material nationalFlag;
         [SerializeField] public EntityType_KINGDOM thisKingdom;
         public float[] roleFleetsSpawnStatistics; // ????

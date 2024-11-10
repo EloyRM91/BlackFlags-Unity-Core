@@ -132,16 +132,27 @@ public class GameManager : MonoBehaviour
 
     //Routes setters and Info
 #region DATA ACCESS
-    public Kingdom GetKingdombyTag(string tag)
+    public Kingdom GetKingdombyTag(ushort id)
     {
-        switch (tag)
+        //switch (tag)
+        //{
+        //    case "KingdomSpain": return Kingdoms[0];
+        //    case "KingdomPortugal": return Kingdoms[1];
+        //    case "KingdomFrance": return Kingdoms[2];
+        //    case "KingdomDutch": return Kingdoms[3];
+        //    case "KingdomBritain": return Kingdoms[4];
+        //}
+        //return null;
+
+        //! desde la v0.032 ya no se utilizan tags. En lugar de eso, vamos a usar
+        //! un identificador (los mods podrán otros reinos que no sean los establecidos)
+
+        for (int i = 0; i < Kingdoms.Length; i++)
         {
-            case "KingdomSpain": return Kingdoms[0];
-            case "KingdomPortugal": return Kingdoms[1];
-            case "KingdomFrance": return Kingdoms[2];
-            case "KingdomDutch": return Kingdoms[3];
-            case "KingdomBritain": return Kingdoms[4];
+            if (Kingdoms[i].tagKey == id)
+                return Kingdoms[i];
         }
+
         return null;
     }
     public KeyPoint GetShelter(KeyPoint currentShelter)

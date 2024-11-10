@@ -62,7 +62,10 @@ namespace GameMechanics.WorldCities
         }
         private void CreateCharacters(int nSmug, int nSMen, int ratio)
         {
-            var kingdom = GameManager.gm.GetKingdombyTag(transform.parent.tag);
+            //! desde la v0.032 ya no se utilizan tags. En lugar de eso, vamos a usar
+            //! un identificador (los mods podrán otros reinos que no sean los establecidos)
+            //var kingdom = GameManager.gm.GetKingdombyTag(transform.parent.tag);
+            var kingdom = transform.parent.parent.GetComponent<Kingdom>();
 
             //Create smugglers
             for (int i = 0; i < nSmug; i++)
@@ -117,7 +120,8 @@ namespace GameMechanics.WorldCities
         }
         private void CallAtlanticConvoy()
         {
-            var kingdom = GameManager.gm.GetKingdombyTag(transform.parent.tag);
+            //var kingdom = GameManager.gm.GetKingdombyTag(transform.parent.tag);
+            var kingdom = transform.transform.parent.GetComponent<Kingdom>();
             var sc = NewDestinationFromThisPort(kingdom, true, 50);
             var routeCities = sc != null ? new Settlement[2] { this, NewDestinationFromThisPort(kingdom, true, 50) } : new Settlement[1] { this };
             kingdom.CallEuropeanConvoy(routeCities, spawnPoint);

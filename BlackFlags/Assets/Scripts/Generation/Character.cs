@@ -20,7 +20,7 @@ namespace GameMechanics.Data
     public abstract class BASE_Character
     {
         //Salutations
-        protected static readonly Dictionary<EntityType_KINGDOM, string> D_Hello = new Dictionary<EntityType_KINGDOM, string>()
+        protected static Dictionary<EntityType_KINGDOM, string> D_Hello = new Dictionary<EntityType_KINGDOM, string>()
         {
             {EntityType_KINGDOM.KINGDOM_Spain, "Buen día," },
             {EntityType_KINGDOM.KINGDOM_Portugal, "Bom Dia," },
@@ -31,6 +31,7 @@ namespace GameMechanics.Data
 
 
         public string CharacterName;
+        public ushort kingdomTag;
         public string GetCharacterName()
         {
             return CharacterName;
@@ -343,14 +344,15 @@ namespace GameMechanics.Data
 
         private string GetSalutation()
         {
-            var currentPort = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().GetPort();
-            if (currentPort != null)
-            {
+            //var currentPort = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().GetPort();
+            //if (currentPort != null)
+            //{
                 if (Random.Range(0, 3) != 0)
                 {
-                    return D_Hello[GameManager.gm.GetKingdombyTag(currentPort.transform.parent.tag).thisKingdom];
+                    //return D_Hello[GameManager.gm.GetKingdombyTag(currentPort.transform.parent.tag).thisKingdom];
+                    return D_Hello[(EntityType_KINGDOM)kingdomTag];
                 }
-            }
+            //}
             return "Saludos,";
         }
 
@@ -377,18 +379,19 @@ namespace GameMechanics.Data
         }
 
         //Constructor
-        public Smuggler(string name, List<Resource> resources)
-        {
-            CharacterName = name;
-            SmugglerOffer = resources;
-            SmugglerInventory = new List<InventoryItemStacking>();
-            SetFriendshipLevel();
-            SetGenerationRatio();
-            GetEvents();
-        }
+        //public Smuggler(string name, List<Resource> resources)
+        //{
+        //    CharacterName = name;
+        //    SmugglerOffer = resources;
+        //    SmugglerInventory = new List<InventoryItemStacking>();
+        //    SetFriendshipLevel();
+        //    SetGenerationRatio();
+        //    GetEvents();
+        //}
         //Constructor
         public Smuggler(EntityType_KINGDOM country, List<Resource> resources)
         {
+            kingdomTag = (ushort)country; //! esto es temporal (el enumerador debe de dejar de usarse)
             SetNameByGeneration(country);
             SmugglerOffer = resources;
             SmugglerInventory = new List<InventoryItemStacking>();

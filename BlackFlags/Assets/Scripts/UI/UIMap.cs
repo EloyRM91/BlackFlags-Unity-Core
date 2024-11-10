@@ -549,7 +549,15 @@ public class UIMap : MonoBehaviour //, UIDetectable
         MatController.RunTiming();
         //Set panel values
         _TEXT_CityViewName.text = k.cityName;
-        Kingdom thisKingdom = GameManager.gm.GetKingdombyTag(k.transform.parent.tag);
+        //! desde la v0.032 ya no se utilizan tags. En lugar de eso, vamos a usar
+        //! un identificador (los mods podrán otros reinos que no sean los establecidos)
+        //Kingdom thisKingdom = GameManager.gm.GetKingdombyTag(k.transform.parent.tag);
+        Kingdom thisKingdom = null;
+        var container = k.transform.parent;
+        if (!container.CompareTag("Pirate"))
+        {
+            thisKingdom = container.parent.GetComponent<Kingdom>();
+        }
         _TEXT_CityViewDomain.text = $"Dominio {thisKingdom.GENTILISM_MALESIN}";
         _TEXT_CityViewPopulation.text = $"Población - {k.population}";
         //Set Flag

@@ -230,8 +230,17 @@ namespace UI.WorldMap
             {
                 //Call Event:
                 npcSelected();
+
                 //This convoy's data
-                var kingdom = GameManager.gm.GetKingdombyTag(convoy.transform.tag);
+                //! desde la v0.032 ya no se utilizan tags. En lugar de eso, vamos a usar
+                //! un identificador (los mods podrán otros reinos que no sean los establecidos)
+                //var kingdom = GameManager.gm.GetKingdombyTag(convoy.transform.tag);
+                Kingdom kingdom = null;
+                if (!convoy.transform.CompareTag("Pirate"))
+                {
+                    kingdom = convoy.transform.transform.GetComponent<Kingdom>();
+                }
+
                 var ai = convoy.GetComponent<ClassAI>();
                 //Convoy Role
                 _Text_Role.text = $"{ai.GetAIRol()} {ai.GetGentilism(kingdom)}";

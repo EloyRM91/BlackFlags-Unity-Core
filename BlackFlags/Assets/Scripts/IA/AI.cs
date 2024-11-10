@@ -182,7 +182,9 @@ namespace GameMechanics.AI
         #region IA STATES
         protected override void SetStateAs_OnCruisse()
         {
-            _thisConvoy.currentPort = _thisConvoy.currentPort.NewDestinationFromThisPort(transform.tag);
+            Kingdom kingdom = transform.parent.parent.GetComponent<Kingdom>();
+            //En el futuro, los mercantes tendrán que poder entrar en puertos con los que se tenga un acuerdo comercial
+            _thisConvoy.currentPort = _thisConvoy.currentPort.NewDestinationFromThisPort(kingdom);
             _thisConvoy.SetIADestination(GetDestiation(_thisConvoy.currentPort));
             _thisConvoy.convoyCurrentState = ConvoyState.Sailing;
             collider.enabled = true;
@@ -246,7 +248,8 @@ namespace GameMechanics.AI
         //-------------------- AI STATES
         protected override void SetStateAs_OnCruisse()
         {
-            _thisConvoy.currentPort = _thisConvoy.currentPort.NewDestinationFromThisPort(transform.tag, true, 250);
+            Kingdom kingdom = transform.parent.parent.GetComponent<Kingdom>();
+            _thisConvoy.currentPort = _thisConvoy.currentPort.NewDestinationFromThisPort(kingdom, true, 250);
             _thisConvoy.SetIADestination(GetDestiation(_thisConvoy.currentPort));
             _thisConvoy.convoyCurrentState = ConvoyState.Sailing;
             collider.enabled = true;

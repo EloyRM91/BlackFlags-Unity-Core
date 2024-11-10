@@ -167,7 +167,7 @@ namespace GameMechanics.WorldCities
             UIMap.ui.canGraphicRaycasting = true;
         }
         //IA
-        public virtual Settlement NewDestinationFromThisPort(string tag, bool onlyCities = false, int dis = 100) { return null; }
+        public virtual Settlement NewDestinationFromThisPort(ushort tag, bool onlyCities = false, int dis = 100) { return null; }
         public virtual Settlement NewDestinationFromThisPort(Kingdom kingdom, bool onlyCities = false, int dis = 100) { return null; }
         public Sprite GetSprite() { return spriteNonSelected; }
     }
@@ -202,9 +202,12 @@ namespace GameMechanics.WorldCities
         /// </summary>
         /// <param name="onlyCities"></param>
         /// <returns></returns>
-        public override Settlement NewDestinationFromThisPort(string tag, bool onlyCities = false, int dis = 100)
+        public override Settlement NewDestinationFromThisPort(ushort tag, bool onlyCities = false, int dis = 100)
         {
+            //! desde la v0.032 ya no se utilizan tags. En lugar de eso, vamos a usar
+            //! un identificador (los mods podrán otros reinos que no sean los establecidos)
             Kingdom kingdom = GameManager.gm.GetKingdombyTag(tag);
+
 
             var list = onlyCities ? new List<Settlement>(kingdom.GetPortsList().Where(x => x is MB_City).ToList()) : new List<Settlement>(kingdom.GetPortsList());
             list.Remove(this); //current port is not a valid destination
