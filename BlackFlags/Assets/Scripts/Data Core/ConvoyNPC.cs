@@ -17,7 +17,7 @@ namespace GameMechanics.Ships
         protected override void Start() { }
 
         //Set data from ships convoy
-        public void SetConvoyData()
+        public void SetConvoyData(Kingdom k)
         {
             convoySpeed = thisConvoyShips[0].GetMinSmoothSpeed();
             var leadership = thisConvoyShips[0];
@@ -39,7 +39,9 @@ namespace GameMechanics.Ships
             convoyName = leadership.name_Ship;
             convoyCaptain = leadership.name_Captain;
 
-            GetSprite(transform.tag, (byte)thisConvoyShips.Length);
+            //GetSprite(transform.tag, (byte)thisConvoyShips.Length);
+            GetSprite(
+                k != null ? k.tagKey : (ushort)9999, (byte)thisConvoyShips.Length);
             _thisConvoySpriteController.SetSpritesSet(leadership.GetSpriteIndex());
         }
 

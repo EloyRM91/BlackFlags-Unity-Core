@@ -83,6 +83,12 @@ public class GameManager : MonoBehaviour
 
     //Generation
 #region GENERATION
+    public GameObject InstantiateMapConvoy(Transform parent = null)
+    {
+        var obj = Instantiate(_prefab_Pirate, parent);
+        obj.tag = "Untagged";
+        return _prefab_Pirate;
+    }
     private void CreateArmada_PIRATE()
     {
         foreach (KeyPoint shelter in PirateShelters)
@@ -110,7 +116,7 @@ public class GameManager : MonoBehaviour
                 ship.name_Captain = pirate.CharacterName;
                 pirate.shipName = ship.name_Ship;
                 data.thisConvoyShips = new Ship[1] { ship };
-                data.SetConvoyData();
+                data.SetConvoyData(null);
             }
         }
     }
@@ -128,6 +134,7 @@ public class GameManager : MonoBehaviour
             }
         }
         GameObject newCon = Instantiate(_prefab_Pirate, _pooling_Pirate);
+        newCon.tag = "Pirate";
         return newCon;
     }
 #endregion

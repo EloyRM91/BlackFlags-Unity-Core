@@ -179,22 +179,22 @@ public class UIMap : MonoBehaviour //, UIDetectable
         PersistentGameData.updateGold -= UpdateGold;
     }
     //Data Geters
-    public Sprite GetFlag(int i) { return _flags[i]; }
+    public Sprite GetFlag(int i) { return _flags[i == 9999 ? _flags.Length - 1 : i]; }
     //public Sprite GetFlag(EntityType_KINGDOM k) { return _flags[(int)k]; }
-    public Sprite GetFlag(ushort kingdom) { return _flags[kingdom]; }
-    public Sprite GetFlag(string tag)
-    {
-        switch (tag)
-        {
-            case "KingdomSpain": return _flags[0];
-            case "KingdomPortugal": return _flags[1];
-            case "KingdomFrance": return _flags[2];
-            case "KingdomDutch": return _flags[3];
-            case "KingdomBritain": return _flags[4];
-            case "Pirate": return _flags[7];
-            default: return null;
-        }
-    }
+    public Sprite GetFlag(ushort kingdom) { return _flags[kingdom == 9999 ? _flags.Length - 1 : kingdom]; }
+    //public Sprite GetFlag(string tag) //ya no se obtiene información por tags
+    //{
+    //    switch (tag)
+    //    {
+    //        case "KingdomSpain": return _flags[0];
+    //        case "KingdomPortugal": return _flags[1];
+    //        case "KingdomFrance": return _flags[2];
+    //        case "KingdomDutch": return _flags[3];
+    //        case "KingdomBritain": return _flags[4];
+    //        case "Pirate": return _flags[7];
+    //        default: return null;
+    //    }
+    //}
     public static Sprite GetResourceSprite(int index)
     {
         return ui._resources[index];

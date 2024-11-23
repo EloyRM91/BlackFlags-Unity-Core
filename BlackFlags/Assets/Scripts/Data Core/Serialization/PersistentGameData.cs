@@ -279,6 +279,11 @@ namespace GameMechanics.save
     {
         public string cityName;
         public bool revealed;
+        public float[]
+            position,
+            entryPoint,
+            eventsPoint;
+        public byte spriteIndex;
     }
 
     [Serializable]
@@ -309,6 +314,20 @@ namespace GameMechanics.save
     public class SerializablePirateShelter : SerializableSettlement
     {
 
+    }
+
+    [Serializable]
+    public class SerializableKingdom : SerializationConverter
+    {
+        public ushort tagKey;
+        public byte[] roleFleetSpawnStats = new byte[4];
+        public float countryBaseStrength = 1;
+        public SerializableSettlement[] countryPossessions;
+        public ushort[]
+            atWarWith,
+            atTradeAgrrementWith;
+        public SerializableCity[] countryCities;
+        public SerializableTown[] countryVillages;
     }
 
     [Serializable]

@@ -66,13 +66,13 @@ namespace GameMechanics.Ships
             _thisConvoySpriteController.SetAsTarget(transform);
             _thisConvoySpriteController.SetValues(UIMap.ui.GetFlag(kingdom), n, GetComponent<ClassAI>());
         }
-        public void GetSprite(string tag, byte n)
-        {
-            _thisConvoySpriteController = PoolingShipSprites.GetSprite();
-            _thisConvoySpriteController.SetAsTarget(transform);
-            _thisConvoySpriteController.ForcePosition();
-            _thisConvoySpriteController.SetValues(UIMap.ui.GetFlag(tag), n, GetComponent<ClassAI>());
-        }
+        //public void GetSprite(string tag, byte n)
+        //{
+        //    _thisConvoySpriteController = PoolingShipSprites.GetSprite();
+        //    _thisConvoySpriteController.SetAsTarget(transform);
+        //    _thisConvoySpriteController.ForcePosition();
+        //    _thisConvoySpriteController.SetValues(UIMap.ui.GetFlag(tag), n, GetComponent<ClassAI>());
+        //}
         public bool HasSprite()
         {
             return _thisConvoySpriteController != null;

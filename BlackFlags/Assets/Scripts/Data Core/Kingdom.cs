@@ -35,7 +35,7 @@ namespace GameMechanics.Data
         //Spawning
         public ShipGenerator shipsGenerator;
         [SerializeField] private Transform _poolContainer_LOC, _poolContainer_EU_M, _poolContainer_PAT;
-        [SerializeField] private GameObject _convoyPrefab;
+        //[SerializeField] private GameObject _convoyPrefab;
         
         //Relations
         public List<Kingdom> atWarWith = new List<Kingdom>();
@@ -100,7 +100,7 @@ namespace GameMechanics.Data
                     ship.name_Ship = WorldGenerator.GiveShipName(tagKey, ShipType_ROLE.LocalMerchant, GenerationMode.Random);
                     ship.name_Captain = WorldGenerator.GetCharacterName(tagKey);
                     data.thisConvoyShips = new Ship[1] { ship };
-                    data.SetConvoyData();
+                    data.SetConvoyData(this);
                 }
             }
             //Patrols
@@ -124,7 +124,7 @@ namespace GameMechanics.Data
                     ship.name_Ship = WorldGenerator.GiveShipName(tagKey, ShipType_ROLE.Patrol, GenerationMode.Random);
                     ship.name_Captain = WorldGenerator.GetCharacterName(tagKey);
                     data.thisConvoyShips = new Ship[1] { ship };
-                    data.SetConvoyData();
+                    data.SetConvoyData(this);
                 }
             }
            
@@ -146,9 +146,9 @@ namespace GameMechanics.Data
                     ship.name_Captain = WorldGenerator.GetCharacterName(tagKey);
                     data.thisConvoyShips[i] = ship;
                 }
-                data.SetConvoyData();
+                data.SetConvoyData(this);
             }
-            data.SetConvoyData();
+            data.SetConvoyData(this);
             newConvoy.GetComponent<AI_Merchant>().SetRoute(route);
         }
         //Pooling
@@ -163,7 +163,8 @@ namespace GameMechanics.Data
                     return c;
                 }
             }
-            GameObject newCon = Instantiate(_convoyPrefab, container);
+            //GameObject newCon = Instantiate(_convoyPrefab, container);
+            GameObject newCon = GameManager.gm.InstantiateMapConvoy(container);
             return newCon;
         }
     }
