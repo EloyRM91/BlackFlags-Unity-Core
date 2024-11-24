@@ -7,6 +7,7 @@ namespace GameMechanics.WorldCities
     public class MB_Town : Settlement
     {
         public int population;
+        public byte imgIndex;
 
         //public override void OnMouseDown()
         //{

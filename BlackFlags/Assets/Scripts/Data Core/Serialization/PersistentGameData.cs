@@ -9,6 +9,7 @@ using GameMechanics.WorldCities;
 //Data
 using System.IO;
 using GameSettings.Core;
+using System.Linq;
 
 //Serialization:
 using System;
@@ -296,12 +297,30 @@ namespace GameMechanics.save
     public class SerializableCity : SerializableSettlement
     {
         public int population;
+        public string tavernName;
+        public float[] spawnPoint;
+        public byte imgIndex;
+
+        public SerializableCity(MB_City city)
+        {
+            population = city.population;
+            tavernName = city.tavernName;
+            spawnPoint = ConvertV3(city.SpawnPoint);
+            imgIndex = city.imgIndex;
+        }
     }
 
     [Serializable]
     public class SerializableTown : SerializableSettlement
     {
         public int population;
+        public byte imgIndex;
+
+        public SerializableTown(MB_Town town)
+        {
+            population = town.population;
+            imgIndex = town.imgIndex;
+        }
     }
 
     [Serializable]
@@ -320,14 +339,55 @@ namespace GameMechanics.save
     public class SerializableKingdom : SerializationConverter
     {
         public ushort tagKey;
-        public byte[] roleFleetSpawnStats = new byte[4];
-        public float countryBaseStrength = 1;
-        public SerializableSettlement[] countryPossessions;
+        public string
+            kingdomName,
+            gentilism_MALESIN, gentilism_MALEPLU, gentilism_FEMSIN, gentilism_FEMPLU;
+        public float[] roleFleetSpawnStats;
+        public byte countryBaseStrength = 1;
         public ushort[]
             atWarWith,
             atTradeAgrrementWith;
         public SerializableCity[] countryCities;
         public SerializableTown[] countryVillages;
+        public SerializableShip[]
+            countryMerchants,
+            countryPatrols,
+            europeanConvoys;
+
+        public SerializableKingdom(Kingdom kingdom)
+        {
+            tagKey = kingdom.tagKey;
+            kingdomName = kingdom.KINGDOMNAME;
+            gentilism_MALESIN = kingdom.GENTILISM_MALESIN;
+            gentilism_MALEPLU = kingdom.GENTILISM_MALEPLU;
+            gentilism_FEMSIN = kingdom.GENTILISM_FEMSIN;
+            gentilism_FEMPLU = kingdom.GENTILISM_FEMPLU;
+            roleFleetSpawnStats = kingdom.roleFleetsSpawnStatistics;
+
+            //posesiones del reino:
+            var countryPossessions = kingdom.GetPortsList();
+            var citiesList = countryPossessions.Where(s => s is MB_City).ToList();
+            var townsList = countryPossessions.Where(s => s is MB_Town).ToList();
+
+            countryCities = new SerializableCity[citiesList.Count];
+            countryVillages = new SerializableTown[townsList.Count];
+
+            for (int i = 0; i < countryCities.Length; i++)
+            {
+                var city = citiesList[i] as MB_City;
+                countryCities[i] = new SerializableCity(city);
+            }
+
+            for (int i = 0; i < countryVillages.Length; i++)
+            {
+                var town = townsList[i] as MB_Town;
+                countryVillages[i] = new SerializableTown(town);
+            }
+
+            var warList = kingdom.atWarWith.ToArray();
+            atWarWith = new ushort[warList.Length];
+            atWarWith = warList.Select((k, index) => warList[index].tagKey).ToArray();
+        }
     }
 
     [Serializable]
@@ -546,6 +606,21 @@ namespace GameMechanics.save
         }
     }
 
+    [Serializable]
+    public class SerializableConvoy : SerializationConverter
+    {
+        public SerializableShip[] convoyShips;
+        public float[] 
+            position,
+            rotation, 
+            destination;
+        public ushort 
+            id,
+            targetId; //referencia al convoy/barco al que está persiguiendo
+        public bool inOnTarget;
+        
+    }
+
     #endregion
 
     #region SAVE GAME
@@ -553,13 +628,16 @@ namespace GameMechanics.save
     [Serializable]
     public class SavedFile : SerializationConverter
     {
+        //-----------------------------
         //Basic Game Data & Game Settings
-
+        //-----------------------------
         public DateTime WorldDate; // fecha de la partida
         //public DateTime startingDate; //fecha inicial de la partida;
-        public uint playedTime; //tiempo de juego en segundos;
+        public uint playedTime; // tiempo de juego en segundos;
         public float deltaWorldDate; // el contador para llegar al próximo día
-        public byte marketTimer; // contador para actualizar mercados.
+        public byte
+            marketTimer, // contador para actualizar mercados.
+            pirateActivity; // número de piratas generados
 
         public GameDifficulty settings_gameDifficulty;
         public bool settings_MoreEvents;
@@ -568,8 +646,9 @@ namespace GameMechanics.save
         public ushort IDCounter; //contador de entidades que hemos creado (indica el siguiente valor de clave primaria cuando instanciamos algo)
         public ushort IDKeyPointCounter; //Contador de ubicaciones en el mundo creadas (ciudades, puntos de misión, etc);
 
+        //-----------------------------
         //Player's basic Data
-
+        //-----------------------------
         public string 
             playerName,
             playerShipName;
@@ -590,7 +669,9 @@ namespace GameMechanics.save
             targetID; //id del barco o convoy siendo pereguido por el jugador
         public float[] playerDestination; //posición del destino
 
+        //-----------------------------
         //Player's Inventory & Crew
+        //-----------------------------
         public byte crew;
         public byte[] moraleModifiers;
         public bool
@@ -616,8 +697,11 @@ namespace GameMechanics.save
         public float[] surplus;
         public int disentryCounter;
 
-        //Cities and KeyPoints
+        //-----------------------------
+        //World: Cities and KeyPoints
+        //-----------------------------
 
+        public SerializableKingdom[] kingdoms;
         //Ships in Game
 
 
@@ -631,6 +715,7 @@ namespace GameMechanics.save
             playedTime = TimeManager.instance.PlayedTime;
             deltaWorldDate = TimeManager.instance.Timer;
             marketTimer = TimeManager.instance.Counter20;
+            pirateActivity = GameManager.gm.pirateActivity;
 
             settings_gameDifficulty = PersistentGameData._GData_Difficulty;
             settings_MoreEvents = PersistentGameData._GDATA_MoreEvents;
@@ -712,6 +797,16 @@ namespace GameMechanics.save
 
             inventoryItems = ShipInventory.Items;
             surplus = ShipInventory.Surplus;
+
+            //World, kingdoms and cities:<
+
+            var kingdomsContainer = GameObject.FindWithTag("Kingdoms").transform;
+            kingdoms = new SerializableKingdom[kingdomsContainer.childCount];
+            for (int i = 0; i < kingdomsContainer.childCount; i++)
+            {
+                var k = kingdomsContainer.GetChild(i).GetComponent<Kingdom>();
+                kingdoms[i] = new SerializableKingdom(k);
+            }
 
         }
     }

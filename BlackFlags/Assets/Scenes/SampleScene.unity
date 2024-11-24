@@ -11096,6 +11096,7 @@ MonoBehaviour:
   population: 3000
   tavernName: La Capitana
   convoysInThisPort: []
+  imgIndex: 0
 --- !u!212 &54918334
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13467,6 +13468,7 @@ MonoBehaviour:
   population: 4500
   tavernName: Cisne Negro
   convoysInThisPort: []
+  imgIndex: 0
 --- !u!212 &73215934
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -54441,6 +54443,7 @@ MonoBehaviour:
   exportsIndex: 01000000
   exports: []
   population: 170
+  imgIndex: 1
 --- !u!212 &301298470
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -55220,6 +55223,7 @@ MonoBehaviour:
   population: 1600
   tavernName: The Sea Dragon
   convoysInThisPort: []
+  imgIndex: 1
 --- !u!212 &309031271
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -57052,6 +57056,7 @@ MonoBehaviour:
   exportsIndex: 02000000
   exports: []
   population: 200
+  imgIndex: 1
 --- !u!212 &330475129
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -57252,6 +57257,7 @@ MonoBehaviour:
   population: 32000
   tavernName: "Las Tres Mar\xEDas"
   convoysInThisPort: []
+  imgIndex: 1
 --- !u!212 &336083673
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -63083,6 +63089,7 @@ MonoBehaviour:
   population: 9100
   tavernName: La Morena
   convoysInThisPort: []
+  imgIndex: 0
 --- !u!212 &390365796
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -82806,6 +82813,7 @@ MonoBehaviour:
   population: 7200
   tavernName: La Mulata
   convoysInThisPort: []
+  imgIndex: 0
 --- !u!212 &463916972
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -89941,6 +89949,7 @@ MonoBehaviour:
   population: 2700
   tavernName: De Zwarte Roos
   convoysInThisPort: []
+  imgIndex: 0
 --- !u!212 &541240480
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -102652,6 +102661,7 @@ MonoBehaviour:
   population: 2100
   tavernName: "El Brib\xF3n"
   convoysInThisPort: []
+  imgIndex: 0
 --- !u!212 &585233875
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -105017,6 +105027,7 @@ MonoBehaviour:
   population: 1370
   tavernName: Les Quatre Amies
   convoysInThisPort: []
+  imgIndex: 0
 --- !u!212 &604095592
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -105708,6 +105719,7 @@ MonoBehaviour:
   population: 1800
   tavernName: 'De Mulatvrouw '
   convoysInThisPort: []
+  imgIndex: 2
 --- !u!212 &611596381
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -107365,6 +107377,7 @@ MonoBehaviour:
   exportsIndex: 05000000
   exports: []
   population: 160
+  imgIndex: 0
 --- !u!212 &630375479
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -108943,6 +108956,7 @@ MonoBehaviour:
   exportsIndex: 00000000
   exports: []
   population: 180
+  imgIndex: 0
 --- !u!212 &633173879
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -111025,6 +111039,7 @@ MonoBehaviour:
   population: 1900
   tavernName: La Belle Anne
   convoysInThisPort: []
+  imgIndex: 0
 --- !u!212 &647591929
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -112373,6 +112388,7 @@ MonoBehaviour:
   exportsIndex: 0f000000
   exports: []
   population: 250
+  imgIndex: 0
 --- !u!212 &668073119
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -115437,6 +115453,7 @@ MonoBehaviour:
   exportsIndex: 06000000
   exports: []
   population: 210
+  imgIndex: 1
 --- !u!212 &706165643
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -121806,6 +121823,7 @@ MonoBehaviour:
   population: 7500
   tavernName: Saint Kitts' Devil
   convoysInThisPort: []
+  imgIndex: 0
 --- !u!212 &771474933
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -122239,6 +122257,7 @@ MonoBehaviour:
   population: 7500
   tavernName: Molly's Harbour
   convoysInThisPort: []
+  imgIndex: 0
 --- !u!212 &776128161
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -141601,6 +141620,7 @@ MonoBehaviour:
   exportsIndex: 06000000
   exports: []
   population: 260
+  imgIndex: 1
 --- !u!212 &883372334
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -142003,6 +142023,7 @@ MonoBehaviour:
   population: 9500
   tavernName: "La Sir\xE8ne Ha\xEFtien"
   convoysInThisPort: []
+  imgIndex: 0
 --- !u!212 &887686052
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -143310,6 +143331,7 @@ MonoBehaviour:
   population: 3600
   tavernName: Casa del Tuerto
   convoysInThisPort: []
+  imgIndex: 0
 --- !u!212 &899158009
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -144834,6 +144856,7 @@ MonoBehaviour:
   exportsIndex: 08000000
   exports: []
   population: 210
+  imgIndex: 1
 --- !u!212 &921120154
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -145692,6 +145715,7 @@ MonoBehaviour:
   exportsIndex: 09000000
   exports: []
   population: 180
+  imgIndex: 0
 --- !u!212 &929852793
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -148151,6 +148175,7 @@ MonoBehaviour:
   population: 6400
   tavernName: Faro del Diablo
   convoysInThisPort: []
+  imgIndex: 1
 --- !u!212 &962159628
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -148517,6 +148542,7 @@ MonoBehaviour:
   exportsIndex: 0b000000
   exports: []
   population: 550
+  imgIndex: 1
 --- !u!212 &967244844
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -154645,6 +154671,7 @@ MonoBehaviour:
   population: 3600
   tavernName: La Puta Coja
   convoysInThisPort: []
+  imgIndex: 0
 --- !u!212 &1024008409
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -156962,6 +156989,7 @@ MonoBehaviour:
   population: 4700
   tavernName: Dos Hermanos
   convoysInThisPort: []
+  imgIndex: 1
 --- !u!212 &1047173808
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -157494,6 +157522,7 @@ MonoBehaviour:
   population: 7400
   tavernName: Cala del Muerto
   convoysInThisPort: []
+  imgIndex: 1
 --- !u!212 &1051808324
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -161572,6 +161601,7 @@ MonoBehaviour:
   exportsIndex: 0c000000
   exports: []
   population: 320
+  imgIndex: 0
 --- !u!212 &1091880495
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -171635,6 +171665,7 @@ MonoBehaviour:
   population: 1850
   tavernName: El Burro
   convoysInThisPort: []
+  imgIndex: 1
 --- !u!212 &1111729668
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -171755,6 +171786,7 @@ MonoBehaviour:
   exportsIndex: 0e000000
   exports: []
   population: 600
+  imgIndex: 1
 --- !u!212 &1113757716
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -180896,6 +180928,7 @@ MonoBehaviour:
   exportsIndex: 08000000
   exports: []
   population: 260
+  imgIndex: 0
 --- !u!212 &1153573015
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -192886,6 +192919,7 @@ MonoBehaviour:
   exportsIndex: 00000000
   exports: []
   population: 200
+  imgIndex: 0
 --- !u!212 &1246244606
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -193011,6 +193045,7 @@ MonoBehaviour:
   exportsIndex: 01000000
   exports: []
   population: 180
+  imgIndex: 0
 --- !u!212 &1246920903
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -197978,6 +198013,7 @@ MonoBehaviour:
   population: 2000
   tavernName: The Privateer
   convoysInThisPort: []
+  imgIndex: 0
 --- !u!212 &1311100798
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -200936,6 +200972,7 @@ MonoBehaviour:
   exportsIndex: 0e000000
   exports: []
   population: 180
+  imgIndex: 0
 --- !u!212 &1340950826
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -201173,6 +201210,7 @@ MonoBehaviour:
   population: 2300
   tavernName: "El Polvor\xEDn"
   convoysInThisPort: []
+  imgIndex: 0
 --- !u!212 &1342677994
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -204836,6 +204874,7 @@ MonoBehaviour:
   exportsIndex: 08000000
   exports: []
   population: 350
+  imgIndex: 1
 --- !u!212 &1365608704
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -205397,6 +205436,7 @@ MonoBehaviour:
   population: 1750
   tavernName: The Sea Lady
   convoysInThisPort: []
+  imgIndex: 0
 --- !u!212 &1369086870
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -216002,6 +216042,7 @@ MonoBehaviour:
   exportsIndex: 00000000
   exports: []
   population: 250
+  imgIndex: 0
 --- !u!212 &1467521298
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -222587,6 +222628,7 @@ MonoBehaviour:
   population: 13700
   tavernName: La Gaviota
   convoysInThisPort: []
+  imgIndex: 0
 --- !u!212 &1512842411
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -224031,6 +224073,7 @@ MonoBehaviour:
   exportsIndex: 00000000
   exports: []
   population: 630
+  imgIndex: 0
 --- !u!212 &1531403133
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -227899,6 +227942,7 @@ MonoBehaviour:
   population: 1600
   tavernName: "Le Diable Ha\xEFtien"
   convoysInThisPort: []
+  imgIndex: 1
 --- !u!212 &1581300193
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -232520,6 +232564,7 @@ MonoBehaviour:
   exportsIndex: 02000000
   exports: []
   population: 170
+  imgIndex: 0
 --- !u!212 &1639963230
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -243701,6 +243746,7 @@ MonoBehaviour:
   exportsIndex: 0c000000
   exports: []
   population: 550
+  imgIndex: 0
 --- !u!212 &1758336424
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -250495,6 +250541,7 @@ MonoBehaviour:
   population: 15100
   tavernName: Licorne
   convoysInThisPort: []
+  imgIndex: 1
 --- !u!212 &1825226404
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -253975,6 +254022,7 @@ MonoBehaviour:
   exportsIndex: 0c000000
   exports: []
   population: 190
+  imgIndex: 0
 --- !u!212 &1864911755
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -261836,6 +261884,7 @@ MonoBehaviour:
   population: 6500
   tavernName: Nevis's Siren
   convoysInThisPort: []
+  imgIndex: 2
 --- !u!212 &1911260273
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -264108,6 +264157,7 @@ MonoBehaviour:
   population: 3600
   tavernName: "Delf\xEDn Negro"
   convoysInThisPort: []
+  imgIndex: 0
 --- !u!212 &1933772255
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -264844,6 +264894,7 @@ MonoBehaviour:
   population: 32000
   tavernName: Puerto Capitanes
   convoysInThisPort: []
+  imgIndex: 0
 --- !u!212 &1942643972
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -264966,6 +265017,7 @@ MonoBehaviour:
   population: 1800
   tavernName: La Sirena
   convoysInThisPort: []
+  imgIndex: 1
 --- !u!212 &1943088801
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -283193,6 +283245,7 @@ MonoBehaviour:
   exportsIndex: 05000000
   exports: []
   population: 350
+  imgIndex: 0
 --- !u!212 &2039875151
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -285469,6 +285522,7 @@ MonoBehaviour:
   exportsIndex: 02000000
   exports: []
   population: 650
+  imgIndex: 1
 --- !u!212 &2075523804
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -285906,6 +285960,7 @@ MonoBehaviour:
   population: 13000
   tavernName: Jamaican Donkey
   convoysInThisPort: []
+  imgIndex: 0
 --- !u!212 &2081298068
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -286643,6 +286698,7 @@ MonoBehaviour:
   population: 1930
   tavernName: "La Bella In\xE9s"
   convoysInThisPort: []
+  imgIndex: 0
 --- !u!212 &2088991602
 SpriteRenderer:
   m_ObjectHideFlags: 0

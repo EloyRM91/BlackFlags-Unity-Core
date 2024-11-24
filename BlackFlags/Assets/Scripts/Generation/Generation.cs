@@ -512,10 +512,8 @@ public class WorldGenerator
             var namesList = _names_NPC_AllCountries[country];
             if (isPirate)
             {
-                Debug.Log(country);
                 str = namesList[0][Random.Range(0, namesList[0].Count)] + " " + namesList[1][Random.Range(0, namesList[1].Count)];
                 str = Random.Range(0, 3) == 2 ? str + " " + _overNames[1][Random.Range(0, _overNames[1].Count)] : str;
-                Debug.LogError(str);
             }
             else
             {

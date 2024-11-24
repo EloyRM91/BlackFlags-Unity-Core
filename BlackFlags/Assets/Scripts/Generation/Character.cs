@@ -51,7 +51,7 @@ namespace GameMechanics.Data
     {
         public float FriendshipLevel;
         public bool hasMetPlayer; //has this charecter seen the player before?
-
+        //todo: esto tendrá que poder cambiarse a través de mods:
         protected static readonly Dictionary<AttributeType, List<string>> D_Presentations = new Dictionary<AttributeType, List<string>>()
         {
             {AttributeType.OdiaEspañoles, new List<string>() { "Esos malditos españoles… ¿Tú también los odias, verdad? ", "*Da un trago* ...Sí... al diablo con ellos. Bueno, a beber *Da un trago*." } },

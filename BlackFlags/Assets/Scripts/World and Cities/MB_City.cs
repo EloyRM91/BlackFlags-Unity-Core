@@ -18,7 +18,9 @@ namespace GameMechanics.WorldCities
         public int population;
         public string tavernName;
         private Vector3 spawnPoint;
+        public Vector3 SpawnPoint { get { return spawnPoint; } }
         public List<Convoy> convoysInThisPort = new List<Convoy>();
+        public byte imgIndex;
 
         //CHARACTERS IN CITY
         [SerializeField] private List<Character> charactersInCity = new List<Character>();

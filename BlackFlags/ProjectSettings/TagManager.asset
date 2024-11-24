@@ -6,11 +6,6 @@ TagManager:
   tags:
   - DestroyAfterALoad
   - KeyPoint
-  - KingdomDutch
-  - KingdomFrance
-  - KingdomPortugal
-  - KingdomBritain
-  - KingdomSpain
   - MinimapUIBox
   - BattleCam
   - Pirate

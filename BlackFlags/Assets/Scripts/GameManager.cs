@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
         PersistentGameData._GData_Reputation = 55;
         ShipInventory.Crew = 5;
 
-        //LoadGame("hola");
+        LoadGame("hola");
     }
 
     //Generation
@@ -280,8 +280,16 @@ public class GameManager : MonoBehaviour
             //print(savedGameData.onEquipmentGuns[0] + " " + savedGameData.onEquipmentGuns[1] + " " + savedGameData.onEquipmentGuns[2] + " " + savedGameData.onEquipmentGuns[3]);
             //print(savedGameData.onUseWeaponsSlots[0] + " " + savedGameData.onUseWeaponsSlots[1] + " " + savedGameData.onUseWeaponsSlots[2] + " " + savedGameData.onUseWeaponsSlots[3]);
 
-            print(savedGameData.inventoryItems[0]);
-            print(savedGameData.surplus[0]);
+            //print(savedGameData.inventoryItems[0]);
+            //print(savedGameData.surplus[0]);
+
+            var kingdoms = savedGameData.kingdoms;
+
+            for (int i = 0; i < kingdoms.Length; i++)
+            {
+                print(kingdoms[i].tagKey);
+                print(kingdoms[i].kingdomName);
+            }
         }
         else
         {

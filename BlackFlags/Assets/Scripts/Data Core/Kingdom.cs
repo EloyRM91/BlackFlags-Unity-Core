@@ -30,6 +30,7 @@ namespace GameMechanics.Data
         //[SerializeField] public EntityType_KINGDOM thisKingdom;
         public float[] roleFleetsSpawnStatistics; // ????
         [SerializeField] private byte _CountryBaseStrength; // spawn capacity
+        public byte CountryBaseStrength { get { return _CountryBaseStrength; } }
         [SerializeField] private List<Settlement> countryPossessions;
 
         //Spawning
