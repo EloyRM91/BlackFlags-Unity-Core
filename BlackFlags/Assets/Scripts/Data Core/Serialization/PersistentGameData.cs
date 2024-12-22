@@ -349,12 +349,12 @@ namespace GameMechanics.save
             atTradeAgrrementWith;
         public SerializableCity[] countryCities;
         public SerializableTown[] countryVillages;
-        public SerializableShip[]
+        public SerializableConvoy[]
             countryMerchants,
             countryPatrols,
             europeanConvoys;
 
-        public SerializableKingdom(Kingdom kingdom)
+        public SerializableKingdom(Kingdom kingdom, Transform kTransform)
         {
             tagKey = kingdom.tagKey;
             kingdomName = kingdom.KINGDOMNAME;
@@ -363,6 +363,10 @@ namespace GameMechanics.save
             gentilism_FEMSIN = kingdom.GENTILISM_FEMSIN;
             gentilism_FEMPLU = kingdom.GENTILISM_FEMPLU;
             roleFleetSpawnStats = kingdom.roleFleetsSpawnStatistics;
+
+            var warList = kingdom.atWarWith.ToArray();
+            atWarWith = new ushort[warList.Length];
+            atWarWith = warList.Select((k, index) => warList[index].tagKey).ToArray();
 
             //posesiones del reino:
             var countryPossessions = kingdom.GetPortsList();
@@ -384,9 +388,70 @@ namespace GameMechanics.save
                 countryVillages[i] = new SerializableTown(town);
             }
 
-            var warList = kingdom.atWarWith.ToArray();
-            atWarWith = new ushort[warList.Length];
-            atWarWith = warList.Select((k, index) => warList[index].tagKey).ToArray();
+            //Recorro los poolings en busca de mercantes, patrullas y convoyes europeos
+            //!esto no funciona. se realizará el recorrido grupo a grupo
+            //for (int i = 2; i < 5; i++)
+            //{
+            //    SerializableConvoy[] target = i == 2
+            //        ? countryMerchants : i == 3
+            //        ? countryPatrols
+            //        : europeanConvoys;
+            //    var shipsContainer = kTransform.GetChild(i);
+            //    var shipsList = new List<SerializableConvoy>();
+
+            //    for (int j = 0; j < shipsContainer.childCount; j++)
+            //    {
+            //        var shipObj = shipsContainer.GetChild(j);
+            //        if (shipObj.gameObject.activeSelf)
+            //        {
+            //            var s = shipObj.GetComponent<ConvoyNPC>();
+            //            shipsList.Add(new SerializableConvoy(s));
+            //        }
+            //    }
+            //    target = shipsList.ToArray();
+            //}
+
+            var shipsContainer = kTransform.GetChild(2);
+            var shipsList = new List<SerializableConvoy>();
+            for (int i = 0; i < shipsContainer.childCount; i++)
+            {
+                var shipObj = shipsContainer.GetChild(i);
+                if (shipObj.gameObject.activeSelf)
+                {
+                    var s = shipObj.GetComponent<ConvoyNPC>();
+                    shipsList.Add(new SerializableConvoy(s));
+                }
+            }
+            countryMerchants = shipsList.ToArray();
+
+            shipsContainer = kTransform.GetChild(3);
+            shipsList = new List<SerializableConvoy>();
+            for (int i = 0; i < shipsContainer.childCount; i++)
+            {
+                var shipObj = shipsContainer.GetChild(i);
+                if (shipObj.gameObject.activeSelf)
+                {
+                    var s = shipObj.GetComponent<ConvoyNPC>();
+                    shipsList.Add(new SerializableConvoy(s));
+                }
+            }
+            countryPatrols = shipsList.ToArray();
+
+            shipsContainer = kTransform.GetChild(4);
+            shipsList = new List<SerializableConvoy>();
+            for (int i = 0; i < shipsContainer.childCount; i++)
+            {
+                var shipObj = shipsContainer.GetChild(i);
+                if (shipObj.gameObject.activeSelf)
+                {
+                    var s = shipObj.GetComponent<ConvoyNPC>();
+                    shipsList.Add(new SerializableConvoy(s));
+                }
+            }
+            europeanConvoys = shipsList.ToArray();
+
+
+
         }
     }
 
@@ -619,6 +684,23 @@ namespace GameMechanics.save
             targetId; //referencia al convoy/barco al que está persiguiendo
         public bool inOnTarget;
         
+        public SerializableConvoy(ConvoyNPC convoy)
+        {
+            var ships = convoy.thisConvoyShips;
+            convoyShips = new SerializableShip[ships.Length];
+            for (int i = 0; i < ships.Length; i++)
+            {
+                convoyShips[i] = new SerializableShip(ships[i]);
+            }
+
+            var tr = convoy.transform;
+            position = ConvertV3(tr.position);
+            rotation = ConvertQuaternion(tr.rotation);
+
+            //todo: id y target id
+
+            inOnTarget = convoy.isOnTarget;
+        }
     }
 
     #endregion
@@ -732,8 +814,8 @@ namespace GameMechanics.save
             //Testing:
             //File.WriteAllBytes(Application.dataPath + "/../SavedScreen.png", playerFlag);
 
-            //playerFlag = PersistentGameData._GData_PlayerFlag.texture.GetRawTextureData();
-            //playerAvatar = PersistentGameData._GData_PlayerAvatar.texture.GetRawTextureData();
+            playerFlag = PersistentGameData._GData_PlayerFlag.texture.GetRawTextureData();
+            playerAvatar = PersistentGameData._GData_PlayerAvatar.texture.GetRawTextureData();
 
             playerShipData = new SerializableShip(PlayerMovement.playership);
             playerGold = PersistentGameData._GData_Gold;
@@ -805,7 +887,7 @@ namespace GameMechanics.save
             for (int i = 0; i < kingdomsContainer.childCount; i++)
             {
                 var k = kingdomsContainer.GetChild(i).GetComponent<Kingdom>();
-                kingdoms[i] = new SerializableKingdom(k);
+                kingdoms[i] = new SerializableKingdom(k, k.transform);
             }
 
         }

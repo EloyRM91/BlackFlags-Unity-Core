@@ -287,8 +287,22 @@ public class GameManager : MonoBehaviour
 
             for (int i = 0; i < kingdoms.Length; i++)
             {
+                print("-------------------------------");
                 print(kingdoms[i].tagKey);
                 print(kingdoms[i].kingdomName);
+                print("convoyes:");
+                var merchants = kingdoms[i].countryMerchants;
+                print(merchants.Length);
+                for (int j = 0; j < merchants.Length; j++)
+                {
+                    print("******");
+                    var convoyShips = merchants[j].convoyShips;
+                    for (int k = 0; k < convoyShips.Length; k++)
+                    {
+                        print("    - " + convoyShips[k].shipName);
+                    }
+                }
+
             }
         }
         else
