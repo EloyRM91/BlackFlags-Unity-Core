@@ -1,0 +1,13 @@
+En conclusión, habrá que hacer lo siguiente:
+- volcar los datos iniciales de una partida nueva en alguna estructura de datos.
+	- Como primera versión, crear un diccionario de reinos serializables.
+	- crear los prefabs necesarios
+	- crear la lógica para que, al instanciar un nuevo asentamiento, se solicite un banner
+	- reemplazar los banners actuales de la escena por un pooling de banners
+    - mientras se está cargando la escena del juego, los datos de reinods y asentamientos del mundo deben cargarse e instanciarse previamente
+    - cuando finalmente se ha cargado la escena, se hace un delivery
+    - cuando tenemos los reinos y ciudades en la escena, se solicitan los banners.
+- borrar los reinos y ciudades de escena
+- si estamos creando una partida nueva, crear los reinos y ciudades de los datos por defecto
+- si estamos creando una partida nueva desde un mod, cargamos los reinos y ciudades desde un json con los datos iniciales del mod
+- si en lugar de lo anterior estamos cargando o continuando una partida, debemos crear los reinos y ciudades partiendo del archivo binary correspondiente

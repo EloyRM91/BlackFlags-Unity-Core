@@ -73060,7 +73060,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.106000006, y: 0.026}
   m_AnchorMax: {x: 0.89300007, y: 0.18422222}
-  m_AnchoredPosition: {x: 1, y: -0.47061157}
+  m_AnchoredPosition: {x: 1, y: -0.4706421}
   m_SizeDelta: {x: -0.89559937, y: -4.9723}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &417046606
@@ -143391,7 +143391,7 @@ MonoBehaviour:
   revealed: 0
   exportsIndex: 0f000000060000000a000000
   exports: []
-  population: 3600
+  population: 3640
   tavernName: Casa del Tuerto
   convoysInThisPort: []
   imgIndex: 0
@@ -157050,7 +157050,7 @@ MonoBehaviour:
   exportsIndex: 020000000000000006000000
   exports: []
   population: 4700
-  tavernName: Dos Hermanos
+  tavernName: Los Dos Hermanos
   convoysInThisPort: []
   imgIndex: 1
 --- !u!212 &1047173808

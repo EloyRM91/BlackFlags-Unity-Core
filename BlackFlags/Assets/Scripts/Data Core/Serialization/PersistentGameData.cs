@@ -95,6 +95,489 @@ namespace GameMechanics.Data
         //EVENTS
         public delegate void UpdateIntValue(int val);
         public static event UpdateIntValue updateGold;
+
+        //WORLD - NEW GAME
+        //!Datos iniciales al crear una partida nueva
+        private Dictionary<byte, SerializableCity> _D_startGameCities = new Dictionary<byte, SerializableCity>()
+        {
+            {0, new SerializableCity(
+                "San Juan",
+                "San Juan de Puerto Rico",
+                new float [2] { -75.16f, 14.8f},
+                new float [2] { -75.16f, 14.324f },
+                new float [2] { -75.16f, 15.92f },
+                new int[] {0, 10, 4, 12},
+                13700,
+                "La Gaviota",
+                0
+                )
+            },
+            {1, new SerializableCity(
+                "Portobelo",
+                "Bahía de Portobelo",
+                new float [2] { 47.302f, 116.713f},
+                new float [2] { 47.902f, 116.241f },
+                new float [2] { 47.302f, 117.833f },
+                new int[] {15, 6, 11},
+                1930,
+                "La Bella Inés",
+                0
+                )
+            },
+            {2, new SerializableCity(
+                "Cartagena",
+                "Ciudad de Cartagena",
+                new float [2] { 7.63f, 103.47f},
+                new float [2] { 8.498f, 103.27f },
+                new float [2] { 7.63f, 104.59f },
+                new int[] {6, 15, 8},
+                9100,
+                "La Morena",
+                0
+                )
+            },
+            {3, new SerializableCity(
+                "Santiago de Tolú",
+                "Coronada de Tolú",
+                new float [2] { 8.104f, 113.193f},
+                new float [2] { 9.216f, 113.513f },
+                new float [2] { 8.104f, 111.833f },
+                new int[] {8, 2, 0},
+                1800,
+                "La Sirena",
+                1
+                )
+            },
+            {4, new SerializableCity(
+                "Maracaibo",
+                "Ciudad de Maracaibo",
+                new float [2] { -27.85f, 100.629f},
+                new float [2] { -28.902f, 100.773f },
+                new float [2] { -27.85f, 99.269f },
+                new int[] {6, 7, 0},
+                6400,
+                "El Faro del Diablo",
+                1
+                )
+            },
+            {5, new SerializableCity(
+                "Coro",
+                "Santa Ana de Coro",
+                new float [2] { -48.15f, 88.422f},
+                new float [2] { -48.15f, 87.77f },
+                new float [2] { -48.15f, 89.542f },
+                new int[] {8,1},
+                3600,
+                "El Delfín Negro",
+                0
+                )
+            },
+            {6, new SerializableCity(
+                "Gibraltar",
+                "San Antonio de Gibraltar",
+                new float [2] { -36.35f, 112.708f},
+                new float [2] { -36.118f, 112.036f },
+                new float [2] { -36.35f, 113.828f },
+                new int[] {15, 6, 10},
+                3640,
+                "La Casa del Tuerto",
+                0
+                )
+            },
+            {7, new SerializableCity(
+                "Caracas",
+                "Ciudad de Caracas",
+                new float [2] { -73.91f, 93.31f},
+                new float [2] { -73.91f, 92.666f },
+                new float [2] { -73.91f, 94.43f },
+                new int[] {6, 9, 7},
+                32000,
+                "Las Tres Marías",
+                1
+                )
+            },
+            {8, new SerializableCity(
+                "Puerto Cabello",
+                "Cala de Puerto Cabello",
+                new float [2] { -64.37f, 96.25f},
+                new float [2] { -64.266f, 95.586f },
+                new float [2] { -64.37f, 97.37f },
+                new int[] {11, 6, 10},
+                7410,
+                "Cala del Muerto",
+                1
+                )
+            },
+            {9, new SerializableCity(
+                "Cumaná",
+                "Puerto de las Perlas de Cumaná",
+                new float [2] { -99.76f, 90.31f},
+                new float [2] { -99.76f, 89.55f },
+                new float [2] { -99.76f, 91.43f },
+                new int[] {14, 9, 11},
+                2100,
+                "El Bribón",
+                0
+                )
+            },
+            {10, new SerializableCity(
+                "La Asunción",
+                "La Margarita",
+                new float [2] { -101.7f, 84.14f},
+                new float [2] { -102.284f, 84.792f },
+                new float [2] { -101.7f, 82.78f },
+                new int[] {14, 12, 6},
+                7200,
+                "La Mulata",
+                0
+                )
+            },
+            {11, new SerializableCity(
+                "Nueva Barcelona",
+                "Barcelona del Cerro",
+                new float [2] { -96.08f, 92.97f},
+                new float [2] { -96.08f, 92.43f },
+                new float [2] { -96.08f, 94.09f },
+                new int[] {2, 0, 6},
+                4700,
+                "Los Dos Hermanos",
+                1
+                )
+            },
+            {12, new SerializableCity(
+                "Puerto España",
+                "Puerto de Isla Trinidad",
+                new float [2] { -126.532f, 84.35f},
+                new float [2] { -125.544f, 84.47f },
+                new float [2] { -126.532f, 82.99f },
+                new int[] {8, 4, 6},
+                3000,
+                "La Capitana",
+                0
+                )
+            },
+            {13, new SerializableCity(
+                "La Habana",
+                "San Cristóbal de La Habana",
+                new float [2] { 77.97f, -13.96f},
+                new float [2] { 78.034f, -14.636f },
+                new float [2] { 77.97f, -12.84f },
+                new int[] {8, 10, 4, 5},
+                32000,
+                "Puerto Capitanes",
+                0
+                )
+            },
+            {14, new SerializableCity(
+                "Santiago de Cuba",
+                "Santiago de Cuba",
+                new float [2] { 16.55f, 12.59f},
+                new float [2] { 16.55f, 13.31f },
+                new float [2] { 16.557f, 11.23f },
+                new int[] {10, 2, 8},
+                2300,
+                "El Polvorín",
+                0
+                )
+            },
+            {15, new SerializableCity(
+                "Trinidad",
+                "Santísima Trinidad",
+                new float [2] { 53.3f, -1.73f},
+                new float [2] { 53.388f, -0.722f },
+                new float [2] { 53.3f, -3.09f },
+                new int[] {8, 6},
+                1850,
+                "El Burro",
+                1
+                )
+            },
+            {16, new SerializableCity(
+                "San Carlos y Severino",
+                "Severino de Matanzas",
+                new float [2] { 67.935f, -14.24f},
+                new float [2] { 67.079f, -14.588f },
+                new float [2] { 67.935f, -13.12f },
+                new int[] {8},
+                3600,
+                "La Puta Coja",
+                0
+                )
+            },
+            {17, new SerializableCity(
+                "Fort Royale",
+                "Isla de La Granade",
+                new float [2] { -122.33f, 69.69f},
+                new float [2] { -122.758f, 70.17f },
+                new float [2] { -122.33f, 68.33f },
+                new int[] {8, 11},
+                1900,
+                "La Belle Anne",
+                0
+                )
+            },
+            {18, new SerializableCity(
+                "Martinica",
+                "Martinique",
+                new float [2] { -125.53f, 42.95f},
+                new float [2] { -125.618f, 43.626f },
+                new float [2] { -125.53f, 41.59f },
+                new int[] {8},
+                1370,
+                "Les Quatre Amies",
+                0,
+                true
+                )
+            },
+            {19, new SerializableCity(
+                "Guadalupe",
+                "Isla Guadalupe",
+                new float [2] { -118.64f, 28.5f},
+                new float [2] { -119.6f, 28.88f },
+                new float [2] { -118.64f, 27.14f },
+                new int[] {10, 8},
+                15100,
+                "La Licorne",
+                1,
+                true
+                )
+            },
+            {20, new SerializableCity(
+                "Cap-Français",
+                "Cap-Haïtien",
+                new float [2] { -17.4f, 10.91f},
+                new float [2] { -17.428f, 10.486f },
+                new float [2] { -17.4f, 9.55f },
+                new int[] {8, 4},
+                9500,
+                "La Sirène Haïtien",
+                0
+                )
+            },
+            {21, new SerializableCity(
+                "Jacmel",
+                "Estuario de Jacmel",
+                new float [2] { -15.78f, 25.083f},
+                new float [2] { -15.588f, 26.031f },
+                new float [2] { -15.78f, 23.723f },
+                new int[] {8, 7},
+                1600,
+                "Le Diable Haïtien",
+                1
+                )
+            },
+            {22, new SerializableCity(
+                "Aruba",
+                "Isla de Aruba",
+                new float [2] { -43.178f, 73.01f},
+                new float [2] { -42.822f, 79.636f },
+                new float [2] { -43.178f, 77.74f },
+                new int[] {11, 2, 12},
+                1800,
+                "De Mulatvrouw",
+                2,
+                true
+                )
+            },
+            {23, new SerializableCity(
+                "Curazao",
+                "Isla de Curazao",
+                new float [2] { -53.66f, 80.92f},
+                new float [2] { -52.996f, 81.464f },
+                new float [2] { -53.66f, 79.56f },
+                new int[] {12, 4, 6},
+                2700,
+                "De Zwarte Roos",
+                0
+                )
+            },
+            {24, new SerializableCity(
+                "Kingston",
+                "Ciudad de Kingston",
+                new float [2] { 23.43f, 31.88f},
+                new float [2] { 23.938f, 32.564f },
+                new float [2] { 23.43f, 30.52f },
+                new int[] {8, 4, 0},
+                13000,
+                "Jamaican Donkey",
+                0,
+                true
+                )
+            },
+            {25, new SerializableCity(
+                "Belize",
+                "Belize Town",
+                new float [2] { 130.96f, 37.11f},
+                new float [2] { 129.86f, 37.162f },
+                new float [2] { 130.96f, 35.75f },
+                new int[] {4, 11},
+                7500,
+                "Molly's Harbour",
+                0
+                )
+            },
+            {26, new SerializableCity(
+                "Basseterre",
+                "Isla de Basseterre",
+                new float [2] { -106.45f, 19.87f},
+                new float [2] { -105.838f, 20.45f },
+                new float [2] { -106.45f, 18.51f },
+                new int[] {4, 11, 13},
+                7400,
+                "Saint Kitts' Devil",
+                0,
+                true
+                )
+            },
+            {27, new SerializableCity(
+                "Charlestown",
+                "Isla de Nieves",
+                new float [2] { -108.531f, 21.607f},
+                new float [2] { -107.851f, 21.623f },
+                new float [2] { -108.531f, 22.727f },
+                new int[] {10, 13, 11, 4},
+                6500,
+                "Nevis's Siren",
+                2,
+                true
+                )
+            },
+            {28, new SerializableCity(
+                "Barbados",
+                "Isla de Barbados",
+                new float [2] { -139.81f, 54.74f},
+                new float [2] { -139.594f, 55.776f },
+                new float [2] { -139.81f, 53.62f },
+                new int[] {8},
+                1600,
+                "The Sea Dragon",
+                1
+                )
+            },
+            {28, new SerializableCity(
+                "Montserrat",
+                "Isla de Montserrat",
+                new float [2] { -112.401f, 24.619f},
+                new float [2] { -111.773f, 24.451f },
+                new float [2] { -112.401f, 25.739f },
+                new int[] {8, 9},
+                1750,
+                "The Sea Lady",
+                0
+                )
+            },
+            {29, new SerializableCity(
+                "Antigua",
+                "Isla Antigua",
+                new float [2] { -116.02f, 20.82f},
+                new float [2] { -116.26f, 20.18f },
+                new float [2] { -116.02f, 21.94f },
+                new int[] {8},
+                2000,
+                "The Privateer",
+                0
+                )
+            },
+
+        };
+        private Dictionary<byte, SerializableTown> _D_startVillages = new Dictionary<byte, SerializableTown>()
+        {
+
+        };
+        private Dictionary<byte, SerializableKingdom> _D_startGameKingdomsData = new Dictionary<byte, SerializableKingdom>()
+        {
+            {0, new SerializableKingdom(
+                0, 
+                "España", 
+                "español", 
+                "españoles", 
+                "española", 
+                "españolas", 
+                new float[4] { 51, 37, 6, 6}, 
+                1,
+                new ushort[0],
+                new ushort[0],
+                new SerializableCity[0],
+                new SerializableTown[0],
+                new SerializableConvoy[0],
+                new SerializableConvoy[0],
+                new SerializableConvoy[0]
+                ) 
+            },
+            {1, new SerializableKingdom(
+                1,
+                "Portugal",
+                "portugués",
+                "portugueses",
+                "portuguesa",
+                "portuguesas",
+                new float[4] { 53, 27, 12, 8},
+                2,
+                new ushort[0],
+                new ushort[0],
+                new SerializableCity[0],
+                new SerializableTown[0],
+                new SerializableConvoy[0],
+                new SerializableConvoy[0],
+                new SerializableConvoy[0]
+                )
+            },
+            {2, new SerializableKingdom(
+                2,
+                "Francia",
+                "francés",
+                "franceses",
+                "francesa",
+                "francesas",
+                new float[4] { 54, 20, 11, 15},
+                1,
+                new ushort[0],
+                new ushort[0],
+                new SerializableCity[0],
+                new SerializableTown[0],
+                new SerializableConvoy[0],
+                new SerializableConvoy[0],
+                new SerializableConvoy[0]
+                )
+            },
+            {3, new SerializableKingdom(
+                3,
+                "Holanda",
+                "holandés",
+                "holandeses",
+                "holandesa",
+                "holandesas",
+                new float[4] { 35, 37, 10, 13},
+                2,
+                new ushort[0],
+                new ushort[0],
+                new SerializableCity[0],
+                new SerializableTown[0],
+                new SerializableConvoy[0],
+                new SerializableConvoy[0],
+                new SerializableConvoy[0]
+                )
+            },
+            {4, new SerializableKingdom(
+                4,
+                "Gran Bretaña",
+                "inglés",
+                "ingleses",
+                "inglesa",
+                "inglesas",
+                new float[4] { 50, 22, 12, 16},
+                2,
+                new ushort[0],
+                new ushort[0],
+                new SerializableCity[0],
+                new SerializableTown[0],
+                new SerializableConvoy[0],
+                new SerializableConvoy[0],
+                new SerializableConvoy[0]
+                )
+            },
+        };
+
         #endregion
 
         protected override void Awake()
@@ -278,19 +761,24 @@ namespace GameMechanics.save
     [Serializable]
     public abstract class SerializableKeyPoint : SerializationConverter
     {
-        public string cityName;
+        public string 
+            cityName, 
+            alternativeName;
         public bool revealed;
         public float[]
             position,
             entryPoint,
+            pivotPoint,
             eventsPoint;
         public byte spriteIndex;
+        public bool flippedX;
     }
 
     [Serializable]
     public abstract class SerializableSettlement : SerializableKeyPoint
     {
-        public SerializableResource[] exports;
+        //public SerializableResource[] exports;
+        public int[] exports;
     }
 
     [Serializable]
@@ -298,15 +786,47 @@ namespace GameMechanics.save
     {
         public int population;
         public string tavernName;
-        public float[] spawnPoint;
         public byte imgIndex;
 
         public SerializableCity(MB_City city)
         {
+            cityName = city.cityName;
+            revealed = city.revealed;
+
+            position = ConvertV3(city.transform.position);
+            entryPoint = ConvertV3(city.transform.GetChild(0).position);
+            pivotPoint = ConvertV3(city.transform.GetChild(1).position);
+            //todo: eventsPoint
+
+            exports = city.exportsIndex;
             population = city.population;
             tavernName = city.tavernName;
-            spawnPoint = ConvertV3(city.SpawnPoint);
+            //spawnPoint = ConvertV3(city.SpawnPoint); //(se calcula automáticmente)
             imgIndex = city.imgIndex;
+        }
+
+        public SerializableCity(
+            string cityName,
+            string alternativeName,
+            float[] position, 
+            float[] entryPoint, 
+            float[] pivotPoint, 
+            int[] exports,
+            int population,
+            string tavernName,
+            byte imgIndex = 0,
+            bool flippedX = false)
+        {
+            this.cityName = cityName;
+            revealed = false;
+
+            this.position = new float[3] { position[0], 0.01f, position[1] };
+            this.entryPoint = new float[3] { entryPoint[0], 0.01f, entryPoint[1] };
+            this.pivotPoint = new float[3] { pivotPoint[0], 0.01f, pivotPoint[1] }; ;
+
+            this.population = population;
+            this.tavernName = tavernName;
+            this.imgIndex = imgIndex;
         }
     }
 
@@ -449,9 +969,40 @@ namespace GameMechanics.save
                 }
             }
             europeanConvoys = shipsList.ToArray();
+        }
 
-
-
+        public SerializableKingdom(
+            ushort tagKey, 
+            string kingdomName,
+            string gentilism_MALESIN, 
+            string gentilism_MALEPLU, 
+            string gentilism_FEMSIN, 
+            string gentilism_FEMPLU, 
+            float[] roleFleetSpawnStats,
+            byte countryBaseStrength, 
+            ushort[] atWarWith, 
+            ushort[] atTradeAgrrementWith,
+            SerializableCity[] countryCities, 
+            SerializableTown[] countryVillages, 
+            SerializableConvoy[] countryMerchants,
+            SerializableConvoy[] countryPatrols,
+            SerializableConvoy[] europeanConvoys)
+        {
+            this.tagKey = tagKey;
+            this.kingdomName = kingdomName;
+            this.gentilism_MALESIN = gentilism_MALESIN;
+            this.gentilism_MALEPLU = gentilism_MALEPLU;
+            this.gentilism_FEMSIN = gentilism_FEMSIN;
+            this.gentilism_FEMPLU = gentilism_FEMPLU;
+            this.roleFleetSpawnStats = roleFleetSpawnStats;
+            this.countryBaseStrength = countryBaseStrength;
+            this.atWarWith = atWarWith;
+            this.atTradeAgrrementWith = atTradeAgrrementWith;
+            this.countryCities = countryCities;
+            this.countryVillages = countryVillages;
+            this.countryMerchants = countryMerchants;
+            this.countryPatrols = countryPatrols;
+            this.europeanConvoys = europeanConvoys;
         }
     }
 
@@ -469,25 +1020,38 @@ namespace GameMechanics.save
     [Serializable]
     public class SerializableInventoryStacking : SerializationConverter
     {
-        public SerializableResource resource;
+        //public SerializableResource resource;
+        public byte key;
         public int amount;
+
+        //public SerializableInventoryStacking(Resource r, int n)
+        //{
+        //    resource = new SerializableResource(r);
+        //    amount = n;
+        //}
+
+        //public SerializableInventoryStacking(SerializableResource r, int n)
+        //{
+        //    resource = r;
+        //    amount = n;
+        //}
+
+        //public SerializableInventoryStacking(InventoryItemStacking inv)
+        //{
+        //    resource = new SerializableResource(inv.resource);
+        //    amount = inv.amount;
+        //}
 
         public SerializableInventoryStacking(Resource r, int n)
         {
-            resource = new SerializableResource(r);
+            key = r.Key;
             amount = n;
         }
 
         public SerializableInventoryStacking(SerializableResource r, int n)
         {
-            resource = r;
+            key = r.key;
             amount = n;
-        }
-
-        public SerializableInventoryStacking(InventoryItemStacking inv)
-        {
-            resource = new SerializableResource(inv.resource);
-            amount = inv.amount;
         }
     }
 
@@ -522,7 +1086,7 @@ namespace GameMechanics.save
 
             for (int i = 0; i < inventory.Count; i++)
             {
-                smugglerInventory[i] = new SerializableInventoryStacking(inventory[i]);
+                smugglerInventory[i] = new SerializableInventoryStacking(inventory[i].resource, inventory[i].amount);
             }
 
             smugglerGenerationRatio = character.SmugglerGenerationRatio;
