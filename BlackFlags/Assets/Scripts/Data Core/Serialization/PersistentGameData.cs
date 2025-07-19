@@ -454,7 +454,7 @@ namespace GameMechanics.Data
                 1
                 )
             },
-            {28, new SerializableCity(
+            {29, new SerializableCity(
                 "Montserrat",
                 "Isla de Montserrat",
                 new float [2] { -112.401f, 24.619f},
@@ -466,7 +466,7 @@ namespace GameMechanics.Data
                 0
                 )
             },
-            {29, new SerializableCity(
+            {30, new SerializableCity(
                 "Antigua",
                 "Isla Antigua",
                 new float [2] { -116.02f, 20.82f},
@@ -480,9 +480,286 @@ namespace GameMechanics.Data
             },
 
         };
-        private Dictionary<byte, SerializableTown> _D_startVillages = new Dictionary<byte, SerializableTown>()
+        private Dictionary<byte, SerializableTown> _D_startGameVillages = new Dictionary<byte, SerializableTown>()
         {
-
+            {0, new SerializableTown(
+                "Pilón",
+                "Villa de Pilón",
+                new float [2] { 31.09f, 12.031f},
+                new float [2] { 31.955f, 11.711f },
+                new float [2] { 31.09f, 13.431f },
+                new int[] {8},
+                210,
+                1,
+                true
+                )
+            },
+            {1, new SerializableTown(
+                "Cubagua",
+                "Isla de Cubagua",
+                new float [2] { -99.33f, 86.41f},
+                new float [2] { -99.905f, 86.66f },
+                new float [2] { -99.33f, 85.21001f },
+                new int[] {14},
+                180,
+                0,
+                true
+                )
+            },
+            {2, new SerializableTown(
+                "Riohacha",
+                "Villa de Riohacha",
+                new float [2] { -17.48f, 90.34f},
+                new float [2] { -16.745f, 90.1f },
+                new float [2] { -17.48f, 91.74f },
+                new int[] {14},
+                600,
+                0,
+                true
+                )
+            },
+            {3, new SerializableTown(
+                "Ciénaga y Santa Marta",
+                "Bahía de Santa Marta",
+                new float [2] { -3.832f, 95.011f },
+                new float [2] { -3.407f, 94.876f },
+                new float [2] { -3.832f, 96.411f },
+                new int[] {0},
+                830,
+                0,
+                true
+                )
+            },
+            {4, new SerializableTown(
+                "Barranquilla",
+                "Aldea de Barranquilla",
+                new float [2] { 2.175f, 97.991f},
+                new float [2] { 2.63f, 97.626f },
+                new float [2] { 2.175f, 99.391f },
+                new int[] {12},
+                550,
+                0
+                )
+            },
+            {5, new SerializableTown(
+                "Coveñas",
+                "Villa de Coveñas",
+                new float [2] { 9.51f, 115.66f},
+                new float [2] { 2.63f, 97.626f },
+                new float [2] { 2.175f, 99.391f },
+                new int[] {2},
+                650,
+                1
+                )
+            },
+            {6, new SerializableTown(
+                "Moñitos",
+                "Villa de Moñitos",
+                new float [2] { 14.254f, 117.695f},
+                new float [2] { 14.839f, 119.095f },
+                new float [2] { 14.254f, 99.391f },
+                new int[] {5},
+                160,
+                1,
+                true
+                )
+            },
+            {7, new SerializableTown(
+                "Moín",
+                "Bahía de Moín",
+                new float [2] { 81.583f, 114.232f},
+                new float [2] { 81.59f, 113.757f },
+                new float [2] { 81.583f, 115.632f },
+                new int[] {0},
+                180,
+                0
+                )
+            },
+            {8, new SerializableTown(
+                "Puerto Viejo de Talamanca",
+                "Puerto Viejo",
+                new float [2] { 77.293f, 118.196f},
+                new float [2] { 76.503f, 117.821f },
+                new float [2] { 77.293f, 119.596f },
+                new int[] {6},
+                260,
+                1,
+                true
+                )
+            },
+            {9, new SerializableTown(
+                "Villa Trujillo",
+                "Trujillo",
+                new float [2] { 110.29f, 57.919f},
+                new float [2] { 110.29f, 57.199f },
+                new float [2] { 110.29f, 59.319f },
+                new int[] {15},
+                250,
+                0
+                )
+            },
+            {10, new SerializableTown(
+                "Puerto Caballos",
+                "Puerto Cortés",
+                new float [2] { 127.62f, 58.82f},
+                new float [2] { 128.17f, 58.715f },
+                new float [2] { 127.62f, 60.22f },
+                new int[] {1},
+                180,
+                0,
+                true
+                )
+            },
+            {11, new SerializableTown(
+                "Río Dulce",
+                "Boca de Río Dulce",
+                new float [2] { 136.305f, 58.63f},
+                new float [2] { 135.695f, 58.45f },
+                new float [2] { 136.305f, 60.03f },
+                new int[] {2},
+                120,
+                0
+                )
+            },
+            {12, new SerializableTown(
+                "San Carlos de Macuro",
+                "Macuro",
+                new float [2] { -119.14f, 84.16f},
+                new float [2] { -119.455f, 84.92f },
+                new float [2] { -119.14f, 82.86f },
+                new int[] {6},
+                210,
+                1,
+                true
+                )
+            },
+            {13, new SerializableTown(
+                "San Martín",
+                "Isla de San Martín",
+                new float [2] { -102.9f, 13.51f},
+                new float [2] { -102.7f, 14.11f },
+                new float [2] { -102.9f, 12.21f },
+                new int[] {12},
+                190,
+                0,
+                true
+                )
+            },
+            {14, new SerializableTown(
+                "Roseau ",
+                "Isla de Ro-Zó",
+                new float [2] { -122.22f, 36.98f},
+                new float [2] { -121.52f, 37.205f },
+                new float [2] { -122.22f, 35.58f },
+                new int[] {5},
+                350,
+                0
+                )
+            },
+            {15, new SerializableTown(
+                "Tobago",
+                "Isla de Tobago",
+                new float [2] { -132.84f, 75.51f},
+                new float [2] { -133.655f, 75.91f },
+                new float [2] { -132.84f, 74.11f },
+                new int[] {8},
+                350,
+                1
+                )
+            },
+            {16, new SerializableTown(
+                "Bonaire",
+                "Isla de Bonaire",
+                new float [2] { -59.73f, 79.6f},
+                new float [2] { -59.26f, 79.82f },
+                new float [2] { -59.73f, 78.2f },
+                new int[] {12},
+                320,
+                0
+                )
+            },
+            {17, new SerializableTown(
+                "Barbuda",
+                "Isla Barbuda",
+                new float [2] { -114.644f, 15.535f},
+                new float [2] { -114.619f, 16.225f },
+                new float [2] { -114.644f, 16.935f },
+                new int[] {0},
+                200,
+                0,
+                true
+                )
+            },
+            {18, new SerializableTown(
+                "Providencia",
+                "Vieja Providencia",
+                new float [2] { 65.067f, 80.338f},
+                new float [2] { 65.552f, 80.038f },
+                new float [2] { 65.067f, 81.738f },
+                new int[] {9},
+                180,
+                0,
+                true
+                )
+            },
+            {19, new SerializableTown(
+                "Bluefields",
+                "Bluefields",
+                new float [2] { 87.85f, 94.76f},
+                new float [2] { 87.625f, 95.535f },
+                new float [2] { 87.85f, 93.06f },
+                new int[] {11},
+                550,
+                1,
+                true
+                )
+            },
+            {20, new SerializableTown(
+                "Corn Island",
+                "Corn Island",
+                new float [2] { 81.141f, 93.444f},
+                new float [2] { 80.506f, 93.684f },
+                new float [2] { 81.141f, 91.744f },
+                new int[] {0},
+                250,
+                0,
+                true
+                )
+            },
+            {21, new SerializableTown(
+                "George Town",
+                "Gran Caimán",
+                new float [2] { 66.773f, 22.451f},
+                new float [2] { 66.703f, 21.981f },
+                new float [2] { 66.773f, 21.151f },
+                new int[] {2},
+                200,
+                1
+                )
+            },
+            {22, new SerializableTown(
+                "Saint Vicent",
+                "Isla de San Vicente",
+                new float [2] { -126.28f, 56.86f},
+                new float [2] { -126.905f, 57.43f },
+                new float [2] { -126.28f, 55.16f },
+                new int[] {1},
+                170,
+                1
+                )
+            },
+            {23, new SerializableTown(
+                "Santa Lucía",
+                "Isla de Santa Lucía",
+                new float [2] { -127.906f, 48.981f},
+                new float [2] { -127.281f, 48.651f },
+                new float [2] { -127.906f, 50.381f },
+                new int[] {8},
+                260,
+                1,
+                true
+                )
+            },
         };
         private Dictionary<byte, SerializableKingdom> _D_startGameKingdomsData = new Dictionary<byte, SerializableKingdom>()
         {
@@ -803,6 +1080,7 @@ namespace GameMechanics.save
             tavernName = city.tavernName;
             //spawnPoint = ConvertV3(city.SpawnPoint); //(se calcula automáticmente)
             imgIndex = city.imgIndex;
+            flippedX = city.transform.localScale.x < 0;
         }
 
         public SerializableCity(
@@ -818,15 +1096,17 @@ namespace GameMechanics.save
             bool flippedX = false)
         {
             this.cityName = cityName;
+            this.alternativeName = alternativeName;
             revealed = false;
 
             this.position = new float[3] { position[0], 0.01f, position[1] };
             this.entryPoint = new float[3] { entryPoint[0], 0.01f, entryPoint[1] };
-            this.pivotPoint = new float[3] { pivotPoint[0], 0.01f, pivotPoint[1] }; ;
-
+            this.pivotPoint = new float[3] { pivotPoint[0], 0.01f, pivotPoint[1] };
+            this.exports = exports;
             this.population = population;
             this.tavernName = tavernName;
             this.imgIndex = imgIndex;
+            this.flippedX = flippedX;
         }
     }
 
@@ -840,6 +1120,28 @@ namespace GameMechanics.save
         {
             population = town.population;
             imgIndex = town.imgIndex;
+        }
+
+        public SerializableTown(
+            string townName,
+            string alternativeName,
+            float[] position,
+            float[] entryPoint,
+            float[] pivotPoint,
+            int[] exports,
+            int population,byte imgIndex = 0,
+            bool flippedX = false)
+        {
+            this.cityName = townName;
+            this.alternativeName = alternativeName;
+            revealed = false;
+
+            this.position = new float[3] { position[0], 0.01f, position[1] };
+            this.entryPoint = new float[3] { entryPoint[0], 0.01f, entryPoint[1] };
+            this.pivotPoint = new float[3] { pivotPoint[0], 0.01f, pivotPoint[1] };
+
+            this.population = population;
+            this.imgIndex = imgIndex;
         }
     }
 

@@ -121883,7 +121883,7 @@ MonoBehaviour:
   revealed: 0
   exportsIndex: 040000000b0000000d000000
   exports: []
-  population: 7500
+  population: 7400
   tavernName: Saint Kitts' Devil
   convoysInThisPort: []
   imgIndex: 0
@@ -224135,7 +224135,7 @@ MonoBehaviour:
   revealed: 0
   exportsIndex: 00000000
   exports: []
-  population: 630
+  population: 830
   imgIndex: 0
 --- !u!212 &1531403133
 SpriteRenderer:
@@ -232584,7 +232584,7 @@ GameObject:
   - component: {fileID: 1639963230}
   - component: {fileID: 1639963231}
   m_Layer: 6
-  m_Name: "Golfo R\xEDo Dulce (Livinston) - Guatemala"
+  m_Name: "Golfo R\xEDo Dulce (Livingston) - Guatemala"
   m_TagString: KeyPoint
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -232626,7 +232626,7 @@ MonoBehaviour:
   revealed: 0
   exportsIndex: 02000000
   exports: []
-  population: 170
+  population: 120
   imgIndex: 0
 --- !u!212 &1639963230
 SpriteRenderer:
