@@ -1063,7 +1063,6 @@ namespace GameMechanics.save
     {
         public int population;
         public string tavernName;
-        public byte imgIndex;
 
         public SerializableCity(MB_City city)
         {
@@ -1078,8 +1077,7 @@ namespace GameMechanics.save
             exports = city.exportsIndex;
             population = city.population;
             tavernName = city.tavernName;
-            //spawnPoint = ConvertV3(city.SpawnPoint); //(se calcula automáticmente)
-            imgIndex = city.imgIndex;
+            spriteIndex = city.imgIndex;
             flippedX = city.transform.localScale.x < 0;
         }
 
@@ -1105,7 +1103,7 @@ namespace GameMechanics.save
             this.exports = exports;
             this.population = population;
             this.tavernName = tavernName;
-            this.imgIndex = imgIndex;
+            this.spriteIndex = imgIndex;
             this.flippedX = flippedX;
         }
     }
@@ -1114,12 +1112,22 @@ namespace GameMechanics.save
     public class SerializableTown : SerializableSettlement
     {
         public int population;
-        public byte imgIndex;
 
         public SerializableTown(MB_Town town)
         {
+            cityName = town.cityName;
+            alternativeName = town.alternativeName;
+            revealed = town.revealed;
+
+            position = ConvertV3(town.transform.position);
+            entryPoint = ConvertV3(town.transform.GetChild(0).position);
+            pivotPoint = ConvertV3(town.transform.GetChild(1).position);
+            eventsPoint = null; //todo
+            
             population = town.population;
-            imgIndex = town.imgIndex;
+            exports = town.exportsIndex;
+            spriteIndex = town.imgIndex;
+            flippedX = town.transform.localScale.x < 0;
         }
 
         public SerializableTown(
@@ -1129,7 +1137,8 @@ namespace GameMechanics.save
             float[] entryPoint,
             float[] pivotPoint,
             int[] exports,
-            int population,byte imgIndex = 0,
+            int population,
+            byte imgIndex = 0,
             bool flippedX = false)
         {
             this.cityName = townName;
@@ -1139,9 +1148,10 @@ namespace GameMechanics.save
             this.position = new float[3] { position[0], 0.01f, position[1] };
             this.entryPoint = new float[3] { entryPoint[0], 0.01f, entryPoint[1] };
             this.pivotPoint = new float[3] { pivotPoint[0], 0.01f, pivotPoint[1] };
-
+            this.exports = exports; 
             this.population = population;
-            this.imgIndex = imgIndex;
+            this.spriteIndex = imgIndex;
+            this.flippedX = flippedX;
         }
     }
 
@@ -1155,6 +1165,25 @@ namespace GameMechanics.save
     public class SerializablePirateShelter : SerializableSettlement
     {
 
+    }
+
+    [Serializable]
+    public class SerializableNaturalPort : SerializableKeyPoint
+    {
+        public byte calado;
+
+        public SerializableNaturalPort(MB_NaturalPort port) 
+        {
+            cityName = port.cityName;
+            alternativeName = port.alternativeName;
+            revealed = port.revealed;
+            position = ConvertV3(port.transform.position);
+            entryPoint = ConvertV3(port.transform.GetChild(0).position);
+            pivotPoint = ConvertV3(port.transform.GetChild(1).position);
+            eventsPoint = null; //todo
+            calado = port.calado;
+
+        }
     }
 
     [Serializable]
@@ -1650,6 +1679,7 @@ namespace GameMechanics.save
         //-----------------------------
 
         public SerializableKingdom[] kingdoms;
+        public SerializableNaturalPort[] naturalPorts;
         //Ships in Game
 
 
@@ -1746,8 +1776,9 @@ namespace GameMechanics.save
             inventoryItems = ShipInventory.Items;
             surplus = ShipInventory.Surplus;
 
-            //World, kingdoms and cities:<
+            //* World, kingdoms and cities:
 
+            //Kingdoms:
             var kingdomsContainer = GameObject.FindWithTag("Kingdoms").transform;
             kingdoms = new SerializableKingdom[kingdomsContainer.childCount];
             for (int i = 0; i < kingdomsContainer.childCount; i++)
@@ -1755,6 +1786,24 @@ namespace GameMechanics.save
                 var k = kingdomsContainer.GetChild(i).GetComponent<Kingdom>();
                 kingdoms[i] = new SerializableKingdom(k, k.transform);
             }
+
+            var worldPlacesContainer = GameObject.FindWithTag("WorldPlaces").transform;
+
+            //Natural shelters:
+            var naturalPortsContainer = worldPlacesContainer.GetChild(0);
+            naturalPorts = new SerializableNaturalPort[naturalPortsContainer.childCount];
+
+            for (int i = 0; i < naturalPortsContainer.childCount; i++)
+            {
+                var p = naturalPortsContainer.GetChild(i).GetComponent<MB_NaturalPort>();
+                naturalPorts[i] = new SerializableNaturalPort(p);
+            }
+
+            //Pirate shelters
+            //todo
+
+            //Smugglers hideouts
+            //todo
 
         }
     }

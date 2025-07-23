@@ -44,12 +44,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "C\xE1rdenas"
+  alternativeName: 
   spriteNonSelected: {fileID: 0}
   spriteHighlighted: {fileID: 0}
   linkedUIBanner: {fileID: 0}
   revealed: 0
   exportsIndex: 00000000
+  exports: []
   population: 190
+  imgIndex: 0
 --- !u!1 &8522682888273303980
 GameObject:
   m_ObjectHideFlags: 0
@@ -61,7 +64,7 @@ GameObject:
   - component: {fileID: 8522682888273303979}
   m_Layer: 0
   m_Name: Villages - west mexico
-  m_TagString: KingdomSpain
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -134,12 +137,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Tecolutla
+  alternativeName: 
   spriteNonSelected: {fileID: 0}
   spriteHighlighted: {fileID: 0}
   linkedUIBanner: {fileID: 0}
   revealed: 0
   exportsIndex: 0f000000
+  exports: []
   population: 200
+  imgIndex: 0
 --- !u!1 &8522682889162927486
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,12 +190,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Sisal
+  alternativeName: 
   spriteNonSelected: {fileID: 0}
   spriteHighlighted: {fileID: 0}
   linkedUIBanner: {fileID: 0}
   revealed: 0
   exportsIndex: 05000000
+  exports: []
   population: 660
+  imgIndex: 0
 --- !u!1 &8522682889244877951
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,12 +243,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Camoa
+  alternativeName: 
   spriteNonSelected: {fileID: 0}
   spriteHighlighted: {fileID: 0}
   linkedUIBanner: {fileID: 0}
   revealed: 0
   exportsIndex: 02000000
+  exports: []
   population: 350
+  imgIndex: 0
 --- !u!1 &8522682889284300680
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,12 +296,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Cozumel
+  alternativeName: 
   spriteNonSelected: {fileID: 0}
   spriteHighlighted: {fileID: 0}
   linkedUIBanner: {fileID: 0}
   revealed: 0
   exportsIndex: 01000000
+  exports: []
   population: 220
+  imgIndex: 0
 --- !u!1 &8522682889625277422
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,12 +349,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: 
+  alternativeName: 
   spriteNonSelected: {fileID: 0}
   spriteHighlighted: {fileID: 0}
   linkedUIBanner: {fileID: 0}
   revealed: 0
   exportsIndex: 0c000000
+  exports: []
   population: 320
+  imgIndex: 0
 --- !u!1 &8522682889630106900
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,12 +402,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Champot\xF3n"
+  alternativeName: 
   spriteNonSelected: {fileID: 0}
   spriteHighlighted: {fileID: 0}
   linkedUIBanner: {fileID: 0}
   revealed: 0
   exportsIndex: 08000000
+  exports: []
   population: 750
+  imgIndex: 0
 --- !u!1 &8522682889843904713
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,12 +455,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Alvarado
+  alternativeName: 
   spriteNonSelected: {fileID: 0}
   spriteHighlighted: {fileID: 0}
   linkedUIBanner: {fileID: 0}
   revealed: 0
   exportsIndex: 02000000
+  exports: []
   population: 400
+  imgIndex: 0
 --- !u!1 &8522682889997466340
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,12 +508,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Tampico
+  alternativeName: 
   spriteNonSelected: {fileID: 0}
   spriteHighlighted: {fileID: 0}
   linkedUIBanner: {fileID: 0}
   revealed: 0
   exportsIndex: 0e000000
+  exports: []
   population: 600
+  imgIndex: 0
 --- !u!1 &8522682890220598117
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,9 +561,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: San Juan
+  alternativeName: 
   spriteNonSelected: {fileID: 0}
   spriteHighlighted: {fileID: 0}
   linkedUIBanner: {fileID: 0}
   revealed: 0
   exportsIndex: 00000000
+  exports: []
   population: 360
+  imgIndex: 0

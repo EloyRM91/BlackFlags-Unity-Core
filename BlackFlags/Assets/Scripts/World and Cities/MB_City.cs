@@ -52,20 +52,20 @@ namespace GameMechanics.WorldCities
             // CHARACTERS
             //----
 
-            //N�mero de contrabandistas en la ciudad
+            //Número de contrabandistas en la ciudad
             var Smugglers = population > 6000 ? 2 : 1;
-            //N�mero de armadores en la ciudad
+            //Número de armadores en la ciudad
             var SmugglingRatio = population > 6000 ? (population > 20000 ? 3 : 2) : 1;
 
             //Ratio de inventario de contrabandistas
-            var ShipyardMen = population > 2500 ? (population > 20000 ? 2: 1) : 0; // N�mero de armadores en la ciudad
+            var ShipyardMen = population > 2500 ? (population > 20000 ? 2: 1) : 0; // Número de armadores en la ciudad
 
             CreateCharacters(Smugglers, ShipyardMen, SmugglingRatio);
         }
         private void CreateCharacters(int nSmug, int nSMen, int ratio)
         {
             //! desde la v0.033 ya no se utilizan tags. En lugar de eso, vamos a usar
-            //! un identificador (los mods podr�n incluir otros reinos que no sean los establecidos)
+            //! un identificador (los mods podrían incluir otros reinos que no sean los establecidos)
             //var kingdom = GameManager.gm.GetKingdombyTag(transform.parent.tag);
             var kingdom = transform.parent.parent.GetComponent<Kingdom>();
 
@@ -153,13 +153,13 @@ namespace GameMechanics.WorldCities
 
         protected override void DisplayKeypointPanel()
         {
-            //Si el jugador hace click y est� en puerto, se abre la vista de ciudad
+            //Si el jugador hace click y está en puerto, se abre la vista de ciudad
             UIMap.ui.DisplayCityViewPanel(this);
         }
 
         protected override void DisplayInfo()
         {
-            //Si el jugador hace click y no est� en el puerto, muestra el panel gen�rico de informaci�n
+            //Si el jugador hace click y no está en el puerto, muestra el panel genérico de información
             UIMap.ui.DisplayInfo(this);
         }
     }

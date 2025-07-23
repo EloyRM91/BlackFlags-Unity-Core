@@ -84,7 +84,7 @@ public class SceneManager : MonoBehaviour
                 if(line != null)
                 {
                     _TXT_versionLabel.text += line;
-                    _TXT_versionText.text = "Cambios en esta versi�n: \n\n";
+                    _TXT_versionText.text = "Cambios en esta versión: \n\n";
 
                     while ((line = sr.ReadLine()) != null)
                     {

@@ -45,7 +45,7 @@ namespace GameMechanics.WorldCities
 
         protected override void DisplayKeypointPanel()
         {
-            //todavía no hay panel para la vista de villas
+            //todavÃ­a no hay panel para la vista de villas
             UIMap.ui.DisplayInfo(this);
         }
 

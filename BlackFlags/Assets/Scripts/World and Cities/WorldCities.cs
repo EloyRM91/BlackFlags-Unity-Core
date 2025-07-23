@@ -28,7 +28,7 @@ namespace GameMechanics.WorldCities
         private static ushort IDCounter;
         public static ushort IDKeyPointCounter { get { return IDCounter; } }
 
-        public string cityName;
+        public string cityName, alternativeName;
         [SerializeField] private Sprite spriteNonSelected, spriteHighlighted;
         [SerializeField] private GameObject linkedUIBanner;
         public bool revealed = false;
