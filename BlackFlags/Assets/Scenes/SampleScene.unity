@@ -9966,6 +9966,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Higuerote
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 5b9343175c50b5a4bb7d901efb73f63e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 43b6ccbb7c8f445468cfa687218e6070, type: 3}
   linkedUIBanner: {fileID: 1566232447}
@@ -11087,6 +11088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Puerto Espa\xF1a"
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 320941820}
@@ -13459,6 +13461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Santo Domingo
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 1670271504}
@@ -19598,6 +19601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: George Town
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: dee28b6043c67cd468a4e5fdf44d08e0, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 3686b15170979734d90daad41f5e5f3c, type: 3}
   linkedUIBanner: {fileID: 40872532}
@@ -34205,6 +34209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Bah\xEDa Honda"
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 5b9343175c50b5a4bb7d901efb73f63e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 43b6ccbb7c8f445468cfa687218e6070, type: 3}
   linkedUIBanner: {fileID: 163160180}
@@ -42237,6 +42242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Tortuga
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: dee28b6043c67cd468a4e5fdf44d08e0, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 3686b15170979734d90daad41f5e5f3c, type: 3}
   linkedUIBanner: {fileID: 1891398913}
@@ -52432,6 +52438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Turbo
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 5b9343175c50b5a4bb7d901efb73f63e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 43b6ccbb7c8f445468cfa687218e6070, type: 3}
   linkedUIBanner: {fileID: 933677681}
@@ -54436,6 +54443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: San VIcente
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: ee2f25b78318fc3479edd54226acfdc9, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: b482be2a33027fa4ba6b91020754746c, type: 3}
   linkedUIBanner: {fileID: 1430454081}
@@ -55214,6 +55222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Barbados
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: fbd72c1eae4676344830592a05792fa4, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: d78a086afde268248a7e918c519006c8, type: 3}
   linkedUIBanner: {fileID: 1130958642}
@@ -56147,11 +56156,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Isla Cotorra
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 5b9343175c50b5a4bb7d901efb73f63e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 43b6ccbb7c8f445468cfa687218e6070, type: 3}
   linkedUIBanner: {fileID: 792867175}
   revealed: 0
-  calado: 3
+  calado: 1
 --- !u!212 &319834529
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -57052,6 +57062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: George Town
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: ee2f25b78318fc3479edd54226acfdc9, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: b482be2a33027fa4ba6b91020754746c, type: 3}
   linkedUIBanner: {fileID: 729238331}
@@ -57251,6 +57262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Caracas
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: fbd72c1eae4676344830592a05792fa4, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: d78a086afde268248a7e918c519006c8, type: 3}
   linkedUIBanner: {fileID: 389707819}
@@ -60334,6 +60346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Caimanera
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 5b9343175c50b5a4bb7d901efb73f63e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 43b6ccbb7c8f445468cfa687218e6070, type: 3}
   linkedUIBanner: {fileID: 1601515998}
@@ -62963,6 +62976,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Nassau
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: dee28b6043c67cd468a4e5fdf44d08e0, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 3686b15170979734d90daad41f5e5f3c, type: 3}
   linkedUIBanner: {fileID: 611154800}
@@ -63083,6 +63097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Cartagena
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 296573201}
@@ -82581,6 +82596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Delta del Orinoco
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 5b9343175c50b5a4bb7d901efb73f63e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 43b6ccbb7c8f445468cfa687218e6070, type: 3}
   linkedUIBanner: {fileID: 415922008}
@@ -82807,6 +82823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "La Asunci\xF3n"
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 440725961}
@@ -88485,11 +88502,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Cat Island
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 5b9343175c50b5a4bb7d901efb73f63e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 43b6ccbb7c8f445468cfa687218e6070, type: 3}
   linkedUIBanner: {fileID: 337729778}
   revealed: 0
-  calado: 2
+  calado: 1
 --- !u!212 &530681584
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -89943,6 +89961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Curazao
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 974795322}
@@ -102655,6 +102674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Cuman\xE1"
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 1395248727}
@@ -105051,6 +105071,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Martinica
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 400582666}
@@ -105743,6 +105764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Aruba
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 2d27bdc4a97e0184aa49ccdc0d1ed358, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 3443db12ef013da4898810c48ec82429, type: 3}
   linkedUIBanner: {fileID: 316596976}
@@ -107433,6 +107455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Mo\xF1itos"
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 1662711919}
@@ -109012,6 +109035,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Mo\xEDn"
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 125183348}
@@ -111093,6 +111117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Fort Royale
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 2418526}
@@ -112444,6 +112469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Villa Trujillo
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 142501681}
@@ -115252,6 +115278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Baracoa
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 2af1203ad0a41064b8611a66b210077e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 5e87ae7460529e641b8042b55bdca510, type: 3}
   linkedUIBanner: {fileID: 30344756}
@@ -115509,6 +115536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: San Carlos de Macuro
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: ee2f25b78318fc3479edd54226acfdc9, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: b482be2a33027fa4ba6b91020754746c, type: 3}
   linkedUIBanner: {fileID: 609532511}
@@ -121877,6 +121905,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Basseterre
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 864581257}
@@ -122311,6 +122340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Belize
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 828751308}
@@ -124082,6 +124112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Puerto Plata
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 2af1203ad0a41064b8611a66b210077e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 5e87ae7460529e641b8042b55bdca510, type: 3}
   linkedUIBanner: {fileID: 261653792}
@@ -141676,6 +141707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Puerto Viejo de Talamanca
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: ee2f25b78318fc3479edd54226acfdc9, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: b482be2a33027fa4ba6b91020754746c, type: 3}
   linkedUIBanner: {fileID: 514156356}
@@ -141881,6 +141913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "R\xEDo Unare"
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 2af1203ad0a41064b8611a66b210077e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 5e87ae7460529e641b8042b55bdca510, type: 3}
   linkedUIBanner: {fileID: 61429960}
@@ -142077,6 +142110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Cap-Fran\xE7ais"
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 2081384136}
@@ -143385,6 +143419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Gibraltar
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 354778659}
@@ -143513,6 +143548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Islas Turcas
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 2af1203ad0a41064b8611a66b210077e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 5e87ae7460529e641b8042b55bdca510, type: 3}
   linkedUIBanner: {fileID: 1917069180}
@@ -144912,6 +144948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Pil\xF3n"
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: ee2f25b78318fc3479edd54226acfdc9, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: b482be2a33027fa4ba6b91020754746c, type: 3}
   linkedUIBanner: {fileID: 95225171}
@@ -145033,6 +145070,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "San Andr\xE9s"
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: dee28b6043c67cd468a4e5fdf44d08e0, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 3686b15170979734d90daad41f5e5f3c, type: 3}
   linkedUIBanner: {fileID: 1330541870}
@@ -145771,6 +145809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Providencia
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 1213180796}
@@ -146075,6 +146114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Roat\xE1n"
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: dee28b6043c67cd468a4e5fdf44d08e0, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 3686b15170979734d90daad41f5e5f3c, type: 3}
   linkedUIBanner: {fileID: 425877471}
@@ -148229,6 +148269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Maracaibo
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: fbd72c1eae4676344830592a05792fa4, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: d78a086afde268248a7e918c519006c8, type: 3}
   linkedUIBanner: {fileID: 2102187575}
@@ -148598,6 +148639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Bluefields
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: ee2f25b78318fc3479edd54226acfdc9, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: b482be2a33027fa4ba6b91020754746c, type: 3}
   linkedUIBanner: {fileID: 1469503766}
@@ -154725,6 +154767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: San Carlos y Severino
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 2112113450}
@@ -154848,6 +154891,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Araya
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 2af1203ad0a41064b8611a66b210077e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 5e87ae7460529e641b8042b55bdca510, type: 3}
   linkedUIBanner: {fileID: 1906673313}
@@ -156286,6 +156330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Bah\xEDa de C\xE1rdenas"
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 5b9343175c50b5a4bb7d901efb73f63e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 43b6ccbb7c8f445468cfa687218e6070, type: 3}
   linkedUIBanner: {fileID: 1305485466}
@@ -157043,6 +157088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Nueva Barcelona
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: fbd72c1eae4676344830592a05792fa4, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: d78a086afde268248a7e918c519006c8, type: 3}
   linkedUIBanner: {fileID: 1117041129}
@@ -157576,6 +157622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Puerto Cabello
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: fbd72c1eae4676344830592a05792fa4, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: d78a086afde268248a7e918c519006c8, type: 3}
   linkedUIBanner: {fileID: 455319920}
@@ -161657,6 +161704,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Bonaire
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 1584267444}
@@ -170533,6 +170581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Isla Saona
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 5b9343175c50b5a4bb7d901efb73f63e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 43b6ccbb7c8f445468cfa687218e6070, type: 3}
   linkedUIBanner: {fileID: 1387234919}
@@ -171719,6 +171768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Trinidad
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: fbd72c1eae4676344830592a05792fa4, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: d78a086afde268248a7e918c519006c8, type: 3}
   linkedUIBanner: {fileID: 1227473832}
@@ -171842,6 +171892,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Riohacha
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: ee2f25b78318fc3479edd54226acfdc9, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: b482be2a33027fa4ba6b91020754746c, type: 3}
   linkedUIBanner: {fileID: 679662127}
@@ -180984,6 +181035,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Santa Luc\xEDa"
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 640888847}
@@ -182405,6 +182457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Isla la Tortuga
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 2af1203ad0a41064b8611a66b210077e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 5e87ae7460529e641b8042b55bdca510, type: 3}
   linkedUIBanner: {fileID: 1066980923}
@@ -185686,6 +185739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Isla de la Gonave
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 5b9343175c50b5a4bb7d901efb73f63e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 43b6ccbb7c8f445468cfa687218e6070, type: 3}
   linkedUIBanner: {fileID: 1468783174}
@@ -192975,6 +193029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Barbuda
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 1213180796}
@@ -193101,6 +193156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Puerto Caballos
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 186229367}
@@ -198067,6 +198123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Antigua
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 575414083}
@@ -201028,6 +201085,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Isla de Cubagua
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 1171862629}
@@ -201264,6 +201322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Santiago de Cuba
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 1133063552}
@@ -203004,6 +203063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Ponce
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 2af1203ad0a41064b8611a66b210077e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 5e87ae7460529e641b8042b55bdca510, type: 3}
   linkedUIBanner: {fileID: 1634223682}
@@ -204930,6 +204990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Tobago
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: ee2f25b78318fc3479edd54226acfdc9, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: b482be2a33027fa4ba6b91020754746c, type: 3}
   linkedUIBanner: {fileID: 221079824}
@@ -205490,6 +205551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Monserrat
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 2d27bdc4a97e0184aa49ccdc0d1ed358, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 3443db12ef013da4898810c48ec82429, type: 3}
   linkedUIBanner: {fileID: 1993694146}
@@ -216098,6 +216160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Corn Island
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 1367926470}
@@ -222682,6 +222745,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: San Juan
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 1069481293}
@@ -224129,6 +224193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Ci\xE9naga y Santa Marta"
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 1688982578}
@@ -226274,6 +226339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: San Salvador
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: dee28b6043c67cd468a4e5fdf44d08e0, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 3686b15170979734d90daad41f5e5f3c, type: 3}
   linkedUIBanner: {fileID: 1330541870}
@@ -227996,6 +228062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Jacmel
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: fbd72c1eae4676344830592a05792fa4, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: d78a086afde268248a7e918c519006c8, type: 3}
   linkedUIBanner: {fileID: 1607017496}
@@ -232620,6 +232687,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Golfo R\xEDo Dulce"
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 743216102}
@@ -243832,6 +243900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Barranquilla
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 693241907}
@@ -250120,6 +250189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Laguna Chiquir\xED"
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 5b9343175c50b5a4bb7d901efb73f63e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 43b6ccbb7c8f445468cfa687218e6070, type: 3}
   linkedUIBanner: {fileID: 1745127357}
@@ -250625,6 +250695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Guadalupe
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: fbd72c1eae4676344830592a05792fa4, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: d78a086afde268248a7e918c519006c8, type: 3}
   linkedUIBanner: {fileID: 1103496478}
@@ -254108,6 +254179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "San Mart\xEDn"
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 1777210612}
@@ -261968,6 +262040,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Charlestown
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 2d27bdc4a97e0184aa49ccdc0d1ed358, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 3443db12ef013da4898810c48ec82429, type: 3}
   linkedUIBanner: {fileID: 1051235334}
@@ -264241,6 +264314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Coro
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 2080184245}
@@ -264978,6 +265052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: La Habana
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 1615478295}
@@ -265101,6 +265176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Santiago de Tol\xFA"
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: fbd72c1eae4676344830592a05792fa4, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: d78a086afde268248a7e918c519006c8, type: 3}
   linkedUIBanner: {fileID: 1543388834}
@@ -283331,6 +283407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Roseau
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 430647994}
@@ -283515,7 +283592,7 @@ GameObject:
   - component: {fileID: 2044328648}
   m_Layer: 0
   m_Name: World KeyPoints
-  m_TagString: Untagged
+  m_TagString: WorldPlaces
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -285608,6 +285685,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Cove\xF1as"
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: ee2f25b78318fc3479edd54226acfdc9, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: b482be2a33027fa4ba6b91020754746c, type: 3}
   linkedUIBanner: {fileID: 1713876462}
@@ -286044,6 +286122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Kingston
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 474637126}
@@ -286782,6 +286861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Portobelo
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 427958244}
@@ -287494,6 +287574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "H\xF4pital"
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: dee28b6043c67cd468a4e5fdf44d08e0, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 3686b15170979734d90daad41f5e5f3c, type: 3}
   linkedUIBanner: {fileID: 654208121}
@@ -287676,6 +287757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Tucacas
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 2af1203ad0a41064b8611a66b210077e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 5e87ae7460529e641b8042b55bdca510, type: 3}
   linkedUIBanner: {fileID: 288911667}
@@ -298838,6 +298920,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Nuevitas del Pr\xEDncipe"
+  alternativeName: 
   spriteNonSelected: {fileID: 21300000, guid: 5b9343175c50b5a4bb7d901efb73f63e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 43b6ccbb7c8f445468cfa687218e6070, type: 3}
   linkedUIBanner: {fileID: 592394606}

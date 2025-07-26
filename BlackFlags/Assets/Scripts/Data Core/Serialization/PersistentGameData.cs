@@ -98,6 +98,150 @@ namespace GameMechanics.Data
 
         //WORLD - NEW GAME
         //!Datos iniciales al crear una partida nueva
+        private Dictionary<byte, SerializableNaturalPort> _D_startGameNatPorts = new Dictionary<byte, SerializableNaturalPort>() 
+        {
+            {0, new SerializableNaturalPort(
+                "Turbo",
+                "Bahía Turbo",
+                new float [2] { 19.542f, 128.45f},
+                new float [2] { 20.04f, 128.45f },
+                new float [2] { 19.542f, 127.19f },
+                1,
+                0,
+                true
+                )
+            },
+            {1, new SerializableNaturalPort(
+                "Higuerote",
+                "Carenero de Higuerote",
+                new float [2] { -81.03f, 93.5f},
+                new float [2] { -81.378f, 93.494f },
+                new float [2] { -81.03f, 94.76f },
+                3,
+                0
+                )
+            },
+            {2, new SerializableNaturalPort(
+                "Isla Saona",
+                "Isla Saona",
+                new float [2] { -52.22f, 21.55f},
+                new float [2] { -51.765f, 21.382f },
+                new float [2] { -52.22f, 22.81f },
+                3,
+                0
+                )
+            },
+            {3, new SerializableNaturalPort(
+                "Isla de la Gonave",
+                "Gonâve",
+                new float [2] { -52.22f, 21.55f},
+                new float [2] { -51.765f, 21.382f },
+                new float [2] { -52.22f, 22.81f },
+                3,
+                0
+                )
+            },
+            {4, new SerializableNaturalPort(
+                "Cat Island",
+                "Cat Island",
+                new float [2] { 16.92f, -30.86f},
+                new float [2] { 17.238f, -30.56f },
+                new float [2] { 16.92f, -32.12f },
+                1,
+                0,
+                true
+                )
+            },
+            {5, new SerializableNaturalPort(
+                "Bahía Honda",
+                "Bahía Honda",
+                new float [2] { 84.54f, -12.54f},
+                new float [2] { 85.458f, -12.606f },
+                new float [2] { 84.54f, -11.28f },
+                3,
+                0,
+                true
+                )
+            },
+            {6, new SerializableNaturalPort(
+                "Bahía de Cárdenas",
+                "Bahía de Cárdenas",
+                new float [2] { 59.78f, -13.15f},
+                new float [2] { 59.888f, -13.342f },
+                new float [2] { 59.78f, -11.89f },
+                3,
+                0,
+                true
+                )
+            },
+            {7, new SerializableNaturalPort(
+                "Caimanera",
+                "Caimanera",
+                new float [2] { 10.16f, 11.38f},
+                new float [2] { 10.73f, 12.13f },
+                new float [2] { 10.16f, 10.12f },
+                3,
+                0,
+                true
+                )
+            },
+            {8, new SerializableNaturalPort(
+                "Laguna Chiquirí",
+                "Laguna Chiquirí",
+                new float [2] { 61f, 122.22f},
+                new float [2] { 60.772f, 122.892f },
+                new float [2] { 61f, 123.48f },
+                2,
+                0,
+                true
+                )
+            },
+            {9, new SerializableNaturalPort(
+                "Laguna Chiquirí",
+                "Laguna Chiquirí",
+                new float [2] { 61f, 122.22f},
+                new float [2] { 60.772f, 122.892f },
+                new float [2] { 61f, 123.48f },
+                2,
+                0,
+                true
+                )
+            },
+            {10, new SerializableNaturalPort(
+                "Isla Cotorra",
+                "Delta del Amacuro",
+                new float [2] { -117.46f, 91.2f},
+                new float [2] { -117.46f, 91.878f },
+                new float [2] { -117.46f, 89.94f },
+                1,
+                0,
+                true
+                )
+            },
+            {11, new SerializableNaturalPort(
+                "Delta del Orinoco",
+                "Delta del Orinoco",
+                new float [2] { -131.16f, 101.18f},
+                new float [2] { -132.354f, 101.516f },
+                new float [2] { -131.16f, 102.44f },
+                1,
+                0,
+                false
+                )
+            },
+            {12, new SerializableNaturalPort(
+                "Nuevitas del Príncipe",
+                "Nuevitas del Príncipe",
+                new float [2] { 31.15f, -1.31f},
+                new float [2] { 30.964f, -1.298f },
+                new float [2] { 31.15f, -0.05f },
+                2,
+                0,
+                false
+                )
+            }
+        };
+
         private Dictionary<byte, SerializableCity> _D_startGameCities = new Dictionary<byte, SerializableCity>()
         {
             {0, new SerializableCity(
@@ -1063,6 +1207,10 @@ namespace GameMechanics.save
     {
         public int population;
         public string tavernName;
+        //todo ¿personajes en la ciudad?
+
+        //todo | crear un id de elemento temporal para el serializado
+        //todo | y así vincular barcos, destinos de barcos y personajes a ciudades
 
         public SerializableCity(MB_City city)
         {
@@ -1072,7 +1220,7 @@ namespace GameMechanics.save
             position = ConvertV3(city.transform.position);
             entryPoint = ConvertV3(city.transform.GetChild(0).position);
             pivotPoint = ConvertV3(city.transform.GetChild(1).position);
-            //todo: eventsPoint
+            eventsPoint = null; //todo
 
             exports = city.exportsIndex;
             population = city.population;
@@ -1148,6 +1296,7 @@ namespace GameMechanics.save
             this.position = new float[3] { position[0], 0.01f, position[1] };
             this.entryPoint = new float[3] { entryPoint[0], 0.01f, entryPoint[1] };
             this.pivotPoint = new float[3] { pivotPoint[0], 0.01f, pivotPoint[1] };
+            this.eventsPoint = null; //todo
             this.exports = exports; 
             this.population = population;
             this.spriteIndex = imgIndex;
@@ -1156,9 +1305,47 @@ namespace GameMechanics.save
     }
 
     [Serializable]
-    public class SerializableSumgglersPost : SerializableSettlement
+    public class SerializableSmugglersPost : SerializableSettlement
     {
+        //todo | personajes en la ciudad
+        //todo | generación de id
 
+        public SerializableSmugglersPost(MB_SmugglersPost post) 
+        {
+            cityName = post.cityName;
+            alternativeName = post.alternativeName;
+            revealed = post.revealed;
+            position = ConvertV3(post.transform.position);
+            entryPoint = ConvertV3(post.transform.GetChild(0).position);
+            pivotPoint = ConvertV3(post.transform.GetChild(1).position);
+            eventsPoint = null; //todo
+            exports = post.exportsIndex;
+            //spriteIndex = post.spriteIndex; //todo
+            flippedX = post.transform.localScale.x < 0;
+        }
+
+        public SerializableSmugglersPost(
+            string townName,
+            string alternativeName,
+            float[] position,
+            float[] entryPoint,
+            float[] pivotPoint,
+            int[] exports,
+            byte imgIndex = 0,
+            bool flippedX = false)
+        {
+            this.cityName = townName;
+            this.alternativeName = alternativeName;
+            revealed = false;
+
+            this.position = new float[3] { position[0], 0.01f, position[1] };
+            this.entryPoint = new float[3] { entryPoint[0], 0.01f, entryPoint[1] };
+            this.pivotPoint = new float[3] { pivotPoint[0], 0.01f, pivotPoint[1] };
+            this.eventsPoint = null; //todo
+            this.exports = exports; 
+            this.spriteIndex = imgIndex;
+            this.flippedX = flippedX;
+        }
     }
 
     [Serializable]
@@ -1181,8 +1368,32 @@ namespace GameMechanics.save
             entryPoint = ConvertV3(port.transform.GetChild(0).position);
             pivotPoint = ConvertV3(port.transform.GetChild(1).position);
             eventsPoint = null; //todo
+            //spriteIndex = port.spriteIndex; //todo
             calado = port.calado;
 
+        }
+
+        public SerializableNaturalPort(
+            string portName,
+            string alternativeName,
+            float[] position,
+            float[] entryPoint,
+            float[] pivotPoint,
+            byte calado,
+            byte imgIndex = 0,
+            bool flippedX = false) 
+        {
+            this.cityName = portName;
+            this.alternativeName = alternativeName;
+            revealed = false;
+
+            this.position = new float[3] { position[0], 0.01f, position[1] };
+            this.entryPoint = new float[3] { entryPoint[0], 0.01f, entryPoint[1] };
+            this.pivotPoint = new float[3] { pivotPoint[0], 0.01f, pivotPoint[1] };
+            this.eventsPoint = null; //todo
+
+            this.spriteIndex = imgIndex;
+            this.flippedX = flippedX;
         }
     }
 
@@ -1680,6 +1891,7 @@ namespace GameMechanics.save
 
         public SerializableKingdom[] kingdoms;
         public SerializableNaturalPort[] naturalPorts;
+        public SerializableSmugglersPost[] hideouts;
         //Ships in Game
 
 
@@ -1799,10 +2011,18 @@ namespace GameMechanics.save
                 naturalPorts[i] = new SerializableNaturalPort(p);
             }
 
-            //Pirate shelters
-            //todo
-
             //Smugglers hideouts
+            var smugglersHideoutsContainer = worldPlacesContainer.GetChild(1);
+            hideouts = new SerializableSmugglersPost[smugglersHideoutsContainer.childCount];
+
+            for (int i = 0; i < smugglersHideoutsContainer.childCount; i++)
+            {
+                var p = smugglersHideoutsContainer.GetChild(i).GetComponent<MB_SmugglersPost>();
+                hideouts[i] = new SerializableSmugglersPost(p);
+            }
+
+            
+            //Pirate shelters
             //todo
 
         }

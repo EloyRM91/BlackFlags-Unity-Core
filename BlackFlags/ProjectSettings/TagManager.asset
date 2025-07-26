@@ -14,6 +14,7 @@ TagManager:
   - Delivery
   - PersistentDataContainer
   - Kingdoms
+  - WorldPlaces
   layers:
   - Default
   - TransparentFX
