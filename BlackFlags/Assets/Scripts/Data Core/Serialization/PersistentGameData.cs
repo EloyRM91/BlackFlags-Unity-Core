@@ -98,7 +98,7 @@ namespace GameMechanics.Data
 
         //WORLD - NEW GAME
         //!Datos iniciales al crear una partida nueva
-        private Dictionary<byte, SerializableNaturalPort> _D_startGameNatPorts = new Dictionary<byte, SerializableNaturalPort>() 
+        private Dictionary<byte, SerializableNaturalPort> _D_startGameNatPorts = new Dictionary<byte, SerializableNaturalPort>()
         {
             {0, new SerializableNaturalPort(
                 "Turbo",
@@ -240,6 +240,118 @@ namespace GameMechanics.Data
                 false
                 )
             }
+        };
+
+        private Dictionary<byte, SerializableSmugglersPost> _D_startGameSmPosts = new Dictionary<byte, SerializableSmugglersPost>()
+        {
+            {
+                0, new SerializableSmugglersPost(
+                    "Isla La Tortuga",
+                    "La Tortuga",
+                    new float [2] { -88.79f, 87.07f},
+                    new float [2] { -88.808f, 87.778f },
+                    new float [2] { -88.79f, 85.99f },
+                    new int[] {12},
+                    0,
+                    false
+                )
+            },
+            {
+                1, new SerializableSmugglersPost(
+                    "Araya",
+                    "Araya",
+                    new float [2] { -99.23f, 88.54f},
+                    new float [2] { -98.312f, 88.402f },
+                    new float [2] { -99.23f, 87.46f },
+                    new int[] {12},
+                    0,
+                    true
+                )
+            },
+            {
+                2, new SerializableSmugglersPost(
+                    "Ponce",
+                    "Ciudad de Ponce",
+                    new float [2] { -72.05f, 19.89f},
+                    new float [2] { -72.05f, 20.556f },
+                    new float [2] { -72.05f, 18.81f },
+                    new int[] {8},
+                    0,
+                    false
+                )
+            },
+            {
+                3, new SerializableSmugglersPost(
+                    "Islas Turcas",
+                    "Las Turcas",
+                    new float [2] { -20.25f, -9.24f},
+                    new float [2] { -20.568f, -8.43f },
+                    new float [2] { -20.25f, -10.32f },
+                    new int[] {12},
+                    0,
+                    false
+                )
+            },
+            {
+                4, new SerializableSmugglersPost(
+                    "Islas Turcas",
+                    "Las Turcas",
+                    new float [2] { -20.25f, -9.24f},
+                    new float [2] { -20.568f, -8.43f },
+                    new float [2] { -20.25f, -10.32f },
+                    new int[] {12},
+                    0,
+                    false
+                )
+            },
+            {
+                5, new SerializableSmugglersPost(
+                    "Baracoa",
+                    "Baracoa",
+                    new float [2] { 4.93f, 6.69f},
+                    new float [2] { 4.492f, 6.342f },
+                    new float [2] { 4.93f, 7.77f },
+                    new int[] {7},
+                    0,
+                    false
+                )
+            },
+            {
+                6, new SerializableSmugglersPost(
+                    "Tucacas",
+                    "Cayos de Tucacas",
+                    new float [2] { -59.24f, 93.1f},
+                    new float [2] { -60.23f, 93.754f },
+                    new float [2] { -59.24f, 92.02f },
+                    new int[] {6},
+                    0,
+                    false
+                )
+            },
+            {
+                7, new SerializableSmugglersPost(
+                    "Río Unare",
+                    "Río Unare",
+                    new float [2] { -90.25f, 95.57f},
+                    new float [2] { -90.022f, 95.156f },
+                    new float [2] { -90.25f, 96.65f },
+                    new int[] {0},
+                    0,
+                    false
+                )
+            },
+            {
+                8, new SerializableSmugglersPost(
+                    "Puerto Plata",
+                    "Puerto de Plata",
+                    new float [2] { -30.93f, 8.491f},
+                    new float [2] { -30.906f, 8.185f },
+                    new float [2] { -30.9f, 9.571f },
+                    new int[] {0, 8},
+                    0,
+                    false
+                )
+            },
         };
 
         private Dictionary<byte, SerializableCity> _D_startGameCities = new Dictionary<byte, SerializableCity>()
@@ -1351,7 +1463,46 @@ namespace GameMechanics.save
     [Serializable]
     public class SerializablePirateShelter : SerializableSettlement
     {
+        public string tavernName;
+        //todo | personajes en la ciudad
+        //todo | generación de id
 
+        public SerializablePirateShelter(MB_PirateShelter shelter) 
+        {
+            cityName = shelter.cityName;
+            alternativeName = shelter.alternativeName;
+            revealed = shelter.revealed;
+            position = ConvertV3(shelter.transform.position);
+            entryPoint = ConvertV3(shelter.transform.GetChild(0).position);
+            pivotPoint = ConvertV3(shelter.transform.GetChild(1).position);
+            eventsPoint = null; //todo
+            tavernName = shelter.tavernName;
+            // this.spriteIndex = shelter.imgIndex; //todo
+            this.flippedX = shelter.transform.localScale.x < 0;
+        }
+
+        public SerializablePirateShelter(
+            string shelterName,
+            string alternativeName,
+            float[] position,
+            float[] entryPoint,
+            float[] pivotPoint,
+            string tavernName,
+            byte imgIndex = 0,
+            bool flippedX = false)
+        {
+            this.cityName = shelterName;
+            this.alternativeName = alternativeName;
+            revealed = false;
+
+            this.position = new float[3] { position[0], 0.01f, position[1] };
+            this.entryPoint = new float[3] { entryPoint[0], 0.01f, entryPoint[1] };
+            this.pivotPoint = new float[3] { pivotPoint[0], 0.01f, pivotPoint[1] };
+            this.eventsPoint = null; //todo
+            this.tavernName = tavernName;
+            this.spriteIndex = imgIndex;
+            this.flippedX = flippedX;
+        }
     }
 
     [Serializable]
@@ -1892,6 +2043,7 @@ namespace GameMechanics.save
         public SerializableKingdom[] kingdoms;
         public SerializableNaturalPort[] naturalPorts;
         public SerializableSmugglersPost[] hideouts;
+        public SerializablePirateShelter[] shelters;
         //Ships in Game
 
 
@@ -2023,8 +2175,14 @@ namespace GameMechanics.save
 
             
             //Pirate shelters
-            //todo
+            var pirateSheltersContainer = worldPlacesContainer.GetChild(2);
+            shelters = new SerializablePirateShelter[pirateSheltersContainer.childCount];
 
+            for (int i = 0; i < smugglersHideoutsContainer.childCount; i++)
+            {
+                var p = pirateSheltersContainer.GetChild(i).GetComponent<MB_PirateShelter>();
+                shelters[i] = new SerializablePirateShelter(p);
+            }
         }
     }
 
