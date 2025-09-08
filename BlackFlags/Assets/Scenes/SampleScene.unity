@@ -19606,8 +19606,10 @@ MonoBehaviour:
   spriteHighlighted: {fileID: 21300000, guid: 3686b15170979734d90daad41f5e5f3c, type: 3}
   linkedUIBanner: {fileID: 40872532}
   revealed: 0
-  _requirement: 5
-  _value: 10
+  _entryCondition:
+    requirement: 5
+    value: 10
+  tavernName: La Dama de Amsterdam
   convoysInThisPort: []
 --- !u!212 &126701433
 SpriteRenderer:
@@ -42247,8 +42249,10 @@ MonoBehaviour:
   spriteHighlighted: {fileID: 21300000, guid: 3686b15170979734d90daad41f5e5f3c, type: 3}
   linkedUIBanner: {fileID: 1891398913}
   revealed: 0
-  _requirement: 6
-  _value: 40
+  _entryCondition:
+    requirement: 6
+    value: 40
+  tavernName: La Dama de Amsterdam
   convoysInThisPort: []
 --- !u!212 &263397012
 SpriteRenderer:
@@ -62981,8 +62985,10 @@ MonoBehaviour:
   spriteHighlighted: {fileID: 21300000, guid: 3686b15170979734d90daad41f5e5f3c, type: 3}
   linkedUIBanner: {fileID: 611154800}
   revealed: 0
-  _requirement: 5
-  _value: 60
+  _entryCondition:
+    requirement: 5
+    value: 65
+  tavernName: La Dama de Amsterdam
   convoysInThisPort: []
 --- !u!212 &389762486
 SpriteRenderer:
@@ -145075,8 +145081,10 @@ MonoBehaviour:
   spriteHighlighted: {fileID: 21300000, guid: 3686b15170979734d90daad41f5e5f3c, type: 3}
   linkedUIBanner: {fileID: 1330541870}
   revealed: 0
-  _requirement: 0
-  _value: 30
+  _entryCondition:
+    requirement: 0
+    value: 30
+  tavernName: La Dama de Amsterdam
   convoysInThisPort: []
 --- !u!212 &921286221
 SpriteRenderer:
@@ -146119,8 +146127,10 @@ MonoBehaviour:
   spriteHighlighted: {fileID: 21300000, guid: 3686b15170979734d90daad41f5e5f3c, type: 3}
   linkedUIBanner: {fileID: 425877471}
   revealed: 0
-  _requirement: 0
-  _value: 40
+  _entryCondition:
+    requirement: 0
+    value: 40
+  tavernName: La Dama de Amsterdam
   convoysInThisPort: []
 --- !u!212 &935585829
 SpriteRenderer:
@@ -226344,8 +226354,10 @@ MonoBehaviour:
   spriteHighlighted: {fileID: 21300000, guid: 3686b15170979734d90daad41f5e5f3c, type: 3}
   linkedUIBanner: {fileID: 1330541870}
   revealed: 0
-  _requirement: 5
-  _value: 30
+  _entryCondition:
+    requirement: 5
+    value: 30
+  tavernName: La Dama de Amsterdam
   convoysInThisPort: []
 --- !u!212 &1565886145
 SpriteRenderer:
@@ -287579,8 +287591,10 @@ MonoBehaviour:
   spriteHighlighted: {fileID: 21300000, guid: 3686b15170979734d90daad41f5e5f3c, type: 3}
   linkedUIBanner: {fileID: 654208121}
   revealed: 0
-  _requirement: 5
-  _value: 50
+  _entryCondition:
+    requirement: 5
+    value: 50
+  tavernName: La Dama de Amsterdam
   convoysInThisPort: []
 --- !u!212 &2098347556
 SpriteRenderer:

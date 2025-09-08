@@ -302,7 +302,13 @@ public class GameManager : MonoBehaviour
                         print("    - " + convoyShips[k].shipName);
                     }
                 }
+            }
 
+            var shelters = savedGameData.shelters;
+            print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+            for (int i = 0; i < shelters.Length; i++)
+            {
+                print(shelters[i].cityName);
             }
         }
         else

@@ -354,6 +354,101 @@ namespace GameMechanics.Data
             },
         };
 
+        private Dictionary<byte, SerializablePirateShelter> _D_startGameShelters = new Dictionary<byte, SerializablePirateShelter>()
+        {
+            {
+                0, new SerializablePirateShelter(
+                    "Tortuga",
+                    "",
+                    new float [2] { -11.49f, 8.491f},
+                    new float [2] { -11.53f, 8.89f },
+                    new float [2] { -11.49f, 6.62f },
+                    "La Dama de Amsterdam",
+                    new EntryClass(RequirementEntry.LoyaltyToCodeLowerThan, 40),
+                    0,
+                    false
+                )
+            },
+            {
+                1, new SerializablePirateShelter(
+                    "Hôpital",
+                    "",
+                    new float [2] { -17.53f, 21.58f},
+                    new float [2] { -16.62f, 21.85f },
+                    new float [2] { -17.53f, 20.28f },
+                    "La Dama de Amsterdam",
+                    new EntryClass(RequirementEntry.LoyaltyToCodeBiggerThan, 50),
+                    0,
+                    false
+                )
+            },
+            {
+                2, new SerializablePirateShelter(
+                    "George Town",
+                    "Isla George Town",
+                    new float [2] { 20.7f, -23.07f},
+                    new float [2] { 20.7f, -22.195f },
+                    new float [2] { 20.7f, -24.37f },
+                    "La Dama de Amsterdam",
+                    new EntryClass(RequirementEntry.LoyaltyToCodeBiggerThan, 10),
+                    0,
+                    false
+                )
+            },
+            {
+                3, new SerializablePirateShelter(
+                    "San Salvador",
+                    "Isla de San Salvador",
+                    new float [2] { 7.99f, -28.8f},
+                    new float [2] { 8.555f, -28.575f },
+                    new float [2] { 7.99f, -27.5f },
+                    "La Dama de Amsterdam",
+                    new EntryClass(RequirementEntry.LoyaltyToCodeBiggerThan, 30),
+                    0,
+                    false
+                )
+            },
+            {
+                4, new SerializablePirateShelter(
+                    "San Andrés",
+                    "Isla de San Andrés",
+                    new float [2] { 68.42f, 89.06f},
+                    new float [2] { 69.035f, 89.06f },
+                    new float [2] { 68.42f, 90.36f },
+                    "La Dama de Amsterdam",
+                    new EntryClass(RequirementEntry.ByFame_Spain, 30),
+                    0,
+                    false
+                )
+            },
+            {
+                5, new SerializablePirateShelter(
+                    "Roatán",
+                    "Isla Roatán",
+                    new float [2] { 114.08f, 52.23f},
+                    new float [2] { 114.08f, 53.08f },
+                    new float [2] { 114.08f, 50.93f },
+                    "La Dama de Amsterdam",
+                    new EntryClass(RequirementEntry.ByFame_Spain, 40),
+                    0,
+                    false
+                )
+            },
+            {
+                6, new SerializablePirateShelter(
+                    "Nassau",
+                    "",
+                    new float [2] { 37.32f, -31.42f},
+                    new float [2] { 37.08f, -31.42f },
+                    new float [2] { 37.32f, -32.72f },
+                    "La Dama de Amsterdam",
+                    new EntryClass(RequirementEntry.LoyaltyToCodeBiggerThan, 65),
+                    0,
+                    false
+                )
+            },
+        };
+
         private Dictionary<byte, SerializableCity> _D_startGameCities = new Dictionary<byte, SerializableCity>()
         {
             {0, new SerializableCity(
@@ -1464,6 +1559,7 @@ namespace GameMechanics.save
     public class SerializablePirateShelter : SerializableSettlement
     {
         public string tavernName;
+        public EntryClass entryCondition;
         //todo | personajes en la ciudad
         //todo | generación de id
 
@@ -1488,6 +1584,7 @@ namespace GameMechanics.save
             float[] entryPoint,
             float[] pivotPoint,
             string tavernName,
+            EntryClass condition,
             byte imgIndex = 0,
             bool flippedX = false)
         {
@@ -1500,6 +1597,7 @@ namespace GameMechanics.save
             this.pivotPoint = new float[3] { pivotPoint[0], 0.01f, pivotPoint[1] };
             this.eventsPoint = null; //todo
             this.tavernName = tavernName;
+            this.entryCondition = new EntryClass(condition);
             this.spriteIndex = imgIndex;
             this.flippedX = flippedX;
         }
@@ -2178,7 +2276,7 @@ namespace GameMechanics.save
             var pirateSheltersContainer = worldPlacesContainer.GetChild(2);
             shelters = new SerializablePirateShelter[pirateSheltersContainer.childCount];
 
-            for (int i = 0; i < smugglersHideoutsContainer.childCount; i++)
+            for (int i = 0; i < pirateSheltersContainer.childCount; i++)
             {
                 var p = pirateSheltersContainer.GetChild(i).GetComponent<MB_PirateShelter>();
                 shelters[i] = new SerializablePirateShelter(p);
