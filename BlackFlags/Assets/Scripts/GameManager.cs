@@ -78,7 +78,17 @@ public class GameManager : MonoBehaviour
         PersistentGameData._GData_Reputation = 55;
         ShipInventory.Crew = 5;
 
+        // ---- AUTOLOAD QUICKSAVE
         LoadGame("hola");
+
+        //DEV
+        // ---- BINARY
+        // var startGameBinaryFormat = new StartGameBinaryFormat(new StartGameData());
+        // startGameBinaryFormat.WorldData("worldData_Campaign_1720");
+
+        // ---- JSON
+        var startGameJSONFormat = new StartGameJSONFormat(new StartGameData());
+        startGameJSONFormat.WorldData("worldData_Campaign_1720");
     }
 
     //Generation
@@ -290,17 +300,28 @@ public class GameManager : MonoBehaviour
                 print("-------------------------------");
                 print(kingdoms[i].tagKey);
                 print(kingdoms[i].kingdomName);
-                print("convoyes:");
-                var merchants = kingdoms[i].countryMerchants;
-                print(merchants.Length);
-                for (int j = 0; j < merchants.Length; j++)
+                // print("convoyes:");
+                // var merchants = kingdoms[i].countryMerchants;
+                // print(merchants.Length);
+                // for (int j = 0; j < merchants.Length; j++)
+                // {
+                //     print("******");
+                //     var convoyShips = merchants[j].convoyShips;
+                //     for (int k = 0; k < convoyShips.Length; k++)
+                //     {
+                //         print("    - " + convoyShips[k].shipName);
+                //     }
+                // }
+
+                print("ciudades:");
+                var cities = kingdoms[i].countryCities;
+                print(cities.Length);
+                for (int j = 0; j < cities.Length; j++)
                 {
-                    print("******");
-                    var convoyShips = merchants[j].convoyShips;
-                    for (int k = 0; k < convoyShips.Length; k++)
-                    {
-                        print("    - " + convoyShips[k].shipName);
-                    }
+                    // print("******");
+                    // var city = cities[j];
+                    // print(city.cityName);
+                    // Debug.Log(string.Join(", ", city.exports));
                 }
             }
 

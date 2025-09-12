@@ -1,0 +1,3339 @@
+{
+    "kingdoms": [
+        {
+            "tagKey": 0,
+            "kingdomName": "España",
+            "gentilism_MALESIN": "español",
+            "gentilism_MALEPLU": "españoles",
+            "gentilism_FEMSIN": "española",
+            "gentilism_FEMPLU": "españolas",
+            "roleFleetSpawnStats": [
+                51.0,
+                37.0,
+                6.0,
+                6.0
+            ],
+            "countryBaseStrength": 1,
+            "atWarWith": [],
+            "atTradeAgrrementWith": [],
+            "countryCities": [
+                {
+                    "cityName": "San Juan",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -75.16000366210938,
+                        0.009999999776482582,
+                        14.800000190734864
+                    ],
+                    "entryPoint": [
+                        -75.16000366210938,
+                        0.009999940171837807,
+                        14.324000358581543
+                    ],
+                    "pivotPoint": [
+                        -75.16000366210938,
+                        0.010000118985772133,
+                        15.920000076293946
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": false,
+                    "exports": [
+                        8,
+                        10,
+                        4,
+                        12
+                    ],
+                    "population": 13700,
+                    "tavernName": "La Gaviota"
+                },
+                {
+                    "cityName": "Portobelo",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        47.301998138427737,
+                        0.009999999776482582,
+                        116.71299743652344
+                    ],
+                    "entryPoint": [
+                        47.90199661254883,
+                        0.009999940171837807,
+                        116.24099731445313
+                    ],
+                    "pivotPoint": [
+                        47.301998138427737,
+                        0.010000118985772133,
+                        117.83300018310547
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": false,
+                    "exports": [
+                        15,
+                        6,
+                        11
+                    ],
+                    "population": 1930,
+                    "tavernName": "La Bella Inés"
+                },
+                {
+                    "cityName": "Cartagena",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        7.630000114440918,
+                        0.009999999776482582,
+                        103.47000122070313
+                    ],
+                    "entryPoint": [
+                        8.498000144958496,
+                        0.009999969974160195,
+                        103.27000427246094
+                    ],
+                    "pivotPoint": [
+                        7.630000114440918,
+                        0.010000118985772133,
+                        104.59000396728516
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": true,
+                    "exports": [
+                        6,
+                        15,
+                        8
+                    ],
+                    "population": 9100,
+                    "tavernName": "La Morena"
+                },
+                {
+                    "cityName": "Santiago de Tolú",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        8.104000091552735,
+                        0.009999999776482582,
+                        113.19300079345703
+                    ],
+                    "entryPoint": [
+                        9.215999603271485,
+                        0.01000002957880497,
+                        113.51300048828125
+                    ],
+                    "pivotPoint": [
+                        8.104000091552735,
+                        0.009999880567193032,
+                        111.83300018310547
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 1,
+                    "flippedX": false,
+                    "exports": [
+                        8,
+                        2,
+                        0
+                    ],
+                    "population": 1800,
+                    "tavernName": "La Sirena"
+                },
+                {
+                    "cityName": "Maracaibo",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -27.850000381469728,
+                        0.009999999776482582,
+                        100.62899780273438
+                    ],
+                    "entryPoint": [
+                        -28.902000427246095,
+                        0.010000014677643776,
+                        100.77299499511719
+                    ],
+                    "pivotPoint": [
+                        -27.850000381469728,
+                        0.009999880567193032,
+                        99.26899719238281
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 1,
+                    "flippedX": true,
+                    "exports": [
+                        6,
+                        7,
+                        0
+                    ],
+                    "population": 6400,
+                    "tavernName": "Faro del Diablo"
+                },
+                {
+                    "cityName": "Coro",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -48.150001525878909,
+                        0.009999999776482582,
+                        88.4219970703125
+                    ],
+                    "entryPoint": [
+                        -48.150001525878909,
+                        0.009999940171837807,
+                        87.7699966430664
+                    ],
+                    "pivotPoint": [
+                        -48.150001525878909,
+                        0.010000118985772133,
+                        89.54199981689453
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": false,
+                    "exports": [
+                        8,
+                        1
+                    ],
+                    "population": 3600,
+                    "tavernName": "Delfín Negro"
+                },
+                {
+                    "cityName": "Gibraltar",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -36.349998474121097,
+                        0.009999999776482582,
+                        112.70800018310547
+                    ],
+                    "entryPoint": [
+                        -36.11800003051758,
+                        0.009999940171837807,
+                        112.03600311279297
+                    ],
+                    "pivotPoint": [
+                        -36.349998474121097,
+                        0.010000118985772133,
+                        113.8280029296875
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": true,
+                    "exports": [
+                        15,
+                        6,
+                        10
+                    ],
+                    "population": 3640,
+                    "tavernName": "Casa del Tuerto"
+                },
+                {
+                    "cityName": "Caracas",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -73.91000366210938,
+                        0.009999999776482582,
+                        93.30999755859375
+                    ],
+                    "entryPoint": [
+                        -73.91000366210938,
+                        0.009999940171837807,
+                        92.66600036621094
+                    ],
+                    "pivotPoint": [
+                        -73.91000366210938,
+                        0.010000118985772133,
+                        94.43000030517578
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 1,
+                    "flippedX": true,
+                    "exports": [
+                        6,
+                        9,
+                        7
+                    ],
+                    "population": 32000,
+                    "tavernName": "Las Tres Marías"
+                },
+                {
+                    "cityName": "Puerto Cabello",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -64.37000274658203,
+                        0.009999999776482582,
+                        96.25
+                    ],
+                    "entryPoint": [
+                        -64.26600646972656,
+                        0.009999940171837807,
+                        95.58599853515625
+                    ],
+                    "pivotPoint": [
+                        -64.37000274658203,
+                        0.010000118985772133,
+                        97.37000274658203
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 1,
+                    "flippedX": false,
+                    "exports": [
+                        11,
+                        6,
+                        10
+                    ],
+                    "population": 7400,
+                    "tavernName": "Cala del Muerto"
+                },
+                {
+                    "cityName": "Cumaná",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -99.76000213623047,
+                        0.009999999776482582,
+                        90.30999755859375
+                    ],
+                    "entryPoint": [
+                        -99.76000213623047,
+                        0.009999880567193032,
+                        89.54999542236328
+                    ],
+                    "pivotPoint": [
+                        -99.76000213623047,
+                        0.010000118985772133,
+                        91.43000030517578
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": false,
+                    "exports": [
+                        14,
+                        9,
+                        11
+                    ],
+                    "population": 2100,
+                    "tavernName": "El Bribón"
+                },
+                {
+                    "cityName": "La Asunción",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -101.69999694824219,
+                        0.009999999776482582,
+                        84.13999938964844
+                    ],
+                    "entryPoint": [
+                        -102.28399658203125,
+                        0.010000059381127358,
+                        84.79199981689453
+                    ],
+                    "pivotPoint": [
+                        -101.69999694824219,
+                        0.009999880567193032,
+                        82.77999877929688
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": true,
+                    "exports": [
+                        14,
+                        12,
+                        6
+                    ],
+                    "population": 7200,
+                    "tavernName": "La Mulata"
+                },
+                {
+                    "cityName": "Nueva Barcelona",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -96.08000183105469,
+                        0.009999999776482582,
+                        92.97000122070313
+                    ],
+                    "entryPoint": [
+                        -96.08000183105469,
+                        0.009999940171837807,
+                        92.43000030517578
+                    ],
+                    "pivotPoint": [
+                        -96.08000183105469,
+                        0.010000118985772133,
+                        94.09000396728516
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 1,
+                    "flippedX": false,
+                    "exports": [
+                        2,
+                        0,
+                        6
+                    ],
+                    "population": 4700,
+                    "tavernName": "Los Dos Hermanos"
+                },
+                {
+                    "cityName": "Puerto España",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -126.53199768066406,
+                        0.009999999776482582,
+                        84.3499984741211
+                    ],
+                    "entryPoint": [
+                        -125.54399871826172,
+                        0.010000014677643776,
+                        84.47000122070313
+                    ],
+                    "pivotPoint": [
+                        -126.53199768066406,
+                        0.009999880567193032,
+                        82.98999786376953
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": false,
+                    "exports": [
+                        8,
+                        4,
+                        6
+                    ],
+                    "population": 3000,
+                    "tavernName": "La Capitana"
+                },
+                {
+                    "cityName": "La Habana",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        77.97000122070313,
+                        0.009999999776482582,
+                        -13.960000038146973
+                    ],
+                    "entryPoint": [
+                        78.03400421142578,
+                        0.009999940171837807,
+                        -14.63599967956543
+                    ],
+                    "pivotPoint": [
+                        77.97000122070313,
+                        0.010000118985772133,
+                        -12.84000015258789
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": false,
+                    "exports": [
+                        8,
+                        10,
+                        4,
+                        5
+                    ],
+                    "population": 32000,
+                    "tavernName": "Puerto Capitanes"
+                },
+                {
+                    "cityName": "Santo Domingo",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -40.279998779296878,
+                        0.009999999776482582,
+                        20.1200008392334
+                    ],
+                    "entryPoint": [
+                        -40.279998779296878,
+                        0.010000059381127358,
+                        20.84000015258789
+                    ],
+                    "pivotPoint": [
+                        -40.279998779296878,
+                        0.009999880567193032,
+                        18.760000228881837
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": false,
+                    "exports": [
+                        8,
+                        2,
+                        5
+                    ],
+                    "population": 4500,
+                    "tavernName": "Cisne Negro"
+                },
+                {
+                    "cityName": "Santiago de Cuba",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        16.549999237060548,
+                        0.009999999776482582,
+                        12.59000015258789
+                    ],
+                    "entryPoint": [
+                        16.549999237060548,
+                        0.010000059381127358,
+                        13.3100004196167
+                    ],
+                    "pivotPoint": [
+                        16.549999237060548,
+                        0.009999880567193032,
+                        11.229999542236329
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": false,
+                    "exports": [
+                        10,
+                        2,
+                        8
+                    ],
+                    "population": 2300,
+                    "tavernName": "El Polvorín"
+                },
+                {
+                    "cityName": "Trinidad",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        53.29999923706055,
+                        0.009999999776482582,
+                        -1.7300000190734864
+                    ],
+                    "entryPoint": [
+                        53.38800048828125,
+                        0.010000118985772133,
+                        -0.7219998836517334
+                    ],
+                    "pivotPoint": [
+                        53.29999923706055,
+                        0.009999880567193032,
+                        -3.0900001525878908
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 1,
+                    "flippedX": false,
+                    "exports": [
+                        8,
+                        6
+                    ],
+                    "population": 1850,
+                    "tavernName": "El Burro"
+                },
+                {
+                    "cityName": "San Carlos y Severino",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        67.93499755859375,
+                        0.009999999776482582,
+                        -14.239999771118164
+                    ],
+                    "entryPoint": [
+                        67.07899475097656,
+                        0.009999969974160195,
+                        -14.58799934387207
+                    ],
+                    "pivotPoint": [
+                        67.93499755859375,
+                        0.010000118985772133,
+                        -13.119999885559082
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": false,
+                    "exports": [
+                        8
+                    ],
+                    "population": 3600,
+                    "tavernName": "La Puta Coja"
+                }
+            ],
+            "countryVillages": [
+                {
+                    "cityName": "Pilón",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        31.09000015258789,
+                        0.009999999776482582,
+                        12.031000137329102
+                    ],
+                    "entryPoint": [
+                        31.954999923706056,
+                        0.009999969974160195,
+                        11.711000442504883
+                    ],
+                    "pivotPoint": [
+                        31.09000015258789,
+                        0.010000118985772133,
+                        13.430999755859375
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 1,
+                    "flippedX": false,
+                    "exports": [
+                        8
+                    ],
+                    "population": 210
+                },
+                {
+                    "cityName": "Isla de Cubagua",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -99.33000183105469,
+                        0.009999999776482582,
+                        86.41000366210938
+                    ],
+                    "entryPoint": [
+                        -99.90499877929688,
+                        0.01000002957880497,
+                        86.66000366210938
+                    ],
+                    "pivotPoint": [
+                        -99.33000183105469,
+                        0.009999880567193032,
+                        85.21000671386719
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": true,
+                    "exports": [
+                        14
+                    ],
+                    "population": 180
+                },
+                {
+                    "cityName": "Riohacha",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -17.479999542236329,
+                        0.009999999776482582,
+                        90.33999633789063
+                    ],
+                    "entryPoint": [
+                        -16.744998931884767,
+                        0.009999969974160195,
+                        90.0999984741211
+                    ],
+                    "pivotPoint": [
+                        -17.479999542236329,
+                        0.010000118985772133,
+                        91.73999786376953
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 1,
+                    "flippedX": true,
+                    "exports": [
+                        14
+                    ],
+                    "population": 600
+                },
+                {
+                    "cityName": "Ciénaga y Santa Marta",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -3.8320000171661379,
+                        0.009999999776482582,
+                        95.01100158691406
+                    ],
+                    "entryPoint": [
+                        -3.4070000648498537,
+                        0.009999984875321389,
+                        94.8759994506836
+                    ],
+                    "pivotPoint": [
+                        -3.8320000171661379,
+                        0.010000118985772133,
+                        96.41100311279297
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": true,
+                    "exports": [
+                        0
+                    ],
+                    "population": 830
+                },
+                {
+                    "cityName": "Barranquilla",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        2.174999952316284,
+                        0.009999999776482582,
+                        97.99099731445313
+                    ],
+                    "entryPoint": [
+                        2.629999876022339,
+                        0.009999969974160195,
+                        97.6259994506836
+                    ],
+                    "pivotPoint": [
+                        2.174999952316284,
+                        0.010000118985772133,
+                        99.39099884033203
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": false,
+                    "exports": [
+                        12
+                    ],
+                    "population": 550
+                },
+                {
+                    "cityName": "Coveñas",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        9.510000228881836,
+                        0.009999999776482582,
+                        115.66000366210938
+                    ],
+                    "entryPoint": [
+                        9.510000228881836,
+                        0.009999940171837807,
+                        115.1300048828125
+                    ],
+                    "pivotPoint": [
+                        9.510000228881836,
+                        0.010000118985772133,
+                        117.06000518798828
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 1,
+                    "flippedX": false,
+                    "exports": [
+                        2
+                    ],
+                    "population": 650
+                },
+                {
+                    "cityName": "Moñitos",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        14.253999710083008,
+                        0.009999999776482582,
+                        117.69499969482422
+                    ],
+                    "entryPoint": [
+                        14.83899974822998,
+                        0.009999969974160195,
+                        117.48500061035156
+                    ],
+                    "pivotPoint": [
+                        14.253999710083008,
+                        0.010000118985772133,
+                        119.09500122070313
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": true,
+                    "exports": [
+                        5
+                    ],
+                    "population": 160
+                },
+                {
+                    "cityName": "Moín",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        81.58300018310547,
+                        0.009999999776482582,
+                        114.23200225830078
+                    ],
+                    "entryPoint": [
+                        81.59000396728516,
+                        0.009999940171837807,
+                        113.75700378417969
+                    ],
+                    "pivotPoint": [
+                        81.58300018310547,
+                        0.010000118985772133,
+                        115.63200378417969
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": false,
+                    "exports": [
+                        0
+                    ],
+                    "population": 180
+                },
+                {
+                    "cityName": "Puerto Viejo de Talamanca",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        77.29299926757813,
+                        0.009999999776482582,
+                        118.19599914550781
+                    ],
+                    "entryPoint": [
+                        76.50299835205078,
+                        0.009999940171837807,
+                        117.82099914550781
+                    ],
+                    "pivotPoint": [
+                        77.29299926757813,
+                        0.010000118985772133,
+                        119.59600067138672
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 1,
+                    "flippedX": true,
+                    "exports": [
+                        6
+                    ],
+                    "population": 260
+                },
+                {
+                    "cityName": "Villa Trujillo",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        110.29000091552735,
+                        0.009999999776482582,
+                        57.91899871826172
+                    ],
+                    "entryPoint": [
+                        110.29000091552735,
+                        0.009999940171837807,
+                        57.198997497558597
+                    ],
+                    "pivotPoint": [
+                        110.29000091552735,
+                        0.010000118985772133,
+                        59.319000244140628
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": false,
+                    "exports": [
+                        15
+                    ],
+                    "population": 250
+                },
+                {
+                    "cityName": "Puerto Caballos",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        127.62000274658203,
+                        0.009999999776482582,
+                        58.81999969482422
+                    ],
+                    "entryPoint": [
+                        128.1699981689453,
+                        0.009999984875321389,
+                        58.71500015258789
+                    ],
+                    "pivotPoint": [
+                        127.62000274658203,
+                        0.010000118985772133,
+                        60.220001220703128
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": true,
+                    "exports": [
+                        1
+                    ],
+                    "population": 180
+                },
+                {
+                    "cityName": "Golfo Río Dulce",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        136.30499267578126,
+                        0.009999999776482582,
+                        58.630001068115237
+                    ],
+                    "entryPoint": [
+                        135.6949920654297,
+                        0.009999984875321389,
+                        58.45000076293945
+                    ],
+                    "pivotPoint": [
+                        136.30499267578126,
+                        0.010000118985772133,
+                        60.03000259399414
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": false,
+                    "exports": [
+                        2
+                    ],
+                    "population": 120
+                },
+                {
+                    "cityName": "San Carlos de Macuro",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -119.13999938964844,
+                        0.009999999776482582,
+                        84.16000366210938
+                    ],
+                    "entryPoint": [
+                        -119.45500183105469,
+                        0.010000118985772133,
+                        84.92000579833985
+                    ],
+                    "pivotPoint": [
+                        -119.13999938964844,
+                        0.009999880567193032,
+                        82.86000061035156
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 1,
+                    "flippedX": true,
+                    "exports": [
+                        6
+                    ],
+                    "population": 210
+                }
+            ],
+            "countryMerchants": [
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Peregrino",
+                            "captainName": "Mansel de Ayala y Zuñiga",
+                            "shipType": 5,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        -75.16000366210938,
+                        0.009999940171837807,
+                        14.324000358581543
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Campoamor",
+                            "captainName": "Esteban Hidalgo Varilla",
+                            "shipType": 3,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        47.90199661254883,
+                        0.009999940171837807,
+                        116.24099731445313
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "San Pedro y San Pablo",
+                            "captainName": "Juan del Valdespino",
+                            "shipType": 7,
+                            "variant": "Roundbrig",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        8.498000144958496,
+                        0.009999969974160195,
+                        103.27000427246094
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "San Carlos",
+                            "captainName": "Pedro Núñez",
+                            "shipType": 3,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        9.215999603271485,
+                        0.01000002957880497,
+                        113.51300048828125
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "San Bernardo",
+                            "captainName": "Juan Martín Gómez de la Vega",
+                            "shipType": 3,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        -28.902000427246095,
+                        0.010000014677643776,
+                        100.77299499511719
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Jacobino",
+                            "captainName": "Íñigo Blanco de Trava",
+                            "shipType": 3,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        -48.150001525878909,
+                        0.009999940171837807,
+                        87.7699966430664
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Capellán",
+                            "captainName": "Ventura de Corme y Zuñiga",
+                            "shipType": 0,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        -36.11800003051758,
+                        0.009999940171837807,
+                        112.03600311279297
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Cornelia",
+                            "captainName": "Esteban Erezcano",
+                            "shipType": 11,
+                            "variant": "Xebec",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        -73.91000366210938,
+                        0.009999940171837807,
+                        92.66600036621094
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Elena",
+                            "captainName": "Juan Gerónimo de la Randa",
+                            "shipType": 9,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        -64.26600646972656,
+                        0.009999940171837807,
+                        95.58599853515625
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Teresa",
+                            "captainName": "Juan Esteban de Noriega",
+                            "shipType": 3,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        -99.76000213623047,
+                        0.009999880567193032,
+                        89.54999542236328
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Cornelia",
+                            "captainName": "Alfonso Santibáñez Cevallos",
+                            "shipType": 9,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        -102.28399658203125,
+                        0.010000059381127358,
+                        84.79199981689453
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Paloma",
+                            "captainName": "Gasparillo Hidalgo Varilla",
+                            "shipType": 3,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        -96.08000183105469,
+                        0.009999940171837807,
+                        92.43000030517578
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Margarita",
+                            "captainName": "Buenaventura Blanco de Trava",
+                            "shipType": 3,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        -125.54399871826172,
+                        0.010000014677643776,
+                        84.47000122070313
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Ulloa",
+                            "captainName": "Diego Hidalgo Varilla",
+                            "shipType": 3,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        78.03400421142578,
+                        0.009999940171837807,
+                        -14.63599967956543
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Juan el Chico",
+                            "captainName": "Juan Esteban Núñez",
+                            "shipType": 3,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        -40.279998779296878,
+                        0.010000059381127358,
+                        20.84000015258789
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Constantino",
+                            "captainName": "Diego Soto Aboal",
+                            "shipType": 3,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        16.549999237060548,
+                        0.010000059381127358,
+                        13.3100004196167
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Señora del Pilar",
+                            "captainName": "Benito Téllez-Girón",
+                            "shipType": 0,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        53.38800048828125,
+                        0.010000118985772133,
+                        -0.7219998836517334
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Señora del Pilar",
+                            "captainName": "Santiago Núñez Varilla",
+                            "shipType": 3,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        67.07899475097656,
+                        0.009999969974160195,
+                        -14.58799934387207
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                }
+            ],
+            "countryPatrols": [],
+            "europeanConvoys": [
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Espíritu Santo",
+                            "captainName": "Álvaro del Valdespino",
+                            "shipType": 2,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        -48.150001525878909,
+                        0.009999940171837807,
+                        87.7699966430664
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Fama",
+                            "captainName": "Juan Andrés Olite Téllez",
+                            "shipType": 9,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        47.90199661254883,
+                        0.009999940171837807,
+                        116.24099731445313
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Malaquita",
+                            "captainName": "Benito Guevara",
+                            "shipType": 1,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        53.38800048828125,
+                        0.010000118985772133,
+                        -0.7219998836517334
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Divina Pastora",
+                            "captainName": "Andrés Díaz Sapena",
+                            "shipType": 2,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        9.215999603271485,
+                        0.01000002957880497,
+                        113.51300048828125
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                }
+            ]
+        },
+        {
+            "tagKey": 1,
+            "kingdomName": "Portugal",
+            "gentilism_MALESIN": "portugués",
+            "gentilism_MALEPLU": "portugueses",
+            "gentilism_FEMSIN": "portuguesa",
+            "gentilism_FEMPLU": "portuguesas",
+            "roleFleetSpawnStats": [
+                53.0,
+                27.0,
+                12.0,
+                8.0
+            ],
+            "countryBaseStrength": 1,
+            "atWarWith": [],
+            "atTradeAgrrementWith": [],
+            "countryCities": [],
+            "countryVillages": [],
+            "countryMerchants": [],
+            "countryPatrols": [],
+            "europeanConvoys": []
+        },
+        {
+            "tagKey": 2,
+            "kingdomName": "Francia",
+            "gentilism_MALESIN": "francés",
+            "gentilism_MALEPLU": "franceses",
+            "gentilism_FEMSIN": "francesa",
+            "gentilism_FEMPLU": "francesas",
+            "roleFleetSpawnStats": [
+                54.0,
+                20.0,
+                11.0,
+                15.0
+            ],
+            "countryBaseStrength": 1,
+            "atWarWith": [],
+            "atTradeAgrrementWith": [],
+            "countryCities": [
+                {
+                    "cityName": "Fort Royale",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -122.33000183105469,
+                        0.009999999776482582,
+                        69.69000244140625
+                    ],
+                    "entryPoint": [
+                        -122.75800323486328,
+                        0.010000059381127358,
+                        70.17000579833985
+                    ],
+                    "pivotPoint": [
+                        -122.33000183105469,
+                        0.009999880567193032,
+                        68.33000183105469
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": false,
+                    "exports": [
+                        8,
+                        11
+                    ],
+                    "population": 1900,
+                    "tavernName": "La Belle Anne"
+                },
+                {
+                    "cityName": "Martinica",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -125.52999877929688,
+                        0.009999999776482582,
+                        42.95000076293945
+                    ],
+                    "entryPoint": [
+                        -125.61799621582031,
+                        0.010000059381127358,
+                        43.625999450683597
+                    ],
+                    "pivotPoint": [
+                        -125.52999877929688,
+                        0.009999880567193032,
+                        41.59000015258789
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": true,
+                    "exports": [
+                        8
+                    ],
+                    "population": 1370,
+                    "tavernName": "Les Quatre Amies"
+                },
+                {
+                    "cityName": "Guadalupe",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -118.63999938964844,
+                        0.009999999776482582,
+                        28.5
+                    ],
+                    "entryPoint": [
+                        -119.5999984741211,
+                        0.010000059381127358,
+                        28.8799991607666
+                    ],
+                    "pivotPoint": [
+                        -118.63999938964844,
+                        0.009999880567193032,
+                        27.139999389648439
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 1,
+                    "flippedX": true,
+                    "exports": [
+                        10,
+                        8
+                    ],
+                    "population": 15100,
+                    "tavernName": "Licorne"
+                },
+                {
+                    "cityName": "Cap-Français",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -17.399999618530275,
+                        0.009999999776482582,
+                        10.90999984741211
+                    ],
+                    "entryPoint": [
+                        -17.42799949645996,
+                        0.009999940171837807,
+                        10.486000061035157
+                    ],
+                    "pivotPoint": [
+                        -17.399999618530275,
+                        0.009999880567193032,
+                        9.549999237060547
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": false,
+                    "exports": [
+                        8,
+                        4
+                    ],
+                    "population": 9500,
+                    "tavernName": "La Sirène Haïtien"
+                },
+                {
+                    "cityName": "Jacmel",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -15.779999732971192,
+                        0.009999999776482582,
+                        25.08300018310547
+                    ],
+                    "entryPoint": [
+                        -15.58799934387207,
+                        0.010000118985772133,
+                        26.0310001373291
+                    ],
+                    "pivotPoint": [
+                        -15.779999732971192,
+                        0.009999880567193032,
+                        23.722999572753908
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 1,
+                    "flippedX": true,
+                    "exports": [
+                        8,
+                        7
+                    ],
+                    "population": 1600,
+                    "tavernName": "Le Diable Haïtien"
+                }
+            ],
+            "countryVillages": [
+                {
+                    "cityName": "San Martín",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -102.9000015258789,
+                        0.009999999776482582,
+                        13.510000228881836
+                    ],
+                    "entryPoint": [
+                        -102.70000457763672,
+                        0.010000059381127358,
+                        14.110000610351563
+                    ],
+                    "pivotPoint": [
+                        -102.9000015258789,
+                        0.009999880567193032,
+                        12.210000038146973
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": true,
+                    "exports": [
+                        12
+                    ],
+                    "population": 190
+                },
+                {
+                    "cityName": "Roseau",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -122.22000122070313,
+                        0.009999999776482582,
+                        36.97999954223633
+                    ],
+                    "entryPoint": [
+                        -121.52000427246094,
+                        0.01000002957880497,
+                        37.20499801635742
+                    ],
+                    "pivotPoint": [
+                        -122.22000122070313,
+                        0.009999880567193032,
+                        35.57999801635742
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": false,
+                    "exports": [
+                        5
+                    ],
+                    "population": 350
+                }
+            ],
+            "countryMerchants": [],
+            "countryPatrols": [],
+            "europeanConvoys": []
+        },
+        {
+            "tagKey": 3,
+            "kingdomName": "Holanda",
+            "gentilism_MALESIN": "holandés",
+            "gentilism_MALEPLU": "holandeses",
+            "gentilism_FEMSIN": "holandesa",
+            "gentilism_FEMPLU": "holandesas",
+            "roleFleetSpawnStats": [
+                35.0,
+                37.0,
+                10.0,
+                13.0
+            ],
+            "countryBaseStrength": 1,
+            "atWarWith": [],
+            "atTradeAgrrementWith": [],
+            "countryCities": [
+                {
+                    "cityName": "Aruba",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -43.178001403808597,
+                        0.009999999776482582,
+                        79.0999984741211
+                    ],
+                    "entryPoint": [
+                        -42.82200241088867,
+                        0.010000059381127358,
+                        79.63600158691406
+                    ],
+                    "pivotPoint": [
+                        -43.178001403808597,
+                        0.009999880567193032,
+                        77.73999786376953
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 2,
+                    "flippedX": true,
+                    "exports": [
+                        11,
+                        2,
+                        12
+                    ],
+                    "population": 1800,
+                    "tavernName": "De Mulatvrouw "
+                },
+                {
+                    "cityName": "Curazao",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -53.65999984741211,
+                        0.009999999776482582,
+                        80.91999816894531
+                    ],
+                    "entryPoint": [
+                        -52.99599838256836,
+                        0.010000059381127358,
+                        81.46399688720703
+                    ],
+                    "pivotPoint": [
+                        -53.65999984741211,
+                        0.009999880567193032,
+                        79.55999755859375
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": false,
+                    "exports": [
+                        12,
+                        4,
+                        6
+                    ],
+                    "population": 2700,
+                    "tavernName": "De Zwarte Roos"
+                }
+            ],
+            "countryVillages": [
+                {
+                    "cityName": "Tobago",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -132.83999633789063,
+                        0.009999999776482582,
+                        75.51000213623047
+                    ],
+                    "entryPoint": [
+                        -133.65499877929688,
+                        0.010000059381127358,
+                        75.91000366210938
+                    ],
+                    "pivotPoint": [
+                        -132.83999633789063,
+                        0.009999880567193032,
+                        74.11000061035156
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 1,
+                    "flippedX": false,
+                    "exports": [
+                        8
+                    ],
+                    "population": 350
+                },
+                {
+                    "cityName": "Bonaire",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -59.72999954223633,
+                        0.009999999776482582,
+                        79.5999984741211
+                    ],
+                    "entryPoint": [
+                        -59.2599983215332,
+                        0.01000002957880497,
+                        79.81999969482422
+                    ],
+                    "pivotPoint": [
+                        -59.72999954223633,
+                        0.009999880567193032,
+                        78.19999694824219
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": false,
+                    "exports": [
+                        12
+                    ],
+                    "population": 320
+                }
+            ],
+            "countryMerchants": [
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Beima",
+                            "captainName": "Cornelis Brower",
+                            "shipType": 7,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        -42.82200241088867,
+                        0.010000059381127358,
+                        79.63600158691406
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Jacoba",
+                            "captainName": "Jacob van Walbeeck",
+                            "shipType": 7,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        -42.82200241088867,
+                        0.010000059381127358,
+                        79.63600158691406
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Sweers",
+                            "captainName": "Zyman Blauvelt",
+                            "shipType": 7,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        -52.99599838256836,
+                        0.010000059381127358,
+                        81.46399688720703
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Hendrik",
+                            "captainName": "Jacob Reis",
+                            "shipType": 0,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        -52.99599838256836,
+                        0.010000059381127358,
+                        81.46399688720703
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                }
+            ],
+            "countryPatrols": [],
+            "europeanConvoys": [
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Hoop",
+                            "captainName": "Zyman Schouten",
+                            "shipType": 7,
+                            "variant": "Snowbrig",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        -42.82200241088867,
+                        0.010000059381127358,
+                        79.63600158691406
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                }
+            ]
+        },
+        {
+            "tagKey": 4,
+            "kingdomName": "Gran Bretaña",
+            "gentilism_MALESIN": "inglés",
+            "gentilism_MALEPLU": "ingleses",
+            "gentilism_FEMSIN": "inglesa",
+            "gentilism_FEMPLU": "inglesas",
+            "roleFleetSpawnStats": [
+                50.0,
+                22.0,
+                12.0,
+                16.0
+            ],
+            "countryBaseStrength": 1,
+            "atWarWith": [],
+            "atTradeAgrrementWith": [],
+            "countryCities": [
+                {
+                    "cityName": "Kingston",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        23.43000030517578,
+                        0.009999999776482582,
+                        31.8799991607666
+                    ],
+                    "entryPoint": [
+                        23.937999725341798,
+                        0.010000059381127358,
+                        32.56399917602539
+                    ],
+                    "pivotPoint": [
+                        23.43000030517578,
+                        0.009999880567193032,
+                        30.51999855041504
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": true,
+                    "exports": [
+                        8,
+                        4,
+                        0
+                    ],
+                    "population": 13000,
+                    "tavernName": "Jamaican Donkey"
+                },
+                {
+                    "cityName": "Belize",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        130.9600067138672,
+                        0.009999999776482582,
+                        37.11000061035156
+                    ],
+                    "entryPoint": [
+                        129.86000061035157,
+                        0.010000007227063179,
+                        37.1619987487793
+                    ],
+                    "pivotPoint": [
+                        130.9600067138672,
+                        0.009999880567193032,
+                        35.75
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": false,
+                    "exports": [
+                        4,
+                        11
+                    ],
+                    "population": 7500,
+                    "tavernName": "Molly's Harbour"
+                },
+                {
+                    "cityName": "Basseterre",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -106.44999694824219,
+                        0.009999999776482582,
+                        19.8700008392334
+                    ],
+                    "entryPoint": [
+                        -105.83799743652344,
+                        0.010000059381127358,
+                        20.450000762939454
+                    ],
+                    "pivotPoint": [
+                        -106.44999694824219,
+                        0.009999880567193032,
+                        18.510000228881837
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": true,
+                    "exports": [
+                        4,
+                        11,
+                        13
+                    ],
+                    "population": 7400,
+                    "tavernName": "Saint Kitts' Devil"
+                },
+                {
+                    "cityName": "Charlestown",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -108.53099822998047,
+                        0.009999999776482582,
+                        21.60700035095215
+                    ],
+                    "entryPoint": [
+                        -107.85099792480469,
+                        0.010000001639127732,
+                        21.623001098632814
+                    ],
+                    "pivotPoint": [
+                        -108.53099822998047,
+                        0.010000118985772133,
+                        22.727001190185548
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 2,
+                    "flippedX": true,
+                    "exports": [
+                        10,
+                        13,
+                        11,
+                        4
+                    ],
+                    "population": 6500,
+                    "tavernName": "Nevis's Siren"
+                },
+                {
+                    "cityName": "Barbados",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -139.80999755859376,
+                        0.009999999776482582,
+                        54.7400016784668
+                    ],
+                    "entryPoint": [
+                        -139.593994140625,
+                        0.010000118985772133,
+                        55.7760009765625
+                    ],
+                    "pivotPoint": [
+                        -139.80999755859376,
+                        0.009999880567193032,
+                        53.62000274658203
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 1,
+                    "flippedX": false,
+                    "exports": [
+                        8
+                    ],
+                    "population": 1600,
+                    "tavernName": "The Sea Dragon"
+                },
+                {
+                    "cityName": "Monserrat",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -112.4010009765625,
+                        0.009999999776482582,
+                        24.618999481201173
+                    ],
+                    "entryPoint": [
+                        -111.77300262451172,
+                        0.009999984875321389,
+                        24.451000213623048
+                    ],
+                    "pivotPoint": [
+                        -112.4010009765625,
+                        0.010000118985772133,
+                        25.73900032043457
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": false,
+                    "exports": [
+                        8,
+                        9
+                    ],
+                    "population": 1750,
+                    "tavernName": "The Sea Lady"
+                },
+                {
+                    "cityName": "Antigua",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -116.0199966430664,
+                        0.009999999776482582,
+                        20.81999969482422
+                    ],
+                    "entryPoint": [
+                        -116.25999450683594,
+                        0.009999940171837807,
+                        20.18000030517578
+                    ],
+                    "pivotPoint": [
+                        -116.0199966430664,
+                        0.010000118985772133,
+                        21.940000534057618
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": false,
+                    "exports": [
+                        8
+                    ],
+                    "population": 2000,
+                    "tavernName": "The Privateer"
+                }
+            ],
+            "countryVillages": [
+                {
+                    "cityName": "Barbuda",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -114.64399719238281,
+                        0.009999999776482582,
+                        15.53499984741211
+                    ],
+                    "entryPoint": [
+                        -114.6189956665039,
+                        0.010000059381127358,
+                        16.225000381469728
+                    ],
+                    "pivotPoint": [
+                        -114.64399719238281,
+                        0.010000118985772133,
+                        16.934999465942384
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": true,
+                    "exports": [
+                        0
+                    ],
+                    "population": 200
+                },
+                {
+                    "cityName": "Providencia",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        65.06700134277344,
+                        0.009999999776482582,
+                        80.33799743652344
+                    ],
+                    "entryPoint": [
+                        65.552001953125,
+                        0.009999969974160195,
+                        80.03799438476563
+                    ],
+                    "pivotPoint": [
+                        65.06700134277344,
+                        0.010000118985772133,
+                        81.73799896240235
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": true,
+                    "exports": [
+                        9
+                    ],
+                    "population": 180
+                },
+                {
+                    "cityName": "Bluefields",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        87.8499984741211,
+                        0.009999999776482582,
+                        94.76000213623047
+                    ],
+                    "entryPoint": [
+                        87.625,
+                        0.010000118985772133,
+                        95.53500366210938
+                    ],
+                    "pivotPoint": [
+                        87.8499984741211,
+                        0.00999976135790348,
+                        93.06000518798828
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 1,
+                    "flippedX": true,
+                    "exports": [
+                        11
+                    ],
+                    "population": 550
+                },
+                {
+                    "cityName": "Corn Island",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        81.14099884033203,
+                        0.009999999776482582,
+                        93.44400024414063
+                    ],
+                    "entryPoint": [
+                        80.50599670410156,
+                        0.01000002957880497,
+                        93.68399810791016
+                    ],
+                    "pivotPoint": [
+                        81.14099884033203,
+                        0.00999976135790348,
+                        91.74400329589844
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": true,
+                    "exports": [
+                        0
+                    ],
+                    "population": 250
+                },
+                {
+                    "cityName": "George Town",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        66.77300262451172,
+                        0.009999999776482582,
+                        22.451000213623048
+                    ],
+                    "entryPoint": [
+                        66.7030029296875,
+                        0.009999940171837807,
+                        21.981000900268556
+                    ],
+                    "pivotPoint": [
+                        66.77300262451172,
+                        0.009999880567193032,
+                        21.1510009765625
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 1,
+                    "flippedX": false,
+                    "exports": [
+                        2
+                    ],
+                    "population": 200
+                },
+                {
+                    "cityName": "San VIcente",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -126.27999877929688,
+                        0.009999999776482582,
+                        56.86000061035156
+                    ],
+                    "entryPoint": [
+                        -126.90499877929688,
+                        0.010000059381127358,
+                        57.43000030517578
+                    ],
+                    "pivotPoint": [
+                        -126.27999877929688,
+                        0.00999976135790348,
+                        55.15999984741211
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 1,
+                    "flippedX": false,
+                    "exports": [
+                        1
+                    ],
+                    "population": 170
+                },
+                {
+                    "cityName": "Santa Lucía",
+                    "alternativeName": "",
+                    "revealed": false,
+                    "position": [
+                        -127.90599822998047,
+                        0.009999999776482582,
+                        48.98099899291992
+                    ],
+                    "entryPoint": [
+                        -127.28099822998047,
+                        0.009999969974160195,
+                        48.650997161865237
+                    ],
+                    "pivotPoint": [
+                        -127.90599822998047,
+                        0.010000118985772133,
+                        50.38100051879883
+                    ],
+                    "eventsPoint": [],
+                    "spriteIndex": 0,
+                    "flippedX": true,
+                    "exports": [
+                        8
+                    ],
+                    "population": 260
+                }
+            ],
+            "countryMerchants": [
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Altair",
+                            "captainName": "Eamon Linn",
+                            "shipType": 1,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        23.937999725341798,
+                        0.010000059381127358,
+                        32.56399917602539
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Wilbur",
+                            "captainName": "Rush Radburn",
+                            "shipType": 0,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        129.86000061035157,
+                        0.010000007227063179,
+                        37.1619987487793
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Veronica",
+                            "captainName": "Charles Hanford",
+                            "shipType": 7,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        -105.83799743652344,
+                        0.010000059381127358,
+                        20.450000762939454
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Little Ben",
+                            "captainName": "John Tennant",
+                            "shipType": 7,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        -107.85099792480469,
+                        0.010000001639127732,
+                        21.623001098632814
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Courtney",
+                            "captainName": "Macy Howland",
+                            "shipType": 7,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        -139.593994140625,
+                        0.010000118985772133,
+                        55.7760009765625
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Forster",
+                            "captainName": "Stede Langhorne",
+                            "shipType": 0,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        -111.77300262451172,
+                        0.009999984875321389,
+                        24.451000213623048
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Vindictive",
+                            "captainName": "Robert Harper",
+                            "shipType": 0,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        -116.25999450683594,
+                        0.009999940171837807,
+                        20.18000030517578
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                }
+            ],
+            "countryPatrols": [],
+            "europeanConvoys": [
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "HMSForce",
+                            "captainName": "Nickleby Dryden",
+                            "shipType": 1,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        129.86000061035157,
+                        0.010000007227063179,
+                        37.1619987487793
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                }
+            ]
+        }
+    ],
+    "naturalPorts": [
+        {
+            "cityName": "Turbo",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                19.54199981689453,
+                0.009999999776482582,
+                128.4499969482422
+            ],
+            "entryPoint": [
+                20.03999900817871,
+                0.009999999776482582,
+                128.4499969482422
+            ],
+            "pivotPoint": [
+                19.54199981689453,
+                0.009999880567193032,
+                127.18999481201172
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "calado": 1
+        },
+        {
+            "cityName": "Higuerote",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                -81.02999877929688,
+                0.009999999776482582,
+                93.5
+            ],
+            "entryPoint": [
+                -81.37799835205078,
+                0.009999998845160008,
+                93.49400329589844
+            ],
+            "pivotPoint": [
+                -81.02999877929688,
+                0.010000118985772133,
+                94.76000213623047
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "calado": 3
+        },
+        {
+            "cityName": "Isla Saona",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                -52.220001220703128,
+                0.009999999776482582,
+                21.549999237060548
+            ],
+            "entryPoint": [
+                -51.76499938964844,
+                0.009999984875321389,
+                21.381999969482423
+            ],
+            "pivotPoint": [
+                -52.220001220703128,
+                0.010000118985772133,
+                22.809999465942384
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "calado": 3
+        },
+        {
+            "cityName": "Isla de la Gonave",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                -9.220000267028809,
+                0.009999999776482582,
+                18.944000244140626
+            ],
+            "entryPoint": [
+                -9.058000564575196,
+                0.009999984875321389,
+                18.757999420166017
+            ],
+            "pivotPoint": [
+                -9.220000267028809,
+                0.010000118985772133,
+                20.20400047302246
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "calado": 3
+        },
+        {
+            "cityName": "Cat Island",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                16.920000076293947,
+                0.009999999776482582,
+                -30.860000610351564
+            ],
+            "entryPoint": [
+                17.238000869750978,
+                0.01000002957880497,
+                -30.560001373291017
+            ],
+            "pivotPoint": [
+                16.920000076293947,
+                0.009999880567193032,
+                -32.119998931884769
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "calado": 1
+        },
+        {
+            "cityName": "Bahía Honda",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                84.54000091552735,
+                0.009999999776482582,
+                -12.539999961853028
+            ],
+            "entryPoint": [
+                85.45800018310547,
+                0.009999992325901986,
+                -12.605999946594239
+            ],
+            "pivotPoint": [
+                84.54000091552735,
+                0.010000118985772133,
+                -11.279999732971192
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "calado": 3
+        },
+        {
+            "cityName": "Bahía de Cárdenas",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                59.779998779296878,
+                0.009999999776482582,
+                -13.149999618530274
+            ],
+            "entryPoint": [
+                59.88800048828125,
+                0.009999969974160195,
+                -13.342000007629395
+            ],
+            "pivotPoint": [
+                59.779998779296878,
+                0.010000118985772133,
+                -11.889999389648438
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "calado": 3
+        },
+        {
+            "cityName": "Caimanera",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                10.15999984741211,
+                0.009999999776482582,
+                11.380000114440918
+            ],
+            "entryPoint": [
+                10.729999542236329,
+                0.010000118985772133,
+                12.130000114440918
+            ],
+            "pivotPoint": [
+                10.15999984741211,
+                0.009999880567193032,
+                10.119999885559082
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "calado": 3
+        },
+        {
+            "cityName": "Laguna Chiquirí",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                61.0,
+                0.009999999776482582,
+                122.22000122070313
+            ],
+            "entryPoint": [
+                60.77199935913086,
+                0.010000059381127358,
+                122.89199829101563
+            ],
+            "pivotPoint": [
+                61.0,
+                0.010000118985772133,
+                123.4800033569336
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "calado": 2
+        },
+        {
+            "cityName": "Isla Cotorra",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                -117.45999908447266,
+                0.009999999776482582,
+                91.19999694824219
+            ],
+            "entryPoint": [
+                -117.45999908447266,
+                0.010000059381127358,
+                91.87799835205078
+            ],
+            "pivotPoint": [
+                -117.45999908447266,
+                0.009999880567193032,
+                89.93999481201172
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "calado": 1
+        },
+        {
+            "cityName": "Delta del Orinoco",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                -131.16000366210938,
+                0.009999999776482582,
+                101.18000030517578
+            ],
+            "entryPoint": [
+                -132.35400390625,
+                0.01000002957880497,
+                101.51599884033203
+            ],
+            "pivotPoint": [
+                -131.16000366210938,
+                0.010000118985772133,
+                102.44000244140625
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "calado": 1
+        },
+        {
+            "cityName": "Nuevitas del Príncipe",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                31.149999618530275,
+                0.009999999776482582,
+                -1.309999942779541
+            ],
+            "entryPoint": [
+                30.963998794555665,
+                0.010000001639127732,
+                -1.2979999780654908
+            ],
+            "pivotPoint": [
+                31.149999618530275,
+                0.010000118985772133,
+                -0.04999983310699463
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "calado": 2
+        }
+    ],
+    "hideouts": [
+        {
+            "cityName": "Isla la Tortuga",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                -88.79000091552735,
+                0.009999999776482582,
+                87.06999969482422
+            ],
+            "entryPoint": [
+                -88.80799865722656,
+                0.010000059381127358,
+                87.77799987792969
+            ],
+            "pivotPoint": [
+                -88.79000091552735,
+                0.009999880567193032,
+                85.98999786376953
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "exports": [
+                12
+            ]
+        },
+        {
+            "cityName": "Araya",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                -99.2300033569336,
+                0.009999999776482582,
+                88.54000091552735
+            ],
+            "entryPoint": [
+                -98.31200408935547,
+                0.009999984875321389,
+                88.4020004272461
+            ],
+            "pivotPoint": [
+                -99.2300033569336,
+                0.009999880567193032,
+                87.45999908447266
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": true,
+            "exports": [
+                12
+            ]
+        },
+        {
+            "cityName": "Ponce",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                -72.05000305175781,
+                0.009999999776482582,
+                19.889999389648439
+            ],
+            "entryPoint": [
+                -72.05000305175781,
+                0.010000059381127358,
+                20.555999755859376
+            ],
+            "pivotPoint": [
+                -72.05000305175781,
+                0.009999880567193032,
+                18.809999465942384
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "exports": [
+                8
+            ]
+        },
+        {
+            "cityName": "Islas Turcas",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                -20.25,
+                0.009999999776482582,
+                -9.239999771118164
+            ],
+            "entryPoint": [
+                -20.56800079345703,
+                0.010000118985772133,
+                -8.429999351501465
+            ],
+            "pivotPoint": [
+                -20.25,
+                0.009999880567193032,
+                -10.319999694824219
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "exports": [
+                12
+            ]
+        },
+        {
+            "cityName": "Baracoa",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                4.929999828338623,
+                0.009999999776482582,
+                6.690000057220459
+            ],
+            "entryPoint": [
+                4.491999626159668,
+                0.009999969974160195,
+                6.3420000076293949
+            ],
+            "pivotPoint": [
+                4.929999828338623,
+                0.010000118985772133,
+                7.770000457763672
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "exports": [
+                7
+            ]
+        },
+        {
+            "cityName": "Tucacas",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                -59.2400016784668,
+                0.009999999776482582,
+                93.0999984741211
+            ],
+            "entryPoint": [
+                -60.230003356933597,
+                0.010000059381127358,
+                93.75399780273438
+            ],
+            "pivotPoint": [
+                -59.2400016784668,
+                0.009999880567193032,
+                92.0199966430664
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "exports": [
+                6
+            ]
+        },
+        {
+            "cityName": "Río Unare",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                -90.25,
+                0.009999999776482582,
+                95.56999969482422
+            ],
+            "entryPoint": [
+                -90.02200317382813,
+                0.009999940171837807,
+                95.15599822998047
+            ],
+            "pivotPoint": [
+                -90.25,
+                0.010000118985772133,
+                96.6500015258789
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "exports": [
+                0
+            ]
+        },
+        {
+            "cityName": "Puerto Plata",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                -30.93000030517578,
+                0.009999999776482582,
+                8.491000175476075
+            ],
+            "entryPoint": [
+                -30.9060001373291,
+                0.009999969974160195,
+                8.1850004196167
+            ],
+            "pivotPoint": [
+                -30.93000030517578,
+                0.010000118985772133,
+                9.571000099182129
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "exports": [
+                0,
+                8
+            ]
+        }
+    ],
+    "shelters": [
+        {
+            "cityName": "Tortuga",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                -11.489999771118164,
+                0.009999999776482582,
+                7.920000076293945
+            ],
+            "entryPoint": [
+                -11.529999732971192,
+                0.010000118985772133,
+                8.890000343322754
+            ],
+            "pivotPoint": [
+                -11.489999771118164,
+                0.009999880567193032,
+                6.619999885559082
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "exports": [],
+            "tavernName": "La Dama de Amsterdam",
+            "entryCondition": {
+                "requirement": 0,
+                "value": 0
+            }
+        },
+        {
+            "cityName": "Hôpital",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                -17.530000686645509,
+                0.009999999776482582,
+                21.579999923706056
+            ],
+            "entryPoint": [
+                -16.6200008392334,
+                0.01000002957880497,
+                21.850000381469728
+            ],
+            "pivotPoint": [
+                -17.530000686645509,
+                0.009999880567193032,
+                20.280000686645509
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "exports": [],
+            "tavernName": "La Dama de Amsterdam",
+            "entryCondition": {
+                "requirement": 0,
+                "value": 0
+            }
+        },
+        {
+            "cityName": "George Town",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                20.700000762939454,
+                0.009999999776482582,
+                -23.06999969482422
+            ],
+            "entryPoint": [
+                20.700000762939454,
+                0.010000118985772133,
+                -22.19499969482422
+            ],
+            "pivotPoint": [
+                20.700000762939454,
+                0.009999880567193032,
+                -24.369998931884767
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "exports": [],
+            "tavernName": "La Dama de Amsterdam",
+            "entryCondition": {
+                "requirement": 0,
+                "value": 0
+            }
+        },
+        {
+            "cityName": "San Salvador",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                7.989999771118164,
+                0.009999999776482582,
+                -28.799999237060548
+            ],
+            "entryPoint": [
+                8.554999351501465,
+                0.01000002957880497,
+                -28.57499885559082
+            ],
+            "pivotPoint": [
+                7.989999771118164,
+                0.010000118985772133,
+                -27.5
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "exports": [],
+            "tavernName": "La Dama de Amsterdam",
+            "entryCondition": {
+                "requirement": 0,
+                "value": 0
+            }
+        },
+        {
+            "cityName": "San Andrés",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                68.41999816894531,
+                0.009999999776482582,
+                89.05999755859375
+            ],
+            "entryPoint": [
+                69.03499603271485,
+                0.009999999776482582,
+                89.05999755859375
+            ],
+            "pivotPoint": [
+                68.41999816894531,
+                0.010000118985772133,
+                90.36000061035156
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "exports": [],
+            "tavernName": "La Dama de Amsterdam",
+            "entryCondition": {
+                "requirement": 0,
+                "value": 0
+            }
+        },
+        {
+            "cityName": "Roatán",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                114.08000183105469,
+                0.009999999776482582,
+                52.22999954223633
+            ],
+            "entryPoint": [
+                114.08000183105469,
+                0.010000118985772133,
+                53.07999801635742
+            ],
+            "pivotPoint": [
+                114.08000183105469,
+                0.009999880567193032,
+                50.93000030517578
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "exports": [],
+            "tavernName": "La Dama de Amsterdam",
+            "entryCondition": {
+                "requirement": 0,
+                "value": 0
+            }
+        },
+        {
+            "cityName": "Nassau",
+            "alternativeName": "",
+            "revealed": false,
+            "position": [
+                37.31999969482422,
+                0.009999999776482582,
+                -31.420000076293947
+            ],
+            "entryPoint": [
+                37.07999801635742,
+                0.009999999776482582,
+                -31.420000076293947
+            ],
+            "pivotPoint": [
+                37.31999969482422,
+                0.009999880567193032,
+                -32.720001220703128
+            ],
+            "eventsPoint": [],
+            "spriteIndex": 0,
+            "flippedX": false,
+            "exports": [],
+            "tavernName": "La Dama de Amsterdam",
+            "entryCondition": {
+                "requirement": 0,
+                "value": 0
+            }
+        }
+    ]
+}

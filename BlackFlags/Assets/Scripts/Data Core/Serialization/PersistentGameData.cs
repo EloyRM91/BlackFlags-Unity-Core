@@ -1699,29 +1699,6 @@ namespace GameMechanics.save
                 countryVillages[i] = new SerializableTown(town);
             }
 
-            //Recorro los poolings en busca de mercantes, patrullas y convoyes europeos
-            //!esto no funciona. se realizará el recorrido grupo a grupo
-            //for (int i = 2; i < 5; i++)
-            //{
-            //    SerializableConvoy[] target = i == 2
-            //        ? countryMerchants : i == 3
-            //        ? countryPatrols
-            //        : europeanConvoys;
-            //    var shipsContainer = kTransform.GetChild(i);
-            //    var shipsList = new List<SerializableConvoy>();
-
-            //    for (int j = 0; j < shipsContainer.childCount; j++)
-            //    {
-            //        var shipObj = shipsContainer.GetChild(j);
-            //        if (shipObj.gameObject.activeSelf)
-            //        {
-            //            var s = shipObj.GetComponent<ConvoyNPC>();
-            //            shipsList.Add(new SerializableConvoy(s));
-            //        }
-            //    }
-            //    target = shipsList.ToArray();
-            //}
-
             var shipsContainer = kTransform.GetChild(2);
             var shipsList = new List<SerializableConvoy>();
             for (int i = 0; i < shipsContainer.childCount; i++)
@@ -2060,6 +2037,97 @@ namespace GameMechanics.save
 
     #endregion
 
+    #region DATA (DEV ONLY)
+    /// <summary>
+    /// An object that contains the kingdoms and cities info for starting a new game.
+    /// In a sense, creating a new game is like loading a saved game, but such saved game contains the initial kingdoms data only
+    /// </summary>
+    [Serializable]
+    public class StartGameData : SerializationConverter
+    {
+        public DateTime WorldDate; // fecha de la partida
+
+        //-----------------------------
+        //World: Cities and KeyPoints
+        //-----------------------------
+
+        public SerializableKingdom[] kingdoms;
+        public SerializableNaturalPort[] naturalPorts;
+        public SerializableSmugglersPost[] hideouts;
+        public SerializablePirateShelter[] shelters;
+
+        public StartGameData()
+        {
+            //Basic Game Data
+            WorldDate = TimeManager.WorldDate;
+
+            //* World, kingdoms and cities:
+            //Kingdoms:
+            var kingdomsContainer = GameObject.FindWithTag("Kingdoms").transform;
+            kingdoms = new SerializableKingdom[kingdomsContainer.childCount];
+            for (int i = 0; i < kingdomsContainer.childCount; i++)
+            {
+                var k = kingdomsContainer.GetChild(i).GetComponent<Kingdom>();
+                kingdoms[i] = new SerializableKingdom(k, k.transform);
+            }
+
+            var worldPlacesContainer = GameObject.FindWithTag("WorldPlaces").transform;
+
+            //Natural shelters:
+            var naturalPortsContainer = worldPlacesContainer.GetChild(0);
+            naturalPorts = new SerializableNaturalPort[naturalPortsContainer.childCount];
+
+            for (int i = 0; i < naturalPortsContainer.childCount; i++)
+            {
+                var p = naturalPortsContainer.GetChild(i).GetComponent<MB_NaturalPort>();
+                naturalPorts[i] = new SerializableNaturalPort(p);
+            }
+
+            //Smugglers hideouts
+            var smugglersHideoutsContainer = worldPlacesContainer.GetChild(1);
+            hideouts = new SerializableSmugglersPost[smugglersHideoutsContainer.childCount];
+
+            for (int i = 0; i < smugglersHideoutsContainer.childCount; i++)
+            {
+                var p = smugglersHideoutsContainer.GetChild(i).GetComponent<MB_SmugglersPost>();
+                hideouts[i] = new SerializableSmugglersPost(p);
+            }
+            
+            //Pirate shelters
+            var pirateSheltersContainer = worldPlacesContainer.GetChild(2);
+            shelters = new SerializablePirateShelter[pirateSheltersContainer.childCount];
+
+            for (int i = 0; i < pirateSheltersContainer.childCount; i++)
+            {
+                var p = pirateSheltersContainer.GetChild(i).GetComponent<MB_PirateShelter>();
+                shelters[i] = new SerializablePirateShelter(p);
+            }
+        }
+
+        //--------------------------------
+        // DATOS INICIALES DE PARTIDA (CIUDADES Y REINOS)
+        //--------------------------------
+#if UNITY_EDITOR
+        /// <summary>
+        /// Función encargada de generar un json con datos iniciales del mundo para una partida.
+        /// Esta función se debe utilizar como desarrollador o para modding
+        /// </summary>
+        public static void GenerateStartGameJson(StartGameData startGameData)
+        {
+            //!esto no compila
+        }
+
+        /// <summary>
+        /// Función encargada de generar un binaryfile con datos iniciales del mundo para una 
+        /// partida. Esta función se debe utilizar como desarrollador o para modding
+        /// </summary>
+        public static void GenerateStartGameBin(StartGameData startGameData)
+        {
+            //!esto no compila
+        }
+#endif
+    }
+    #endregion
     #region SAVE GAME
 
     [Serializable]
@@ -2239,7 +2307,6 @@ namespace GameMechanics.save
             surplus = ShipInventory.Surplus;
 
             //* World, kingdoms and cities:
-
             //Kingdoms:
             var kingdomsContainer = GameObject.FindWithTag("Kingdoms").transform;
             kingdoms = new SerializableKingdom[kingdomsContainer.childCount];
@@ -2270,7 +2337,6 @@ namespace GameMechanics.save
                 var p = smugglersHideoutsContainer.GetChild(i).GetComponent<MB_SmugglersPost>();
                 hideouts[i] = new SerializableSmugglersPost(p);
             }
-
             
             //Pirate shelters
             var pirateSheltersContainer = worldPlacesContainer.GetChild(2);
@@ -2287,17 +2353,19 @@ namespace GameMechanics.save
     [Serializable]
     public class SerializationUtilities : SerializationConverter
     {
-        protected string getFileExtension()
+        public string extension = ".pirate";
+
+        protected virtual string getFileExtension()
         {
             var currentMod = PersistentGameSettings.currentMod;
 
             if (currentMod == null)
             {
-                return ".pirate";
+                return extension;
             }
             else if (currentMod.gameLogic != null)
             {
-                //extersión de partidas guardadas del mod:
+                //extensión de partidas guardadas del mod:
                 var ext = currentMod.gameLogic.modFileExt;
                 if (ext != string.Empty)
                 {
@@ -2343,7 +2411,7 @@ namespace GameMechanics.save
         public void SaveGame(string fileName, bool overWrite = false)
         {
             var path = getRoute() + fileName + getFileExtension();
-            Debug.Log("saving: " + path);
+            // Debug.Log("saving: " + path);
 
             if (File.Exists(path) && !overWrite)
             {
@@ -2361,9 +2429,62 @@ namespace GameMechanics.save
                 binaryFormatter.Serialize(stream, this.savedFile);
                 stream.Close();
             }
-
         }
     }
+
+#if UNITY_EDITOR
+    public class StartGameBinaryFormat : SerializationUtilities
+    {
+        public StartGameData savedFile;
+
+        public StartGameBinaryFormat(StartGameData savedFile)
+        {
+            this.savedFile = savedFile;
+        }
+
+        protected override string getFileExtension()
+        {
+            extension = ".start";
+            return base.getFileExtension();
+        }
+
+        public void WorldData(string fileName)
+        {
+            var path = getRoute() + fileName + getFileExtension();
+
+            var binaryFormatter = new BinaryFormatter();
+            var stream = new FileStream(path, FileMode.Create);
+
+            //Serialización:
+            binaryFormatter.Serialize(stream, this.savedFile);
+            stream.Close();
+        }
+    }
+
+    public class StartGameJSONFormat : SerializationUtilities
+    {
+        public StartGameData savedFile;
+
+        public StartGameJSONFormat(StartGameData savedFile)
+        {
+            this.savedFile = savedFile;
+        }
+
+        protected override string getFileExtension()
+        {
+            extension = ".json";
+            return base.getFileExtension();
+        }
+
+        public void WorldData(string fileName)
+        {
+            var path = getRoute() + fileName + getFileExtension();
+            //Serialización:
+            File.WriteAllText(path, JsonUtility.ToJson(savedFile, true));
+            Debug.Log("SerializeJSON: success");
+        }
+    }
+#endif
 
 #endregion
 

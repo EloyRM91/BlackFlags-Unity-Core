@@ -21,8 +21,7 @@ namespace Serialization
             {
                 Debug.LogError(e);
                 return false;
-            }
-            
+            } 
         }
 
         public static T LoadJson<T>( string path)
@@ -32,8 +31,12 @@ namespace Serialization
             return data;
         }
 
+        //--------------------------------
+        // MAPA DE CORRIENTES
+        //--------------------------------
 
-        //aqu� voy a poner un ejemplo de serializaci�n de mapa de corrientes con los datos por defecto
+
+        //aquí voy a poner un ejemplo de serialización de mapa de corrientes con los datos por defecto
         public static void createDefaultCurrentsMap()
         {
             int[] bufferArray = 
@@ -82,6 +85,29 @@ namespace Serialization
             var currentsMap = LoadJson<serializable_CurrentsMapData>(path);
             return new CurrentsMapData(currentsMap.boundingBox, currentsMap.tilesX, currentsMap.tilesZ, currentsMap.bufferArray);
         }
+
+        //--------------------------------
+        // DATOS INICIALES DE PARTIDA (CIUDADES Y REINOS)
+        //--------------------------------
+// #if UNITY_EDITOR
+        // /// <summary>
+        // /// Función encargada de generar un json con datos iniciales del mundo para una partida.
+        // /// Esta función se debe utilizar como desarrollador o para modding
+        // /// </summary>
+        // public static void GenerateStartGameJson(StartGameData startGameData)
+        // {
+        //     //!esto no compila
+        // }
+
+        // /// <summary>
+        // /// Función encargada de generar un binaryfile con datos iniciales del mundo para una 
+        // /// partida. Esta función se debe utilizar como desarrollador o para modding
+        // /// </summary>
+        // public static void GenerateStartGameBin(StartGameData startGameData)
+        // {
+        //     //!esto no compila
+        // }
+// #endif
     }
 
     public class serializable_CurrentsMapData
