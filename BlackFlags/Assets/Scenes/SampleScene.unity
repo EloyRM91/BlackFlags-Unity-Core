@@ -9966,7 +9966,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Higuerote
-  alternativeName: 
+  alternativeName: Carenero de Higuerote
   spriteNonSelected: {fileID: 21300000, guid: 5b9343175c50b5a4bb7d901efb73f63e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 43b6ccbb7c8f445468cfa687218e6070, type: 3}
   linkedUIBanner: {fileID: 1566232447}
@@ -11088,7 +11088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Puerto Espa\xF1a"
-  alternativeName: 
+  alternativeName: Puerto de Isla Trinidad
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 320941820}
@@ -19609,7 +19609,7 @@ MonoBehaviour:
   _entryCondition:
     requirement: 5
     value: 10
-  tavernName: La Dama de Amsterdam
+  tavernName: Roberts' Blood
   convoysInThisPort: []
 --- !u!212 &126701433
 SpriteRenderer:
@@ -52442,7 +52442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Turbo
-  alternativeName: 
+  alternativeName: "Bah\xEDa Turbo"
   spriteNonSelected: {fileID: 21300000, guid: 5b9343175c50b5a4bb7d901efb73f63e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 43b6ccbb7c8f445468cfa687218e6070, type: 3}
   linkedUIBanner: {fileID: 933677681}
@@ -54446,8 +54446,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d691ff1f2631049b8213681df0f330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cityName: San VIcente
-  alternativeName: 
+  cityName: Saint Vicent
+  alternativeName: Isla de San Vicente
   spriteNonSelected: {fileID: 21300000, guid: ee2f25b78318fc3479edd54226acfdc9, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: b482be2a33027fa4ba6b91020754746c, type: 3}
   linkedUIBanner: {fileID: 1430454081}
@@ -55226,7 +55226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Barbados
-  alternativeName: 
+  alternativeName: Isla de Barbados
   spriteNonSelected: {fileID: 21300000, guid: fbd72c1eae4676344830592a05792fa4, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: d78a086afde268248a7e918c519006c8, type: 3}
   linkedUIBanner: {fileID: 1130958642}
@@ -56160,7 +56160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Isla Cotorra
-  alternativeName: 
+  alternativeName: Delta del Amacuro (Cotorra)
   spriteNonSelected: {fileID: 21300000, guid: 5b9343175c50b5a4bb7d901efb73f63e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 43b6ccbb7c8f445468cfa687218e6070, type: 3}
   linkedUIBanner: {fileID: 792867175}
@@ -57066,7 +57066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: George Town
-  alternativeName: 
+  alternativeName: "Gran Caim\xE1n"
   spriteNonSelected: {fileID: 21300000, guid: ee2f25b78318fc3479edd54226acfdc9, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: b482be2a33027fa4ba6b91020754746c, type: 3}
   linkedUIBanner: {fileID: 729238331}
@@ -57266,7 +57266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Caracas
-  alternativeName: 
+  alternativeName: Ciudad de Caracas
   spriteNonSelected: {fileID: 21300000, guid: fbd72c1eae4676344830592a05792fa4, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: d78a086afde268248a7e918c519006c8, type: 3}
   linkedUIBanner: {fileID: 389707819}
@@ -60350,7 +60350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Caimanera
-  alternativeName: 
+  alternativeName: La Caimanera
   spriteNonSelected: {fileID: 21300000, guid: 5b9343175c50b5a4bb7d901efb73f63e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 43b6ccbb7c8f445468cfa687218e6070, type: 3}
   linkedUIBanner: {fileID: 1601515998}
@@ -62988,7 +62988,7 @@ MonoBehaviour:
   _entryCondition:
     requirement: 5
     value: 65
-  tavernName: La Dama de Amsterdam
+  tavernName: La Taberna de Nancy
   convoysInThisPort: []
 --- !u!212 &389762486
 SpriteRenderer:
@@ -63103,7 +63103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Cartagena
-  alternativeName: 
+  alternativeName: Ciudad de Cartagena
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 296573201}
@@ -73081,7 +73081,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.106000006, y: 0.026}
   m_AnchorMax: {x: 0.89300007, y: 0.18422222}
-  m_AnchoredPosition: {x: 1, y: -0.4706421}
+  m_AnchoredPosition: {x: 1, y: -0.47061157}
   m_SizeDelta: {x: -0.89559937, y: -4.9723}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &417046606
@@ -82829,7 +82829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "La Asunci\xF3n"
-  alternativeName: 
+  alternativeName: "La Margarita (Asunci\xF3n)"
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 440725961}
@@ -89967,7 +89967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Curazao
-  alternativeName: 
+  alternativeName: Isla de Curazao
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 974795322}
@@ -102680,7 +102680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Cuman\xE1"
-  alternativeName: 
+  alternativeName: "Puerto de las Perlas de Cuman\xE1"
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 1395248727}
@@ -105077,7 +105077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Martinica
-  alternativeName: 
+  alternativeName: Martinique
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 400582666}
@@ -105770,7 +105770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Aruba
-  alternativeName: 
+  alternativeName: Isla de Aruba
   spriteNonSelected: {fileID: 21300000, guid: 2d27bdc4a97e0184aa49ccdc0d1ed358, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 3443db12ef013da4898810c48ec82429, type: 3}
   linkedUIBanner: {fileID: 316596976}
@@ -107461,7 +107461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Mo\xF1itos"
-  alternativeName: 
+  alternativeName: "Villa de Mo\xF1itos"
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 1662711919}
@@ -109041,7 +109041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Mo\xEDn"
-  alternativeName: 
+  alternativeName: "Bah\xEDa de Mo\xEDn"
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 125183348}
@@ -111123,7 +111123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Fort Royale
-  alternativeName: 
+  alternativeName: Isla de La Granade
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 2418526}
@@ -112475,7 +112475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Villa Trujillo
-  alternativeName: 
+  alternativeName: Trujillo
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 142501681}
@@ -115542,7 +115542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: San Carlos de Macuro
-  alternativeName: 
+  alternativeName: Macuro
   spriteNonSelected: {fileID: 21300000, guid: ee2f25b78318fc3479edd54226acfdc9, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: b482be2a33027fa4ba6b91020754746c, type: 3}
   linkedUIBanner: {fileID: 609532511}
@@ -121911,7 +121911,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Basseterre
-  alternativeName: 
+  alternativeName: "Isla de San Crist\xF3bal"
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 864581257}
@@ -122346,7 +122346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Belize
-  alternativeName: 
+  alternativeName: Belize Town
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 828751308}
@@ -124118,7 +124118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Puerto Plata
-  alternativeName: 
+  alternativeName: Puerto de Plata
   spriteNonSelected: {fileID: 21300000, guid: 2af1203ad0a41064b8611a66b210077e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 5e87ae7460529e641b8042b55bdca510, type: 3}
   linkedUIBanner: {fileID: 261653792}
@@ -141713,7 +141713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Puerto Viejo de Talamanca
-  alternativeName: 
+  alternativeName: Puerto Viejo
   spriteNonSelected: {fileID: 21300000, guid: ee2f25b78318fc3479edd54226acfdc9, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: b482be2a33027fa4ba6b91020754746c, type: 3}
   linkedUIBanner: {fileID: 514156356}
@@ -142116,7 +142116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Cap-Fran\xE7ais"
-  alternativeName: 
+  alternativeName: "Cap-Ha\xEFtien"
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 2081384136}
@@ -143425,7 +143425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Gibraltar
-  alternativeName: 
+  alternativeName: San Antonio de Gibraltar
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 354778659}
@@ -143554,7 +143554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Islas Turcas
-  alternativeName: 
+  alternativeName: Las Turcas
   spriteNonSelected: {fileID: 21300000, guid: 2af1203ad0a41064b8611a66b210077e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 5e87ae7460529e641b8042b55bdca510, type: 3}
   linkedUIBanner: {fileID: 1917069180}
@@ -144954,7 +144954,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Pil\xF3n"
-  alternativeName: 
+  alternativeName: "Villa de Pil\xF3n"
   spriteNonSelected: {fileID: 21300000, guid: ee2f25b78318fc3479edd54226acfdc9, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: b482be2a33027fa4ba6b91020754746c, type: 3}
   linkedUIBanner: {fileID: 95225171}
@@ -145076,7 +145076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "San Andr\xE9s"
-  alternativeName: 
+  alternativeName: "Isla de San Andr\xE9s"
   spriteNonSelected: {fileID: 21300000, guid: dee28b6043c67cd468a4e5fdf44d08e0, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 3686b15170979734d90daad41f5e5f3c, type: 3}
   linkedUIBanner: {fileID: 1330541870}
@@ -145084,7 +145084,7 @@ MonoBehaviour:
   _entryCondition:
     requirement: 0
     value: 30
-  tavernName: La Dama de Amsterdam
+  tavernName: "Los Tres P\xEDcaros"
   convoysInThisPort: []
 --- !u!212 &921286221
 SpriteRenderer:
@@ -145817,7 +145817,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Providencia
-  alternativeName: 
+  alternativeName: Vieja Providencia
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 1213180796}
@@ -146122,7 +146122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Roat\xE1n"
-  alternativeName: 
+  alternativeName: "Isla Roat\xE1n"
   spriteNonSelected: {fileID: 21300000, guid: dee28b6043c67cd468a4e5fdf44d08e0, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 3686b15170979734d90daad41f5e5f3c, type: 3}
   linkedUIBanner: {fileID: 425877471}
@@ -146130,7 +146130,7 @@ MonoBehaviour:
   _entryCondition:
     requirement: 0
     value: 40
-  tavernName: La Dama de Amsterdam
+  tavernName: La Negrita
   convoysInThisPort: []
 --- !u!212 &935585829
 SpriteRenderer:
@@ -148279,7 +148279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Maracaibo
-  alternativeName: 
+  alternativeName: Ciudad de Maracaibo
   spriteNonSelected: {fileID: 21300000, guid: fbd72c1eae4676344830592a05792fa4, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: d78a086afde268248a7e918c519006c8, type: 3}
   linkedUIBanner: {fileID: 2102187575}
@@ -154777,7 +154777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: San Carlos y Severino
-  alternativeName: 
+  alternativeName: Severino de Matanzas
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 2112113450}
@@ -156340,7 +156340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Bah\xEDa de C\xE1rdenas"
-  alternativeName: 
+  alternativeName: "Bah\xEDa de Jorge C\xE1rdenas"
   spriteNonSelected: {fileID: 21300000, guid: 5b9343175c50b5a4bb7d901efb73f63e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 43b6ccbb7c8f445468cfa687218e6070, type: 3}
   linkedUIBanner: {fileID: 1305485466}
@@ -157098,7 +157098,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Nueva Barcelona
-  alternativeName: 
+  alternativeName: Barcelona del Cerro
   spriteNonSelected: {fileID: 21300000, guid: fbd72c1eae4676344830592a05792fa4, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: d78a086afde268248a7e918c519006c8, type: 3}
   linkedUIBanner: {fileID: 1117041129}
@@ -157632,7 +157632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Puerto Cabello
-  alternativeName: 
+  alternativeName: Cala de Puerto Cabello
   spriteNonSelected: {fileID: 21300000, guid: fbd72c1eae4676344830592a05792fa4, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: d78a086afde268248a7e918c519006c8, type: 3}
   linkedUIBanner: {fileID: 455319920}
@@ -161714,7 +161714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Bonaire
-  alternativeName: 
+  alternativeName: Isla de Bonaire
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 1584267444}
@@ -171778,7 +171778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Trinidad
-  alternativeName: 
+  alternativeName: "Sant\xEDsima Trinidad"
   spriteNonSelected: {fileID: 21300000, guid: fbd72c1eae4676344830592a05792fa4, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: d78a086afde268248a7e918c519006c8, type: 3}
   linkedUIBanner: {fileID: 1227473832}
@@ -171902,7 +171902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Riohacha
-  alternativeName: 
+  alternativeName: Villa de Riohacha
   spriteNonSelected: {fileID: 21300000, guid: ee2f25b78318fc3479edd54226acfdc9, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: b482be2a33027fa4ba6b91020754746c, type: 3}
   linkedUIBanner: {fileID: 679662127}
@@ -181045,7 +181045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Santa Luc\xEDa"
-  alternativeName: 
+  alternativeName: "Isla de Santa Luc\xEDa"
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 640888847}
@@ -182467,7 +182467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Isla la Tortuga
-  alternativeName: 
+  alternativeName: La Tortuga
   spriteNonSelected: {fileID: 21300000, guid: 2af1203ad0a41064b8611a66b210077e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 5e87ae7460529e641b8042b55bdca510, type: 3}
   linkedUIBanner: {fileID: 1066980923}
@@ -185749,7 +185749,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Isla de la Gonave
-  alternativeName: 
+  alternativeName: "Gon\xE2ve"
   spriteNonSelected: {fileID: 21300000, guid: 5b9343175c50b5a4bb7d901efb73f63e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 43b6ccbb7c8f445468cfa687218e6070, type: 3}
   linkedUIBanner: {fileID: 1468783174}
@@ -193039,7 +193039,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Barbuda
-  alternativeName: 
+  alternativeName: Isla Barbuda
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 1213180796}
@@ -193166,7 +193166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Puerto Caballos
-  alternativeName: 
+  alternativeName: "Puerto Cort\xE9s"
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 186229367}
@@ -198133,7 +198133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Antigua
-  alternativeName: 
+  alternativeName: Isla Antigua
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 575414083}
@@ -201094,8 +201094,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d691ff1f2631049b8213681df0f330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cityName: Isla de Cubagua
-  alternativeName: 
+  cityName: Cubagua
+  alternativeName: Isla de Cubagua
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 1171862629}
@@ -205000,7 +205000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Tobago
-  alternativeName: 
+  alternativeName: Isla de Tobago
   spriteNonSelected: {fileID: 21300000, guid: ee2f25b78318fc3479edd54226acfdc9, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: b482be2a33027fa4ba6b91020754746c, type: 3}
   linkedUIBanner: {fileID: 221079824}
@@ -205561,7 +205561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Monserrat
-  alternativeName: 
+  alternativeName: Isla de Montserrat
   spriteNonSelected: {fileID: 21300000, guid: 2d27bdc4a97e0184aa49ccdc0d1ed358, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 3443db12ef013da4898810c48ec82429, type: 3}
   linkedUIBanner: {fileID: 1993694146}
@@ -222755,7 +222755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: San Juan
-  alternativeName: 
+  alternativeName: San Juan de Puerto Rico
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 1069481293}
@@ -224203,7 +224203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Ci\xE9naga y Santa Marta"
-  alternativeName: 
+  alternativeName: "Bah\xEDa de Santa Marta"
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 1688982578}
@@ -226349,7 +226349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: San Salvador
-  alternativeName: 
+  alternativeName: Isla de San Salvador
   spriteNonSelected: {fileID: 21300000, guid: dee28b6043c67cd468a4e5fdf44d08e0, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 3686b15170979734d90daad41f5e5f3c, type: 3}
   linkedUIBanner: {fileID: 1330541870}
@@ -226357,7 +226357,7 @@ MonoBehaviour:
   _entryCondition:
     requirement: 5
     value: 30
-  tavernName: La Dama de Amsterdam
+  tavernName: Taberna San Dimas
   convoysInThisPort: []
 --- !u!212 &1565886145
 SpriteRenderer:
@@ -228074,7 +228074,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Jacmel
-  alternativeName: 
+  alternativeName: Estuario de Jacmel
   spriteNonSelected: {fileID: 21300000, guid: fbd72c1eae4676344830592a05792fa4, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: d78a086afde268248a7e918c519006c8, type: 3}
   linkedUIBanner: {fileID: 1607017496}
@@ -232699,7 +232699,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Golfo R\xEDo Dulce"
-  alternativeName: 
+  alternativeName: "Boca de R\xEDo Dulce"
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 743216102}
@@ -243912,7 +243912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Barranquilla
-  alternativeName: 
+  alternativeName: Aldea de Barranquilla
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 693241907}
@@ -250707,7 +250707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Guadalupe
-  alternativeName: 
+  alternativeName: Isla Guadalupe
   spriteNonSelected: {fileID: 21300000, guid: fbd72c1eae4676344830592a05792fa4, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: d78a086afde268248a7e918c519006c8, type: 3}
   linkedUIBanner: {fileID: 1103496478}
@@ -254191,7 +254191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "San Mart\xEDn"
-  alternativeName: 
+  alternativeName: "Isla de San Mart\xEDn"
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 1777210612}
@@ -262052,7 +262052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Charlestown
-  alternativeName: 
+  alternativeName: Isla de Nieves
   spriteNonSelected: {fileID: 21300000, guid: 2d27bdc4a97e0184aa49ccdc0d1ed358, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 3443db12ef013da4898810c48ec82429, type: 3}
   linkedUIBanner: {fileID: 1051235334}
@@ -264326,7 +264326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Coro
-  alternativeName: 
+  alternativeName: Santa Ana de Coro
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 2080184245}
@@ -265064,7 +265064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: La Habana
-  alternativeName: 
+  alternativeName: "San Crist\xF3bal de La Habana"
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 1615478295}
@@ -265188,7 +265188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Santiago de Tol\xFA"
-  alternativeName: 
+  alternativeName: "Coronada de Tol\xFA"
   spriteNonSelected: {fileID: 21300000, guid: fbd72c1eae4676344830592a05792fa4, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: d78a086afde268248a7e918c519006c8, type: 3}
   linkedUIBanner: {fileID: 1543388834}
@@ -283419,7 +283419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Roseau
-  alternativeName: 
+  alternativeName: "Isla de Ro-Z\xF3"
   spriteNonSelected: {fileID: 21300000, guid: 7ea465a0b82ca45459cd7dc76e5df904, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 0cdc712333f1e7c4fad7c38570fc7f74, type: 3}
   linkedUIBanner: {fileID: 430647994}
@@ -285697,7 +285697,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: "Cove\xF1as"
-  alternativeName: 
+  alternativeName: "Villa de Cove\xF1as"
   spriteNonSelected: {fileID: 21300000, guid: ee2f25b78318fc3479edd54226acfdc9, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: b482be2a33027fa4ba6b91020754746c, type: 3}
   linkedUIBanner: {fileID: 1713876462}
@@ -286134,7 +286134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Kingston
-  alternativeName: 
+  alternativeName: Ciudad de Kingston
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 474637126}
@@ -286873,7 +286873,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Portobelo
-  alternativeName: 
+  alternativeName: "Bah\xEDa de Portobelo"
   spriteNonSelected: {fileID: 21300000, guid: 4651d19e2c45be74d8b9930e94f30299, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 1157a7a67e3c37142a6624b1ff3c94ac, type: 3}
   linkedUIBanner: {fileID: 427958244}
@@ -287594,7 +287594,7 @@ MonoBehaviour:
   _entryCondition:
     requirement: 5
     value: 50
-  tavernName: La Dama de Amsterdam
+  tavernName: Le Bon Voleur
   convoysInThisPort: []
 --- !u!212 &2098347556
 SpriteRenderer:
@@ -287771,7 +287771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityName: Tucacas
-  alternativeName: 
+  alternativeName: Cayos de Tucacas
   spriteNonSelected: {fileID: 21300000, guid: 2af1203ad0a41064b8611a66b210077e, type: 3}
   spriteHighlighted: {fileID: 21300000, guid: 5e87ae7460529e641b8042b55bdca510, type: 3}
   linkedUIBanner: {fileID: 288911667}

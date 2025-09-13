@@ -123,7 +123,7 @@ namespace GameMechanics.Data
             },
             {2, new SerializableNaturalPort(
                 "Isla Saona",
-                "Isla Saona",
+                "",
                 new float [2] { -52.22f, 21.55f},
                 new float [2] { -51.765f, 21.382f },
                 new float [2] { -52.22f, 22.81f },
@@ -143,7 +143,7 @@ namespace GameMechanics.Data
             },
             {4, new SerializableNaturalPort(
                 "Cat Island",
-                "Cat Island",
+                "",
                 new float [2] { 16.92f, -30.86f},
                 new float [2] { 17.238f, -30.56f },
                 new float [2] { 16.92f, -32.12f },
@@ -154,7 +154,7 @@ namespace GameMechanics.Data
             },
             {5, new SerializableNaturalPort(
                 "Bahía Honda",
-                "Bahía Honda",
+                "",
                 new float [2] { 84.54f, -12.54f},
                 new float [2] { 85.458f, -12.606f },
                 new float [2] { 84.54f, -11.28f },
@@ -165,7 +165,7 @@ namespace GameMechanics.Data
             },
             {6, new SerializableNaturalPort(
                 "Bahía de Cárdenas",
-                "Bahía de Cárdenas",
+                "Bahía de Jorge Cárdenas",
                 new float [2] { 59.78f, -13.15f},
                 new float [2] { 59.888f, -13.342f },
                 new float [2] { 59.78f, -11.89f },
@@ -176,7 +176,7 @@ namespace GameMechanics.Data
             },
             {7, new SerializableNaturalPort(
                 "Caimanera",
-                "Caimanera",
+                "La Caimanera",
                 new float [2] { 10.16f, 11.38f},
                 new float [2] { 10.73f, 12.13f },
                 new float [2] { 10.16f, 10.12f },
@@ -187,7 +187,7 @@ namespace GameMechanics.Data
             },
             {8, new SerializableNaturalPort(
                 "Laguna Chiquirí",
-                "Laguna Chiquirí",
+                "",
                 new float [2] { 61f, 122.22f},
                 new float [2] { 60.772f, 122.892f },
                 new float [2] { 61f, 123.48f },
@@ -197,19 +197,8 @@ namespace GameMechanics.Data
                 )
             },
             {9, new SerializableNaturalPort(
-                "Laguna Chiquirí",
-                "Laguna Chiquirí",
-                new float [2] { 61f, 122.22f},
-                new float [2] { 60.772f, 122.892f },
-                new float [2] { 61f, 123.48f },
-                2,
-                0,
-                true
-                )
-            },
-            {10, new SerializableNaturalPort(
                 "Isla Cotorra",
-                "Delta del Amacuro",
+                "Delta del Amacuro (Cotorra)",
                 new float [2] { -117.46f, 91.2f},
                 new float [2] { -117.46f, 91.878f },
                 new float [2] { -117.46f, 89.94f },
@@ -218,9 +207,9 @@ namespace GameMechanics.Data
                 true
                 )
             },
-            {11, new SerializableNaturalPort(
+            {10, new SerializableNaturalPort(
                 "Delta del Orinoco",
-                "Delta del Orinoco",
+                "",
                 new float [2] { -131.16f, 101.18f},
                 new float [2] { -132.354f, 101.516f },
                 new float [2] { -131.16f, 102.44f },
@@ -229,9 +218,9 @@ namespace GameMechanics.Data
                 false
                 )
             },
-            {12, new SerializableNaturalPort(
+            {11, new SerializableNaturalPort(
                 "Nuevitas del Príncipe",
-                "Nuevitas del Príncipe",
+                "",
                 new float [2] { 31.15f, -1.31f},
                 new float [2] { 30.964f, -1.298f },
                 new float [2] { 31.15f, -0.05f },
@@ -259,7 +248,7 @@ namespace GameMechanics.Data
             {
                 1, new SerializableSmugglersPost(
                     "Araya",
-                    "Araya",
+                    "",
                     new float [2] { -99.23f, 88.54f},
                     new float [2] { -98.312f, 88.402f },
                     new float [2] { -99.23f, 87.46f },
@@ -271,7 +260,7 @@ namespace GameMechanics.Data
             {
                 2, new SerializableSmugglersPost(
                     "Ponce",
-                    "Ciudad de Ponce",
+                    "",
                     new float [2] { -72.05f, 19.89f},
                     new float [2] { -72.05f, 20.556f },
                     new float [2] { -72.05f, 18.81f },
@@ -294,20 +283,8 @@ namespace GameMechanics.Data
             },
             {
                 4, new SerializableSmugglersPost(
-                    "Islas Turcas",
-                    "Las Turcas",
-                    new float [2] { -20.25f, -9.24f},
-                    new float [2] { -20.568f, -8.43f },
-                    new float [2] { -20.25f, -10.32f },
-                    new int[] {12},
-                    0,
-                    false
-                )
-            },
-            {
-                5, new SerializableSmugglersPost(
                     "Baracoa",
-                    "Baracoa",
+                    "",
                     new float [2] { 4.93f, 6.69f},
                     new float [2] { 4.492f, 6.342f },
                     new float [2] { 4.93f, 7.77f },
@@ -317,7 +294,7 @@ namespace GameMechanics.Data
                 )
             },
             {
-                6, new SerializableSmugglersPost(
+                5, new SerializableSmugglersPost(
                     "Tucacas",
                     "Cayos de Tucacas",
                     new float [2] { -59.24f, 93.1f},
@@ -329,9 +306,9 @@ namespace GameMechanics.Data
                 )
             },
             {
-                7, new SerializableSmugglersPost(
+                6, new SerializableSmugglersPost(
                     "Río Unare",
-                    "Río Unare",
+                    "",
                     new float [2] { -90.25f, 95.57f},
                     new float [2] { -90.022f, 95.156f },
                     new float [2] { -90.25f, 96.65f },
@@ -341,7 +318,7 @@ namespace GameMechanics.Data
                 )
             },
             {
-                8, new SerializableSmugglersPost(
+                7, new SerializableSmugglersPost(
                     "Puerto Plata",
                     "Puerto de Plata",
                     new float [2] { -30.93f, 8.491f},
@@ -376,7 +353,7 @@ namespace GameMechanics.Data
                     new float [2] { -17.53f, 21.58f},
                     new float [2] { -16.62f, 21.85f },
                     new float [2] { -17.53f, 20.28f },
-                    "La Dama de Amsterdam",
+                    "Le Bon Voleur",
                     new EntryClass(RequirementEntry.LoyaltyToCodeBiggerThan, 50),
                     0,
                     false
@@ -389,7 +366,7 @@ namespace GameMechanics.Data
                     new float [2] { 20.7f, -23.07f},
                     new float [2] { 20.7f, -22.195f },
                     new float [2] { 20.7f, -24.37f },
-                    "La Dama de Amsterdam",
+                    "Roberts' Blood",
                     new EntryClass(RequirementEntry.LoyaltyToCodeBiggerThan, 10),
                     0,
                     false
@@ -402,7 +379,7 @@ namespace GameMechanics.Data
                     new float [2] { 7.99f, -28.8f},
                     new float [2] { 8.555f, -28.575f },
                     new float [2] { 7.99f, -27.5f },
-                    "La Dama de Amsterdam",
+                    "Taberna San Dimas",
                     new EntryClass(RequirementEntry.LoyaltyToCodeBiggerThan, 30),
                     0,
                     false
@@ -415,7 +392,7 @@ namespace GameMechanics.Data
                     new float [2] { 68.42f, 89.06f},
                     new float [2] { 69.035f, 89.06f },
                     new float [2] { 68.42f, 90.36f },
-                    "La Dama de Amsterdam",
+                    "Los Tres Pícaros",
                     new EntryClass(RequirementEntry.ByFame_Spain, 30),
                     0,
                     false
@@ -428,7 +405,7 @@ namespace GameMechanics.Data
                     new float [2] { 114.08f, 52.23f},
                     new float [2] { 114.08f, 53.08f },
                     new float [2] { 114.08f, 50.93f },
-                    "La Dama de Amsterdam",
+                    "La Negrita",
                     new EntryClass(RequirementEntry.ByFame_Spain, 40),
                     0,
                     false
@@ -441,7 +418,7 @@ namespace GameMechanics.Data
                     new float [2] { 37.32f, -31.42f},
                     new float [2] { 37.08f, -31.42f },
                     new float [2] { 37.32f, -32.72f },
-                    "La Dama de Amsterdam",
+                    "La Taberna de Nancy",
                     new EntryClass(RequirementEntry.LoyaltyToCodeBiggerThan, 65),
                     0,
                     false
@@ -620,8 +597,20 @@ namespace GameMechanics.Data
                 )
             },
             {14, new SerializableCity(
+                "Santo Domingo",
+                "",
+                new float [2] { -40.28f, 20.12f},
+                new float [2] { -40.28f, 20.84f },
+                new float [2] { -40.28f, 18.76f },
+                new int[] {8, 2, 5},
+                4510,
+                "Cisne Negro",
+                0
+                )
+            },
+            {15, new SerializableCity(
                 "Santiago de Cuba",
-                "Santiago de Cuba",
+                "",
                 new float [2] { 16.55f, 12.59f},
                 new float [2] { 16.55f, 13.31f },
                 new float [2] { 16.557f, 11.23f },
@@ -631,7 +620,7 @@ namespace GameMechanics.Data
                 0
                 )
             },
-            {15, new SerializableCity(
+            {16, new SerializableCity(
                 "Trinidad",
                 "Santísima Trinidad",
                 new float [2] { 53.3f, -1.73f},
@@ -643,7 +632,7 @@ namespace GameMechanics.Data
                 1
                 )
             },
-            {16, new SerializableCity(
+            {17, new SerializableCity(
                 "San Carlos y Severino",
                 "Severino de Matanzas",
                 new float [2] { 67.935f, -14.24f},
@@ -655,7 +644,7 @@ namespace GameMechanics.Data
                 0
                 )
             },
-            {17, new SerializableCity(
+            {18, new SerializableCity(
                 "Fort Royale",
                 "Isla de La Granade",
                 new float [2] { -122.33f, 69.69f},
@@ -667,7 +656,7 @@ namespace GameMechanics.Data
                 0
                 )
             },
-            {18, new SerializableCity(
+            {19, new SerializableCity(
                 "Martinica",
                 "Martinique",
                 new float [2] { -125.53f, 42.95f},
@@ -680,7 +669,7 @@ namespace GameMechanics.Data
                 true
                 )
             },
-            {19, new SerializableCity(
+            {20, new SerializableCity(
                 "Guadalupe",
                 "Isla Guadalupe",
                 new float [2] { -118.64f, 28.5f},
@@ -693,7 +682,7 @@ namespace GameMechanics.Data
                 true
                 )
             },
-            {20, new SerializableCity(
+            {21, new SerializableCity(
                 "Cap-Français",
                 "Cap-Haïtien",
                 new float [2] { -17.4f, 10.91f},
@@ -705,7 +694,7 @@ namespace GameMechanics.Data
                 0
                 )
             },
-            {21, new SerializableCity(
+            {22, new SerializableCity(
                 "Jacmel",
                 "Estuario de Jacmel",
                 new float [2] { -15.78f, 25.083f},
@@ -717,10 +706,10 @@ namespace GameMechanics.Data
                 1
                 )
             },
-            {22, new SerializableCity(
+            {23, new SerializableCity(
                 "Aruba",
                 "Isla de Aruba",
-                new float [2] { -43.178f, 73.01f},
+                new float [2] { -43.178f, 79.1f},
                 new float [2] { -42.822f, 79.636f },
                 new float [2] { -43.178f, 77.74f },
                 new int[] {11, 2, 12},
@@ -730,7 +719,7 @@ namespace GameMechanics.Data
                 true
                 )
             },
-            {23, new SerializableCity(
+            {24, new SerializableCity(
                 "Curazao",
                 "Isla de Curazao",
                 new float [2] { -53.66f, 80.92f},
@@ -742,7 +731,7 @@ namespace GameMechanics.Data
                 0
                 )
             },
-            {24, new SerializableCity(
+            {25, new SerializableCity(
                 "Kingston",
                 "Ciudad de Kingston",
                 new float [2] { 23.43f, 31.88f},
@@ -755,7 +744,7 @@ namespace GameMechanics.Data
                 true
                 )
             },
-            {25, new SerializableCity(
+            {26, new SerializableCity(
                 "Belize",
                 "Belize Town",
                 new float [2] { 130.96f, 37.11f},
@@ -767,9 +756,9 @@ namespace GameMechanics.Data
                 0
                 )
             },
-            {26, new SerializableCity(
+            {27, new SerializableCity(
                 "Basseterre",
-                "Isla de Basseterre",
+                "Isla de San Cristóbal",
                 new float [2] { -106.45f, 19.87f},
                 new float [2] { -105.838f, 20.45f },
                 new float [2] { -106.45f, 18.51f },
@@ -780,7 +769,7 @@ namespace GameMechanics.Data
                 true
                 )
             },
-            {27, new SerializableCity(
+            {28, new SerializableCity(
                 "Charlestown",
                 "Isla de Nieves",
                 new float [2] { -108.531f, 21.607f},
@@ -793,7 +782,7 @@ namespace GameMechanics.Data
                 true
                 )
             },
-            {28, new SerializableCity(
+            {29, new SerializableCity(
                 "Barbados",
                 "Isla de Barbados",
                 new float [2] { -139.81f, 54.74f},
@@ -805,7 +794,7 @@ namespace GameMechanics.Data
                 1
                 )
             },
-            {29, new SerializableCity(
+            {30, new SerializableCity(
                 "Montserrat",
                 "Isla de Montserrat",
                 new float [2] { -112.401f, 24.619f},
@@ -817,7 +806,7 @@ namespace GameMechanics.Data
                 0
                 )
             },
-            {30, new SerializableCity(
+            {31, new SerializableCity(
                 "Antigua",
                 "Isla Antigua",
                 new float [2] { -116.02f, 20.82f},
@@ -1055,7 +1044,7 @@ namespace GameMechanics.Data
             },
             {19, new SerializableTown(
                 "Bluefields",
-                "Bluefields",
+                "",
                 new float [2] { 87.85f, 94.76f},
                 new float [2] { 87.625f, 95.535f },
                 new float [2] { 87.85f, 93.06f },
@@ -1067,7 +1056,7 @@ namespace GameMechanics.Data
             },
             {20, new SerializableTown(
                 "Corn Island",
-                "Corn Island",
+                "",
                 new float [2] { 81.141f, 93.444f},
                 new float [2] { 80.506f, 93.684f },
                 new float [2] { 81.141f, 91.744f },
@@ -1107,7 +1096,7 @@ namespace GameMechanics.Data
                 new float [2] { -127.906f, 50.381f },
                 new int[] {8},
                 260,
-                1,
+                0,
                 true
                 )
             },
