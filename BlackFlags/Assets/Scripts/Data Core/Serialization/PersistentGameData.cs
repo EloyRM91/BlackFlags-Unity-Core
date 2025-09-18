@@ -1543,7 +1543,7 @@ namespace GameMechanics.save
             this.flippedX = flippedX;
         }
 
-        public GameObject Deserialize(Transform parent)
+        public MB_SmugglersPost Deserialize(Transform parent)
         {
             var prefab = Resources.Load<GameObject>("KeyPoints/KeyPoint_Hideout") as GameObject;
             GameObject kp = UnityEngine.Object.Instantiate(prefab, parent);
@@ -1551,7 +1551,7 @@ namespace GameMechanics.save
             {
                 //Añade a este puerto la información serializada
                 port.SetFromSerializedData(this);
-                return kp;
+                return port;
             }
 
             return null;
@@ -1605,7 +1605,7 @@ namespace GameMechanics.save
             this.flippedX = flippedX;
         }
 
-        public GameObject Deserialize(Transform parent)
+        public MB_PirateShelter Deserialize(Transform parent)
         {
             var prefab = Resources.Load<GameObject>("KeyPoints/KeyPoint_Shelter") as GameObject;
             GameObject kp = UnityEngine.Object.Instantiate(prefab, parent);
@@ -1613,7 +1613,7 @@ namespace GameMechanics.save
             {
                 //Añade a este puerto la información serializada
                 port.SetFromSerializedData(this);
-                return kp;
+                return port;
             }
 
             return null;
@@ -1662,7 +1662,7 @@ namespace GameMechanics.save
             this.flippedX = flippedX;
         }
 
-        public GameObject Deserialize(Transform parent)
+        public MB_NaturalPort Deserialize(Transform parent)
         {
             var prefab = Resources.Load<GameObject>("KeyPoints/KeyPoint_NatPort") as GameObject;
             GameObject kp = UnityEngine.Object.Instantiate(prefab, parent);
@@ -1670,7 +1670,7 @@ namespace GameMechanics.save
             {
                 //Añade a este puerto la información serializada
                 port.SetFromSerializedData(this);
-                return kp;
+                return port;
             }
 
             return null;
@@ -2713,7 +2713,8 @@ namespace Serialization
             kingdomsContainer.tag = "Kingdoms";
             kingdomsContainer.SetActive(false);
 
-            var Banners
+            var banners = new GameObject().transform;
+            banners.gameObject.SetActive(false);
 
             SerializableKingdom[] kingdoms = CampaignCitiesData.kingdoms;
 
@@ -2728,29 +2729,42 @@ namespace Serialization
             kpsContainer.tag = "WorldPlaces";
             kpsContainer.SetActive(false);
 
+            //Puertos naturales
             var naturalPorts = CampaignCitiesData.naturalPorts;
             var naturalPortsContainer = new GameObject();
             naturalPortsContainer.transform.parent = kpsContainer.transform;
             naturalPortsContainer.name = "Natural Docks";
-            //todo: banners
+
+            //Banners
             var naturalPortsBanners = new GameObject();
+            naturalPortsBanners.name = "Natural piers";
+            naturalPortsBanners.transform.SetParent(banners);
             for (int i = 0; i < naturalPorts.Length; ++i)
             {
                 SerializableNaturalPort port = naturalPorts[i];
-                port.Deserialize(naturalPortsContainer.transform);
+                MB_NaturalPort serializedPort = port.Deserialize(naturalPortsContainer.transform);
+                //Asigna un banner
+                Transform bannerTransform = serializedPort.GetKeyPointBanner(naturalPortsBanners.transform).transform;
             }
 
+            //Escondites de contrabando
             var hideouts = CampaignCitiesData.hideouts;
             var hideOutsContainer = new GameObject();
             hideOutsContainer.transform.parent = kpsContainer.transform;
             hideOutsContainer.name = "Smuggglers Posts";
             hideOutsContainer.tag = "Pirate";
-            //todo: banners
+
+            //Banners
             var hideOutsBanners = new GameObject();
+            hideOutsBanners.name = "Smuggglers hideout";
+            hideOutsBanners.transform.SetParent(banners);
             for (int i = 0; i < hideouts.Length; ++i)
             {
                 SerializableSmugglersPost port = hideouts[i];
-                GameObject obj = port.Deserialize(hideOutsContainer.transform);
+                MB_SmugglersPost serializedPort = port.Deserialize(hideOutsContainer.transform);
+
+                //Asigna un banner
+                Transform bannerTransform = serializedPort.GetKeyPointBanner(naturalPortsBanners.transform).transform;
             }
 
             var shelters = CampaignCitiesData.shelters;
@@ -2758,15 +2772,20 @@ namespace Serialization
             sheltersContainer.transform.parent = kpsContainer.transform;
             sheltersContainer.name = "Pirate Shelters";
             sheltersContainer.tag = "Pirate";
-            //todo: banners
+
             var sheltersBanners = new GameObject();
+            sheltersBanners.name = "Pirate Shelters";
+            sheltersBanners.transform.SetParent(banners);
             for (int i = 0; i < shelters.Length; ++i)
             {
                 SerializablePirateShelter port = shelters[i];
-                GameObject obj = port.Deserialize(sheltersContainer.transform);
+                MB_PirateShelter serializedPort = port.Deserialize(sheltersContainer.transform);
+
+                //Asigna un banner
+                Transform bannerTransform = serializedPort.GetKeyPointBanner(naturalPortsBanners.transform).transform;
             }
 
-            return new Transform[2] {kingdomsContainer.transform, kpsContainer.transform};
+            return new Transform[3] {kingdomsContainer.transform, kpsContainer.transform, banners};
         }
     }
 

@@ -33512,12 +33512,12 @@ GameObject:
   m_Component:
   - component: {fileID: 186589559}
   m_Layer: 5
-  m_Name: Pirate Shelter
+  m_Name: Pirate Shelters
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &186589559
 RectTransform:
   m_ObjectHideFlags: 0
@@ -146560,7 +146560,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &942724228
 RectTransform:
   m_ObjectHideFlags: 0
@@ -238367,7 +238367,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1708449814
 RectTransform:
   m_ObjectHideFlags: 0
@@ -283608,7 +283608,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2044328648
 Transform:
   m_ObjectHideFlags: 0

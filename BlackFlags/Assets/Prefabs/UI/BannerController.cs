@@ -34,5 +34,10 @@ namespace UI.WorldMap
         {
             SetUIPosition();
         }
+
+        public void SetNewTarget(Transform newTarget)
+        {
+            _target = newTarget;
+        }
     }
 }

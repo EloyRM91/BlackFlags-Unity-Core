@@ -89,6 +89,26 @@ public class GameManager : MonoBehaviour
         // ---- JSON
         // var startGameJSONFormat = new StartGameJSONFormat(new StartGameData());
         // startGameJSONFormat.WorldData("worldData_Campaign_1720");
+
+        //Recoge los datos de la escena de carga:
+
+        bool IsCitiesDataDelivery(GameObject obj)
+        {
+            return obj.GetComponent<CitiesDataDelivery>() != null;
+        }
+
+        var obj = System.Array.Find(GameObject.FindGameObjectsWithTag("Delivery"), IsCitiesDataDelivery);
+        var delivery = obj.GetComponent<CitiesDataDelivery>();
+
+        var elements = delivery.Deliver();
+        var banners = elements[2];
+        Transform ui = UIMap.ui.transform;
+        banners.SetParent(ui.parent.GetChild(1));
+
+        foreach (Transform e in elements)
+        {
+            e.gameObject.SetActive(true);
+        }
     }
 
     //Generation

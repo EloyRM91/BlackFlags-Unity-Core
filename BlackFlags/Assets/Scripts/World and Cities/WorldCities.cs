@@ -59,6 +59,12 @@ namespace GameMechanics.WorldCities
                 }
             }
         }
+
+        public void LinkUIBanner(GameObject banner)
+        {
+            linkedUIBanner = banner;
+        }
+
         public void Highlight(bool h)
         {
             GetComponent<SpriteRenderer>().sprite = h ? spriteHighlighted : spriteNonSelected;

@@ -83,5 +83,27 @@ namespace GameMechanics.WorldCities
 
             this.calado = portData.calado;
         }
+
+        public GameObject GetKeyPointBanner(Transform container)
+        {
+            string fileName = "Natural port Banner OnScreen - " + (this.cityName.Length > 13 ? "Large" : "Small");
+            var prefab = Resources.Load<GameObject>("KeyPointBanners/" + fileName);
+
+            if(prefab == null)
+            {
+                Debug.LogError("no file");
+            }
+
+            var banner = Instantiate(prefab, container);
+            banner.name = "Banner Controller - " + this.cityName;
+            if(banner.TryGetComponent<UI.WorldMap.BannerController>(out UI.WorldMap.BannerController controller))
+            {
+                controller.SetNewTarget(transform);
+                LinkUIBanner(banner);
+                return banner;
+            }
+            Debug.LogError("no component");
+            return null;
+        }
     }
 }

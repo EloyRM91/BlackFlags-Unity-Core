@@ -18,7 +18,7 @@ public abstract class Delivery<T> : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public T Deliver()
+    public virtual T Deliver()
     {
         Kill();
         return shipmentData;

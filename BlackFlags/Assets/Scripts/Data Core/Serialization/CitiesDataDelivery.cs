@@ -16,4 +16,14 @@ public class CitiesDataDelivery : Delivery<Transform[]>
         //     t.parent = gameObject.transform;
         // }  
     }
+
+    public override Transform[] Deliver()
+    {
+        foreach(Transform t in shipmentData)
+        {
+            t.SetParent(null);
+        }  
+        Kill();
+        return shipmentData;
+    }
 }

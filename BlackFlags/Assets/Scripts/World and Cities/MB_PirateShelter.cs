@@ -92,6 +92,28 @@ namespace GameMechanics.WorldCities
                 this.transform.localScale = new Vector3(-s.x, s.y, s.z);
             }
         }
+
+        public GameObject GetKeyPointBanner(Transform container)
+        {
+            string fileName = "Smuggglers post Banner OnScreen - " + (this.cityName.Length > 13 ? "Large" : "Small");
+            var prefab = Resources.Load<GameObject>("KeyPointBanners/" + fileName);
+
+            if(prefab == null)
+            {
+                Debug.LogError("no file");
+            }
+
+            var banner = Instantiate(prefab, container);
+            banner.name = "Banner Controller - " + this.cityName;
+            if(banner.TryGetComponent<UI.WorldMap.BannerController>(out UI.WorldMap.BannerController controller))
+            {
+                controller.SetNewTarget(transform);
+                LinkUIBanner(banner);
+                return banner;
+            }
+            Debug.LogError("no component");
+            return null;
+        }
     }
 
     [System.Serializable]
