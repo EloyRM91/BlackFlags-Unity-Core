@@ -87,8 +87,8 @@ public class GameManager : MonoBehaviour
         // startGameBinaryFormat.WorldData("worldData_Campaign_1720");
 
         // ---- JSON
-        var startGameJSONFormat = new StartGameJSONFormat(new StartGameData());
-        startGameJSONFormat.WorldData("worldData_Campaign_1720");
+        // var startGameJSONFormat = new StartGameJSONFormat(new StartGameData());
+        // startGameJSONFormat.WorldData("worldData_Campaign_1720");
     }
 
     //Generation
@@ -279,9 +279,10 @@ public class GameManager : MonoBehaviour
         savedGameBinaryFormat.SaveGame(fileName);
     }
 
+//? Sólo para pruebas (El game manager no se encarga de gestionar la des-serialización)
     public void LoadGame(string fileName)
     {
-        var loaderBinaryFormat = new LoaderBinaryFormat();
+        var loaderBinaryFormat = new GameLoaderBinaryFormat();
         SavedFile savedGameData = loaderBinaryFormat.LoadGame(fileName);
 
         if(savedGameData != null)

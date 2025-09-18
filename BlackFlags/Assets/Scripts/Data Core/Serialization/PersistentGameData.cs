@@ -1359,12 +1359,12 @@ namespace GameMechanics.save
             return new float[2] { vector.x, vector.y };
         }
 
-        public Vector3 ToVector3(float[] values)
+        public static Vector3 ToVector3(float[] values)
         {
             return new Vector3(values[0], values[1], values[2]);
         }
 
-        public Vector2 ToVector2(float[] values)
+        public static Vector2 ToVector2(float[] values)
         {
             return new Vector3(values[0], values[1]);
         }
@@ -1542,6 +1542,20 @@ namespace GameMechanics.save
             this.spriteIndex = imgIndex;
             this.flippedX = flippedX;
         }
+
+        public GameObject Deserialize(Transform parent)
+        {
+            var prefab = Resources.Load<GameObject>("KeyPoints/KeyPoint_Hideout") as GameObject;
+            GameObject kp = UnityEngine.Object.Instantiate(prefab, parent);
+            if(kp.TryGetComponent<MB_SmugglersPost>(out MB_SmugglersPost port))
+            {
+                //Añade a este puerto la información serializada
+                port.SetFromSerializedData(this);
+                return kp;
+            }
+
+            return null;
+        }
     }
 
     [Serializable]
@@ -1590,6 +1604,20 @@ namespace GameMechanics.save
             this.spriteIndex = imgIndex;
             this.flippedX = flippedX;
         }
+
+        public GameObject Deserialize(Transform parent)
+        {
+            var prefab = Resources.Load<GameObject>("KeyPoints/KeyPoint_Shelter") as GameObject;
+            GameObject kp = UnityEngine.Object.Instantiate(prefab, parent);
+            if(kp.TryGetComponent<MB_PirateShelter>(out MB_PirateShelter port))
+            {
+                //Añade a este puerto la información serializada
+                port.SetFromSerializedData(this);
+                return kp;
+            }
+
+            return null;
+        }
     }
 
     [Serializable]
@@ -1632,6 +1660,20 @@ namespace GameMechanics.save
 
             this.spriteIndex = imgIndex;
             this.flippedX = flippedX;
+        }
+
+        public GameObject Deserialize(Transform parent)
+        {
+            var prefab = Resources.Load<GameObject>("KeyPoints/KeyPoint_NatPort") as GameObject;
+            GameObject kp = UnityEngine.Object.Instantiate(prefab, parent);
+            if(kp.TryGetComponent<MB_NaturalPort>(out MB_NaturalPort port))
+            {
+                //Añade a este puerto la información serializada
+                port.SetFromSerializedData(this);
+                return kp;
+            }
+
+            return null;
         }
     }
 
@@ -2092,29 +2134,6 @@ namespace GameMechanics.save
                 shelters[i] = new SerializablePirateShelter(p);
             }
         }
-
-        //--------------------------------
-        // DATOS INICIALES DE PARTIDA (CIUDADES Y REINOS)
-        //--------------------------------
-#if UNITY_EDITOR
-        /// <summary>
-        /// Función encargada de generar un json con datos iniciales del mundo para una partida.
-        /// Esta función se debe utilizar como desarrollador o para modding
-        /// </summary>
-        public static void GenerateStartGameJson(StartGameData startGameData)
-        {
-            //!esto no compila
-        }
-
-        /// <summary>
-        /// Función encargada de generar un binaryfile con datos iniciales del mundo para una 
-        /// partida. Esta función se debe utilizar como desarrollador o para modding
-        /// </summary>
-        public static void GenerateStartGameBin(StartGameData startGameData)
-        {
-            //!esto no compila
-        }
-#endif
     }
     #endregion
     #region SAVE GAME
@@ -2421,7 +2440,6 @@ namespace GameMechanics.save
         }
     }
 
-#if UNITY_EDITOR
     public class StartGameBinaryFormat : SerializationUtilities
     {
         public StartGameData savedFile;
@@ -2473,13 +2491,31 @@ namespace GameMechanics.save
             Debug.Log("SerializeJSON: success");
         }
     }
-#endif
 
 #endregion
 
 #region LOAD
+    // [Serializable]
+    // public class LoaderBinaryFormat<T> : SerializationUtilities
+    // {
+    //     public T LoadGame(string fileName)
+    //     {
+    //         var path = getRoute() + fileName + getFileExtension();
+    //         Debug.Log(path);
+    //         if (File.Exists(path))
+    //         {
+    //             var binaryFormatter = new BinaryFormatter();
+    //             var stream = new FileStream(path, FileMode.Open);
+    //             T result = binaryFormatter.Deserialize(stream) as T; //!esto no compila
+    //             stream.Close();
+    //             return result;
+    //         }
+    //         return null;
+    //     }
+    // }
+
     [Serializable]
-    public class LoaderBinaryFormat : SerializationUtilities
+    public class GameLoaderBinaryFormat : SerializationUtilities
     {
         public SavedFile LoadGame(string fileName)
         {
@@ -2497,7 +2533,256 @@ namespace GameMechanics.save
         }
     }
 
-    #endregion
+    [Serializable]
+    public class CitiesLoaderBinaryFormat : SerializationUtilities
+    {
+        public CitiesLoaderBinaryFormat()
+        {
+            extension = ".start";
+        }
 
+        protected string getRoute()
+        {
+            var currentMod = PersistentGameSettings.currentMod;
+            if (currentMod == null)
+            {
+                //Ruta por del juego vanilla:
+                return Directory.GetCurrentDirectory() + "/Campaigns/";
+            }
+            else
+            {
+                //Ruta del directorio del mod
+                return currentMod.ModPath + "Data/Campaigns/";
+            }
+        }
+
+        protected override string getFileExtension()
+        {
+            var currentMod = PersistentGameSettings.currentMod;
+
+            if (currentMod == null)
+            {
+                return extension;
+            }
+            else if (currentMod.gameLogic != null)
+            {
+                //extensión de partida para mods:
+                //(usaremos un .json)
+                return ".json";
+            }
+            else
+            {
+                return extension;
+            }
+        }
+
+        public StartGameData LoadWorldData(string fileName)
+        {
+            var path = getRoute() + fileName + getFileExtension();
+            Debug.Log(path);
+            if (File.Exists(path))
+            {
+                var binaryFormatter = new BinaryFormatter();
+                var stream = new FileStream(path, FileMode.Open);
+                StartGameData result = binaryFormatter.Deserialize(stream) as StartGameData;
+                stream.Close();
+                return result;
+            }
+            return null;
+        }
+    }
+
+#endregion
+
+}
+
+namespace Serialization
+{
+    public class SerializationUtils
+    {
+        public static bool SerializeJSON<T>(T data, string pathFile)
+        {
+            try
+            {
+                File.WriteAllText(pathFile, JsonUtility.ToJson(data, true));
+                Debug.Log("SerializeJSON: success");
+                return true;
+            }
+            catch(System.Exception e)
+            {
+                Debug.LogError(e);
+                return false;
+            } 
+        }
+
+        public static T LoadJson<T>( string path)
+        {
+            T data;
+            data = JsonUtility.FromJson<T>(File.ReadAllText(path));
+            return data;
+        }
+
+        //--------------------------------
+        // MAPA DE CORRIENTES
+        //--------------------------------
+
+
+        //aquí voy a poner un ejemplo de serialización de mapa de corrientes con los datos por defecto
+        public static void createDefaultCurrentsMap()
+        {
+            int[] bufferArray = 
+                { 
+                22, 32, 21, 32, 22, 21, 0, 0, 0, 15, 61, 0, 22, 32, 42, 41, 31, 41, 62, 51, 53, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                23, 33, 42, 22, 33, 22, 31, 0, 0, 15, 61, 0, 81, 62, 42, 61, 22, 32, 42, 41, 43, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                13, 0, 51, 13, 31, 44, 22, 21, 0, 15, 71, 0, 0, 61, 62, 22, 23, 33, 43, 42, 51, 42, 0, 0, 0, 0, 0, 0, 71, 81, 71, 81,
+                83, 73, 63, 83, 25, 45, 35, 35, 25, 14, 82, 0, 11, 0, 61, 13, 13, 61, 52, 62, 41, 81, 42, 21, 81, 61, 21, 22, 32, 81, 81, 61,
+                72, 82, 83, 25, 83, 63, 22, 22, 13, 82, 82, 81, 81, 0, 0, 81, 83, 83, 62, 23, 33, 82, 81, 71, 71, 21, 12, 21, 41, 52, 61, 62,
+                82, 72, 83, 15, 72, 62, 0, 0, 0, 0, 0, 0, 81, 22, 42, 0, 71, 62, 72, 83, 0, 43, 82, 81, 71, 71, 82, 81, 61, 62, 81, 42,
+                71, 71, 84, 85, 62, 0, 0, 23, 43, 0, 0, 0, 0, 82, 82, 71, 0, 61, 71, 83, 73, 63, 82, 82, 62, 72, 81, 82, 72, 61, 81, 81,
+                0, 0, 12, 15, 85, 23, 23, 32, 32, 21, 0, 0, 0, 0, 0, 81, 61, 61, 71, 71, 82, 82, 82, 72, 72, 61, 72, 82, 82, 72, 82, 82,
+                0, 0, 81, 83, 84, 23, 13, 23, 62, 82, 82, 81, 31, 61, 61, 62, 0, 0, 0, 0, 0, 0, 81, 71, 71, 82, 71, 71, 0, 81, 81, 82,
+                0, 0, 11, 12, 83, 84, 84, 84, 72, 71, 81, 21, 41, 41, 41, 51, 0, 0, 0, 0, 22, 42, 81, 0, 71, 61, 71, 82, 0, 0, 82, 81,
+                0, 0, 11, 82, 82, 83, 84, 74, 84, 72, 81, 11, 0, 0, 32, 42, 61, 61, 81, 22, 33, 43, 42, 62, 72, 72, 82, 82, 81, 0, 82, 82,
+                0, 21, 11, 82, 82, 72, 72, 83, 74, 84, 22, 12, 21, 82, 63, 53, 42, 22, 22, 82, 72, 62, 62, 41, 61, 71, 71, 81, 82, 81, 81, 82,
+                0, 0, 81, 81, 71, 82, 82, 72, 73, 84, 74, 84, 84, 83, 73, 64, 74, 74, 74, 63, 63, 62, 72, 81, 62, 72, 72, 72, 82, 11, 0, 82,
+                0, 0, 0, 0, 0, 81, 82, 61, 82, 73, 83, 84, 74, 74, 64, 74, 74, 83, 83, 74, 84, 73, 72, 72, 81, 81, 71, 82, 71, 82, 81, 62,
+                0, 0, 0, 0, 0, 0, 51, 61, 61, 72, 82, 72, 82, 74, 73, 82, 82, 72, 72, 82, 73, 83, 83, 73, 72, 82, 72, 72, 73, 83, 73, 82,
+                0, 0, 0, 0, 0, 0, 61, 62, 72, 72, 72, 81, 72, 82, 62, 81, 81, 81, 71, 71, 72, 73, 82, 62, 63, 83, 72, 72, 63, 74, 85, 83,
+                0, 0, 0, 0, 0, 0, 52, 63, 73, 83, 83, 82, 81, 71, 81, 11, 21, 81, 0, 0, 0, 0, 41, 71, 71, 61, 61, 61, 61, 0, 0, 85,
+                0, 0, 0, 0, 0, 0, 52, 53, 62, 82, 13, 12, 62, 72, 82, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 82,
+                0, 0, 0, 0, 0, 0, 42, 43, 42, 32, 23, 23, 52, 0, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 41, 43, 33, 33, 23, 32, 43, 33, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+            };
+            //var box = new BoundingBox(4.635f, -4.72f, 4.1672f, -1.9784f);
+            var box = new BoundingBox(139f, -141.5f, -59.5f, 124.8f);
+            var defaultDataMap = new serializable_CurrentsMapData(box, 32, 21, bufferArray);
+
+            string filename = "CurrentsMapData.json";
+            Debug.Log(defaultDataMap.bufferArray);
+            SerializeJSON(defaultDataMap, filename);
+        }
+
+        public static CurrentsMapData Test()
+        {
+            string path = "CurrentsMapData.json";
+            var currentsMap = LoadJson<serializable_CurrentsMapData>(path);
+
+            return new CurrentsMapData(currentsMap.boundingBox, currentsMap.tilesX, currentsMap.tilesZ, currentsMap.bufferArray);
+        }
+
+        public static CurrentsMapData LoadCurrentsMap(string path)
+        {
+            var currentsMap = LoadJson<serializable_CurrentsMapData>(path);
+            return new CurrentsMapData(currentsMap.boundingBox, currentsMap.tilesX, currentsMap.tilesZ, currentsMap.bufferArray);
+        }
+
+        //--------------------------------
+        // DATOS INICIALES DE PARTIDA (CIUDADES Y REINOS)
+        //--------------------------------
+
+        /// <summary>
+        /// Función encargada de generar un json con datos iniciales del mundo para una partida.
+        /// Esta función se debe utilizar como desarrollador o para modding
+        /// </summary>
+        public static void GenerateStartGameJson(StartGameData startGameData)
+        {
+            var startGameJSONFormat = new StartGameJSONFormat(new StartGameData());
+            startGameJSONFormat.WorldData("worldData_Campaign_1720");
+        }
+
+        /// <summary>
+        /// Función encargada de generar un binaryfile con datos iniciales del mundo para una 
+        /// partida. Esta función se debe utilizar como desarrollador o para modding
+        /// </summary>
+        public static void GenerateStartGameBin(StartGameData startGameData)
+        {
+            var startGameBinaryFormat = new StartGameBinaryFormat(new StartGameData());
+            startGameBinaryFormat.WorldData("worldData_Campaign_1720");
+        }
+
+        public static Transform[] LoadCitiesDataBin(string fileName)
+        {
+            var loaderBinaryFormat = new CitiesLoaderBinaryFormat();
+            StartGameData CampaignCitiesData = loaderBinaryFormat.LoadWorldData(fileName);
+            Debug.Log(CampaignCitiesData);
+            Debug.Log(CampaignCitiesData.kingdoms);
+            //Reinos
+            var kingdomsContainer = new GameObject();
+            kingdomsContainer.name = "Countries";
+            kingdomsContainer.tag = "Kingdoms";
+            kingdomsContainer.SetActive(false);
+
+            var Banners
+
+            SerializableKingdom[] kingdoms = CampaignCitiesData.kingdoms;
+
+            for (int i = 0; i < kingdoms.Length; ++i)
+            {
+                SerializableKingdom k = kingdoms[i]; 
+            }
+
+            //Keypoints:
+            var kpsContainer = new GameObject();
+            kpsContainer.name = "World KeyPoints -- holi :3";
+            kpsContainer.tag = "WorldPlaces";
+            kpsContainer.SetActive(false);
+
+            var naturalPorts = CampaignCitiesData.naturalPorts;
+            var naturalPortsContainer = new GameObject();
+            naturalPortsContainer.transform.parent = kpsContainer.transform;
+            naturalPortsContainer.name = "Natural Docks";
+            //todo: banners
+            var naturalPortsBanners = new GameObject();
+            for (int i = 0; i < naturalPorts.Length; ++i)
+            {
+                SerializableNaturalPort port = naturalPorts[i];
+                port.Deserialize(naturalPortsContainer.transform);
+            }
+
+            var hideouts = CampaignCitiesData.hideouts;
+            var hideOutsContainer = new GameObject();
+            hideOutsContainer.transform.parent = kpsContainer.transform;
+            hideOutsContainer.name = "Smuggglers Posts";
+            hideOutsContainer.tag = "Pirate";
+            //todo: banners
+            var hideOutsBanners = new GameObject();
+            for (int i = 0; i < hideouts.Length; ++i)
+            {
+                SerializableSmugglersPost port = hideouts[i];
+                GameObject obj = port.Deserialize(hideOutsContainer.transform);
+            }
+
+            var shelters = CampaignCitiesData.shelters;
+            var sheltersContainer = new GameObject();
+            sheltersContainer.transform.parent = kpsContainer.transform;
+            sheltersContainer.name = "Pirate Shelters";
+            sheltersContainer.tag = "Pirate";
+            //todo: banners
+            var sheltersBanners = new GameObject();
+            for (int i = 0; i < shelters.Length; ++i)
+            {
+                SerializablePirateShelter port = shelters[i];
+                GameObject obj = port.Deserialize(sheltersContainer.transform);
+            }
+
+            return new Transform[2] {kingdomsContainer.transform, kpsContainer.transform};
+        }
+    }
+
+    public class serializable_CurrentsMapData
+    {
+        public BoundingBox boundingBox;
+        public int tilesX, tilesZ;
+        public int[] bufferArray;
+
+        public serializable_CurrentsMapData(BoundingBox boundingBox, int tilesX, int tilesZ, int[] bufferArray)
+        {
+            this.boundingBox = boundingBox;
+            this.tilesX = tilesX;
+            this.tilesZ = tilesZ;
+            this.bufferArray = bufferArray;
+        }
+    }
 }
 

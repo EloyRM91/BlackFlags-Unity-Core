@@ -5,14 +5,14 @@ using UnityEngine;
 /// <summary>
 /// Delivery es una estructura de clase que contiene un dato y luego se destruye.
 /// La utilidad radica en guardar un dato entre escenas y destruirlo con la entrega del dato,
-/// evitando reservar memoria para datos est·ticos persistentes.
+/// evitando reservar memoria para datos est√°ticos persistentes.
 /// </summary>
 /// <typeparam name="T"></typeparam>
 public abstract class Delivery<T> : MonoBehaviour
 {
     public T shipmentData;
 
-    void Awake()
+    protected virtual void Awake()
     {
         transform.tag = "Delivery";
         DontDestroyOnLoad(gameObject);

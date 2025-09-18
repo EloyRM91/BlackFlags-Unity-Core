@@ -35,11 +35,18 @@ namespace GameMechanics.Sound
 
         protected override void Start()
         {
-
             //Modding
             if (PersistentGameSettings.currentMod != null)
             {
-                var delivery = GameObject.FindWithTag("Delivery").GetComponent<GameMusicDelivery>();
+                bool IsGameMusicDelivery(GameObject obj)
+                {
+                    return obj.GetComponent<GameMusicDelivery>() != null;
+                }
+
+                // var delivery = GameObject.FindWithTag("Delivery").GetComponent<GameMusicDelivery>();
+
+                var obj = System.Array.Find(GameObject.FindGameObjectsWithTag("Delivery"), IsGameMusicDelivery);
+                var delivery = obj.GetComponent<GameMusicDelivery>();
 
                 _music = delivery.Deliver();
                 _songNames = PersistentGameSettings.currentMod.jsonTracks.songsGame;

@@ -12,6 +12,7 @@ using GameMechanics.Sound;
 using Generation.Generators;
 using GameMechanics.Data;
 using GameMechanics.save;
+using Serialization;
 
 
 namespace GameSettings.Loading
@@ -27,17 +28,17 @@ namespace GameSettings.Loading
         //Quotes Dictionary
         protected Dictionary<byte, string> D_LoadingText = new Dictionary<byte, string>()
         {
-            { 0, "El desempeño de la tripulación en combate viene dado por el nivel de moral. No es buena idea iniciar una batalla con la moral muy baja." },
-            { 1, "Al conseguir un botín, se repartirá entre la tripulación, aumentando así la moral a bordo. La moral empeorará si transcurre tiempo sin saquear." },
-            { 2, "La moral de la tripulación puede aumentarse pasando tiempo en las tabernas, consiguiendo victorias y saqueos, y asegurando las reservas de ron."},
-            { 3, "El 19 de septiembre es el “Día Internacional de Hablar como Un Pirata”."},
-            { 4, "Todo hombre normal debe tener la tentación, a veces, de escupirse las manos, izar la bandera negra y comenzar a rajar gargantas. - H.L. Mencken"},
-            { 5, "Si terminas una frase llamando a alguien “rata de sentina” la gente pensará, “¿Quién es ese tipo tan genial que habla como un pirata? Quiero ser su amigo”."},
-            { 6, "“Do What You Want, Cause A Pirate Is Free... You Are A Pirate!” – Lazy Town, Canción Infantil"},
+            { 0, "El desempeÃ±o de la tripulaciÃ³n en combate viene dado por el nivel de moral. No es buena idea iniciar una batalla con la moral muy baja." },
+            { 1, "Al conseguir un botÃ­n, se repartirÃ¡ entre la tripulaciÃ³n, aumentando asÃ­ la moral a bordo. La moral empeorarÃ¡ si transcurre tiempo sin saquear." },
+            { 2, "La moral de la tripulaciÃ³n puede aumentarse pasando tiempo en las tabernas, consiguiendo victorias y saqueos, y asegurando las reservas de ron."},
+            { 3, "El 19 de septiembre es el â€œDÃ­a Internacional de Hablar como Un Pirataâ€."},
+            { 4, "Todo hombre normal debe tener la tentaciÃ³n, a veces, de escupirse las manos, izar la bandera negra y comenzar a rajar gargantas. - H.L. Mencken"},
+            { 5, "Si terminas una frase llamando a alguien â€œrata de sentinaâ€ la gente pensarÃ¡, â€œÂ¿QuiÃ©n es ese tipo tan genial que habla como un pirata? Quiero ser su amigoâ€."},
+            { 6, "â€œDo What You Want, Cause A Pirate Is Free... You Are A Pirate!â€ â€“ Lazy Town, CanciÃ³n Infantil"},
             { 7, "Si escribes yourareapirate.ytmnd.com en el navegador no te vas a arrepentir."},
             { 8, "Con el tiempo, el nivel de amistad con los personajes del mundo se reduce poco a poco. Negocia con contrabandistas y bebe con otros capitanes para mantener el nivel de amistad."},
-            { 9, "Algunos refugios de piratas requieren que tu lealtad al código tenga cierto valor para acceder, o que tu reputación sea alta."},
-            { 10, "Los piratas solían carenar sus barcos en bahías apartadas porque no tenían acceso a los diques secos. Busca un refugio en el mapa para poder reparar tu embarcación"}
+            { 9, "Algunos refugios de piratas requieren que tu lealtad al cÃ³digo tenga cierto valor para acceder, o que tu reputaciÃ³n sea alta."},
+            { 10, "Los piratas solÃ­an carenar sus barcos en bahÃ­as apartadas porque no tenÃ­an acceso a los diques secos. Busca un refugio en el mapa para poder reparar tu embarcaciÃ³n"}
         };
 #endregion
         void OnEnable()
@@ -105,7 +106,7 @@ namespace GameSettings.Loading
                 //Load saved file data
                 var file = PersistentGameSettings.selectedFileName;
                 var fileName = file.Split('.')[0];
-                var loaderBinaryFormat = new LoaderBinaryFormat();
+                var loaderBinaryFormat = new GameLoaderBinaryFormat();
                 SavedFile savedGameData = loaderBinaryFormat.LoadGame(fileName);
 
                 if (savedGameData != null)
@@ -116,6 +117,20 @@ namespace GameSettings.Loading
                 else
                 {
                     Application.Quit();
+                }
+            }
+            else 
+            {
+                //cargar los datos de campaÃ±a por defecto
+                Transform[] containers = SerializationUtils.LoadCitiesDataBin("worldData_Campaign_1720");
+                GameObject persistentContainer = new GameObject();
+                persistentContainer.name = "DELIVERY";
+                var delivery = persistentContainer.AddComponent<CitiesDataDelivery>();
+                delivery.shipmentData = containers;
+
+                foreach (Transform t in containers)
+                {
+                    t.parent = persistentContainer.transform;
                 }
             }
         }

@@ -326,6 +326,7 @@ namespace GameSettings.Mods
     public class JSON_GameData : JSON_MOD
     {
         public string modFileExt = ".mod";
+        public string modStartFileExt = ".mst";
 
         public JSON_GameData(string modFileExt)
         {

@@ -277531,7 +277531,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1994514470}
   m_Layer: 0
-  m_Name: Pirate Shelter
+  m_Name: Pirate Shelters
   m_TagString: Pirate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -284614,7 +284614,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2057966879}
   m_Layer: 0
-  m_Name: Smuggglers Post
+  m_Name: Smuggglers Posts
   m_TagString: Pirate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

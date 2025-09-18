@@ -559,7 +559,7 @@
             "countryVillages": [
                 {
                     "cityName": "Pilón",
-                    "alternativeName": "",
+                    "alternativeName": "Villa de Pilón",
                     "revealed": false,
                     "position": [
                         31.09000015258789,
@@ -585,8 +585,8 @@
                     "population": 210
                 },
                 {
-                    "cityName": "Isla de Cubagua",
-                    "alternativeName": "",
+                    "cityName": "Cubagua",
+                    "alternativeName": "Isla de Cubagua",
                     "revealed": false,
                     "position": [
                         -99.33000183105469,
@@ -613,7 +613,7 @@
                 },
                 {
                     "cityName": "Riohacha",
-                    "alternativeName": "",
+                    "alternativeName": "Villa de Riohacha",
                     "revealed": false,
                     "position": [
                         -17.479999542236329,
@@ -640,7 +640,7 @@
                 },
                 {
                     "cityName": "Ciénaga y Santa Marta",
-                    "alternativeName": "",
+                    "alternativeName": "Bahía de Santa Marta",
                     "revealed": false,
                     "position": [
                         -3.8320000171661379,
@@ -667,7 +667,7 @@
                 },
                 {
                     "cityName": "Barranquilla",
-                    "alternativeName": "",
+                    "alternativeName": "Aldea de Barranquilla",
                     "revealed": false,
                     "position": [
                         2.174999952316284,
@@ -694,7 +694,7 @@
                 },
                 {
                     "cityName": "Coveñas",
-                    "alternativeName": "",
+                    "alternativeName": "Villa de Coveñas",
                     "revealed": false,
                     "position": [
                         9.510000228881836,
@@ -721,7 +721,7 @@
                 },
                 {
                     "cityName": "Moñitos",
-                    "alternativeName": "",
+                    "alternativeName": "Villa de Moñitos",
                     "revealed": false,
                     "position": [
                         14.253999710083008,
@@ -748,7 +748,7 @@
                 },
                 {
                     "cityName": "Moín",
-                    "alternativeName": "",
+                    "alternativeName": "Bahía de Moín",
                     "revealed": false,
                     "position": [
                         81.58300018310547,
@@ -775,7 +775,7 @@
                 },
                 {
                     "cityName": "Puerto Viejo de Talamanca",
-                    "alternativeName": "",
+                    "alternativeName": "Puerto Viejo",
                     "revealed": false,
                     "position": [
                         77.29299926757813,
@@ -802,7 +802,7 @@
                 },
                 {
                     "cityName": "Villa Trujillo",
-                    "alternativeName": "",
+                    "alternativeName": "Trujillo",
                     "revealed": false,
                     "position": [
                         110.29000091552735,
@@ -829,7 +829,7 @@
                 },
                 {
                     "cityName": "Puerto Caballos",
-                    "alternativeName": "",
+                    "alternativeName": "Puerto Cortés",
                     "revealed": false,
                     "position": [
                         127.62000274658203,
@@ -856,7 +856,7 @@
                 },
                 {
                     "cityName": "Golfo Río Dulce",
-                    "alternativeName": "",
+                    "alternativeName": "Boca de Río Dulce",
                     "revealed": false,
                     "position": [
                         136.30499267578126,
@@ -883,7 +883,7 @@
                 },
                 {
                     "cityName": "San Carlos de Macuro",
-                    "alternativeName": "",
+                    "alternativeName": "Macuro",
                     "revealed": false,
                     "position": [
                         -119.13999938964844,
@@ -913,9 +913,9 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Peregrino",
-                            "captainName": "Mansel de Ayala y Zuñiga",
-                            "shipType": 5,
+                            "shipName": "Cavite",
+                            "captainName": "Andrés de León",
+                            "shipType": 3,
                             "variant": "",
                             "shipImprovements": []
                         }
@@ -939,8 +939,8 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Campoamor",
-                            "captainName": "Esteban Hidalgo Varilla",
+                            "shipName": "Alejandra",
+                            "captainName": "Diego Alfonso Téllez",
                             "shipType": 3,
                             "variant": "",
                             "shipImprovements": []
@@ -965,10 +965,10 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "San Pedro y San Pablo",
-                            "captainName": "Juan del Valdespino",
-                            "shipType": 7,
-                            "variant": "Roundbrig",
+                            "shipName": "Sereníssima",
+                            "captainName": "Blas Salazar de la Gasca",
+                            "shipType": 5,
+                            "variant": "",
                             "shipImprovements": []
                         }
                     ],
@@ -991,8 +991,8 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "San Carlos",
-                            "captainName": "Pedro Núñez",
+                            "shipName": "Quiteria",
+                            "captainName": "Jerónimo Seriche de Roa",
                             "shipType": 3,
                             "variant": "",
                             "shipImprovements": []
@@ -1017,9 +1017,9 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "San Bernardo",
-                            "captainName": "Juan Martín Gómez de la Vega",
-                            "shipType": 3,
+                            "shipName": "María",
+                            "captainName": "Buenaventura de la Bodega",
+                            "shipType": 5,
                             "variant": "",
                             "shipImprovements": []
                         }
@@ -1043,8 +1043,8 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Jacobino",
-                            "captainName": "Íñigo Blanco de Trava",
+                            "shipName": "Rosario",
+                            "captainName": "Íñigo Espinosa ",
                             "shipType": 3,
                             "variant": "",
                             "shipImprovements": []
@@ -1069,9 +1069,9 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Capellán",
-                            "captainName": "Ventura de Corme y Zuñiga",
-                            "shipType": 0,
+                            "shipName": "Cecilia",
+                            "captainName": "Blasco de Ayala y Zuñiga",
+                            "shipType": 3,
                             "variant": "",
                             "shipImprovements": []
                         }
@@ -1095,10 +1095,10 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Cornelia",
-                            "captainName": "Esteban Erezcano",
-                            "shipType": 11,
-                            "variant": "Xebec",
+                            "shipName": "Atocha",
+                            "captainName": "Pedro Cevallos",
+                            "shipType": 5,
+                            "variant": "",
                             "shipImprovements": []
                         }
                     ],
@@ -1121,9 +1121,9 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Elena",
-                            "captainName": "Juan Gerónimo de la Randa",
-                            "shipType": 9,
+                            "shipName": "San José",
+                            "captainName": "Bartolomé Guevara",
+                            "shipType": 3,
                             "variant": "",
                             "shipImprovements": []
                         }
@@ -1147,8 +1147,8 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Teresa",
-                            "captainName": "Juan Esteban de Noriega",
+                            "shipName": "Maribel",
+                            "captainName": "José Gaspar de Valera y Perea",
                             "shipType": 3,
                             "variant": "",
                             "shipImprovements": []
@@ -1173,9 +1173,9 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Cornelia",
-                            "captainName": "Alfonso Santibáñez Cevallos",
-                            "shipType": 9,
+                            "shipName": "Játiva",
+                            "captainName": "Juan Martín Pardo de Noguera",
+                            "shipType": 3,
                             "variant": "",
                             "shipImprovements": []
                         }
@@ -1199,8 +1199,8 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Paloma",
-                            "captainName": "Gasparillo Hidalgo Varilla",
+                            "shipName": "San José",
+                            "captainName": "Vasco Andía",
                             "shipType": 3,
                             "variant": "",
                             "shipImprovements": []
@@ -1225,9 +1225,9 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Margarita",
-                            "captainName": "Buenaventura Blanco de Trava",
-                            "shipType": 3,
+                            "shipName": "Juan el Chico",
+                            "captainName": "Santiago de Ursúa",
+                            "shipType": 5,
                             "variant": "",
                             "shipImprovements": []
                         }
@@ -1251,8 +1251,8 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Ulloa",
-                            "captainName": "Diego Hidalgo Varilla",
+                            "shipName": "Santa Teresa",
+                            "captainName": "Bruno Salazar de Noguera",
                             "shipType": 3,
                             "variant": "",
                             "shipImprovements": []
@@ -1277,8 +1277,8 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Juan el Chico",
-                            "captainName": "Juan Esteban Núñez",
+                            "shipName": "Aránzazu",
+                            "captainName": "Juan Andrés Larraondo",
                             "shipType": 3,
                             "variant": "",
                             "shipImprovements": []
@@ -1303,9 +1303,9 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Constantino",
-                            "captainName": "Diego Soto Aboal",
-                            "shipType": 3,
+                            "shipName": "Teresa",
+                            "captainName": "Blas de León",
+                            "shipType": 9,
                             "variant": "",
                             "shipImprovements": []
                         }
@@ -1329,9 +1329,9 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Señora del Pilar",
-                            "captainName": "Benito Téllez-Girón",
-                            "shipType": 0,
+                            "shipName": "Cecilia",
+                            "captainName": "Luis Tomás de Luceni",
+                            "shipType": 3,
                             "variant": "",
                             "shipImprovements": []
                         }
@@ -1355,8 +1355,8 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Señora del Pilar",
-                            "captainName": "Santiago Núñez Varilla",
+                            "shipName": "Nuestra Señora de la Almudena",
+                            "captainName": "Andrés Guzmán y Tovar",
                             "shipType": 3,
                             "variant": "",
                             "shipImprovements": []
@@ -1384,61 +1384,35 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Espíritu Santo",
-                            "captainName": "Álvaro del Valdespino",
+                            "shipName": "Perla",
+                            "captainName": "Íñigo Pizarro",
+                            "shipType": 4,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        -99.76000213623047,
+                        0.009999880567193032,
+                        89.54999542236328
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Nuestra Señora de Guadalupe",
+                            "captainName": "Blasco Gómez de Sandobal",
                             "shipType": 2,
-                            "variant": "",
-                            "shipImprovements": []
-                        }
-                    ],
-                    "position": [
-                        -48.150001525878909,
-                        0.009999940171837807,
-                        87.7699966430664
-                    ],
-                    "rotation": [
-                        0.0,
-                        -0.9532891511917114,
-                        0.0,
-                        -0.30205944180488589
-                    ],
-                    "destination": [],
-                    "id": 0,
-                    "targetId": 0,
-                    "inOnTarget": false
-                },
-                {
-                    "convoyShips": [
-                        {
-                            "shipName": "Fama",
-                            "captainName": "Juan Andrés Olite Téllez",
-                            "shipType": 9,
-                            "variant": "",
-                            "shipImprovements": []
-                        }
-                    ],
-                    "position": [
-                        47.90199661254883,
-                        0.009999940171837807,
-                        116.24099731445313
-                    ],
-                    "rotation": [
-                        0.0,
-                        -0.9532891511917114,
-                        0.0,
-                        -0.30205944180488589
-                    ],
-                    "destination": [],
-                    "id": 0,
-                    "targetId": 0,
-                    "inOnTarget": false
-                },
-                {
-                    "convoyShips": [
-                        {
-                            "shipName": "Malaquita",
-                            "captainName": "Benito Guevara",
-                            "shipType": 1,
                             "variant": "",
                             "shipImprovements": []
                         }
@@ -1462,17 +1436,43 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Divina Pastora",
-                            "captainName": "Andrés Díaz Sapena",
-                            "shipType": 2,
+                            "shipName": "Medea",
+                            "captainName": "Domingo Núñez",
+                            "shipType": 4,
                             "variant": "",
                             "shipImprovements": []
                         }
                     ],
                     "position": [
-                        9.215999603271485,
-                        0.01000002957880497,
-                        113.51300048828125
+                        -96.08000183105469,
+                        0.009999940171837807,
+                        92.43000030517578
+                    ],
+                    "rotation": [
+                        0.0,
+                        -0.9532891511917114,
+                        0.0,
+                        -0.30205944180488589
+                    ],
+                    "destination": [],
+                    "id": 0,
+                    "targetId": 0,
+                    "inOnTarget": false
+                },
+                {
+                    "convoyShips": [
+                        {
+                            "shipName": "Águila de Nantes",
+                            "captainName": "Domingo Seriche de Roa",
+                            "shipType": 9,
+                            "variant": "",
+                            "shipImprovements": []
+                        }
+                    ],
+                    "position": [
+                        -102.28399658203125,
+                        0.010000059381127358,
+                        84.79199981689453
                     ],
                     "rotation": [
                         0.0,
@@ -1674,7 +1674,7 @@
             "countryVillages": [
                 {
                     "cityName": "San Martín",
-                    "alternativeName": "",
+                    "alternativeName": "Isla de San Martín",
                     "revealed": false,
                     "position": [
                         -102.9000015258789,
@@ -1701,7 +1701,7 @@
                 },
                 {
                     "cityName": "Roseau",
-                    "alternativeName": "",
+                    "alternativeName": "Isla de Ro-Zó",
                     "revealed": false,
                     "position": [
                         -122.22000122070313,
@@ -1812,7 +1812,7 @@
             "countryVillages": [
                 {
                     "cityName": "Tobago",
-                    "alternativeName": "",
+                    "alternativeName": "Isla de Tobago",
                     "revealed": false,
                     "position": [
                         -132.83999633789063,
@@ -1839,7 +1839,7 @@
                 },
                 {
                     "cityName": "Bonaire",
-                    "alternativeName": "",
+                    "alternativeName": "Isla de Bonaire",
                     "revealed": false,
                     "position": [
                         -59.72999954223633,
@@ -1869,9 +1869,9 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Beima",
-                            "captainName": "Cornelis Brower",
-                            "shipType": 7,
+                            "shipName": "Liselot",
+                            "captainName": "Zymen Alvel",
+                            "shipType": 0,
                             "variant": "",
                             "shipImprovements": []
                         }
@@ -1895,9 +1895,9 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Jacoba",
-                            "captainName": "Jacob van Walbeeck",
-                            "shipType": 7,
+                            "shipName": "Spotvogel",
+                            "captainName": "Hendrik van Zuylen",
+                            "shipType": 0,
                             "variant": "",
                             "shipImprovements": []
                         }
@@ -1921,9 +1921,9 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Sweers",
-                            "captainName": "Zyman Blauvelt",
-                            "shipType": 7,
+                            "shipName": "Deaventer",
+                            "captainName": "Zymen Evertsen",
+                            "shipType": 0,
                             "variant": "",
                             "shipImprovements": []
                         }
@@ -1947,9 +1947,9 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Hendrik",
-                            "captainName": "Jacob Reis",
-                            "shipType": 0,
+                            "shipName": "Engel de Ruyter",
+                            "captainName": "Olivier Alvel",
+                            "shipType": 1,
                             "variant": "",
                             "shipImprovements": []
                         }
@@ -1976,17 +1976,17 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Hoop",
-                            "captainName": "Zyman Schouten",
-                            "shipType": 7,
-                            "variant": "Snowbrig",
+                            "shipName": "Oosvoorne",
+                            "captainName": "Jan Marinus Alvel",
+                            "shipType": 6,
+                            "variant": "",
                             "shipImprovements": []
                         }
                     ],
                     "position": [
-                        -42.82200241088867,
+                        -52.99599838256836,
                         0.010000059381127358,
-                        79.63600158691406
+                        81.46399688720703
                     ],
                     "rotation": [
                         0.0,
@@ -2227,7 +2227,7 @@
             "countryVillages": [
                 {
                     "cityName": "Barbuda",
-                    "alternativeName": "",
+                    "alternativeName": "Isla Barbuda",
                     "revealed": false,
                     "position": [
                         -114.64399719238281,
@@ -2254,7 +2254,7 @@
                 },
                 {
                     "cityName": "Providencia",
-                    "alternativeName": "",
+                    "alternativeName": "Vieja Providencia",
                     "revealed": false,
                     "position": [
                         65.06700134277344,
@@ -2335,7 +2335,7 @@
                 },
                 {
                     "cityName": "George Town",
-                    "alternativeName": "",
+                    "alternativeName": "Gran Caimán",
                     "revealed": false,
                     "position": [
                         66.77300262451172,
@@ -2361,8 +2361,8 @@
                     "population": 200
                 },
                 {
-                    "cityName": "San VIcente",
-                    "alternativeName": "",
+                    "cityName": "Saint Vicent",
+                    "alternativeName": "Isla de San Vicente",
                     "revealed": false,
                     "position": [
                         -126.27999877929688,
@@ -2389,7 +2389,7 @@
                 },
                 {
                     "cityName": "Santa Lucía",
-                    "alternativeName": "",
+                    "alternativeName": "Isla de Santa Lucía",
                     "revealed": false,
                     "position": [
                         -127.90599822998047,
@@ -2419,9 +2419,9 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Altair",
-                            "captainName": "Eamon Linn",
-                            "shipType": 1,
+                            "shipName": "Fiske",
+                            "captainName": "Francis Dane",
+                            "shipType": 7,
                             "variant": "",
                             "shipImprovements": []
                         }
@@ -2445,9 +2445,9 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Wilbur",
-                            "captainName": "Rush Radburn",
-                            "shipType": 0,
+                            "shipName": "Cable",
+                            "captainName": "Reginald Hendrick",
+                            "shipType": 7,
                             "variant": "",
                             "shipImprovements": []
                         }
@@ -2471,10 +2471,10 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Veronica",
-                            "captainName": "Charles Hanford",
+                            "shipName": "Jacob",
+                            "captainName": "Jack Garrick",
                             "shipType": 7,
-                            "variant": "",
+                            "variant": "Snowbrig",
                             "shipImprovements": []
                         }
                     ],
@@ -2497,8 +2497,8 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Little Ben",
-                            "captainName": "John Tennant",
+                            "shipName": "Avenger",
+                            "captainName": "Riley Brooks",
                             "shipType": 7,
                             "variant": "",
                             "shipImprovements": []
@@ -2523,9 +2523,9 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Courtney",
-                            "captainName": "Macy Howland",
-                            "shipType": 7,
+                            "shipName": "Biddle",
+                            "captainName": "George Lyre",
+                            "shipType": 0,
                             "variant": "",
                             "shipImprovements": []
                         }
@@ -2549,8 +2549,8 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Forster",
-                            "captainName": "Stede Langhorne",
+                            "shipName": "Alexandria",
+                            "captainName": "George Keane",
                             "shipType": 0,
                             "variant": "",
                             "shipImprovements": []
@@ -2575,8 +2575,8 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "Vindictive",
-                            "captainName": "Robert Harper",
+                            "shipName": "Avenger",
+                            "captainName": "Rush Tennant",
                             "shipType": 0,
                             "variant": "",
                             "shipImprovements": []
@@ -2604,17 +2604,17 @@
                 {
                     "convoyShips": [
                         {
-                            "shipName": "HMSForce",
-                            "captainName": "Nickleby Dryden",
-                            "shipType": 1,
-                            "variant": "",
+                            "shipName": "HMSRedmill",
+                            "captainName": "Francis Gale",
+                            "shipType": 8,
+                            "variant": "Snowbrig",
                             "shipImprovements": []
                         }
                     ],
                     "position": [
-                        129.86000061035157,
-                        0.010000007227063179,
-                        37.1619987487793
+                        -116.25999450683594,
+                        0.009999940171837807,
+                        20.18000030517578
                     ],
                     "rotation": [
                         0.0,
@@ -2633,7 +2633,7 @@
     "naturalPorts": [
         {
             "cityName": "Turbo",
-            "alternativeName": "",
+            "alternativeName": "Bahía Turbo",
             "revealed": false,
             "position": [
                 19.54199981689453,
@@ -2657,7 +2657,7 @@
         },
         {
             "cityName": "Higuerote",
-            "alternativeName": "",
+            "alternativeName": "Carenero de Higuerote",
             "revealed": false,
             "position": [
                 -81.02999877929688,
@@ -2705,7 +2705,7 @@
         },
         {
             "cityName": "Isla de la Gonave",
-            "alternativeName": "",
+            "alternativeName": "Gonâve",
             "revealed": false,
             "position": [
                 -9.220000267028809,
@@ -2777,7 +2777,7 @@
         },
         {
             "cityName": "Bahía de Cárdenas",
-            "alternativeName": "",
+            "alternativeName": "Bahía de Jorge Cárdenas",
             "revealed": false,
             "position": [
                 59.779998779296878,
@@ -2801,7 +2801,7 @@
         },
         {
             "cityName": "Caimanera",
-            "alternativeName": "",
+            "alternativeName": "La Caimanera",
             "revealed": false,
             "position": [
                 10.15999984741211,
@@ -2849,7 +2849,7 @@
         },
         {
             "cityName": "Isla Cotorra",
-            "alternativeName": "",
+            "alternativeName": "Delta del Amacuro (Cotorra)",
             "revealed": false,
             "position": [
                 -117.45999908447266,
@@ -2923,7 +2923,7 @@
     "hideouts": [
         {
             "cityName": "Isla la Tortuga",
-            "alternativeName": "",
+            "alternativeName": "La Tortuga",
             "revealed": false,
             "position": [
                 -88.79000091552735,
@@ -3001,7 +3001,7 @@
         },
         {
             "cityName": "Islas Turcas",
-            "alternativeName": "",
+            "alternativeName": "Las Turcas",
             "revealed": false,
             "position": [
                 -20.25,
@@ -3053,7 +3053,7 @@
         },
         {
             "cityName": "Tucacas",
-            "alternativeName": "",
+            "alternativeName": "Cayos de Tucacas",
             "revealed": false,
             "position": [
                 -59.2400016784668,
@@ -3105,7 +3105,7 @@
         },
         {
             "cityName": "Puerto Plata",
-            "alternativeName": "",
+            "alternativeName": "Puerto de Plata",
             "revealed": false,
             "position": [
                 -30.93000030517578,
@@ -3184,7 +3184,7 @@
             "spriteIndex": 0,
             "flippedX": false,
             "exports": [],
-            "tavernName": "La Dama de Amsterdam",
+            "tavernName": "Le Bon Voleur",
             "entryCondition": {
                 "requirement": 0,
                 "value": 0
@@ -3213,7 +3213,7 @@
             "spriteIndex": 0,
             "flippedX": false,
             "exports": [],
-            "tavernName": "La Dama de Amsterdam",
+            "tavernName": "Roberts' Blood",
             "entryCondition": {
                 "requirement": 0,
                 "value": 0
@@ -3221,7 +3221,7 @@
         },
         {
             "cityName": "San Salvador",
-            "alternativeName": "",
+            "alternativeName": "Isla de San Salvador",
             "revealed": false,
             "position": [
                 7.989999771118164,
@@ -3242,7 +3242,7 @@
             "spriteIndex": 0,
             "flippedX": false,
             "exports": [],
-            "tavernName": "La Dama de Amsterdam",
+            "tavernName": "Taberna San Dimas",
             "entryCondition": {
                 "requirement": 0,
                 "value": 0
@@ -3250,7 +3250,7 @@
         },
         {
             "cityName": "San Andrés",
-            "alternativeName": "",
+            "alternativeName": "Isla de San Andrés",
             "revealed": false,
             "position": [
                 68.41999816894531,
@@ -3271,7 +3271,7 @@
             "spriteIndex": 0,
             "flippedX": false,
             "exports": [],
-            "tavernName": "La Dama de Amsterdam",
+            "tavernName": "Los Tres Pícaros",
             "entryCondition": {
                 "requirement": 0,
                 "value": 0
@@ -3279,7 +3279,7 @@
         },
         {
             "cityName": "Roatán",
-            "alternativeName": "",
+            "alternativeName": "Isla Roatán",
             "revealed": false,
             "position": [
                 114.08000183105469,
@@ -3300,7 +3300,7 @@
             "spriteIndex": 0,
             "flippedX": false,
             "exports": [],
-            "tavernName": "La Dama de Amsterdam",
+            "tavernName": "La Negrita",
             "entryCondition": {
                 "requirement": 0,
                 "value": 0
@@ -3329,7 +3329,7 @@
             "spriteIndex": 0,
             "flippedX": false,
             "exports": [],
-            "tavernName": "La Dama de Amsterdam",
+            "tavernName": "La Taberna de Nancy",
             "entryCondition": {
                 "requirement": 0,
                 "value": 0

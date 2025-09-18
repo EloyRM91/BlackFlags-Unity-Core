@@ -12,15 +12,15 @@ public class PersistentSavedFileContainer : Persistent
     public bool ignoreInventoryData = false;
     private bool inventoyDataLoaded;
 
-    //Player Data - Transformación y datos de ruta y destino
+    //Player Data - TransformaciÃ³n y datos de ruta y destino
     public bool ignorePlayerConvoyData = false;
     private bool playerConvoyDataLoaded;
 
-    //Morale - Tripulación, racionamiento y modificadores
+    //Morale - TripulaciÃ³n, racionamiento y modificadores
     public bool ignoreMoraleData = false;
     private bool moraleDataLoaded;
 
-    //Calendary - Fecha, timer de día y de actualización de mercados
+    //Calendary - Fecha, timer de dÃ­a y de actualizaciÃ³n de mercados
     public bool ignoreDateData = false;
     private bool dateDataLoaded;
 

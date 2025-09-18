@@ -21,7 +21,14 @@ namespace GameMechanics.Sound
             //Modding
             if (PersistentGameSettings.currentMod != null)
             {
-                var delivery = GameObject.FindWithTag("Delivery").GetComponent<MenuMusicDelivery>();
+                bool IsMenuMusicDelivery(GameObject obj)
+                {
+                    return obj.GetComponent<MenuMusicDelivery>() != null;
+                }
+
+                // var delivery = GameObject.FindWithTag("Delivery").GetComponent<MenuMusicDelivery>();
+                var obj = System.Array.Find(GameObject.FindGameObjectsWithTag("Delivery"), IsMenuMusicDelivery);
+                var delivery = obj.GetComponent<MenuMusicDelivery>();
 
                 _tracks = delivery.Deliver();
                 _songNames = new string[_tracks.Length];

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 //Mechanics
 using GameMechanics.Data;
+using GameMechanics.save;
 
 namespace GameMechanics.WorldCities
 {
@@ -64,13 +65,42 @@ namespace GameMechanics.WorldCities
 
         protected override void DisplayKeypointPanel()
         {
-            //todav�a no hay panel para la vista de villas
             UIMap.ui.DisplayInfo(this);
         }
 
         protected override void DisplayInfo()
         {
             UIMap.ui.DisplayInfo(this);
+        }
+
+        public void SetFromSerializedData(SerializableSmugglersPost portData)
+        {
+            this.cityName = portData.cityName;
+            gameObject.name = portData.cityName;
+            this.alternativeName = portData.alternativeName;
+            this.revealed = portData.revealed;
+            this.transform.position = SerializationConverter.ToVector3(portData.position);
+
+            //Target Path:
+            var entryPoint = this.transform.GetChild(0);
+            entryPoint.position = SerializationConverter.ToVector3(portData.entryPoint);
+
+            //Banner's Pivot
+            var pivot = this.transform.GetChild(1);
+            pivot.position = SerializationConverter.ToVector3(portData.pivotPoint);
+
+            //todo: events point
+            
+            //todo: modificar el sprite en función del índice
+            //todo: (podemos tener más de un tipo de sprite para este tipo de keypoint)
+            var index = portData.spriteIndex;
+            if(portData.flippedX)
+            {
+                var s = this.transform.localScale;
+                this.transform.localScale = new Vector3(-s.x, s.y, s.z);
+            }
+
+            this.exportsIndex = portData.exports;
         }
     }
 }
