@@ -1,13 +1,10 @@
-0.031
-- Incluida primera versión del layout "Mapas" en la sección "Información del Mundo"
-- Incorporado modo de vista de mapa de Cabotaje
-- Incorporado modo de vista de mapa de Corrientes
-- Incorporada carga de datos de corrientes a partir de archivo json. Las corrientes del mundo se pueden modear
-- Cambios en la mecánica de movimiento del jugador para adaptar la velocidad a la influencia de la corriente
-- Cambios visuales menores
-- Cámara: habiendo seleccionado un barco en mapa y teniéndolo visualizado en la vista inferior izquierda, al hacer click sobre la vista inferior izquierda, la cámara de mundo se centrará sobre ese barco o convoy
-- Añadida documentación interna
-- Añadidos nuevos nombres a la base de datos
+0.038
+- Cambios en nombres y población de ciudades
+- Añadidos datos internos de los lugares del mundo, como nombres alternativos que pueden usar los personajes npc en los diálogos
+- Reubicados los botones de mapa de cabotaje y mapa de corrientes para evitar un fallo de detección de clicks por superposición con el área del minimapa.
+- Se puede guardar partida. Al guardar, se sobreescribirá la última partida guardada.
+- Se puede continuar una partida guardada desde el menú al pulsar "Continuar"
+- Se pueden moddear datos del mundo: puertos naturales, refugios pirata y escondites de contrabando.
 
 Puedes seguir las notificaciones de las actualizaciones en itch:
 https://eloy-ruiz.itch.io/
