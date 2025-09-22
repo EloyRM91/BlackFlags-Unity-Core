@@ -37,12 +37,12 @@ public class PlayerNameInput : MonoBehaviour
         _inputField.onValueChanged.AddListener(delegate { SetName(); });
 
         //Generator
-#if (UNITY_EDITOR)
+// #if (UNITY_EDITOR)
         if (!WorldGenerator.InitializationDone)
         {
             WorldGenerator.Initialize();
         }
-#endif
+// #endif
 
         //_inputField.text = WorldGenerator.GetCharacterName(EntityType_KINGDOM.KINGDOM_Britain);
         _inputField.text = WorldGenerator.GetCharacterName(_currentSel);
