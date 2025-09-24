@@ -122,7 +122,17 @@ namespace GameSettings.Loading
             else 
             {
                 //cargar los datos de campaña por defecto
-                Transform[] containers = SerializationUtils.LoadCitiesDataBin("worldData_Campaign_1720");
+                Transform[] containers;
+                if(PersistentGameSettings.currentMod != null)
+                {
+                    containers = SerializationUtils.LoadCitiesDataJson("worldData_Campaign_1720");
+                }
+                else 
+                {
+                    // containers = SerializationUtils.LoadCitiesDataJson("worldData_Campaign_1720");
+                    containers = SerializationUtils.LoadCitiesDataBin("worldData_Campaign_1720");
+                }
+
                 GameObject persistentContainer = new GameObject();
                 persistentContainer.name = "DELIVERY";
                 var delivery = persistentContainer.AddComponent<CitiesDataDelivery>();

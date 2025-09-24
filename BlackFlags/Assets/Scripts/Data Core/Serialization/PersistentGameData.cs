@@ -2401,7 +2401,7 @@ namespace GameMechanics.save
             else
             {
                 //Ruta del directorio del mod
-                return currentMod.ModPath + "Data/Saves/";
+                return currentMod.ModPath + "/Data/Saves/";
             }
         }
     }
@@ -2552,7 +2552,7 @@ namespace GameMechanics.save
             else
             {
                 //Ruta del directorio del mod
-                return currentMod.ModPath + "Data/Campaigns/";
+                return currentMod.ModPath + "/Data/Campaigns/";
             }
         }
 
@@ -2567,6 +2567,7 @@ namespace GameMechanics.save
             else if (currentMod.gameLogic != null)
             {
                 //extensión de partida para mods:
+                // return currentMod.gameLogic.modExtension;
                 //(usaremos un .json)
                 return ".json";
             }
@@ -2586,6 +2587,64 @@ namespace GameMechanics.save
                 var stream = new FileStream(path, FileMode.Open);
                 StartGameData result = binaryFormatter.Deserialize(stream) as StartGameData;
                 stream.Close();
+                return result;
+            }
+            return null;
+        }
+    }
+
+    [Serializable]
+    public class CitiesLoaderJsonFormat : SerializationUtilities
+    {
+        public CitiesLoaderJsonFormat()
+        {
+            extension = ".json";
+        }
+
+        protected string getRoute()
+        {
+            var currentMod = PersistentGameSettings.currentMod;
+            if (currentMod == null)
+            {
+                //Ruta por del juego vanilla:
+                return Directory.GetCurrentDirectory() + "/Campaigns/";
+            }
+            else
+            {
+                //Ruta del directorio del mod
+                return currentMod.ModPath + "/Data/Campaigns/";
+            }
+        }
+
+        protected override string getFileExtension()
+        {
+            var currentMod = PersistentGameSettings.currentMod;
+
+            if (currentMod == null)
+            {
+                return extension;
+            }
+            else if (currentMod.gameLogic != null)
+            {
+                //extensión de partida para mods:
+                // return currentMod.gameLogic.modExtension;
+                //(usaremos un .json)
+                return ".json";
+            }
+            else
+            {
+                return extension;
+            }
+        }
+
+        public StartGameData LoadWorldData(string fileName)
+        {
+            var path = getRoute() + fileName + getFileExtension();
+            Debug.LogError(path);
+            if (File.Exists(path))
+            {
+                string json = File.ReadAllText(path);
+                StartGameData result = JsonUtility.FromJson<StartGameData>(json) as StartGameData;
                 return result;
             }
             return null;
@@ -2707,6 +2766,93 @@ namespace Serialization
             StartGameData CampaignCitiesData = loaderBinaryFormat.LoadWorldData(fileName);
             Debug.Log(CampaignCitiesData);
             Debug.Log(CampaignCitiesData.kingdoms);
+            //Reinos
+            var kingdomsContainer = new GameObject();
+            kingdomsContainer.name = "Countries";
+            kingdomsContainer.tag = "Kingdoms";
+            kingdomsContainer.SetActive(false);
+
+            var banners = new GameObject().transform;
+            banners.gameObject.SetActive(false);
+
+            SerializableKingdom[] kingdoms = CampaignCitiesData.kingdoms;
+
+            for (int i = 0; i < kingdoms.Length; ++i)
+            {
+                SerializableKingdom k = kingdoms[i]; 
+            }
+
+            //Keypoints:
+            var kpsContainer = new GameObject();
+            kpsContainer.name = "World KeyPoints -- holi :3";
+            kpsContainer.tag = "WorldPlaces";
+            kpsContainer.SetActive(false);
+
+            //Puertos naturales
+            var naturalPorts = CampaignCitiesData.naturalPorts;
+            var naturalPortsContainer = new GameObject();
+            naturalPortsContainer.transform.parent = kpsContainer.transform;
+            naturalPortsContainer.name = "Natural Docks";
+
+            //Banners
+            var naturalPortsBanners = new GameObject();
+            naturalPortsBanners.name = "Natural piers";
+            naturalPortsBanners.transform.SetParent(banners);
+            for (int i = 0; i < naturalPorts.Length; ++i)
+            {
+                SerializableNaturalPort port = naturalPorts[i];
+                MB_NaturalPort serializedPort = port.Deserialize(naturalPortsContainer.transform);
+                //Asigna un banner
+                Transform bannerTransform = serializedPort.GetKeyPointBanner(naturalPortsBanners.transform).transform;
+            }
+
+            //Escondites de contrabando
+            var hideouts = CampaignCitiesData.hideouts;
+            var hideOutsContainer = new GameObject();
+            hideOutsContainer.transform.parent = kpsContainer.transform;
+            hideOutsContainer.name = "Smuggglers Posts";
+            hideOutsContainer.tag = "Pirate";
+
+            //Banners
+            var hideOutsBanners = new GameObject();
+            hideOutsBanners.name = "Smuggglers hideout";
+            hideOutsBanners.transform.SetParent(banners);
+            for (int i = 0; i < hideouts.Length; ++i)
+            {
+                SerializableSmugglersPost port = hideouts[i];
+                MB_SmugglersPost serializedPort = port.Deserialize(hideOutsContainer.transform);
+
+                //Asigna un banner
+                Transform bannerTransform = serializedPort.GetKeyPointBanner(naturalPortsBanners.transform).transform;
+            }
+
+            var shelters = CampaignCitiesData.shelters;
+            var sheltersContainer = new GameObject();
+            sheltersContainer.transform.parent = kpsContainer.transform;
+            sheltersContainer.name = "Pirate Shelters";
+            sheltersContainer.tag = "Pirate";
+
+            var sheltersBanners = new GameObject();
+            sheltersBanners.name = "Pirate Shelters";
+            sheltersBanners.transform.SetParent(banners);
+            for (int i = 0; i < shelters.Length; ++i)
+            {
+                SerializablePirateShelter port = shelters[i];
+                MB_PirateShelter serializedPort = port.Deserialize(sheltersContainer.transform);
+
+                //Asigna un banner
+                Transform bannerTransform = serializedPort.GetKeyPointBanner(naturalPortsBanners.transform).transform;
+            }
+
+            return new Transform[3] {kingdomsContainer.transform, kpsContainer.transform, banners};
+        }
+
+        //todo: refactorizar esto (usar un parámetro genérico <T> en lugar de duplicar la función)
+        public static Transform[] LoadCitiesDataJson(string fileName)
+        {
+            var jsonFormatter = new CitiesLoaderJsonFormat();
+            StartGameData CampaignCitiesData = jsonFormatter.LoadWorldData(fileName);
+
             //Reinos
             var kingdomsContainer = new GameObject();
             kingdomsContainer.name = "Countries";

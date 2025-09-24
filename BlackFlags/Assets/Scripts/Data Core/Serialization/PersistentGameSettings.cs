@@ -126,7 +126,8 @@ namespace GameSettings.Core
             ModData.GetJsonFile(File.ReadAllText(Path.Combine(directory, "Data/Menu/menu.json")), out currentMod.jsonMenu);
             ModData.GetJsonFile(File.ReadAllText(Path.Combine(directory, "Fonts/styles.json")), out currentMod.jsonFonts);
             ModData.GetJsonFile(File.ReadAllText(Path.Combine(directory, "Music/tracks.json")), out currentMod.jsonTracks);
-            ModData.GetJsonFile(File.ReadAllText(Path.Combine(directory, "Data/gameData.json")), out currentMod.gameLogic);
+            //todo: crear el gameLogic
+            // ModData.GetJsonFile(File.ReadAllText(Path.Combine(directory, "Data/gameData.json")), out currentMod.gameLogic);
         }
 
     }

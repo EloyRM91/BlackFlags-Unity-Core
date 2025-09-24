@@ -107,7 +107,7 @@ namespace GameMechanics.WorldCities
             banner.name = "Banner Controller - " + this.cityName;
             if(banner.TryGetComponent<UI.WorldMap.BannerController>(out UI.WorldMap.BannerController controller))
             {
-                controller.SetNewTarget(transform);
+                controller.SetNewTarget(transform.GetChild(1));
                 LinkUIBanner(banner);
                 return banner;
             }
