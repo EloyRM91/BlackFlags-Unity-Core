@@ -32,7 +32,7 @@ public class ButtonLoadLastSavedGame : ButtonIntroAction
 
         PersistentGameSettings.loadingFile = true;
         PersistentGameSettings.selectedFileName = latestFileName;
-        SceneManager.SetAsynSceneAndLoadAsyn(3); //En el futuro, debería de emplearse una escena diferente (y en ella crear las ciudades y asentamientos)
+        SceneManager.SetAsynSceneAndLoadAsyn(3); //En el futuro, deberï¿½a de emplearse una escena diferente (y en ella crear las ciudades y asentamientos)
     }
 
     private string GetDirectory()
@@ -46,7 +46,7 @@ public class ButtonLoadLastSavedGame : ButtonIntroAction
         else
         {
             //Ruta del directorio del mod
-            return currentMod.ModPath + "Data/Saves/";
+            return currentMod.ModPath + "/Data/Saves/";
         }
     }
 

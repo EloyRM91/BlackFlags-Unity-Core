@@ -103,7 +103,7 @@ public class ModsMenu : MonoBehaviour
             _IMG_Preview.sprite = Resources.Load<Sprite>("Warnings/nopreview");
         }
         previewPath = selectedPath + "\\readme.txt";
-        _TEXT_description.text = File.Exists(previewPath) ? File.ReadAllText(previewPath) : "Sin descripción";
+        _TEXT_description.text = File.Exists(previewPath) ? File.ReadAllText(previewPath) : "Sin descripciÃ³n";
     }
 
     public void LoadMod()

@@ -2094,6 +2094,8 @@ namespace GameMechanics.save
 
             //* World, kingdoms and cities:
             //Kingdoms:
+            return;
+            //todo: gestionar reinos:
             var kingdomsContainer = GameObject.FindWithTag("Kingdoms").transform;
             kingdoms = new SerializableKingdom[kingdomsContainer.childCount];
             for (int i = 0; i < kingdomsContainer.childCount; i++)
@@ -2640,7 +2642,6 @@ namespace GameMechanics.save
         public StartGameData LoadWorldData(string fileName)
         {
             var path = getRoute() + fileName + getFileExtension();
-            Debug.LogError(path);
             if (File.Exists(path))
             {
                 string json = File.ReadAllText(path);

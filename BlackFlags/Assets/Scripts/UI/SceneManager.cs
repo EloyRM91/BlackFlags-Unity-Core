@@ -76,10 +76,14 @@ public class SceneManager : MonoBehaviour
         {
             try
             {
-#if UNITY_EDITOR
-            
-#endif
-                StreamReader sr = new StreamReader("version.txt");
+                var path = "version.txt";
+                var mod = GameSettings.Core.PersistentGameSettings.currentMod;
+                if(mod != null)
+                {
+                    path = mod.ModPath + "/version.txt";
+                }
+
+                StreamReader sr = new StreamReader(path);
                 string line = sr.ReadLine();
                 if(line != null)
                 {
