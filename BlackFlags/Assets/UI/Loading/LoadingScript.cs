@@ -20,7 +20,7 @@ namespace GameSettings.Loading
     public class LoadingScript : MonoBehaviour
     {
 
-#region VARIABLES
+        #region VARIABLES
         //Loading quotations text
         [SerializeField] private Text _TEXT_Loading;
         //Scene Background
@@ -40,7 +40,7 @@ namespace GameSettings.Loading
             { 9, "Algunos refugios de piratas requieren que tu lealtad al código tenga cierto valor para acceder, o que tu reputación sea alta."},
             { 10, "Los piratas solían carenar sus barcos en bahías apartadas porque no tenían acceso a los diques secos. Busca un refugio en el mapa para poder reparar tu embarcación"}
         };
-#endregion
+        #endregion
         void OnEnable()
         {
             //LoadDatabase
@@ -90,7 +90,7 @@ namespace GameSettings.Loading
                         StartCoroutine(TryGetGameAudio(mod));
                 }
 
-                if(!mod.jsonTracks.setMenuTracks & !mod.jsonTracks.setGameTracks)
+                if (!mod.jsonTracks.setMenuTracks & !mod.jsonTracks.setGameTracks)
                     Invoke("Load", 0.3f); //Dummy patch
             }
             else
@@ -101,7 +101,7 @@ namespace GameSettings.Loading
 
         void Awake()
         {
-            if(PersistentGameSettings.loadingFile)
+            if (PersistentGameSettings.loadingFile)
             {
                 //Load saved file data
                 var file = PersistentGameSettings.selectedFileName;
@@ -119,18 +119,23 @@ namespace GameSettings.Loading
                     Application.Quit();
                 }
             }
-            else 
+            else
             {
+                //Comprobar si esta escena de carga lleva a una escena de partida.
+                //Esto ocurrirá si hemos pasado por el menú y obtenido el contenedor persistente
+                if (GameObject.FindWithTag("PersistentDataContainer") == null)
+                    return;
+
                 //cargar los datos de campaña por defecto
                 Transform[] containers;
-                if(PersistentGameSettings.currentMod != null)
+                if (PersistentGameSettings.currentMod != null)
                 {
                     containers = SerializationUtils.LoadCitiesDataJson("worldData_Campaign_1720");
                 }
-                else 
+                else
                 {
-                    // containers = SerializationUtils.LoadCitiesDataJson("worldData_Campaign_1720");
-                    containers = SerializationUtils.LoadCitiesDataBin("worldData_Campaign_1720");
+                    containers = SerializationUtils.LoadCitiesDataJson("worldData_Campaign_1720");
+                    // containers = SerializationUtils.LoadCitiesDataBin("worldData_Campaign_1720");
                 }
 
                 GameObject persistentContainer = new GameObject();
@@ -163,7 +168,7 @@ namespace GameSettings.Loading
 
             var jsonSongs = mod.jsonTracks.songsMenu;
 
-            if(jsonSongs.Length > 0)
+            if (jsonSongs.Length > 0)
             {
                 Song[] tracks = new Song[jsonSongs.Length];
 
@@ -195,7 +200,7 @@ namespace GameSettings.Loading
         {
             //Files route
             var path = mod.ModPath + "/Music/game/";
-            
+
             var jsonSongs = mod.jsonTracks.songsGame;
 
             if (jsonSongs.Length > 0)

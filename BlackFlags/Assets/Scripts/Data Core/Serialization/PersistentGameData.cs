@@ -1104,13 +1104,13 @@ namespace GameMechanics.Data
         private Dictionary<byte, SerializableKingdom> _D_startGameKingdomsData = new Dictionary<byte, SerializableKingdom>()
         {
             {0, new SerializableKingdom(
-                0, 
-                "España", 
-                "español", 
-                "españoles", 
-                "española", 
-                "españolas", 
-                new float[4] { 51, 37, 6, 6}, 
+                0,
+                "España",
+                "español",
+                "españoles",
+                "española",
+                "españolas",
+                new float[4] { 51, 37, 6, 6},
                 1,
                 new ushort[0],
                 new ushort[0],
@@ -1119,7 +1119,7 @@ namespace GameMechanics.Data
                 new SerializableConvoy[0],
                 new SerializableConvoy[0],
                 new SerializableConvoy[0]
-                ) 
+                )
             },
             {1, new SerializableKingdom(
                 1,
@@ -1218,7 +1218,7 @@ namespace GameMechanics.Data
             _GData_ShipName = "Sereníssima";
         }
 
-#region EVENTS
+        #region EVENTS
 
         private void Start()
         {
@@ -1226,7 +1226,7 @@ namespace GameMechanics.Data
             PlayerMovement._EVENT_ArriveToPort += PlayerArrive2Port;
             PlayerMovement._EVENT_ExitFromPort += PlayerExitFromPort;
         }
-        
+
         private void OnDestroy()
         {
             //Events
@@ -1241,9 +1241,9 @@ namespace GameMechanics.Data
         {
             updateGold(_gold);
         }
-#endregion
+        #endregion
 
-#region DIFFICULTY SETTINGS
+        #region DIFFICULTY SETTINGS
 
         private static void SetDifficultyModifiers(GameDifficulty level)
         {
@@ -1275,9 +1275,9 @@ namespace GameMechanics.Data
                     break;
             }
         }
-#endregion
+        #endregion
 
-#region WORLDPOINTS & NAVIGATION
+        #region WORLDPOINTS & NAVIGATION
 
         private void PlayerArrive2Port(KeyPoint k)
         {
@@ -1289,9 +1289,9 @@ namespace GameMechanics.Data
             playerIsOnPort = false;
             //playerCurrentPort = null;
         }
-#endregion
+        #endregion
 
-#region CAMPAIGNS & TUTORIAL
+        #region CAMPAIGNS & TUTORIAL
         //public static void SetInventory(ShipInventory inventory) { shipInventory = inventory; }
         public static void SetAsTutorial(bool val)
         {
@@ -1299,7 +1299,7 @@ namespace GameMechanics.Data
         }
         #endregion
 
-#region SET DATA
+        #region SET DATA
         public static void getDataFromSavedFile(SavedFile savedFile)
         {
             _GData_PlayerName = savedFile.playerName;
@@ -1378,8 +1378,8 @@ namespace GameMechanics.save
     [Serializable]
     public abstract class SerializableKeyPoint : SerializationConverter
     {
-        public string 
-            cityName, 
+        public string
+            cityName,
             alternativeName;
         public bool revealed;
         public float[]
@@ -1428,9 +1428,9 @@ namespace GameMechanics.save
         public SerializableCity(
             string cityName,
             string alternativeName,
-            float[] position, 
-            float[] entryPoint, 
-            float[] pivotPoint, 
+            float[] position,
+            float[] entryPoint,
+            float[] pivotPoint,
             int[] exports,
             int population,
             string tavernName,
@@ -1467,7 +1467,7 @@ namespace GameMechanics.save
             entryPoint = ConvertV3(town.transform.GetChild(0).position);
             pivotPoint = ConvertV3(town.transform.GetChild(1).position);
             eventsPoint = null; //todo
-            
+
             population = town.population;
             exports = town.exportsIndex;
             spriteIndex = town.imgIndex;
@@ -1493,7 +1493,7 @@ namespace GameMechanics.save
             this.entryPoint = new float[3] { entryPoint[0], 0.01f, entryPoint[1] };
             this.pivotPoint = new float[3] { pivotPoint[0], 0.01f, pivotPoint[1] };
             this.eventsPoint = null; //todo
-            this.exports = exports; 
+            this.exports = exports;
             this.population = population;
             this.spriteIndex = imgIndex;
             this.flippedX = flippedX;
@@ -1506,7 +1506,7 @@ namespace GameMechanics.save
         //todo | personajes en la ciudad
         //todo | generación de id
 
-        public SerializableSmugglersPost(MB_SmugglersPost post) 
+        public SerializableSmugglersPost(MB_SmugglersPost post)
         {
             cityName = post.cityName;
             alternativeName = post.alternativeName;
@@ -1538,7 +1538,7 @@ namespace GameMechanics.save
             this.entryPoint = new float[3] { entryPoint[0], 0.01f, entryPoint[1] };
             this.pivotPoint = new float[3] { pivotPoint[0], 0.01f, pivotPoint[1] };
             this.eventsPoint = null; //todo
-            this.exports = exports; 
+            this.exports = exports;
             this.spriteIndex = imgIndex;
             this.flippedX = flippedX;
         }
@@ -1547,7 +1547,7 @@ namespace GameMechanics.save
         {
             var prefab = Resources.Load<GameObject>("KeyPoints/KeyPoint_Hideout") as GameObject;
             GameObject kp = UnityEngine.Object.Instantiate(prefab, parent);
-            if(kp.TryGetComponent<MB_SmugglersPost>(out MB_SmugglersPost port))
+            if (kp.TryGetComponent<MB_SmugglersPost>(out MB_SmugglersPost port))
             {
                 //Añade a este puerto la información serializada
                 port.SetFromSerializedData(this);
@@ -1566,7 +1566,7 @@ namespace GameMechanics.save
         //todo | personajes en la ciudad
         //todo | generación de id
 
-        public SerializablePirateShelter(MB_PirateShelter shelter) 
+        public SerializablePirateShelter(MB_PirateShelter shelter)
         {
             cityName = shelter.cityName;
             alternativeName = shelter.alternativeName;
@@ -1609,7 +1609,7 @@ namespace GameMechanics.save
         {
             var prefab = Resources.Load<GameObject>("KeyPoints/KeyPoint_Shelter") as GameObject;
             GameObject kp = UnityEngine.Object.Instantiate(prefab, parent);
-            if(kp.TryGetComponent<MB_PirateShelter>(out MB_PirateShelter port))
+            if (kp.TryGetComponent<MB_PirateShelter>(out MB_PirateShelter port))
             {
                 //Añade a este puerto la información serializada
                 port.SetFromSerializedData(this);
@@ -1625,7 +1625,7 @@ namespace GameMechanics.save
     {
         public byte calado;
 
-        public SerializableNaturalPort(MB_NaturalPort port) 
+        public SerializableNaturalPort(MB_NaturalPort port)
         {
             cityName = port.cityName;
             alternativeName = port.alternativeName;
@@ -1647,7 +1647,7 @@ namespace GameMechanics.save
             float[] pivotPoint,
             byte calado,
             byte imgIndex = 0,
-            bool flippedX = false) 
+            bool flippedX = false)
         {
             this.cityName = portName;
             this.alternativeName = alternativeName;
@@ -1666,7 +1666,7 @@ namespace GameMechanics.save
         {
             var prefab = Resources.Load<GameObject>("KeyPoints/KeyPoint_NatPort") as GameObject;
             GameObject kp = UnityEngine.Object.Instantiate(prefab, parent);
-            if(kp.TryGetComponent<MB_NaturalPort>(out MB_NaturalPort port))
+            if (kp.TryGetComponent<MB_NaturalPort>(out MB_NaturalPort port))
             {
                 //Añade a este puerto la información serializada
                 port.SetFromSerializedData(this);
@@ -1771,18 +1771,18 @@ namespace GameMechanics.save
         }
 
         public SerializableKingdom(
-            ushort tagKey, 
+            ushort tagKey,
             string kingdomName,
-            string gentilism_MALESIN, 
-            string gentilism_MALEPLU, 
-            string gentilism_FEMSIN, 
-            string gentilism_FEMPLU, 
+            string gentilism_MALESIN,
+            string gentilism_MALEPLU,
+            string gentilism_FEMSIN,
+            string gentilism_FEMPLU,
             float[] roleFleetSpawnStats,
-            byte countryBaseStrength, 
-            ushort[] atWarWith, 
+            byte countryBaseStrength,
+            ushort[] atWarWith,
             ushort[] atTradeAgrrementWith,
-            SerializableCity[] countryCities, 
-            SerializableTown[] countryVillages, 
+            SerializableCity[] countryCities,
+            SerializableTown[] countryVillages,
             SerializableConvoy[] countryMerchants,
             SerializableConvoy[] countryPatrols,
             SerializableConvoy[] europeanConvoys)
@@ -1949,10 +1949,11 @@ namespace GameMechanics.save
             shipImprovements = ship.GetCurrentImprovementsKeys();
         }
 
-        public Ship GetShipFromSerializedData() {
+        public Ship GetShipFromSerializedData()
+        {
 
             Ship newShip;
-            switch(shipType)
+            switch (shipType)
             {
                 case 0:
                     newShip = new ShipSubCategory_CoastalSloop();
@@ -2038,15 +2039,15 @@ namespace GameMechanics.save
     public class SerializableConvoy : SerializationConverter
     {
         public SerializableShip[] convoyShips;
-        public float[] 
+        public float[]
             position,
-            rotation, 
+            rotation,
             destination;
-        public ushort 
+        public ushort
             id,
             targetId; //referencia al convoy/barco al que está persiguiendo
         public bool inOnTarget;
-        
+
         public SerializableConvoy(ConvoyNPC convoy)
         {
             var ships = convoy.thisConvoyShips;
@@ -2089,13 +2090,16 @@ namespace GameMechanics.save
 
         public StartGameData()
         {
+            //!el constructor nunca debería de llamarse si no estamos en la escena del juego
+            //!Sin embargo, el deserializar json llama al constructor si cargamos un mod
+            if (GameObject.FindWithTag("Kingdoms") == null)
+                return;
+
             //Basic Game Data
             WorldDate = TimeManager.WorldDate;
 
             //* World, kingdoms and cities:
             //Kingdoms:
-            return;
-            //todo: gestionar reinos:
             var kingdomsContainer = GameObject.FindWithTag("Kingdoms").transform;
             kingdoms = new SerializableKingdom[kingdomsContainer.childCount];
             for (int i = 0; i < kingdomsContainer.childCount; i++)
@@ -2125,7 +2129,7 @@ namespace GameMechanics.save
                 var p = smugglersHideoutsContainer.GetChild(i).GetComponent<MB_SmugglersPost>();
                 hideouts[i] = new SerializableSmugglersPost(p);
             }
-            
+
             //Pirate shelters
             var pirateSheltersContainer = worldPlacesContainer.GetChild(2);
             shelters = new SerializablePirateShelter[pirateSheltersContainer.childCount];
@@ -2164,10 +2168,10 @@ namespace GameMechanics.save
         //-----------------------------
         //Player's basic Data
         //-----------------------------
-        public string 
+        public string
             playerName,
             playerShipName;
-        public byte[] 
+        public byte[]
             playerFlag,
             playerAvatar;
 
@@ -2179,7 +2183,7 @@ namespace GameMechanics.save
         public bool
             playerIsInPort,
             playerCanMove;
-        public int 
+        public int
             portID, //id del puerto destino del jugador
             targetID; //id del barco o convoy siendo pereguido por el jugador
         public float[] playerDestination; //posición del destino
@@ -2271,12 +2275,12 @@ namespace GameMechanics.save
             rationingRum = ShipInventory.instance.rationingRum;
             rationingMeat = ShipInventory.instance.rationingMeat;
 
-            if(rationingRum || rationingMeat)
+            if (rationingRum || rationingMeat)
             {
                 //var toggles = TimeManager.instance.RationingManagers;
                 var toggles = GameObject.FindObjectsOfType<UI.WorldMap.ToggleRationing>(true);
 
-                if (rationingRum )
+                if (rationingRum)
                 {
                     for (int i = 0; i < toggles.Length; i++)
                     {
@@ -2347,7 +2351,7 @@ namespace GameMechanics.save
                 var p = smugglersHideoutsContainer.GetChild(i).GetComponent<MB_SmugglersPost>();
                 hideouts[i] = new SerializableSmugglersPost(p);
             }
-            
+
             //Pirate shelters
             var pirateSheltersContainer = worldPlacesContainer.GetChild(2);
             shelters = new SerializablePirateShelter[pirateSheltersContainer.childCount];
@@ -2494,9 +2498,9 @@ namespace GameMechanics.save
         }
     }
 
-#endregion
+    #endregion
 
-#region LOAD
+    #region LOAD
     // [Serializable]
     // public class LoaderBinaryFormat<T> : SerializationUtilities
     // {
@@ -2652,7 +2656,7 @@ namespace GameMechanics.save
         }
     }
 
-#endregion
+    #endregion
 
 }
 
@@ -2668,14 +2672,14 @@ namespace Serialization
                 Debug.Log("SerializeJSON: success");
                 return true;
             }
-            catch(System.Exception e)
+            catch (System.Exception e)
             {
                 Debug.LogError(e);
                 return false;
-            } 
+            }
         }
 
-        public static T LoadJson<T>( string path)
+        public static T LoadJson<T>(string path)
         {
             T data;
             data = JsonUtility.FromJson<T>(File.ReadAllText(path));
@@ -2690,8 +2694,8 @@ namespace Serialization
         //aquí voy a poner un ejemplo de serialización de mapa de corrientes con los datos por defecto
         public static void createDefaultCurrentsMap()
         {
-            int[] bufferArray = 
-                { 
+            int[] bufferArray =
+                {
                 22, 32, 21, 32, 22, 21, 0, 0, 0, 15, 61, 0, 22, 32, 42, 41, 31, 41, 62, 51, 53, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 23, 33, 42, 22, 33, 22, 31, 0, 0, 15, 61, 0, 81, 62, 42, 61, 22, 32, 42, 41, 43, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 13, 0, 51, 13, 31, 44, 22, 21, 0, 15, 71, 0, 0, 61, 62, 22, 23, 33, 43, 42, 51, 42, 0, 0, 0, 0, 0, 0, 71, 81, 71, 81,
@@ -2745,21 +2749,21 @@ namespace Serialization
         /// Función encargada de generar un json con datos iniciales del mundo para una partida.
         /// Esta función se debe utilizar como desarrollador o para modding
         /// </summary>
-        public static void GenerateStartGameJson(StartGameData startGameData)
-        {
-            var startGameJSONFormat = new StartGameJSONFormat(new StartGameData());
-            startGameJSONFormat.WorldData("worldData_Campaign_1720");
-        }
+        // public static void GenerateStartGameJson(StartGameData startGameData)
+        // {
+        //     var startGameJSONFormat = new StartGameJSONFormat(startGameData);
+        //     startGameJSONFormat.WorldData("worldData_Campaign_1720");
+        // }
 
         /// <summary>
         /// Función encargada de generar un binaryfile con datos iniciales del mundo para una 
         /// partida. Esta función se debe utilizar como desarrollador o para modding
         /// </summary>
-        public static void GenerateStartGameBin(StartGameData startGameData)
-        {
-            var startGameBinaryFormat = new StartGameBinaryFormat(new StartGameData());
-            startGameBinaryFormat.WorldData("worldData_Campaign_1720");
-        }
+        // public static void GenerateStartGameBin(StartGameData startGameData)
+        // {
+        //     var startGameBinaryFormat = new StartGameBinaryFormat(startGameData);
+        //     startGameBinaryFormat.WorldData("worldData_Campaign_1720");
+        // }
 
         public static Transform[] LoadCitiesDataBin(string fileName)
         {
@@ -2780,7 +2784,7 @@ namespace Serialization
 
             for (int i = 0; i < kingdoms.Length; ++i)
             {
-                SerializableKingdom k = kingdoms[i]; 
+                SerializableKingdom k = kingdoms[i];
             }
 
             //Keypoints:
@@ -2845,7 +2849,7 @@ namespace Serialization
                 Transform bannerTransform = serializedPort.GetKeyPointBanner(naturalPortsBanners.transform).transform;
             }
 
-            return new Transform[3] {kingdomsContainer.transform, kpsContainer.transform, banners};
+            return new Transform[3] { kingdomsContainer.transform, kpsContainer.transform, banners };
         }
 
         //todo: refactorizar esto (usar un parámetro genérico <T> en lugar de duplicar la función)
@@ -2867,7 +2871,7 @@ namespace Serialization
 
             for (int i = 0; i < kingdoms.Length; ++i)
             {
-                SerializableKingdom k = kingdoms[i]; 
+                SerializableKingdom k = kingdoms[i];
             }
 
             //Keypoints:
@@ -2932,7 +2936,7 @@ namespace Serialization
                 Transform bannerTransform = serializedPort.GetKeyPointBanner(naturalPortsBanners.transform).transform;
             }
 
-            return new Transform[3] {kingdomsContainer.transform, kpsContainer.transform, banners};
+            return new Transform[3] { kingdomsContainer.transform, kpsContainer.transform, banners };
         }
     }
 
