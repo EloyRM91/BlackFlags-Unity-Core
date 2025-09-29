@@ -1,4 +1,5 @@
-using UnityEngine; using System.Collections;
+using UnityEngine;
+using System.Collections;
 
 //Pathfinding
 using UnityEngine.AI;
@@ -48,15 +49,15 @@ namespace GameMechanics.Ships
         public delegate void VoidEvent(); // this entity did something, like arriving to destination
         public delegate void DestinationEvent(Vector3 destination); //this entity has set a destination
 
-#region Interface: As Selectable
+        #region Interface: As Selectable
         //As an IsSelectable implementer
         public virtual void OnMouseEnter() { }
         public virtual void OnMouseExit() { }
         public virtual void OnMouseDown() { }
-#endregion
+        #endregion
 
         //------------ BODY
-        protected virtual void Start() { SetID();}
+        protected virtual void Start() { SetID(); }
 
         // HUD Pooling
         //public void GetSprite(EntityType_KINGDOM k, byte n)
@@ -92,7 +93,7 @@ namespace GameMechanics.Ships
             if (val > IDCounter) IDCounter = val;
         }
 
-#endregion
+        #endregion
         // Basic
         //public void SetTag(EntityType_KINGDOM kingdom)
         //{
@@ -110,7 +111,7 @@ namespace GameMechanics.Ships
             gameObject.tag = tag;
         }
 
-#region TWEENING
+        #region TWEENING
         public virtual void PointedOut()
         {
             sequence.Kill();
@@ -168,9 +169,9 @@ namespace GameMechanics.Ships
         {
             _thisConvoySpriteController.gameObject.SetActive(false);
         }
-#endregion
+        #endregion
 
-#region routes
+        #region routes
         public float CalculateRouteTime()
         {
             var time = 0f;
@@ -179,7 +180,7 @@ namespace GameMechanics.Ships
             {
                 time += Vector3.Distance(path.corners[i], path.corners[i + 1]) / convoySpeed;
             }
-            return Mathf.Round(time/24);
+            return Mathf.Round(time / 24);
         }
         protected virtual Vector3 Intercept(Convoy target)
         {
@@ -199,7 +200,7 @@ namespace GameMechanics.Ships
                 //Destination
                 float t = Mathf.Abs(2 * D / (C1 + Mathf.Sqrt(C3)));
 
-                if(t < 0)
+                if (t < 0)
                 {
                     //No solution
                     return transform.position + target.transform.forward * 15;
@@ -217,7 +218,7 @@ namespace GameMechanics.Ships
             NavMesh.CalculatePath(transform.position, d, NavMesh.AllAreas, path);
             return path.status == NavMeshPathStatus.PathComplete;
         }
-#endregion
+        #endregion
         //Basic movement
         protected abstract void Move(Vector3[] destination);
         public abstract Vector3 GetDestination();
@@ -229,7 +230,7 @@ namespace GameMechanics.Ships
             float t;
             while (true)
             {
-                if(Time.timeScale == 20)
+                if (Time.timeScale == 20)
                 {
                     transform.position += transform.forward * 0.15f * Time.deltaTime * convoySpeed;
                     yield return new WaitForEndOfFrame();
@@ -246,6 +247,6 @@ namespace GameMechanics.Ships
         }
     }
     [System.Serializable]
-    public enum ConvoyState { Sailing, Chase, AtPort}
+    public enum ConvoyState { Sailing, Chase, AtPort }
 }
 

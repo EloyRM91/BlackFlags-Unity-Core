@@ -7,6 +7,9 @@ using GameMechanics.Ships;
 //Lists filtering
 using System.Linq;
 
+//Deserialización
+using GameMechanics.save;
+
 namespace GameMechanics.WorldCities
 {
     /// <summary>
@@ -37,7 +40,7 @@ namespace GameMechanics.WorldCities
             //---- 
 
             //Set frequency: the more populated is the city, the more traffic from Europe it receives.
-            var ConvoysFrequency = Mathf.Clamp(Mathf.Round(population / 3000),1, 30);
+            var ConvoysFrequency = Mathf.Clamp(Mathf.Round(population / 3000), 1, 30);
 
             //Set entry point for european convoys
             spawnPoint = OceanicRoute.GetOceanicRouteIn(transform.position);
@@ -46,7 +49,7 @@ namespace GameMechanics.WorldCities
             ConvoysFrequency = 52560 / ConvoysFrequency;
 
             //Call european convoys
-            InvokeRepeating("CallAtlanticConvoy", ConvoysFrequency/2, ConvoysFrequency);
+            InvokeRepeating("CallAtlanticConvoy", ConvoysFrequency / 2, ConvoysFrequency);
 
             //----
             // CHARACTERS
@@ -58,7 +61,7 @@ namespace GameMechanics.WorldCities
             var SmugglingRatio = population > 6000 ? (population > 20000 ? 3 : 2) : 1;
 
             //Ratio de inventario de contrabandistas
-            var ShipyardMen = population > 2500 ? (population > 20000 ? 2: 1) : 0; // Número de armadores en la ciudad
+            var ShipyardMen = population > 2500 ? (population > 20000 ? 2 : 1) : 0; // Número de armadores en la ciudad
 
             CreateCharacters(Smugglers, ShipyardMen, SmugglingRatio);
         }
@@ -117,7 +120,7 @@ namespace GameMechanics.WorldCities
         }
         public List<Character> GetCharacters(bool onlyCriminals = false)
         {
-            return (onlyCriminals? charactersInCity.Where(c => !(c is ShipyardMan)).ToList() : charactersInCity);
+            return (onlyCriminals ? charactersInCity.Where(c => !(c is ShipyardMan)).ToList() : charactersInCity);
         }
         public List<Character> GetCharacters<C>()
         {
@@ -161,6 +164,63 @@ namespace GameMechanics.WorldCities
         {
             //Si el jugador hace click y no está en el puerto, muestra el panel genérico de información
             UIMap.ui.DisplayInfo(this);
+        }
+
+        public void SetFromSerializedData(SerializableCity cityData)
+        {
+            this.cityName = cityData.cityName;
+            gameObject.name = cityData.cityName;
+            this.alternativeName = cityData.alternativeName;
+            this.population = cityData.population;
+            this.tavernName = cityData.tavernName;
+            this.revealed = cityData.revealed;
+            this.transform.position = SerializationConverter.ToVector3(cityData.position);
+
+            //Target Path:
+            var entryPoint = this.transform.GetChild(0);
+            entryPoint.position = SerializationConverter.ToVector3(cityData.entryPoint);
+
+            //Banner's Pivot
+            var pivot = this.transform.GetChild(1);
+            pivot.position = SerializationConverter.ToVector3(cityData.pivotPoint);
+
+            //todo: events point
+
+            //todo: modificar el sprite en función del índice
+            //todo: (podemos tener más de un tipo de sprite para este tipo de keypoint)
+
+            var index = cityData.spriteIndex;
+            if (cityData.flippedX)
+            {
+                var s = this.transform.localScale;
+                this.transform.localScale = new Vector3(-s.x, s.y, s.z);
+            }
+
+            this.exportsIndex = cityData.exports;
+        }
+
+        public GameObject GetKeyPointBanner(Transform container)
+        {
+            string fileName = "City Banner OnScreen - " + (this.cityName.Length > 13 ? "Large" : "Small");
+            var prefab = Resources.Load<GameObject>("KeyPointBanners/" + fileName);
+
+            if (prefab == null)
+            {
+                Debug.LogError("no file");
+            }
+
+            var banner = Instantiate(prefab, container);
+            banner.SetActive(revealed);
+            banner.name = "Banner Controller - " + this.cityName;
+            if (banner.TryGetComponent<UI.WorldMap.BannerController>(out UI.WorldMap.BannerController controller))
+            {
+                controller.SetNewTarget(transform.GetChild(1));
+                controller.SetNewText(cityName);
+                LinkUIBanner(banner);
+                return banner;
+            }
+            Debug.LogError("no component");
+            return null;
         }
     }
 }

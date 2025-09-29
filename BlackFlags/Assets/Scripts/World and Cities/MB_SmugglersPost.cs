@@ -28,7 +28,7 @@ namespace GameMechanics.WorldCities
             //----
             // CHARACTERS
             //----
-            CreateSmugglers(Random.Range(2,4));
+            CreateSmugglers(Random.Range(2, 4));
         }
         private void CreateSmugglers(int n)
         {
@@ -90,11 +90,11 @@ namespace GameMechanics.WorldCities
             pivot.position = SerializationConverter.ToVector3(portData.pivotPoint);
 
             //todo: events point
-            
+
             //todo: modificar el sprite en función del índice
             //todo: (podemos tener más de un tipo de sprite para este tipo de keypoint)
             var index = portData.spriteIndex;
-            if(portData.flippedX)
+            if (portData.flippedX)
             {
                 var s = this.transform.localScale;
                 this.transform.localScale = new Vector3(-s.x, s.y, s.z);
@@ -108,16 +108,18 @@ namespace GameMechanics.WorldCities
             string fileName = "Smuggglers post Banner OnScreen - " + (this.cityName.Length > 13 ? "Large" : "Small");
             var prefab = Resources.Load<GameObject>("KeyPointBanners/" + fileName);
 
-            if(prefab == null)
+            if (prefab == null)
             {
                 Debug.LogError("no file");
             }
 
             var banner = Instantiate(prefab, container);
+            banner.SetActive(revealed);
             banner.name = "Banner Controller - " + this.cityName;
-            if(banner.TryGetComponent<UI.WorldMap.BannerController>(out UI.WorldMap.BannerController controller))
+            if (banner.TryGetComponent<UI.WorldMap.BannerController>(out UI.WorldMap.BannerController controller))
             {
                 controller.SetNewTarget(transform.GetChild(1));
+                controller.SetNewText(cityName);
                 LinkUIBanner(banner);
                 return banner;
             }

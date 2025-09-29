@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            if(currentsMapData == null)
+            if (currentsMapData == null)
             {
                 createCurrentsMap();
             }
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
     {
         //Singleton
         gm = this;
-        
+
         createCurrentsMap();
 
         //Set MatController parameters
@@ -73,25 +73,8 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        CreateArmada_PIRATE();
-        PersistentGameData.CallUpdate();
-        PersistentGameData._GData_Reputation = 55;
-        ShipInventory.Crew = 5;
-
-        // ---- AUTOLOAD QUICKSAVE
-        LoadGame("hola");
-
-        //DEV
-        // ---- BINARY
-        // var startGameBinaryFormat = new StartGameBinaryFormat(new StartGameData());
-        // startGameBinaryFormat.WorldData("worldData_Campaign_1720");
-
-        // ---- JSON
-        // var startGameJSONFormat = new StartGameJSONFormat(new StartGameData());
-        // startGameJSONFormat.WorldData("worldData_Campaign_1720");
-
+        //----------------------------------------------------
         //Recoge los datos de la escena de carga:
-
         bool IsCitiesDataDelivery(GameObject obj)
         {
             return obj.GetComponent<CitiesDataDelivery>() != null;
@@ -109,10 +92,36 @@ public class GameManager : MonoBehaviour
         {
             e.gameObject.SetActive(true);
         }
+
+        Transform deliveredKingdoms = elements[0];
+        Kingdoms = new Kingdom[deliveredKingdoms.childCount];
+
+        for (int i = 0; i < deliveredKingdoms.childCount; i++)
+        {
+            Kingdoms[i] = deliveredKingdoms.GetChild(i).GetComponent<Kingdom>();
+        }
+
+        //----------------------------------------------------
+        CreateArmada_PIRATE();
+        PersistentGameData.CallUpdate();
+        PersistentGameData._GData_Reputation = 55;
+        ShipInventory.Crew = 5;
+
+        // ---- AUTOLOAD QUICKSAVE
+        LoadGame("hola");
+
+        //DEV
+        // ---- BINARY
+        // var startGameBinaryFormat = new StartGameBinaryFormat(new StartGameData());
+        // startGameBinaryFormat.WorldData("worldData_Campaign_1720");
+
+        // ---- JSON
+        // var startGameJSONFormat = new StartGameJSONFormat(new StartGameData());
+        // startGameJSONFormat.WorldData("worldData_Campaign_1720");
     }
 
     //Generation
-#region GENERATION
+    #region GENERATION
     public GameObject InstantiateMapConvoy(Transform parent = null)
     {
         var obj = Instantiate(_prefab_Pirate, parent);
@@ -136,7 +145,7 @@ public class GameManager : MonoBehaviour
                 //Set Convoy's Data
                 //todo: en caso de mods, hay que cambiar esto (por ahora se tomará Gran Bretaña como ptarget principal)
                 var kingdomsCount = GameObject.FindWithTag("Kingdoms").transform.childCount;
-                ushort pirateOrigin = Random.Range(0, 2) == 1 ? (ushort) 4 : (ushort) Random.Range(0, kingdomsCount);
+                ushort pirateOrigin = Random.Range(0, 2) == 1 ? (ushort)4 : (ushort)Random.Range(0, kingdomsCount);
                 AI_Pirate.CreatePirateCharacter(pirateOrigin);
 
                 var pirate = newCPirate.GetComponent<AI_Pirate>().pirateCharacter;
@@ -167,10 +176,10 @@ public class GameManager : MonoBehaviour
         newCon.tag = "Pirate";
         return newCon;
     }
-#endregion
+    #endregion
 
     //Routes setters and Info
-#region DATA ACCESS
+    #region DATA ACCESS
     public Kingdom GetKingdombyTag(ushort id)
     {
         //switch (tag)
@@ -207,7 +216,7 @@ public class GameManager : MonoBehaviour
         if (list.Count == 0) return GetCity(currentCity);
         return list[Random.Range(0, list.Count)];
     }
-#endregion
+    #endregion
 
     //Currents
 
@@ -215,7 +224,7 @@ public class GameManager : MonoBehaviour
     public void createCurrentsMap()
     {
         string path = (
-            PersistentGameSettings.currentMod == null ? 
+            PersistentGameSettings.currentMod == null ?
             Application.streamingAssetsPath : PersistentGameSettings.currentMod.ModStreaming
         ) + "/";
 
@@ -224,15 +233,15 @@ public class GameManager : MonoBehaviour
 #endif
         path += "CurrentsMapData.json";
 
-       //Testeo de ruta: 
-// StreamWriter outputFile = new StreamWriter(Path.Combine(Application.streamingAssetsPath, "HOLAAAAAA.txt"));
-// outputFile.WriteLine("path: " + path);
-// outputFile.WriteLine("State:");
+        //Testeo de ruta: 
+        // StreamWriter outputFile = new StreamWriter(Path.Combine(Application.streamingAssetsPath, "HOLAAAAAA.txt"));
+        // outputFile.WriteLine("path: " + path);
+        // outputFile.WriteLine("State:");
         // outputFile.Close();   
         // try //!BUILD:  este try no funciona en la build
         // {
-            currentsMapData = Serialization.SerializationUtils.LoadCurrentsMap(path);
-            // outputFile.WriteLine("success");
+        currentsMapData = Serialization.SerializationUtils.LoadCurrentsMap(path);
+        // outputFile.WriteLine("success");
         // }
         // catch (System.Exception e)
         // {
@@ -267,11 +276,11 @@ public class GameManager : MonoBehaviour
         int j = (int)Mathf.Floor(z / currentsMapData.tileSizeZ);
         //print(i + "  " + j);
 
-       
+
         //print(currentsMapData.arrows[j, i].direction);
         //var strength = currentsMapData.arrows[j, i].dragStrength;
 
-        if(currentsMapData.arrows[j, i].direction == 0) 
+        if (currentsMapData.arrows[j, i].direction == 0)
         {
             // print("no hay corriente");
             return 0;
@@ -291,7 +300,7 @@ public class GameManager : MonoBehaviour
         return Mathf.Clamp(1 - dif / 30, -1, 1) * currentsMapData.arrows[j, i].dragStrength;
     }
 
-#region SAVE & LOAD
+    #region SAVE & LOAD
 
     public void SaveGame(string fileName)
     {
@@ -299,13 +308,13 @@ public class GameManager : MonoBehaviour
         savedGameBinaryFormat.SaveGame(fileName);
     }
 
-//? Sólo para pruebas (El game manager no se encarga de gestionar la des-serialización)
+    //? Sólo para pruebas (El game manager no se encarga de gestionar la des-serialización)
     public void LoadGame(string fileName)
     {
         var loaderBinaryFormat = new GameLoaderBinaryFormat();
         SavedFile savedGameData = loaderBinaryFormat.LoadGame(fileName);
 
-        if(savedGameData != null)
+        if (savedGameData != null)
         {
             //print(savedGameData.onLoadGuns[0] + " " + savedGameData.onLoadGuns[1] + " " + savedGameData.onLoadGuns[2] + " " + savedGameData.onLoadGuns[3]);
             //print(savedGameData.onEquipmentGuns[0] + " " + savedGameData.onEquipmentGuns[1] + " " + savedGameData.onEquipmentGuns[2] + " " + savedGameData.onEquipmentGuns[3]);
@@ -358,5 +367,5 @@ public class GameManager : MonoBehaviour
             Debug.LogError("File not found");
         }
     }
-#endregion
+    #endregion
 }

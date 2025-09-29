@@ -82,11 +82,11 @@ namespace GameMechanics.WorldCities
             pivot.position = SerializationConverter.ToVector3(portData.pivotPoint);
 
             //todo: events point
-            
+
             //todo: modificar el sprite en función del índice
             //todo: (podemos tener más de un tipo de sprite para este tipo de keypoint)
             var index = portData.spriteIndex;
-            if(portData.flippedX)
+            if (portData.flippedX)
             {
                 var s = this.transform.localScale;
                 this.transform.localScale = new Vector3(-s.x, s.y, s.z);
@@ -98,16 +98,18 @@ namespace GameMechanics.WorldCities
             string fileName = "Smuggglers post Banner OnScreen - " + (this.cityName.Length > 13 ? "Large" : "Small");
             var prefab = Resources.Load<GameObject>("KeyPointBanners/" + fileName);
 
-            if(prefab == null)
+            if (prefab == null)
             {
                 Debug.LogError("no file");
             }
 
             var banner = Instantiate(prefab, container);
+            banner.SetActive(revealed);
             banner.name = "Banner Controller - " + this.cityName;
-            if(banner.TryGetComponent<UI.WorldMap.BannerController>(out UI.WorldMap.BannerController controller))
+            if (banner.TryGetComponent<UI.WorldMap.BannerController>(out UI.WorldMap.BannerController controller))
             {
                 controller.SetNewTarget(transform.GetChild(1));
+                controller.SetNewText(cityName);
                 LinkUIBanner(banner);
                 return banner;
             }
@@ -117,7 +119,7 @@ namespace GameMechanics.WorldCities
     }
 
     [System.Serializable]
-    public enum RequirementEntry {ByFame_Spain, ByFame_GB, ByFame_France, ByFame_Dutch, ByFame_Portugal, LoyaltyToCodeBiggerThan, LoyaltyToCodeLowerThan};
+    public enum RequirementEntry { ByFame_Spain, ByFame_GB, ByFame_France, ByFame_Dutch, ByFame_Portugal, LoyaltyToCodeBiggerThan, LoyaltyToCodeLowerThan };
 
     /// <summary>
     /// This class contains a shelter's entry requirement and a threshold condition value
@@ -128,17 +130,19 @@ namespace GameMechanics.WorldCities
     /// </example>
     /// </summary>
     [System.Serializable]
-    public class EntryClass 
+    public class EntryClass
     {
         public RequirementEntry requirement;
         public byte value;
 
-        public EntryClass(RequirementEntry requirement, byte value) {
+        public EntryClass(RequirementEntry requirement, byte value)
+        {
             this.requirement = requirement;
             this.value = value;
         }
 
-        public EntryClass(EntryClass entry) {
+        public EntryClass(EntryClass entry)
+        {
             this.requirement = entry.requirement;
             this.value = entry.value;
         }

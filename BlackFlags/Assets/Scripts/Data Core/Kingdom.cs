@@ -11,6 +11,7 @@ using GameMechanics.AI;
 //World
 using GameMechanics.WorldCities;
 using GameMechanics.Ships;
+using GameMechanics.save;
 
 //Mods ans settings
 using GameSettings.Core;
@@ -25,7 +26,7 @@ namespace GameMechanics.Data
         #region VARIABLES
         //public static  ushort kingdomsCount = 5;
         //this kingdom parameters
-        public ushort tagKey; // El indentificador de este pa�s
+        public ushort tagKey; // El indentificador de este país
         public Material nationalFlag;
         //[SerializeField] public EntityType_KINGDOM thisKingdom;
         public float[] roleFleetsSpawnStatistics; // ????
@@ -37,19 +38,19 @@ namespace GameMechanics.Data
         public ShipGenerator shipsGenerator;
         [SerializeField] private Transform _poolContainer_LOC, _poolContainer_EU_M, _poolContainer_PAT;
         //[SerializeField] private GameObject _convoyPrefab;
-        
+
         //Relations
         public List<Kingdom> atWarWith = new List<Kingdom>();
         public List<Kingdom> atTradeAgreementWith = new List<Kingdom>();
 
         //Text
         public string KINGDOMNAME, GENTILISM_MALESIN, GENTILISM_MALEPLU, GENTILISM_FEMSIN, GENTILISM_FEMPLU;
-#endregion
+        #endregion
 
         void Awake()
         {
             //Generator of this country, with its own ratio spawns according to database values.
-            //TODO: En el futuro esto se tendr�a que hacer en la pantalla de carga, al menos la parte de la lectura de la bbdd
+            //TODO: En el futuro esto se tendría que hacer en la pantalla de carga, al menos la parte de la lectura de la bbdd
             shipsGenerator = WorldGenerator.GetShipSpawnData(tagKey, PersistentGameSettings.currentMod != null);
         }
         private void Start()
@@ -92,7 +93,7 @@ namespace GameMechanics.Data
                     newConvoy.transform.position = port.transform.GetChild(0).position;
                     var data = newConvoy.GetComponent<ConvoyNPC>();
                     data.currentPort = port;
-                    if(newConvoy.GetComponent<AI_LocalMerchant>() == null)
+                    if (newConvoy.GetComponent<AI_LocalMerchant>() == null)
                     {
                         newConvoy.AddComponent<AI_LocalMerchant>();
                     }
@@ -128,7 +129,7 @@ namespace GameMechanics.Data
                     data.SetConvoyData(this);
                 }
             }
-           
+
         }
         public void CallEuropeanConvoy(Settlement[] route, Vector3 spawnOrigin)
         {
@@ -168,9 +169,87 @@ namespace GameMechanics.Data
             GameObject newCon = GameManager.gm.InstantiateMapConvoy(container);
             return newCon;
         }
+
+        public void SetFromSerializedData(SerializableKingdom kingdomData)
+        {
+            gameObject.name = kingdomData.kingdomName;
+            tagKey = kingdomData.tagKey;
+
+            //todo: nationalFlag
+
+            roleFleetsSpawnStatistics = kingdomData.roleFleetSpawnStats;
+            _CountryBaseStrength = kingdomData.countryBaseStrength;
+            countryPossessions = new List<Settlement>();
+
+            //todo: a ver ahora cómo creo una lista de reinos si los reinos aún se están creando
+            // atWarWith = ;
+            // atTradeAgreementWith = ;
+
+
+            KINGDOMNAME = kingdomData.kingdomName;
+            GENTILISM_MALESIN = kingdomData.gentilism_MALESIN;
+            GENTILISM_MALEPLU = kingdomData.gentilism_MALEPLU;
+            GENTILISM_FEMSIN = kingdomData.gentilism_FEMSIN;
+            GENTILISM_FEMPLU = kingdomData.gentilism_FEMPLU;
+        }
+
+        public void SetFromSerializedData(SerializableKingdom kingdomData, Settlement[] belongings)
+        {
+            SetFromSerializedData(kingdomData);
+            countryPossessions = belongings.ToList();
+        }
+
+        /// <summary>
+        /// Establece los datos de relaciones con otros reinos a partir de arrays de claves de identificación
+        /// </summary>
+        /// <param name="atWarWith"></param>
+        /// <param name="atTradeAgrrementWith"></param>
+        public void SetTreatmentsFromId(ushort[] atWarWith, ushort[] atTradeAgrrementWith)
+        {
+            for (int i = 0; i < atWarWith.Length; i++)
+            {
+                var targetId = atWarWith[i];
+                Kingdom k = GameManager.gm.GetKingdombyTag(targetId);
+                if (k)
+                {
+                    this.atWarWith.Add(k);
+                }
+            }
+            for (int i = 0; i < atTradeAgrrementWith.Length; i++)
+            {
+                var targetId = atWarWith[i];
+                Kingdom k = GameManager.gm.GetKingdombyTag(targetId);
+
+                if (k)
+                {
+                    this.atTradeAgreementWith.Add(k);
+                }
+            }
+        }
+
+        // public void OnCountryTerritoryChanges(List<Settlement> belongings)
+        // {
+        //     this.countryPossessions = belongings;
+        // }
+
+        public void OnCountryTerritoryChanges()
+        {
+            countryPossessions = new List<Settlement>();
+
+            var cities = transform.GetChild(0);
+            for (int i = 0; i < cities.childCount; i++)
+            {
+                var c = cities.GetChild(i);
+                countryPossessions.Add(c.GetComponent<MB_City>());
+            }
+
+            var villages = transform.GetChild(1);
+            for (int i = 0; i < villages.childCount; i++)
+            {
+                var v = villages.GetChild(i);
+                countryPossessions.Add(v.GetComponent<MB_Town>());
+            }
+        }
     }
-
-
-
 }
 

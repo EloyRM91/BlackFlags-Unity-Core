@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 5072462873417052136}
   - component: {fileID: 218433728764248395}
   m_Layer: 0
-  m_Name: Default_Kingdom_Prefab
+  m_Name: Kingdom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

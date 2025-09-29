@@ -1450,6 +1450,19 @@ namespace GameMechanics.save
             this.spriteIndex = imgIndex;
             this.flippedX = flippedX;
         }
+
+        public MB_City Deserialize(Transform parent)
+        {
+            var prefab = Resources.Load<GameObject>("KeyPoints/KeyPoint_City") as GameObject;
+            GameObject c = UnityEngine.Object.Instantiate(prefab, parent);
+            if (c.TryGetComponent<MB_City>(out MB_City port))
+            {
+                //Añade a este puerto la información serializada
+                port.SetFromSerializedData(this);
+                return port;
+            }
+            return null;
+        }
     }
 
     [Serializable]
@@ -1497,6 +1510,19 @@ namespace GameMechanics.save
             this.population = population;
             this.spriteIndex = imgIndex;
             this.flippedX = flippedX;
+        }
+
+        public MB_Town Deserialize(Transform parent)
+        {
+            var prefab = Resources.Load<GameObject>("KeyPoints/KeyPoint_Village") as GameObject;
+            GameObject c = UnityEngine.Object.Instantiate(prefab, parent);
+            if (c.TryGetComponent<MB_Town>(out MB_Town port))
+            {
+                //Añade a este puerto la información serializada
+                port.SetFromSerializedData(this);
+                return port;
+            }
+            return null;
         }
     }
 
@@ -1802,6 +1828,21 @@ namespace GameMechanics.save
             this.countryMerchants = countryMerchants;
             this.countryPatrols = countryPatrols;
             this.europeanConvoys = europeanConvoys;
+        }
+
+        public Kingdom Deserialize(Transform parent)
+        {
+            //todo: crear reino, ya sea a partir de un prefab o bien
+            //todo: creando un gameobject
+            var prefab = Resources.Load<GameObject>("World/Kingdom") as GameObject;
+            GameObject obj = UnityEngine.Object.Instantiate(prefab, parent);
+            if (obj.TryGetComponent<Kingdom>(out Kingdom k))
+            {
+                //Añade a este puerto la información serializada
+                k.SetFromSerializedData(this);
+                return k;
+            }
+            return null;
         }
     }
 
@@ -2773,7 +2814,7 @@ namespace Serialization
             Debug.Log(CampaignCitiesData.kingdoms);
             //Reinos
             var kingdomsContainer = new GameObject();
-            kingdomsContainer.name = "Countries";
+            kingdomsContainer.name = "Countries -- holi";
             kingdomsContainer.tag = "Kingdoms";
             kingdomsContainer.SetActive(false);
 
@@ -2785,6 +2826,50 @@ namespace Serialization
             for (int i = 0; i < kingdoms.Length; ++i)
             {
                 SerializableKingdom k = kingdoms[i];
+                Kingdom newKingdom = k.Deserialize(kingdomsContainer.transform);
+                // var belongings = new List<Settlement>();
+
+                //Ciudades de este reino:
+                SerializableCity[] cities = k.countryCities;
+
+                //Banners
+                var citiesBanners = new GameObject();
+                citiesBanners.name = "Cities - " + k.kingdomName;
+                citiesBanners.transform.SetParent(banners);
+
+                for (int j = 0; j < cities.Length; j++)
+                {
+                    SerializableCity city = cities[j];
+                    var citiesContainer = newKingdom.transform.GetChild(0);
+                    MB_City cityComponent = city.Deserialize(citiesContainer);
+                    // belongings.Add(cityComponent);
+
+                    //Asigna un banner:
+                    Transform bannerTransform = cityComponent.GetKeyPointBanner(citiesBanners.transform).transform;
+                }
+
+                //Villas de este reino:
+                SerializableTown[] villages = k.countryVillages;
+
+                //Banners
+                var townBanners = new GameObject();
+                townBanners.name = "Villages - " + k.kingdomName;
+                townBanners.transform.SetParent(banners);
+
+                for (int j = 0; j < villages.Length; j++)
+                {
+                    SerializableTown town = villages[j];
+                    var villagesContainer = newKingdom.transform.GetChild(1);
+                    MB_Town townComponent = town.Deserialize(villagesContainer);
+                    // belongings.Add(townComponent);
+
+                    //Asigna un banner:
+                    Transform bannerTransform = townComponent.GetKeyPointBanner(townBanners.transform).transform;
+                }
+
+                //Actualia las posesiones del reino:
+                newKingdom.OnCountryTerritoryChanges();
+
             }
 
             //Keypoints:

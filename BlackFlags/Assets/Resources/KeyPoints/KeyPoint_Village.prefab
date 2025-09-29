@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 4155451039436136200}
   - component: {fileID: 7678717104025887028}
   m_Layer: 6
-  m_Name: Default_Village_Prefab
+  m_Name: KeyPoint_Village
   m_TagString: KeyPoint
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
