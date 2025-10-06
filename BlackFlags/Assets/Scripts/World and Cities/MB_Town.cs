@@ -42,6 +42,12 @@ namespace GameMechanics.WorldCities
             this.revealed = town.revealed;
             this.transform.position = SerializationConverter.ToVector3(town.position);
 
+            if (town.flippedX)
+            {
+                var s = this.transform.localScale;
+                this.transform.localScale = new Vector3(-s.x, s.y, s.z);
+            }
+
             //Target Path:
             var entryPoint = this.transform.GetChild(0);
             entryPoint.position = SerializationConverter.ToVector3(town.entryPoint);
@@ -56,11 +62,6 @@ namespace GameMechanics.WorldCities
             //todo: (podemos tener más de un tipo de sprite para este tipo de keypoint)
 
             var index = town.spriteIndex;
-            if (town.flippedX)
-            {
-                var s = this.transform.localScale;
-                this.transform.localScale = new Vector3(-s.x, s.y, s.z);
-            }
 
             this.exportsIndex = town.exports;
         }

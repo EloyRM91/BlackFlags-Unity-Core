@@ -1,6 +1,7 @@
 0.0385
 - Corrección de bugs en la implementación de la versión 0.038
 - Si cargamos un mod, el apartado "versión del menú" mostrará el version.txt del mod que estemos jugando
+- Completada deserialización en escena de ciudades y villas
 
 
 0.038

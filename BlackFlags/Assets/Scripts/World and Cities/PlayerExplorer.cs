@@ -35,17 +35,17 @@ public class PlayerExplorer : MonoBehaviour
     private void ArriveToPort(KeyPoint k)
     {
         GetComponent<SphereCollider>().enabled = false;
-        if(visibleConvoys.Count > 0)
+        if (visibleConvoys.Count > 0)
         {
 
-            foreach (Transform visibleConvoy in visibleConvoys)
-            {
-                print(visibleConvoy);
-            }
+            // foreach (Transform visibleConvoy in visibleConvoys)
+            // {
+            //     print(visibleConvoy);
+            // }
 
             foreach (Transform visibleConvoy in visibleConvoys)
             {
-                if(visibleConvoy != null)
+                if (visibleConvoy != null)
                 {
                     var convoy = visibleConvoy.GetComponent<Convoy>();
                     convoy.Dissappear();
@@ -70,7 +70,7 @@ public class PlayerExplorer : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         var point = other.GetComponent<KeyPoint>();
-        if(point != null)   //-- A keypoint
+        if (point != null)   //-- A keypoint
         {
             if (!point.revealed)
             {
@@ -78,15 +78,15 @@ public class PlayerExplorer : MonoBehaviour
                     point.Reveal();
             }
         }
-        else 
-        {  
+        else
+        {
             var convoy = other.GetComponent<Convoy>();
             if (convoy != null)
             {
                 convoy.Appear();
                 other.transform.GetChild(0).gameObject.SetActive(true);
             }
-            if(other.gameObject != gameObject && !other.CompareTag("Respawn")) 
+            if (other.gameObject != gameObject && !other.CompareTag("Respawn"))
             {
                 visibleConvoys.Add(other.transform);
                 var AI = other.GetComponent<AI_Pirate>();
@@ -97,7 +97,7 @@ public class PlayerExplorer : MonoBehaviour
             }
         }
 
-        
+
     }
     private void OnTriggerExit(Collider other)
     {
@@ -121,7 +121,7 @@ public class PlayerExplorer : MonoBehaviour
                     _playermovement.TargetLost();
                 }
             }
-        }   
+        }
     }
     /// <summary>
     /// Is the convoy target visible by player?

@@ -174,6 +174,9 @@ namespace GameMechanics.Ships
         #region routes
         public float CalculateRouteTime()
         {
+            // print(path.corners.Length);
+            // print(pathProgressIndex);
+            // print("----------------------------------");
             var time = 0f;
             time += Vector3.Distance(transform.position, path.corners[pathProgressIndex]) / convoySpeed;
             for (int i = pathProgressIndex; i < path.corners.Length - 1; i++)

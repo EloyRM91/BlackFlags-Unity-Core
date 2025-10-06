@@ -2837,6 +2837,11 @@ namespace Serialization
                 citiesBanners.name = "Cities - " + k.kingdomName;
                 citiesBanners.transform.SetParent(banners);
 
+                // //todo: esto hay que dejarlo más bonito
+                // //todo distinguir además si cargamos un mod
+                var path = "UI/Kingdoms/Simple/" + newKingdom.tagKey;
+                var kingdomSprite = Resources.Load<Sprite>(path) as Sprite;
+
                 for (int j = 0; j < cities.Length; j++)
                 {
                     SerializableCity city = cities[j];
@@ -2846,6 +2851,7 @@ namespace Serialization
 
                     //Asigna un banner:
                     Transform bannerTransform = cityComponent.GetKeyPointBanner(citiesBanners.transform).transform;
+                    bannerTransform.GetComponent<UI.WorldMap.BannerController>().SetImage(kingdomSprite);
                 }
 
                 //Villas de este reino:
@@ -2865,6 +2871,7 @@ namespace Serialization
 
                     //Asigna un banner:
                     Transform bannerTransform = townComponent.GetKeyPointBanner(townBanners.transform).transform;
+                    bannerTransform.GetComponent<UI.WorldMap.BannerController>().SetImage(kingdomSprite);
                 }
 
                 //Actualia las posesiones del reino:

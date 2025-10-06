@@ -81,6 +81,12 @@ namespace GameMechanics.WorldCities
             this.revealed = portData.revealed;
             this.transform.position = SerializationConverter.ToVector3(portData.position);
 
+            if (portData.flippedX)
+            {
+                var s = this.transform.localScale;
+                this.transform.localScale = new Vector3(-s.x, s.y, s.z);
+            }
+
             //Target Path:
             var entryPoint = this.transform.GetChild(0);
             entryPoint.position = SerializationConverter.ToVector3(portData.entryPoint);
@@ -94,11 +100,6 @@ namespace GameMechanics.WorldCities
             //todo: modificar el sprite en función del índice
             //todo: (podemos tener más de un tipo de sprite para este tipo de keypoint)
             var index = portData.spriteIndex;
-            if (portData.flippedX)
-            {
-                var s = this.transform.localScale;
-                this.transform.localScale = new Vector3(-s.x, s.y, s.z);
-            }
 
             this.exportsIndex = portData.exports;
         }

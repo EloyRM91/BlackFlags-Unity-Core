@@ -52,6 +52,12 @@ namespace UI.WorldMap
             }
         }
 
+        public void SetImage(Sprite newImg)
+        {
+            var renderer = getFlagImage();
+            renderer.sprite = newImg;
+        }
+
         private Text GetText()
         {
             Text Traverse(Transform tr)
@@ -63,6 +69,28 @@ namespace UI.WorldMap
                 foreach (Transform child in tr)
                 {
                     Text found = Traverse(child);
+                    if (found != null)
+                        return found;
+                }
+
+                return null;
+            }
+
+            return Traverse(transform);
+        }
+
+        private Image getFlagImage()
+        {
+            Image Traverse(Transform tr)
+            {
+                Image img = tr.GetComponent<Image>();
+                if (img != null)
+                    if (tr.name == "Image - Kingdom")
+                        return img;
+
+                foreach (Transform child in tr)
+                {
+                    Image found = Traverse(child);
                     if (found != null)
                         return found;
                 }
