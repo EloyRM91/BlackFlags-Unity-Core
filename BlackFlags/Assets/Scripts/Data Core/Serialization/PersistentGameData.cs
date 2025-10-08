@@ -2705,6 +2705,32 @@ namespace Serialization
 {
     public class SerializationUtils
     {
+        public static string getKingdomsSpritePath()
+        {
+            var mod = PersistentGameSettings.currentMod;
+            var defaultRoute = "UI/Kingdoms/Simple/";
+            if (mod != null)
+            {
+                var modSpritePath = mod.ModPath + "/Data/Kingdoms/Simple/";
+                return Directory.Exists(modSpritePath) ? modSpritePath : defaultRoute;
+            }
+
+            return defaultRoute;
+        }
+
+        public static string getKingdomsDetSpritePath()
+        {
+            var mod = PersistentGameSettings.currentMod;
+            var defaultRoute = "UI/Kingdoms/Detailed/";
+            if (mod != null)
+            {
+                var modSpritePath = mod.ModPath + "/Data/Kingdoms/Detailed/";
+                return Directory.Exists(modSpritePath) ? modSpritePath : "UI/Kingdoms/Detailed/";
+            }
+
+            return defaultRoute;
+        }
+
         public static bool SerializeJSON<T>(T data, string pathFile)
         {
             try
@@ -2837,10 +2863,14 @@ namespace Serialization
                 citiesBanners.name = "Cities - " + k.kingdomName;
                 citiesBanners.transform.SetParent(banners);
 
-                // //todo: esto hay que dejarlo más bonito
-                // //todo distinguir además si cargamos un mod
-                var path = "UI/Kingdoms/Simple/" + newKingdom.tagKey;
+                var path = getKingdomsSpritePath() + newKingdom.tagKey;
                 var kingdomSprite = Resources.Load<Sprite>(path) as Sprite;
+                newKingdom.spriteSimple = kingdomSprite;
+
+                var pathDetailed = getKingdomsDetSpritePath() + newKingdom.tagKey;
+                var kingdomSpriteDetailed = Resources.Load<Sprite>(path) as Sprite;
+                newKingdom.spriteSimple = kingdomSpriteDetailed;
+
 
                 for (int j = 0; j < cities.Length; j++)
                 {

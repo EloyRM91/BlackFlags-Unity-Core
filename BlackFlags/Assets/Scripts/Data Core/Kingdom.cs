@@ -34,6 +34,20 @@ namespace GameMechanics.Data
         public byte CountryBaseStrength { get { return _CountryBaseStrength; } }
         [SerializeField] private List<Settlement> countryPossessions;
 
+        //Sprites & materials
+        [SerializeField] private Sprite _spriteSimple, _spriteDetailed;
+        public Sprite spriteSimple
+        {
+            get { return _spriteSimple; }
+            set { _spriteSimple = value; }
+        }
+
+        public Sprite spriteDetailed
+        {
+            get { return _spriteDetailed; }
+            set { _spriteDetailed = value; }
+        }
+
         //Spawning
         public ShipGenerator shipsGenerator;
         [SerializeField] private Transform _poolContainer_LOC, _poolContainer_EU_M, _poolContainer_PAT;
