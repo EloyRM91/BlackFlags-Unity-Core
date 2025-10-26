@@ -134,7 +134,6 @@ namespace GameSettings.Loading
                 }
                 else
                 {
-                    // containers = SerializationUtils.LoadCitiesDataJson("worldData_Campaign_1720");
                     containers = SerializationUtils.LoadCitiesDataBin("worldData_Campaign_1720");
                 }
 

@@ -23,6 +23,8 @@ namespace GameMechanics.Intro
         {
             if (timer != 0)
                 Invoke("SafetyDelay", timer); //Dummy delay, Check stopped working :(
+
+            CursorManager.HideCursor();
         }
 
         private void SafetyDelay()
@@ -81,7 +83,7 @@ namespace GameMechanics.Intro
 
                 //Request to local path
                 UnityWebRequest request = UnityWebRequestTexture.GetTexture(path);
-                
+
                 //Asynchronous response
                 yield return request.SendWebRequest();
 
@@ -94,7 +96,7 @@ namespace GameMechanics.Intro
                 PersistentGameSettings.currentMod.loadingBackground = Sprite.Create(texture, rec, new Vector2(0, 0), 1);
             }
 
-            
+
             if (mod.jsonMenu.customMenu)
             {
                 //Image route
@@ -116,7 +118,7 @@ namespace GameMechanics.Intro
                 PersistentGameSettings.currentMod.menuBackground = Sprite.Create(texture, rec, new Vector2(0, 0), 1);
             }
 
-            if(mod.jsonFonts.changeFonts)
+            if (mod.jsonFonts.changeFonts)
             {
                 //Fonts route
                 path = Path.Combine(mod.ModPath, "Fonts");

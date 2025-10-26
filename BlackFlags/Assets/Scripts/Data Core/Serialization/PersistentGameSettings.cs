@@ -34,6 +34,8 @@ namespace GameSettings.Core
         #endregion
         protected override void Awake()
         {
+            CursorManager.ShowCursor();
+
             if (currentMod != null)
             {
                 path = currentMod.ModPath + "/Data/ModSettings.txt";
@@ -42,7 +44,7 @@ namespace GameSettings.Core
                     GetFonts();
             }
             else
-            {  
+            {
                 GetFonts();
             }
             ReadSettings();
@@ -135,7 +137,7 @@ namespace GameSettings.Core
     public class ModData
     {
         //public ModData currentMod;
-        private string 
+        private string
             modName,
             modVersion,
             modReadme,
@@ -169,7 +171,7 @@ namespace GameSettings.Core
         {
             //modPath = directory;
             var path = directory + "/version.txt";
-            
+
             StreamReader reader;
             if (File.Exists(path))
             {
@@ -191,7 +193,7 @@ namespace GameSettings.Core
                 reader.Close();
             }
             modPath = directory;
-            modStreaming = Path.Combine(directory, "StreamingAssets/");
+            modStreaming = Path.Combine(directory, "StreamingAssets\\");
         }
 
         public static void GetJsonFile<T>(string path, out T file) where T : JSON_MOD
@@ -200,7 +202,7 @@ namespace GameSettings.Core
         }
     }
 
-    public enum GameDifficulty { easy = 1, normal = 2, hard = 3, nightmare = 4}
+    public enum GameDifficulty { easy = 1, normal = 2, hard = 3, nightmare = 4 }
 }
 
 namespace GameSettings.Mods
@@ -294,7 +296,7 @@ namespace GameSettings.Mods
             for (int i = 0; i < 7; i++)
             {
                 var group = groups[i];
-                GameText._D_FontStyles.Add((FontType)i,  new UI.FontStyle[] { new UI.FontStyle(fonts[groups[i].data[0].data[0]], groups[i].data[0].data[1]), new UI.FontStyle(fonts[groups[i].data[1].data[0]], groups[i].data[1].data[1]), new UI.FontStyle(fonts[groups[i].data[2].data[0]], groups[i].data[2].data[1]) });
+                GameText._D_FontStyles.Add((FontType)i, new UI.FontStyle[] { new UI.FontStyle(fonts[groups[i].data[0].data[0]], groups[i].data[0].data[1]), new UI.FontStyle(fonts[groups[i].data[1].data[0]], groups[i].data[1].data[1]), new UI.FontStyle(fonts[groups[i].data[2].data[0]], groups[i].data[2].data[1]) });
             }
         }
     }

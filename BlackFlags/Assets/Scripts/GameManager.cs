@@ -226,7 +226,7 @@ public class GameManager : MonoBehaviour
         string path = (
             PersistentGameSettings.currentMod == null ?
             Application.streamingAssetsPath : PersistentGameSettings.currentMod.ModStreaming
-        ) + "/";
+        ) + "\\";
 
 #if UNITY_EDITOR
         path = "";
