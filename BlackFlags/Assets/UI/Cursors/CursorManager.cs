@@ -34,9 +34,12 @@ public class CursorManager : MonoBehaviour
                     }
                     for (int i = 0; i < files.Length; i++)
                     {
-                        cursors[i] = Resources.Load<Texture2D>(files[i]) as Texture2D;
+                        byte[] fileData = File.ReadAllBytes(files[i]);
+                        Texture2D tex = new Texture2D(2, 2);
+                        tex.LoadImage(fileData);
+                        cursors[i] = tex;
                     }
-
+                    SetCursor(0);
                 }
             }
         }
