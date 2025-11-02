@@ -51,7 +51,7 @@ public class CursorManager : MonoBehaviour
 
     public static void HideCursor()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 

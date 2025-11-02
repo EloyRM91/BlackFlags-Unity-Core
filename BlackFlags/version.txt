@@ -1,7 +1,11 @@
-0.0385
-- Corrección de bugs en la implementación de la versión 0.038
-- Si cargamos un mod, el apartado "versión del menú" mostrará el version.txt del mod que estemos jugando
-- Completada deserialización en escena de ciudades y villas
+0.038.5
+- Corrección de bugs en la implementación de la versión 0.038.
+- Si cargamos un mod, el apartado "versión del menú" mostrará el version.txt del mod que estemos jugando.
+- Completada deserialización en escena de ciudades y villas. Los datos de villas y ciudades se pueden moddear.
+- Solucionado error al caragar el mapa de corrientes en mods.
+- Solucionado error al cargar información de reinos y ciudades en mods.
+- El cursor desaparece durante la escela de logo.
+- Se pueden personalizar los cursores de los mods.
 
 
 0.038
