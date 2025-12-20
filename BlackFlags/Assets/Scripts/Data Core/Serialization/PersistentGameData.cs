@@ -1349,6 +1349,11 @@ namespace GameMechanics.save
     [Serializable]
     public abstract class SerializationConverter
     {
+        public string generateUUID()
+        {
+            return Guid.NewGuid().ToString();
+            // return Guid.NewGuid().ToJson();
+        }
         public float[] ConvertV3(Vector3 vector)
         {
             return new float[3] { vector.x, vector.y, vector.z };
@@ -1379,6 +1384,7 @@ namespace GameMechanics.save
     public abstract class SerializableKeyPoint : SerializationConverter
     {
         public string
+            uuid,
             cityName,
             alternativeName;
         public bool revealed;
@@ -1389,6 +1395,11 @@ namespace GameMechanics.save
             eventsPoint;
         public byte spriteIndex;
         public bool flippedX;
+
+        public SerializableKeyPoint()
+        {
+            uuid = generateUUID();
+        }
     }
 
     [Serializable]
@@ -1396,6 +1407,14 @@ namespace GameMechanics.save
     {
         //public SerializableResource[] exports;
         public int[] exports;
+
+        public SerializableBaseCharacter[] serializedCharacters;
+
+        public SerializableSettlement() : base()
+        {
+            // List<Character> chs = settlement.GetCharacters();
+            //todo: exports?
+        }
     }
 
     [Serializable]
@@ -1403,12 +1422,8 @@ namespace GameMechanics.save
     {
         public int population;
         public string tavernName;
-        //todo ¿personajes en la ciudad?
 
-        //todo | crear un id de elemento temporal para el serializado
-        //todo | y así vincular barcos, destinos de barcos y personajes a ciudades
-
-        public SerializableCity(MB_City city)
+        public SerializableCity(MB_City city) : base()
         {
             cityName = city.cityName;
             revealed = city.revealed;
@@ -1423,6 +1438,25 @@ namespace GameMechanics.save
             tavernName = city.tavernName;
             spriteIndex = city.imgIndex;
             flippedX = city.transform.localScale.x < 0;
+
+            //* Personajes en la ciudad
+            List<Character> chs = city.GetCharacters();
+            serializedCharacters = new SerializableBaseCharacter[chs.Count];
+            for (int i = 0; i < chs.Count; i++)
+            {
+                Character ch = chs[i];
+
+                if (ch is Smuggler)
+                {
+                    //Es un contrabandista:
+                    var serializedCharacter = new SerializableSmuggler(ch as Smuggler);
+                    serializedCharacters[i] = serializedCharacter;
+                }
+                else if (ch is Pirate)
+                {
+                    //todo: crear pirata
+                }
+            }
         }
 
         public SerializableCity(
@@ -1435,7 +1469,8 @@ namespace GameMechanics.save
             int population,
             string tavernName,
             byte imgIndex = 0,
-            bool flippedX = false)
+            bool flippedX = false,
+            Character[] characters = null) : base()
         {
             this.cityName = cityName;
             this.alternativeName = alternativeName;
@@ -1449,6 +1484,25 @@ namespace GameMechanics.save
             this.tavernName = tavernName;
             this.spriteIndex = imgIndex;
             this.flippedX = flippedX;
+
+            characters = characters ?? new Character[0];
+            serializedCharacters = new SerializableBaseCharacter[characters.Length];
+
+            for (int i = 0; i < characters.Length; i++)
+            {
+                Character ch = characters[i];
+
+                if (ch is Smuggler)
+                {
+                    //Es un contrabandista:
+                    var serializedCharacter = new SerializableSmuggler(ch as Smuggler);
+                    serializedCharacters[i] = serializedCharacter;
+                }
+                else if (ch is Pirate)
+                {
+                    //todo: crear pirata
+                }
+            }
         }
 
         public MB_City Deserialize(Transform parent)
@@ -1470,7 +1524,7 @@ namespace GameMechanics.save
     {
         public int population;
 
-        public SerializableTown(MB_Town town)
+        public SerializableTown(MB_Town town) : base()
         {
             cityName = town.cityName;
             alternativeName = town.alternativeName;
@@ -1496,7 +1550,7 @@ namespace GameMechanics.save
             int[] exports,
             int population,
             byte imgIndex = 0,
-            bool flippedX = false)
+            bool flippedX = false) : base()
         {
             this.cityName = townName;
             this.alternativeName = alternativeName;
@@ -1532,7 +1586,7 @@ namespace GameMechanics.save
         //todo | personajes en la ciudad
         //todo | generación de id
 
-        public SerializableSmugglersPost(MB_SmugglersPost post)
+        public SerializableSmugglersPost(MB_SmugglersPost post) : base()
         {
             cityName = post.cityName;
             alternativeName = post.alternativeName;
@@ -1544,6 +1598,26 @@ namespace GameMechanics.save
             exports = post.exportsIndex;
             //spriteIndex = post.spriteIndex; //todo
             flippedX = post.transform.localScale.x < 0;
+
+            //* Personajes en el asentamiento
+            List<Character> chs = post.GetCharacters();
+            serializedCharacters = new SerializableBaseCharacter[chs.Count];
+
+            for (int i = 0; i < chs.Count; i++)
+            {
+                Character ch = chs[i];
+
+                if (ch is Smuggler)
+                {
+                    //Es un contrabandista:
+                    var serializedCharacter = new SerializableSmuggler(ch as Smuggler);
+                    serializedCharacters[i] = serializedCharacter;
+                }
+                else if (ch is Pirate)
+                {
+                    //todo: crear pirata
+                }
+            }
         }
 
         public SerializableSmugglersPost(
@@ -1554,7 +1628,7 @@ namespace GameMechanics.save
             float[] pivotPoint,
             int[] exports,
             byte imgIndex = 0,
-            bool flippedX = false)
+            bool flippedX = false) : base()
         {
             this.cityName = townName;
             this.alternativeName = alternativeName;
@@ -1592,7 +1666,7 @@ namespace GameMechanics.save
         //todo | personajes en la ciudad
         //todo | generación de id
 
-        public SerializablePirateShelter(MB_PirateShelter shelter)
+        public SerializablePirateShelter(MB_PirateShelter shelter) : base()
         {
             cityName = shelter.cityName;
             alternativeName = shelter.alternativeName;
@@ -1615,7 +1689,7 @@ namespace GameMechanics.save
             string tavernName,
             EntryClass condition,
             byte imgIndex = 0,
-            bool flippedX = false)
+            bool flippedX = false) : base()
         {
             this.cityName = shelterName;
             this.alternativeName = alternativeName;
@@ -1651,7 +1725,7 @@ namespace GameMechanics.save
     {
         public byte calado;
 
-        public SerializableNaturalPort(MB_NaturalPort port)
+        public SerializableNaturalPort(MB_NaturalPort port) : base()
         {
             cityName = port.cityName;
             alternativeName = port.alternativeName;
@@ -1673,7 +1747,7 @@ namespace GameMechanics.save
             float[] pivotPoint,
             byte calado,
             byte imgIndex = 0,
-            bool flippedX = false)
+            bool flippedX = false) : base()
         {
             this.cityName = portName;
             this.alternativeName = alternativeName;
@@ -1832,8 +1906,6 @@ namespace GameMechanics.save
 
         public Kingdom Deserialize(Transform parent)
         {
-            //todo: crear reino, ya sea a partir de un prefab o bien
-            //todo: creando un gameobject
             var prefab = Resources.Load<GameObject>("World/Kingdom") as GameObject;
             GameObject obj = UnityEngine.Object.Instantiate(prefab, parent);
             if (obj.TryGetComponent<Kingdom>(out Kingdom k))
@@ -1896,9 +1968,15 @@ namespace GameMechanics.save
     }
 
     [Serializable]
-    public class SerializableCharacter : SerializationConverter
+    public class SerializableBaseCharacter : SerializationConverter
     {
         public string characterName;
+        public ushort kingdomTag;
+    }
+
+    [Serializable]
+    public class SerializableCharacter : SerializableBaseCharacter
+    {
         public float friendshipLevel;
         public bool hasMetPlayer;
     }
@@ -1908,7 +1986,7 @@ namespace GameMechanics.save
     {
         public SerializableResource[] smugglerOffer;
         public SerializableInventoryStacking[] smugglerInventory;
-        private int[] smugglerGenerationRatio;
+        public int[] smugglerGenerationRatio;
 
         public SerializableSmuggler(SerializableResource[] smugglerOffer, SerializableInventoryStacking[] smugglerInventory, int[] smugglerGenerationRatio)
         {
@@ -1929,7 +2007,12 @@ namespace GameMechanics.save
                 smugglerInventory[i] = new SerializableInventoryStacking(inventory[i].resource, inventory[i].amount);
             }
 
-            smugglerGenerationRatio = character.SmugglerGenerationRatio;
+            smugglerGenerationRatio = character.smugglerGenerationRatio;
+        }
+
+        public Smuggler Deserialize()
+        {
+            return new Smuggler(this);
         }
     }
 

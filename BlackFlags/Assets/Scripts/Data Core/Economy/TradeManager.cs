@@ -28,7 +28,8 @@ namespace GameMechanics.Data
         //Graphic Display Elements
         [Header("Trade Panel elements")]
         [SerializeField] private GameObject _tradePanel;
-        [SerializeField] private Text 
+        [SerializeField]
+        private Text
             _TEXT_LabelName,
             _TEXT_InventoryDescriptor,
             _TEXT_ShipLoad,
@@ -36,7 +37,8 @@ namespace GameMechanics.Data
 
         [Header("Sell Panel elements")]
         [SerializeField] private GameObject _SellFromInventoryPanel;
-        [SerializeField] private Text 
+        [SerializeField]
+        private Text
             _TEXT_SellingToName,
             _TEXT_MaxAmmount,
             _TEXT_CurrentAmmount,
@@ -74,7 +76,7 @@ namespace GameMechanics.Data
             //singleton
             instance = this;
         }
-#region EVENTS
+        #region EVENTS
         private void Start()
         {
             RowCharacterButton.TalkWithSmuggler += SetCurrentTrader;
@@ -91,9 +93,9 @@ namespace GameMechanics.Data
             ButtonTrade.sellAction -= RegenerateOfferDisplay_ResourceOnly;
             ShipInventory.updateLoad -= UpdateShipLoad;
         }
-#endregion
+        #endregion
 
-#region SETTERS
+        #region SETTERS
         private void SetCurrentTrader(Character character)
         {
             currentTrader = (Smuggler)character;
@@ -102,7 +104,7 @@ namespace GameMechanics.Data
         {
             currentTrader = character;
         }
-#endregion
+        #endregion
 
         #region HUD: Main Panel
 
@@ -120,8 +122,8 @@ namespace GameMechanics.Data
             _tradePanel.SetActive(true);
 
             //Set Elements
-            _TEXT_LabelName.text = $"Comerciando con {currentTrader.CharacterName}";
-            _TEXT_SellingToName.text = $"Vender a {currentTrader.CharacterName}";
+            _TEXT_LabelName.text = $"Comerciando con {currentTrader.characterName}";
+            _TEXT_SellingToName.text = $"Vender a {currentTrader.characterName}";
             _TEXT_ShipName.text = $"{PersistentGameData._GData_ShipName}:";
 
             RegenerateOfferDisplay();
@@ -222,7 +224,7 @@ namespace GameMechanics.Data
 
             RowShipInventoryScript rs;
 
-            if(amount != 0)
+            if (amount != 0)
             {
                 if (row == null)
                 {
@@ -334,17 +336,17 @@ namespace GameMechanics.Data
                 }
 
                 if (lack > 1)
-                    txt = $"Faltan suministros básicos a bordo";
+                    txt = $"Faltan suministros bï¿½sicos a bordo";
                 else if (lack == 1)
                     txt = $"Es preciso abastecerse de {D_WorldResources[lackOf].resourceName}.";
                 else
-                    txt = $"Hay suministros a bordo para mantener a la tripulación {0} días.";
+                    txt = $"Hay suministros a bordo para mantener a la tripulaciï¿½n {0} dï¿½as.";
 
                 var n = ShipInventory.Items[5];
-                txt += 
+                txt +=
                     n > 25 ? " Hay herramientas de sobra para reparos y carenado" :
                     n > 16 ? " Las herramientas y materiales a bordo son suficientes." :
-                    n > 9 ? " La reserva de herramientas podría ser mayor." :
+                    n > 9 ? " La reserva de herramientas podrï¿½a ser mayor." :
                     " Los materiales y herramientas son insuficientes";
 
             }
@@ -359,7 +361,7 @@ namespace GameMechanics.Data
 
         private void UpdateShipLoad()
         {
-            _TEXT_ShipLoad.text = $"{System.Math.Truncate(ShipInventory.shipLoad * 10)/10} / {PersistentGameData._GData_PlayerShip.GetCapacity()} ton.\n {ShipInventory.Crew} tripulantes";
+            _TEXT_ShipLoad.text = $"{System.Math.Truncate(ShipInventory.shipLoad * 10) / 10} / {PersistentGameData._GData_PlayerShip.GetCapacity()} ton.\n {ShipInventory.Crew} tripulantes";
         }
         #endregion
 
@@ -382,7 +384,7 @@ namespace GameMechanics.Data
 
             _sliderButton.CurrentResource = stock.resource;
             _sliderButton.Amount = (int)_Slider_Sell.value;
-            
+
         }
 
         public void OnSliderChange()

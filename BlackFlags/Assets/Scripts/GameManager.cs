@@ -152,7 +152,7 @@ public class GameManager : MonoBehaviour
                 var ship = Kingdoms[(byte)pirateOrigin].shipsGenerator.GenerateShipData(ShipType_ROLE.Pirate, pirateOrigin);
 
                 ship.name_Ship = WorldGenerator.GiveShipName(pirateOrigin, ShipType_ROLE.Pirate, GenerationMode.Random);
-                ship.name_Captain = pirate.CharacterName;
+                ship.name_Captain = pirate.characterName;
                 pirate.shipName = ship.name_Ship;
                 data.thisConvoyShips = new Ship[1] { ship };
                 data.SetConvoyData(null);

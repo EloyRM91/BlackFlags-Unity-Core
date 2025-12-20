@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine; using UnityEngine.UI;
+using UnityEngine;
+using UnityEngine.UI;
 using GameSettings.Core;
 //Tweening
 using DG.Tweening;
@@ -16,11 +17,11 @@ namespace GameMechanics.Data
         private readonly Dictionary<int, List<Dialog>> _D_tavernDialogs_NOEFFECT = new Dictionary<int, List<Dialog>>()
         {
             {
-                0, new List<Dialog>() 
+                0, new List<Dialog>()
                 {
-                    new Dialog("Marinero 1", new List<string>() { "*Snif* Ese... ese Roberts era un caballero. *Da un trago* ...Trataba bien a sus hombres...", "... y era delicado con las mujeres ¿Sabes?" }), 
-                    new Dialog("Marinero 2", new List<string>() { "¿Mujeres? ¿Y las tomaba? ... ¿No tenía un amante a bordo del Rover? Sí ese... uno bajito."}), 
-                    new Dialog("Marinero 1", new List<string>() { "*Eructa* Pero eso era en alta amar. Ya sabes... cuando la tempestad aprieta cualquier agujero es aspillera *snif*" }) 
+                    new Dialog("Marinero 1", new List<string>() { "*Snif* Ese... ese Roberts era un caballero. *Da un trago* ...Trataba bien a sus hombres...", "... y era delicado con las mujeres ¿Sabes?" }),
+                    new Dialog("Marinero 2", new List<string>() { "¿Mujeres? ¿Y las tomaba? ... ¿No tenía un amante a bordo del Rover? Sí ese... uno bajito."}),
+                    new Dialog("Marinero 1", new List<string>() { "*Eructa* Pero eso era en alta amar. Ya sabes... cuando la tempestad aprieta cualquier agujero es aspillera *snif*" })
                 }
             },
             {
@@ -101,10 +102,10 @@ namespace GameMechanics.Data
                 }
             }
         };
-        
+
         //--------------------------------------------------
-        
-#region VARIABLES
+
+        #region VARIABLES
 
         //Singleton
         public static DialogManager DM;
@@ -139,7 +140,7 @@ namespace GameMechanics.Data
         /// </summary>
         public static event SetDialogUIEvent ActionByDialog;
 
-#endregion
+        #endregion
 
         private void Awake()
         {
@@ -154,9 +155,9 @@ namespace GameMechanics.Data
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter) )
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter))
             {
-                if(playingDialog) skip = true;
+                if (playingDialog) skip = true;
             }
 
             if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape))
@@ -197,8 +198,8 @@ namespace GameMechanics.Data
             List<string> response = null;
             var dialogSequence = new List<Dialog>()
             {
-                new Dialog(character.CharacterName, character.hasMetPlayer ? 
-                ( val == 0 ? character.GetGreetings_Responsive(out response): character.GetGreetings()) : character.GetPresentation()) 
+                new Dialog(character.characterName, character.hasMetPlayer ?
+                ( val == 0 ? character.GetGreetings_Responsive(out response): character.GetGreetings()) : character.GetPresentation())
             };
 
             if (val == 0) dialogSequence.Add(new Dialog("Capitán " + PersistentGameData._GData_PlayerName, response));
@@ -229,7 +230,7 @@ namespace GameMechanics.Data
                 switch (mode)
                 {
                     //Escuchando conversaciones en la taberna:
-                    case DialogMode.listening: 
+                    case DialogMode.listening:
                         if (Random.Range(0, 5) == 0)
                         {
                             dialogSequence.Add(new Dialog("Tripulante del " + PersistentGameData._GData_ShipName, new List<string>() { " *Snif* Capitaaaaaaan... Este sitio es estupendo... *Da un trago*" }));
@@ -249,8 +250,8 @@ namespace GameMechanics.Data
                         if (Random.Range(0, 4) != 0)
                         {
 
-                            dialogSequence.Add(new Dialog(currentCharacter.CharacterName, currentCharacter.GetDrinkingDialog(out response)));
-                            if(response != null) dialogSequence.Add(new Dialog("Capitán " + PersistentGameData._GData_PlayerName, response));
+                            dialogSequence.Add(new Dialog(currentCharacter.characterName, currentCharacter.GetDrinkingDialog(out response)));
+                            if (response != null) dialogSequence.Add(new Dialog("Capitán " + PersistentGameData._GData_PlayerName, response));
                         }
                         else
                         {
@@ -307,11 +308,11 @@ namespace GameMechanics.Data
             _TR_DialogBox.SetActive(false);
 
             //Call event when dialog panel is closed or sequence is over, not when view window is closed
-            if(!suspendedByExit) ActionByDialog(currentDialogTrigger);
+            if (!suspendedByExit) ActionByDialog(currentDialogTrigger);
         }
         IEnumerator RunDialog(List<Dialog> sequence)
         {
-            
+
             int indexSequence = 0, indexDialog;
             yield return new WaitForSeconds(1);
             while (indexSequence < sequence.Count)
@@ -344,7 +345,7 @@ namespace GameMechanics.Data
                 //Set counter
                 indexDialog = 0;
 
-                while(indexDialog < currentDialog.text.Count)
+                while (indexDialog < currentDialog.text.Count)
                 {
                     //Current message
                     string msg = currentDialog.text[indexDialog];
@@ -393,7 +394,7 @@ namespace GameMechanics.Data
         {
             blinkerTween.Kill();
             _TEXT_Continue.DOFade(0, 0);
-            if(val)blinkerTween = _TEXT_Continue.DOFade(0.9f, 0.6f).SetLoops(-1, LoopType.Yoyo);
+            if (val) blinkerTween = _TEXT_Continue.DOFade(0.9f, 0.6f).SetLoops(-1, LoopType.Yoyo);
         }
     }
 

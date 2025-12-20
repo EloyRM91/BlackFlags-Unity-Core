@@ -26,7 +26,7 @@ namespace GameMechanics.WorldCities
         public byte imgIndex;
 
         //CHARACTERS IN CITY
-        [SerializeField] private List<Character> charactersInCity = new List<Character>();
+        // [SerializeField] private List<Character> charactersInCity = new List<Character>();
 
         private void Awake()
         {
@@ -101,7 +101,7 @@ namespace GameMechanics.WorldCities
                 var newSmuggler = new Smuggler(kingdom.tagKey, r);
                 newSmuggler.ratio = ratio;
                 newSmuggler.SetInventory(true);
-                charactersInCity.Add(newSmuggler);
+                charactersInShelter.Add(newSmuggler);
             }
             //Create shipyardmen
             for (int i = 0; i < nSMen; i++)
@@ -109,22 +109,6 @@ namespace GameMechanics.WorldCities
                 //Construct shipyardman
                 var newShipyardMan = new ShipyardMan();
             }
-        }
-        public void GetIn(Character c)
-        {
-            charactersInCity.Add(c);
-        }
-        public void GetOut(Character c)
-        {
-            charactersInCity.Remove(c);
-        }
-        public List<Character> GetCharacters(bool onlyCriminals = false)
-        {
-            return (onlyCriminals ? charactersInCity.Where(c => !(c is ShipyardMan)).ToList() : charactersInCity);
-        }
-        public List<Character> GetCharacters<C>()
-        {
-            return charactersInCity.Where(c => !(c is C)).ToList();
         }
         private void CallAtlanticConvoy()
         {

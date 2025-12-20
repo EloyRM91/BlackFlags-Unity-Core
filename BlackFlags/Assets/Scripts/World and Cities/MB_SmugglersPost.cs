@@ -1,6 +1,7 @@
 //Core
 using System.Collections.Generic;
 using UnityEngine;
+using GameSettings.Core;
 //Mechanics
 using GameMechanics.Data;
 using GameMechanics.save;
@@ -10,7 +11,7 @@ namespace GameMechanics.WorldCities
     public class MB_SmugglersPost : Settlement
     {
         //CHARACTERS IN SHELTER
-        [SerializeField] private List<Character> charactersInShelter = new List<Character>();
+        // [SerializeField] private List<Character> charactersInShelter = new List<Character>();
         //public override void OnMouseDown()
         //{
         //    base.OnMouseDown();
@@ -25,10 +26,15 @@ namespace GameMechanics.WorldCities
 
         private void Start()
         {
-            //----
-            // CHARACTERS
-            //----
-            CreateSmugglers(Random.Range(2, 4));
+            if (PersistentGameSettings.loadingFile == false)
+            {
+                //*Genera datos de la nueva partida
+                //----
+                // CHARACTERS
+                //----
+                CreateSmugglers(Random.Range(2, 4));
+            }
+
         }
         private void CreateSmugglers(int n)
         {
@@ -102,6 +108,20 @@ namespace GameMechanics.WorldCities
             var index = portData.spriteIndex;
 
             this.exportsIndex = portData.exports;
+
+            //* Personajes en este enclave:
+            SerializableBaseCharacter[] chs = portData.serializedCharacters;
+
+            for (int i = 0; i < chs.Length; i++)
+            {
+                SerializableBaseCharacter schar = chs[i];
+
+                if (schar is SerializableSmuggler)
+                {
+                    var newSmuggler = (schar as SerializableSmuggler).Deserialize();
+                }
+            }
+
         }
 
         public GameObject GetKeyPointBanner(Transform container)

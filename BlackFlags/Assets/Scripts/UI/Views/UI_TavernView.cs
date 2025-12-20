@@ -122,7 +122,7 @@ public class UI_TavernView : UI_ScenicView<UI_TavernView>
         }
 
         //Character's Data
-        _TEXT_CharacterLabel.text = character.CharacterName;
+        _TEXT_CharacterLabel.text = character.characterName;
         _TEXT_RoleLabel.text = character.GetRoleName();
 
         //Icon's sprite
@@ -153,15 +153,15 @@ public class UI_TavernView : UI_ScenicView<UI_TavernView>
 
     private void SetFriendshipLevel(Character character)
     {
-        float val = character.FriendshipLevel * 100;
+        float val = character.friendshipLevel * 100;
         float rounded = (int)(val * 10) * 0.1f;
         _TEXT_friendshipLevel.text = rounded + "%";
-        _IMG_FriendshipIcon.sprite = GetFriendshipIcon(character.FriendshipLevel);
+        _IMG_FriendshipIcon.sprite = GetFriendshipIcon(character.friendshipLevel);
     }
 
     private void SetCharacterImage(Character character)
     {
-        if(character is Pirate)
+        if (character is Pirate)
         {
             _CharacterPirate.SetActive(true);
 
@@ -179,7 +179,7 @@ public class UI_TavernView : UI_ScenicView<UI_TavernView>
 
                 //Fade
                 layer.layerImage.DOFade(0, 0);
-                if(layer.layerImage.sprite != null)
+                if (layer.layerImage.sprite != null)
                     layer.layerImage.DOFade(1, .6f);
             }
 
@@ -199,9 +199,9 @@ public class UI_TavernView : UI_ScenicView<UI_TavernView>
 
     private IEnumerator Blink(Layer faceLayer, int i)
     {
-        while(true)
+        while (true)
         {
-            yield return new WaitForSeconds(Random.Range(0,4) == 0 ? 0.15f : Random.Range(4,7));
+            yield return new WaitForSeconds(Random.Range(0, 4) == 0 ? 0.15f : Random.Range(4, 7));
             faceLayer.layerImage.sprite = _closedEyes[i];
             yield return new WaitForSeconds(0.15f);
             faceLayer.layerImage.sprite = faceLayer.layerSprites[i];
@@ -221,7 +221,7 @@ public class UI_TavernView : UI_ScenicView<UI_TavernView>
     }
 
     [System.Serializable]
-    public class Layer 
+    public class Layer
     {
         public Image layerImage;
         public Sprite[] layerSprites;

@@ -5,6 +5,9 @@ using GameMechanics.save;
 using GameMechanics.Data;
 using GameMechanics.Ships;
 
+//Lists
+using System.Linq;
+
 namespace GameMechanics.WorldCities
 {
     public class MB_PirateShelter : KeyPoint
@@ -45,6 +48,14 @@ namespace GameMechanics.WorldCities
         public void GetOut(Character c)
         {
             charactersInShelter.Remove(c);
+        }
+        public List<Character> GetCharacters(bool onlyCriminals = false)
+        {
+            return onlyCriminals ? charactersInShelter.Where(c => !(c is ShipyardMan)).ToList() : charactersInShelter;
+        }
+        public List<Character> GetCharacters<C>()
+        {
+            return charactersInShelter.Where(c => !(c is C)).ToList();
         }
         public string GetRequirementString()
         {

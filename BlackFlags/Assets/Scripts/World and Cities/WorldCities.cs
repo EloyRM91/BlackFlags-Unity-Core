@@ -19,7 +19,7 @@ namespace GameMechanics.WorldCities
     /// <summary>
     /// A key point is a physic point in game world where the player and npcs can get into/go out.
     /// </summary>
-    public abstract class KeyPoint : MonoBehaviour, IsSelectable 
+    public abstract class KeyPoint : MonoBehaviour, IsSelectable
     {
         #region VARIABLES
         //Data & performance
@@ -48,7 +48,7 @@ namespace GameMechanics.WorldCities
         //Unselect
         public static void Unselect()
         {
-            if(currentSelected != null)
+            if (currentSelected != null)
             {
                 currentSelected.Highlight(false);
                 currentSelected = null;
@@ -86,7 +86,7 @@ namespace GameMechanics.WorldCities
             sequence.Play();
         }
 
-#region INTERFACES
+        #region INTERFACES
         // As selectable object
         public virtual void OnMouseEnter()
         {
@@ -97,7 +97,7 @@ namespace GameMechanics.WorldCities
                     CursorManager.SetCursor(1);
                     Highlight(true);
                 }
-            }     
+            }
         }
         public virtual void OnMouseExit()
         {
@@ -162,7 +162,7 @@ namespace GameMechanics.WorldCities
 
         protected abstract void DisplayKeypointPanel();
         protected abstract void DisplayInfo();
-#endregion
+        #endregion
 
         //Fixing GUIRaycasting
         IEnumerator AvoidUIRaycasting()
@@ -185,6 +185,9 @@ namespace GameMechanics.WorldCities
     {
         public int[] exportsIndex;
         public List<Resource> exports;
+
+        //CHARACTERS IN SHELTER
+        [SerializeField] protected List<Character> charactersInShelter = new List<Character>();
 
         public void SetExportsFromIndex()
         {
@@ -221,7 +224,7 @@ namespace GameMechanics.WorldCities
             List<Settlement> tempList;
             foreach (Kingdom traderK in kingdom.atTradeAgreementWith)
             {
-                 tempList = onlyCities ? traderK.GetPortsList().Where(x => x is MB_City).ToList() : traderK.GetPortsList();
+                tempList = onlyCities ? traderK.GetPortsList().Where(x => x is MB_City).ToList() : traderK.GetPortsList();
                 list.AddRange(tempList.AsEnumerable());
             }
             tempList = new List<Settlement>();
@@ -250,12 +253,27 @@ namespace GameMechanics.WorldCities
                 if (Vector3.Distance(transform.position, port.transform.position) < dis)
                     tempList.Add(port);
             }
-            if(tempList.Count != 0)
+            if (tempList.Count != 0)
                 return tempList[Random.Range(0, tempList.Count)];
             return null;
         }
-    }
-    
 
+        public void GetIn(Character c)
+        {
+            charactersInShelter.Add(c);
+        }
+        public void GetOut(Character c)
+        {
+            charactersInShelter.Remove(c);
+        }
+        public List<Character> GetCharacters(bool onlyCriminals = false)
+        {
+            return onlyCriminals ? charactersInShelter.Where(c => !(c is ShipyardMan)).ToList() : charactersInShelter;
+        }
+        public List<Character> GetCharacters<C>()
+        {
+            return charactersInShelter.Where(c => !(c is C)).ToList();
+        }
+    }
 }
 

@@ -1,8 +1,12 @@
 //Unity
-using System.Collections; using System.Collections.Generic; using UnityEngine; using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
 using System.Linq;
 //HUD
-using UnityEngine.UI; using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 //Cities
 using GameMechanics.WorldCities;
 //Mechanics
@@ -70,11 +74,11 @@ public class UIMap : MonoBehaviour //, UIDetectable
     [SerializeField] private Image customFlag;
     // -- Lista de ciudades
     List<MB_City> revealedCities;
-        // -- Botón: Ordenar por población
+    // -- Botón: Ordenar por población
     private bool ascending = false;
-        // -- Botón: Ordenar por población
+    // -- Botón: Ordenar por población
     private bool az = true;
-        // -- Dropdown: Ordenar por recursos
+    // -- Dropdown: Ordenar por recursos
     [SerializeField] private Dropdown _DROPDOWN_resourceCityFilter;
 
     //Vista de Piratas
@@ -134,7 +138,7 @@ public class UIMap : MonoBehaviour //, UIDetectable
     public delegate void Transition(bool state);
     public static Transition uiTransition;
 
-#endregion
+    #endregion
     private void Awake()
     {
         ui = this;
@@ -209,7 +213,7 @@ public class UIMap : MonoBehaviour //, UIDetectable
     {
         _TEXT_PlayersReputation.text = reputation + " %";
     }
-#region INPUTS
+    #region INPUTS
     private void Update()
     {
         GetInputs();
@@ -228,9 +232,9 @@ public class UIMap : MonoBehaviour //, UIDetectable
                 if (!GetGraphicRaycastResult()) ClearPanels();
         }
     }
-#endregion
+    #endregion
 
-#region HUD response
+    #region HUD response
     public static bool GetGraphicRaycastResult()
     {
         m_PointerEventData = new PointerEventData(m_EventSystem);
@@ -246,9 +250,9 @@ public class UIMap : MonoBehaviour //, UIDetectable
     {
         _deltaMovementIcon.SetActive(val);
     }
-#endregion
+    #endregion
 
-#region ZOOM AND CAMERA
+    #region ZOOM AND CAMERA
     private void UpdateZoom(float val)
     {
         _TEXT_ZoomLevel.text = "Zoom: " + val + "%";
@@ -272,9 +276,9 @@ public class UIMap : MonoBehaviour //, UIDetectable
     }
     public void LockCamera() { MapCamera.isLocked = true; }
     public void UnlockCamera() { MapCamera.isLocked = false; }
-#endregion
+    #endregion
 
-#region WORLD POINTS INFO
+    #region WORLD POINTS INFO
     private void DisplayBasicInfo(KeyPoint target, byte bg, bool isProducing = false)
     {
         _TEXT_Name.text = target.cityName;
@@ -287,7 +291,7 @@ public class UIMap : MonoBehaviour //, UIDetectable
     }
     private string SetRequirements(KeyPoint target)
     {
-        if(target is MB_NaturalPort)
+        if (target is MB_NaturalPort)
         {
             MB_NaturalPort thisPort = (MB_NaturalPort)target;
             _TEXT_RequirementsLabel.text = "Profundidad: <color=blue>Nivel " + (thisPort.calado + 1) + "</color>";
@@ -299,7 +303,7 @@ public class UIMap : MonoBehaviour //, UIDetectable
             _TEXT_RequirementsLabel.text = "Derecho de paso";
             return "Para entrar a " + thisShelter.cityName + thisShelter.GetRequirementString();
         }
-            return string.Empty;
+        return string.Empty;
     }
     public void DisplayInfo(MB_City targetCity)
     {
@@ -343,7 +347,7 @@ public class UIMap : MonoBehaviour //, UIDetectable
     }
     public void DisplayInfo(MB_NaturalPort targetBay)
     {
-        if(!_WINDOW_Settlement.activeSelf)
+        if (!_WINDOW_Settlement.activeSelf)
         {
             var targetKingdom = targetBay.transform.parent.parent.GetComponent<Kingdom>();
             DisplayBasicInfo(targetBay, 2);
@@ -423,7 +427,7 @@ public class UIMap : MonoBehaviour //, UIDetectable
     }
     #endregion
 
-#region WORLD INFO DISPLAY
+    #region WORLD INFO DISPLAY
 
     public void OrderCitiesListPOP()
     {
@@ -441,7 +445,7 @@ public class UIMap : MonoBehaviour //, UIDetectable
     {
         revealedCities = new List<MB_City>(GameManager.gm.Cities.Where(c => c.revealed).ToList());
         int i = _DROPDOWN_resourceCityFilter.value;
-        if(i != 0)
+        if (i != 0)
         {
             i = i - 1;
             revealedCities = new List<MB_City>(revealedCities.Where(c => c.Contains(i)).ToList());
@@ -473,10 +477,10 @@ public class UIMap : MonoBehaviour //, UIDetectable
             var dr = _CONTENT_PirateInfoLayout.GetChild(0).gameObject;
             DestroyImmediate(dr);
         }
-        foreach(Pirate pirate in pirates)
+        foreach (Pirate pirate in pirates)
         {
             var rp = Instantiate(_PREF_PirateRow, _CONTENT_PirateInfoLayout).transform;
-            rp.GetChild(1).GetComponent<Text>().text = pirate.CharacterName;
+            rp.GetChild(1).GetComponent<Text>().text = pirate.characterName;
         }
     }
     public void DisplayWorldViewPanel(int index)
@@ -488,7 +492,7 @@ public class UIMap : MonoBehaviour //, UIDetectable
         }
         _PANELS_WorldInfoPanels[index].SetActive(true);
         _IMGS_WorldInfoSection[index].color = selectionColor;
-        
+
     }
 
     private void CreateNewCityList()
@@ -521,7 +525,7 @@ public class UIMap : MonoBehaviour //, UIDetectable
         }
     }
     #endregion
-#region GAME MENU
+    #region GAME MENU
     public void OpenGameMenu()
     {
         if (ui.gameObject.activeSelf)
@@ -530,7 +534,7 @@ public class UIMap : MonoBehaviour //, UIDetectable
             {
                 panelON = true;
                 _WINDOW_Menu.SetActive(true);
-                if(!_UIConvoyHUD.IsShowingPanel)
+                if (!_UIConvoyHUD.IsShowingPanel)
                     UIMinimap.SliceDownST();
             }
             else
@@ -540,8 +544,8 @@ public class UIMap : MonoBehaviour //, UIDetectable
 
 
 
-#endregion
-#region WORLD KEYPOINTS VIEW & ACTIONS
+    #endregion
+    #region WORLD KEYPOINTS VIEW & ACTIONS
     public void DisplayCityViewPanel(MB_City k)
     {
         //Set this as locker panel
@@ -594,7 +598,7 @@ public class UIMap : MonoBehaviour //, UIDetectable
         panelON = false;
     }
     #endregion
-#region CALENDAR & TIME SPEED
+    #region CALENDAR & TIME SPEED
 
     public void UpdateSpeed(float t)
     {
@@ -605,7 +609,7 @@ public class UIMap : MonoBehaviour //, UIDetectable
     {
         _TEXT_Calendar.text = newDate.ToString("dd MMM yyyy");
     }
-#endregion
+    #endregion
 
 }
 

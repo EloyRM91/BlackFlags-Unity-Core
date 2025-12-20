@@ -5,6 +5,9 @@ using UnityEngine;
 //Generation Calls
 using Generation.Generators;
 
+//Serialization
+using GameMechanics.save;
+
 namespace GameMechanics.Data
 {
     //--------------------------------
@@ -32,16 +35,16 @@ namespace GameMechanics.Data
         };
 
 
-        public string CharacterName;
+        public string characterName;
         public ushort kingdomTag = 9999;
         public string GetCharacterName()
         {
-            return CharacterName;
+            return characterName;
         }
         //public void SetNameByGeneration(EntityType_KINGDOM nationality, bool isPirate = false)
         public void SetNameByGeneration(ushort nationality, bool isPirate = false)
         {
-            CharacterName = WorldGenerator.GetCharacterName(nationality, isPirate);
+            characterName = WorldGenerator.GetCharacterName(nationality, isPirate);
         }
         public abstract string GetRoleName();
     }
@@ -49,7 +52,7 @@ namespace GameMechanics.Data
     [System.Serializable]
     public abstract class Character : BASE_Character
     {
-        public float FriendshipLevel;
+        public float friendshipLevel;
         public bool hasMetPlayer; //has this charecter seen the player before?
         //todo: esto tendrá que poder cambiarse a través de mods:
         protected static readonly Dictionary<AttributeType, List<string>> D_Presentations = new Dictionary<AttributeType, List<string>>()
@@ -197,34 +200,34 @@ namespace GameMechanics.Data
             {AttributeType.BebedorSocial, new List<string>[]
             {
                 new List<string>() { "¡Haharl! ¡Cantemos La doncella de Ámsterdam!" },
-                new List<string>() { "*Da un trago* ¡Vamooos! ¡Que los músicos toquen una zarabanda! ¿Qué es esto, un galeón?"} } 
+                new List<string>() { "*Da un trago* ¡Vamooos! ¡Que los músicos toquen una zarabanda! ¿Qué es esto, un galeón?"} }
             },
-            {AttributeType.BebedorColérico, new List<string>[] 
+            {AttributeType.BebedorColérico, new List<string>[]
             {
                 new List<string>() { "*Gruñido* ...Arghlrl... ¿QUÉ MIRÁIS VOSOTROS? *Saca la pistola de chispa*" },
-                new List<string>() { "HA-HARL, ¡Bebed, cantad! ... *Dispara al techo* CANTAD, HE DICHO." } } 
+                new List<string>() { "HA-HARL, ¡Bebed, cantad! ... *Dispara al techo* CANTAD, HE DICHO." } }
             },
             {AttributeType.Agresivo, new List<string>[]
             {
                 new List<string>() { "¿Sabéis por qué Stede Bonnet era un hombre? *Golpea la mesa* ¡Porque no se rendía!", "En el Revenge lo abandonaron, ¡Y él continuó!. Le capturaron... ¡Y él se fugó! ...Aunque lo atraparon otra vez..." },
-                new List<string>() { "Da igual si uno es marino, villanesco... o hasta un haitiano haciendo vudú con dientes y huesos. *Sniff*", "Todo hombre que se precie debe, al menos una vez en la vida, escupirse las manos...", "...izar la bandera negra... ¡Y rajar cuellos! ¡Ha-harl! *Da un trago*"} } 
+                new List<string>() { "Da igual si uno es marino, villanesco... o hasta un haitiano haciendo vudú con dientes y huesos. *Sniff*", "Todo hombre que se precie debe, al menos una vez en la vida, escupirse las manos...", "...izar la bandera negra... ¡Y rajar cuellos! ¡Ha-harl! *Da un trago*"} }
             },
-            {AttributeType.Prudente, new List<string>[] 
+            {AttributeType.Prudente, new List<string>[]
             {
                 new List<string>() { "Los piratas no duramos más de tres años en esta profesión, y luego... el dulce abrazo del cáñamo \"Quajhrh\" *Saca la lengua*", "Por eso en esta vida hay que tener una parte de gallardía y otra de prudencia *Da un trago*" },
-                new List<string>() { "Tened cuidado al cargar las piezas de la regala... *Sniff* ...Falconetes, esmeriles...", "...Si no se limpian bien, pueden explotar en la cara del artillero."} } 
+                new List<string>() { "Tened cuidado al cargar las piezas de la regala... *Sniff* ...Falconetes, esmeriles...", "...Si no se limpian bien, pueden explotar en la cara del artillero."} }
             },
             {AttributeType.Callado, new List<string>[]
             {
                 new List<string>() { "... *Da un trago* ... (...) ........ ¿Vos Conocéis a Sandy, la fulana tuerta?" },
-                new List<string>() { "........ *Da un trago* ........" } } 
+                new List<string>() { "........ *Da un trago* ........" } }
             },
-            {AttributeType.Desconfiado, new List<string>[] 
-            { 
+            {AttributeType.Desconfiado, new List<string>[]
+            {
                 new List<string>() {"...*Da un trago* ¿Vos sabéis cómo atraparon a Bonnet? Algún perro canalla hijo del demonio lo delató...", "*Escupe* Sí... hay que tener cuidado con los puñales que tienes delante...", "*Mira fijamente* ...pero más todavía con los que tienes detrás... *Da un trago*" },
-                new List<string>() { "*Voz baja* ...Fijáos si hay alguna cara nueva que mire mucho hacia aquí. Puede venir algún soplón de la guardia..."} } 
+                new List<string>() { "*Voz baja* ...Fijáos si hay alguna cara nueva que mire mucho hacia aquí. Puede venir algún soplón de la guardia..."} }
             },
-            {AttributeType.ColeccionaTrofeos, new List<string>[] 
+            {AttributeType.ColeccionaTrofeos, new List<string>[]
             {
                 new List<string>() {"¿Véis este anillo que llevo? De un capitán inglés. ¿Y este otro? De un corsario francés.", "Estos son mis tesoros... el recordar que vas a morir, y que tus cosas terminan en el anular de alguien, ¡Haharl!" },
                 new List<string>() { "...Y la de cruces es el gallardete de almirantago. *Deja la jarra* Algún día me haré con una bandera de almirantazgo", "*Sniff*, y la pondré junto a la red Union de un bergantín de Esnón. Isville se llamaba aquel navío..."} } }
@@ -255,7 +258,7 @@ namespace GameMechanics.Data
 
         public virtual void ModifyFriendship(float amount)
         {
-            FriendshipLevel = Mathf.Clamp(FriendshipLevel + amount,0,100);
+            friendshipLevel = Mathf.Clamp(friendshipLevel + amount, 0, 100);
         }
         public virtual void ModifyFriendship() { }
     }
@@ -296,7 +299,7 @@ namespace GameMechanics.Data
         //Current character inventory
         [SerializeField] public List<InventoryItemStacking> SmugglerInventory;
         //Resource spawn ratio by category
-        public int[] SmugglerGenerationRatio = new int[4];
+        public int[] smugglerGenerationRatio = new int[4];
         //This character base ratio
         public int ratio = 1;
 
@@ -313,10 +316,10 @@ namespace GameMechanics.Data
             //Get dialog body
             var n = Random.Range(0, 4);
             var p2 =
-                n == 0 ? new List<string>() { $"Me llamo {CharacterName}, humilde contrabandista. Necesitará darle salida a la mercancía de los botines, ¿Me equivoco?" } :
-                n == 1 ? new List<string>() { $"Mi nombre es {CharacterName}. Me dedico a proveer bienes a la gente de bien.", "Mis hombres van a los pueblos y venden todo lo que la corona regula", "Aceite, vino, acucias... ¡No hay profesión más noble que el contrabando!" } :
-                n == 2 ? new List<string>() { $"Soy {CharacterName}. Para vos {CharacterName.Split(' ')[0]}, o el bueno de \"{CharacterName.Split(' ')[0]}\". Tal vez podamos hacer negocios." } :
-                new List<string>() { $"Mi nombre es {CharacterName}. Por aquí me conocen por ser alguien que provee lo que es difícil de conseguir...", "o al menos es así cuando han puesto precio a tu cabeza." };
+                n == 0 ? new List<string>() { $"Me llamo {characterName}, humilde contrabandista. Necesitará darle salida a la mercancía de los botines, ¿Me equivoco?" } :
+                n == 1 ? new List<string>() { $"Mi nombre es {characterName}. Me dedico a proveer bienes a la gente de bien.", "Mis hombres van a los pueblos y venden todo lo que la corona regula", "Aceite, vino, acucias... ¡No hay profesión más noble que el contrabando!" } :
+                n == 2 ? new List<string>() { $"Soy {characterName}. Para vos {characterName.Split(' ')[0]}, o el bueno de \"{characterName.Split(' ')[0]}\". Tal vez podamos hacer negocios." } :
+                new List<string>() { $"Mi nombre es {characterName}. Por aquí me conocen por ser alguien que provee lo que es difícil de conseguir...", "o al menos es así cuando han puesto precio a tu cabeza." };
             //Merge
             p1.AddRange(p2);
 
@@ -329,7 +332,7 @@ namespace GameMechanics.Data
             var n = Random.Range(0, 4);
             //(Random.Range(0, 2) == 0 ? name : string.Empty)
             var txt =
-                n == 0 ? new List<string>() { $"Capitán { name }, ¿Qué le trae por aquí? Tal vez quiera hacer negocios con el bueno de {CharacterName.Split(' ')[0]}." } :
+                n == 0 ? new List<string>() { $"Capitán {name}, ¿Qué le trae por aquí? Tal vez quiera hacer negocios con el bueno de {characterName.Split(' ')[0]}." } :
                 n == 1 ? new List<string>() { $"{GetSalutation()} Capitán {name}. ¿Algún negocio en mente? Vamos, no sea reservado.", "Yo haría todos los atavíos y vos sigue de correrías en alta mar, ¿Qué os parece?" } :
                 n == 2 ? new List<string>() { $"¿En qué le puedo ayudar, Capitán {name}?, ¿Puedo llamarlo {name.Split(' ')[0]}, verdad? Estamos entre socios." } :
                 new List<string>() { $"Capitán {name}. Qué casualidad, tengo unos zuchos y hachas de abordaje que os vendrían bien" };
@@ -350,11 +353,11 @@ namespace GameMechanics.Data
             //var currentPort = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().GetPort();
             //if (currentPort != null)
             //{
-                if (Random.Range(0, 3) != 0)
-                {
-                    //return D_Hello[GameManager.gm.GetKingdombyTag(currentPort.transform.parent.tag).thisKingdom];
-                    return D_Hello[kingdomTag];
-                }
+            if (Random.Range(0, 3) != 0)
+            {
+                //return D_Hello[GameManager.gm.GetKingdombyTag(currentPort.transform.parent.tag).thisKingdom];
+                return D_Hello[kingdomTag];
+            }
             //}
             return "Saludos,";
         }
@@ -362,7 +365,7 @@ namespace GameMechanics.Data
         //Friendship
         public float GetDiscountModifier()
         {
-            return Mathf.Clamp(1 + (FriendshipLevel - 0.4f) / 2, 1, 1.2f);
+            return Mathf.Clamp(1 + (friendshipLevel - 0.4f) / 2, 1, 1.2f);
         }
         public override void ModifyFriendship(float amount)
         {
@@ -370,14 +373,14 @@ namespace GameMechanics.Data
         }
         public void ModifyFriendship_ByTrading(float money)
         {
-            FriendshipLevel = Mathf.Clamp(FriendshipLevel + money / 15000, 0, 1);
+            friendshipLevel = Mathf.Clamp(friendshipLevel + money / 15000, 0, 1);
             //Debug.Log($"Nuevo valor de amistad (por comercio) {FriendshipLevel}");
             UI_TavernView.SetFriendshipLevelST(this);
         }
 
         public void ModifyFriendship_ByTime()
         {
-            FriendshipLevel = Mathf.Clamp(FriendshipLevel - 0.02f, 0.25f, 1);
+            friendshipLevel = Mathf.Clamp(friendshipLevel - 0.02f, 0.25f, 1);
             //UI_TavernView.SetFriendshipLevelST(this);
         }
 
@@ -403,6 +406,43 @@ namespace GameMechanics.Data
             GetEvents();
         }
 
+        public Smuggler(SerializableSmuggler sm)
+        {
+            this.characterName = sm.characterName;
+            this.kingdomTag = sm.kingdomTag;
+            this.friendshipLevel = sm.friendshipLevel;
+
+            //Oferta del comerciante
+            {
+                //todo: referenciar los recursos
+                SerializableResource[] offerArray = sm.smugglerOffer;
+                SmugglerOffer = new List<Resource>();
+
+                for (int i = 0; i < offerArray.Length; i++)
+                {
+                    Resource resource = EconomyBehaviour.GetResource(offerArray[i].key);
+                    SmugglerOffer.Add(resource);
+                }
+
+                this.smugglerGenerationRatio = sm.smugglerGenerationRatio;
+            }
+
+            //Inventario de este personaje:
+            {
+                SerializableInventoryStacking[] seriazableInventory = sm.smugglerInventory;
+                this.SmugglerInventory = new List<InventoryItemStacking>();
+
+                //todo: referenciar los recursos
+                for (int i = 0; i < seriazableInventory.Length; i++)
+                {
+                    var stock = seriazableInventory[i];
+                    Resource resource = EconomyBehaviour.GetResource(stock.key);
+                    this.SmugglerInventory.Add(new InventoryItemStacking(resource, stock.amount));
+                }
+            }
+
+        }
+
         private void GetEvents()
         {
             TimeManager.UpdateMarketDay += UpdateOffer;
@@ -416,21 +456,21 @@ namespace GameMechanics.Data
 
         private void SetFriendshipLevel()
         {
-            FriendshipLevel = 0.2f;
+            friendshipLevel = 0.2f;
         }
 
-#region INVENTORY
+        #region INVENTORY
         private void SetGenerationRatio()
         {
             for (byte i = 0; i < 4; i++)
             {
-                SmugglerGenerationRatio[i] = Random.Range(D_BaseRatio[i][0], D_BaseRatio[i][1]);
+                smugglerGenerationRatio[i] = Random.Range(D_BaseRatio[i][0], D_BaseRatio[i][1]);
             }
         }
 
         private int GetGenerationRatio(ResourceType type)
         {
-            return SmugglerGenerationRatio[(int)type];
+            return smugglerGenerationRatio[(int)type];
         }
 
         private void UpdateOffer()
@@ -460,7 +500,7 @@ namespace GameMechanics.Data
                     var baseValue = GetGenerationRatio(SmugglerInventory[i].resource.ResourceType);
 
                     //Base lineal: Aumenta o disminuye la oferta de inventario en base a la oferta actual;
-                    var adaptiveValue = ratio * baseValue  - SmugglerInventory[i].amount * ratio;
+                    var adaptiveValue = ratio * baseValue - SmugglerInventory[i].amount * ratio;
 
                     //Aumenta o disminuye el inventario
                     // ¿El comerciante vemde este recurso? Actualiza la oferta
@@ -475,14 +515,14 @@ namespace GameMechanics.Data
                     }
 
                     //Limpia la lista de elementos vacíos.
-                    foreach(InventoryItemStacking e in remover)
+                    foreach (InventoryItemStacking e in remover)
                     {
                         SmugglerInventory.Remove(e);
                     }
                 }
             }
         }
-#endregion
+        #endregion
     }
     /// <summary>
     /// Pirata: Personaje que se desplaza entre ciudades y refugios.
@@ -540,8 +580,8 @@ namespace GameMechanics.Data
             var p1 = new List<string>(D_Presentations[attributes[0].attribute]);
             var n = Random.Range(0, 2);
             var p2 = n == 0 ?
-                new List<string>() { (Random.Range(0, 2) == 0 ? "En fin. " : "*Escupe* ") + $"Soy {CharacterName}, el {adjective} capitán del {shipName}. " + (Random.Range(0,2) == 0 ? "Haharl" : "*Da un trago*") } :
-                new List<string>() { $"Soy {CharacterName.Split(' ')[0]}, el {adjective} capitán del {shipName}.", (Random.Range(0, 2) == 0 ? "*Sniff* " : string.Empty) + $"{CharacterName}, ese soy yo." };
+                new List<string>() { (Random.Range(0, 2) == 0 ? "En fin. " : "*Escupe* ") + $"Soy {characterName}, el {adjective} capitán del {shipName}. " + (Random.Range(0, 2) == 0 ? "Haharl" : "*Da un trago*") } :
+                new List<string>() { $"Soy {characterName.Split(' ')[0]}, el {adjective} capitán del {shipName}.", (Random.Range(0, 2) == 0 ? "*Sniff* " : string.Empty) + $"{characterName}, ese soy yo." };
             p1.AddRange(p2);
             if (n == 0 && D_Presentations_End[attributes[0].attribute] != null) p1.AddRange(D_Presentations_End[attributes[0].attribute]);
 
@@ -557,7 +597,7 @@ namespace GameMechanics.Data
         public override List<string> GetGreetings()
         {
             //var list = List<string>(){ }
-            return (Random.Range(0, 4) == 0 ? D_Greetings_PIRATE_GENERIC[Random.Range(0, 8)] : D_Greetings_PIRATE_BY_ATTRIBUTE[attributes[Random.Range(0,2)].attribute]);
+            return (Random.Range(0, 4) == 0 ? D_Greetings_PIRATE_GENERIC[Random.Range(0, 8)] : D_Greetings_PIRATE_BY_ATTRIBUTE[attributes[Random.Range(0, 2)].attribute]);
         }
 
         public override List<string> GetDrinkingDialog(out List<string> response)
@@ -574,7 +614,7 @@ namespace GameMechanics.Data
                         response = new List<string>() { "En esa historia hay más enemigos cada vez que la cuentas..." };
                         break;
                     case AttributeType.Sanguinario:
-                        response = new List<string>() { $"Capitán { CharacterName.Split(' ')[0]}... Hablar con vos siempre es una delicia... *Da un trago largo* *Argh* ..." };
+                        response = new List<string>() { $"Capitán {characterName.Split(' ')[0]}... Hablar con vos siempre es una delicia... *Da un trago largo* *Argh* ..." };
                         break;
                     case AttributeType.Desconfiado:
                         response = new List<string>() { "Vos siempre tan desconfiado... *Da un trago*" };
@@ -592,7 +632,7 @@ namespace GameMechanics.Data
             else
             {
                 response = Random.Range(0, 3) == 0 ? new List<string>() { "*Da un trago*" } : null;
-                return D_Drinking_PIRATE_GENERIC[Random.Range(0,10)];
+                return D_Drinking_PIRATE_GENERIC[Random.Range(0, 10)];
             }
 
         }
@@ -611,8 +651,8 @@ namespace GameMechanics.Data
             {
                 switch (attributes[i].attribute)
                 {
-                    case AttributeType.BebedorSocial: 
-                        amount += 1; 
+                    case AttributeType.BebedorSocial:
+                        amount += 1;
                         break;
                     case AttributeType.BebedorColérico:
                         amount += Random.Range(-2, 3);
@@ -646,15 +686,15 @@ namespace GameMechanics.Data
                 }
 
             }
-            FriendshipLevel = Mathf.Clamp(FriendshipLevel + amount/100, 0.18f, limit);
-            Debug.Log($"Nuevo valor de amistad (por beber) {FriendshipLevel}");
+            friendshipLevel = Mathf.Clamp(friendshipLevel + amount / 100, 0.18f, limit);
+            Debug.Log($"Nuevo valor de amistad (por beber) {friendshipLevel}");
             UI_TavernView.SetFriendshipLevelST(this);
         }
 
         //Constructor
         public Pirate(string name, int Karma)
         {
-            CharacterName = name;
+            characterName = name;
             reputation = Karma;
             SetRandomAttributes();
             SetFriendshipLevel();
@@ -671,11 +711,11 @@ namespace GameMechanics.Data
             _pirateList.Add(this);
         }
         //Constructor
-        public Pirate ()
+        public Pirate()
         {
             var n = (ushort)Random.Range(0, 6);
             //todo: en caso de mods, hay que cambiar esto (por ahora se tomará Gran Bretaña como ptarget principal)
-            ushort country = n > 3 ? (ushort) 4 : n; //todo: en mods esto podrá variar
+            ushort country = n > 3 ? (ushort)4 : n; //todo: en mods esto podrá variar
             SetNameByGeneration(country, true);
             SetRandomAttributes();
             SetFriendshipLevel();
@@ -698,13 +738,13 @@ namespace GameMechanics.Data
                 switch (attributes[i].attribute)
                 {
                     case AttributeType.Desconfiado:
-                        FriendshipLevel = 0.18f;
+                        friendshipLevel = 0.18f;
                         break;
                     case AttributeType.Caballeroso:
-                        FriendshipLevel = 0.25f;
+                        friendshipLevel = 0.25f;
                         break;
-                    default: 
-                        FriendshipLevel = 0.2f;
+                    default:
+                        friendshipLevel = 0.2f;
                         break;
                 }
             }
@@ -722,7 +762,7 @@ namespace GameMechanics.Data
         //Constructor
         public Criminal(string name)
         {
-            CharacterName = name;
+            characterName = name;
         }
         //Constructor
         //public Criminal(EntityType_KINGDOM country)
@@ -871,11 +911,11 @@ namespace GameMechanics.Data
         //Colecciona trofeos: Sin efecto
         ColeccionaTrofeos
     }
-#endregion
+    #endregion
     /// <summary>
     /// ¿Dónde se encuentra el personaje?
     /// </summary>
-    public enum CharacterLocation { atPort, atTavern}
+    public enum CharacterLocation { atPort, atTavern }
 
     /// <summary>
     /// Los personajes-evento actúan como trigger de misión. No se puede tener nivel de amistad ya que desaparecerán
@@ -901,13 +941,13 @@ namespace GameMechanics.Data
         public override string GetRoleName() { return "Capitán Retirado"; }
         public RetiredCaptain(string name)
         {
-            CharacterName = name;
+            characterName = name;
         }
         //public RetiredCaptain(EntityType_KINGDOM country)
         public RetiredCaptain(ushort country)
         {
             SetNameByGeneration(country);
-            CharacterName += CharacterName.Split(' ')[0] + " El Viejo";
+            characterName += characterName.Split(' ')[0] + " El Viejo";
         }
     }
 }
