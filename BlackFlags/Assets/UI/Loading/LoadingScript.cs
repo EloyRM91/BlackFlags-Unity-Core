@@ -130,7 +130,7 @@ namespace GameSettings.Loading
                 Transform[] containers;
                 if (PersistentGameSettings.currentMod != null)
                 {
-                    containers = SerializationUtils.LoadCitiesDataJson("worldData_Campaign_1720");
+                    containers = SerializationUtils.LoadCitiesDataJson("worldData_Campaign_Mod");
                 }
                 else
                 {

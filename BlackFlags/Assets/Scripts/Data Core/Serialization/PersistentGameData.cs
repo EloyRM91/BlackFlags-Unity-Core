@@ -1454,7 +1454,10 @@ namespace GameMechanics.save
                 }
                 else if (ch is Pirate)
                 {
-                    //todo: crear pirata
+                    //todo: guardar datos de pirata, creando un "pirata serializable"
+                    //convoy pirata:
+                    // Transform convoy = ??;
+
                 }
             }
         }
@@ -1998,6 +2001,7 @@ namespace GameMechanics.save
         public SerializableSmuggler(Smuggler character)
         {
             characterName = character.GetCharacterName();
+            hasMetPlayer = character.hasMetPlayer;
 
             var inventory = character.SmugglerInventory;
             smugglerInventory = new SerializableInventoryStacking[inventory.Count];
@@ -2013,6 +2017,39 @@ namespace GameMechanics.save
         public Smuggler Deserialize()
         {
             return new Smuggler(this);
+        }
+    }
+
+    [Serializable]
+    public class SerializablePirate : SerializableCharacter
+    {
+        public string shipName;
+        public int reputation;
+        public bool seenByPlayer;
+        public ushort[] attributesIndices, characterAspectSeeds;
+
+        public SerializablePirate(Pirate character)
+        {
+            characterName = character.GetCharacterName();
+            hasMetPlayer = character.hasMetPlayer;
+            seenByPlayer = character.seenByPlayer;
+            reputation = character.reputation;
+
+            //Atributos de personaje:
+            {
+                CharacterAttribute[] attributes = character.attributes;
+                attributesIndices = new ushort[attributes.Length];
+                for (int i = 0; i < attributes.Length; i++)
+                {
+                    attributesIndices[i] = (ushort)attributes[i].attribute;
+                }
+            }
+
+            //Aspecto físico del personaje:
+            {
+                int[] characterSeeds = character.GetSeed();
+                characterAspectSeeds = new ushort[characterSeeds.Length];
+            }
         }
     }
 

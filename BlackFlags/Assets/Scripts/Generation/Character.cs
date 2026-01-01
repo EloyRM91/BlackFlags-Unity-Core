@@ -540,7 +540,7 @@ namespace GameMechanics.Data
         private static List<Pirate> _pirateList = new List<Pirate>();
         public int reputation;
         public CharacterAttribute[] attributes = new CharacterAttribute[2];
-        public bool seenByPlayer, knownByPlayer;
+        public bool seenByPlayer;
 
         //Seed Generation (Pirate aspect)
         private int[] characterSeed = new int[10];

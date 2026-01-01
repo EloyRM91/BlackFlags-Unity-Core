@@ -1,9 +1,13 @@
 //Core
-using UnityEngine; using System.Collections;
+using UnityEngine;
+using System.Collections;
 //Lists
-using System.Collections.Generic; using System.Linq;
+using System.Collections.Generic;
+using System.Linq;
 //Mechanics
-using GameMechanics.WorldCities; using GameMechanics.Ships; using GameMechanics.Data;
+using GameMechanics.WorldCities;
+using GameMechanics.Ships;
+using GameMechanics.Data;
 
 
 namespace GameMechanics.AI
@@ -20,7 +24,7 @@ namespace GameMechanics.AI
         protected abstract void SetStateAs_OnCruisse();
         public abstract string GetAIRol();
         public abstract string GetGentilism(Kingdom kingdom);
-        protected virtual void SetStateAs_AtPort() 
+        protected virtual void SetStateAs_AtPort()
         {
             collider.enabled = false;
             transform.GetChild(0).gameObject.SetActive(false);
@@ -73,14 +77,14 @@ namespace GameMechanics.AI
         }
         public override void ArriveToDestination()
         {
-            //¿He recibido la información?
-            if(convoyRoute == null)
+            //Â¿He recibido la informaciÃ³n?
+            if (convoyRoute == null)
             {
                 StartCoroutine("DestinationSync");
                 return;
             }
 
-            //¿Qué hago si llego a destino?
+            //Â¿QuÃ© hago si llego a destino?
             var iT = GetComponent<IsTarget>();
             if (iT != null)
                 iT.Safe();
@@ -105,7 +109,7 @@ namespace GameMechanics.AI
         #region IA STATES
         protected override void SetStateAs_OnCruisse()
         {
-            if (toOcean) 
+            if (toOcean)
             {
                 _thisConvoy.currentPort = null;
                 _thisConvoy.SetIADestination(OceanicRoute.GetOceanicRouteOut(transform.position));
@@ -171,10 +175,10 @@ namespace GameMechanics.AI
         }
         public override void ArriveToDestination()
         {
-            //¿Qué hago si llego a destino?
+            //Â¿QuÃ© hago si llego a destino?
             SetStateAs_AtPort();
             var iT = GetComponent<IsTarget>();
-            if(iT != null)
+            if (iT != null)
                 iT.Safe();
         }
 
@@ -183,7 +187,7 @@ namespace GameMechanics.AI
         protected override void SetStateAs_OnCruisse()
         {
             Kingdom kingdom = transform.parent.parent.GetComponent<Kingdom>();
-            //En el futuro, los mercantes tendrán que poder entrar en puertos con los que se tenga un acuerdo comercial
+            //En el futuro, los mercantes tendrÃ¡n que poder entrar en puertos con los que se tenga un acuerdo comercial
             _thisConvoy.currentPort = _thisConvoy.currentPort.NewDestinationFromThisPort(kingdom);
             _thisConvoy.SetIADestination(GetDestiation(_thisConvoy.currentPort));
             _thisConvoy.convoyCurrentState = ConvoyState.Sailing;
@@ -213,7 +217,7 @@ namespace GameMechanics.AI
         }
         IEnumerator SetStateAs_AtPortSync()
         {
-            while(_thisConvoy.currentPort == null)
+            while (_thisConvoy.currentPort == null)
             {
                 yield return null;
             }
@@ -232,7 +236,7 @@ namespace GameMechanics.AI
         }
         public override void ArriveToDestination()
         {
-            //¿Qué hago si llego a destino?
+            //Â¿QuÃ© hago si llego a destino?
             var iT = GetComponent<IsTarget>();
             if (iT != null)
                 iT.Safe();
@@ -242,7 +246,7 @@ namespace GameMechanics.AI
         //-------------------- AI CHASE
         public void ChaseTarget(Convoy target)
         {
-            //¿Cómo establezco el destino?
+            //Â¿CÃ³mo establezco el destino?
         }
 
         //-------------------- AI STATES
@@ -278,7 +282,7 @@ namespace GameMechanics.AI
 
         IEnumerator OnEnableSync()
         {
-            while(!_thisConvoy.HasSprite())
+            while (!_thisConvoy.HasSprite())
             {
                 yield return null;
             }
@@ -288,7 +292,6 @@ namespace GameMechanics.AI
         {
             SetStateAs_AtPort();
         }
-        //public void CreatePirateCharacter(EntityType_KINGDOM k)
         public void CreatePirateCharacter(ushort k)
         {
             //pirateCharacter = new Pirate(Random.Range(16, 90), k); //Karma aleatorio?
@@ -302,7 +305,7 @@ namespace GameMechanics.AI
         }
         public override void ArriveToDestination()
         {
-            //¿Qué hago si llego a destino?
+            //Â¿QuÃ© hago si llego a destino?
             SetStateAs_AtPort();
             var iT = GetComponent<IsTarget>();
             if (iT != null)
@@ -310,11 +313,11 @@ namespace GameMechanics.AI
         }
         public void ChaseTarget(Convoy target)
         {
-            //¿Cómo establezco el destino?
+            //Â¿CÃ³mo establezco el destino?
         }
 
         //-------------------- AI STATES
-#region IA STATES
+        #region IA STATES
         protected override void SetStateAs_OnCruisse()
         {
             var currentPort = _thisConvoy.currentPort;
@@ -329,7 +332,7 @@ namespace GameMechanics.AI
                 var shelter = (MB_PirateShelter)currentPort;
                 shelter.GetOut(pirateCharacter);
             }
-            //Si el jugador está en puerto el convoy no se va
+            //Si el jugador estÃ¡ en puerto el convoy no se va
             //if ()
             //{
             //    SetStateAs_AtPort();
@@ -337,7 +340,7 @@ namespace GameMechanics.AI
             currentPort = Random.Range(0, 2) == 1 ? GameManager.gm.GetCity(currentPort) : GameManager.gm.GetShelter(currentPort);
 
             //PARCHE: ESTABLECER RUTA A BELIZE DA ERRORES DE PATHFINDING AL SALIR DE LOS PUERTOS DE LAS ANTILLAS
-            if(currentPort.cityName == "Belize" && Vector3.Distance(transform.position, currentPort.transform.position) > 150) currentPort = GameManager.gm.GetShelter(currentPort);
+            if (currentPort.cityName == "Belize" && Vector3.Distance(transform.position, currentPort.transform.position) > 150) currentPort = GameManager.gm.GetShelter(currentPort);
 
             _thisConvoy.currentPort = currentPort;
             _thisConvoy.SetIADestination(GetDestiation(currentPort));
@@ -348,7 +351,7 @@ namespace GameMechanics.AI
         {
             base.SetStateAs_AtPort();
             CancelInvoke();
-            if(_thisConvoy.currentPort is MB_City)
+            if (_thisConvoy.currentPort is MB_City)
             {
                 var city = (MB_City)_thisConvoy.currentPort;
                 city.GetIn(pirateCharacter);
@@ -358,7 +361,7 @@ namespace GameMechanics.AI
                 var shelter = (MB_PirateShelter)_thisConvoy.currentPort;
                 shelter.GetIn(pirateCharacter);
             }
-            Invoke("SetStateAs_OnCruisse", 480); //pero si el jugador está en puerto vuelve a contar
+            Invoke("SetStateAs_OnCruisse", 480); //pero si el jugador estÃ¡ en puerto vuelve a contar
 
             //Add this convoy to settlement's list
             if (_thisConvoy.currentPort is MB_City)
@@ -372,7 +375,7 @@ namespace GameMechanics.AI
                 port.convoysInThisPort.Add(_thisConvoy);
             }
         }
-#endregion
+        #endregion
     }
     //-----------------------------------------------------------------------------------------------------
     public class IsTarget : MonoBehaviour

@@ -111,6 +111,7 @@ namespace GameMechanics.WorldCities
 
             //* Personajes en este enclave:
             SerializableBaseCharacter[] chs = portData.serializedCharacters;
+            if (chs == null) return;
 
             for (int i = 0; i < chs.Length; i++)
             {
