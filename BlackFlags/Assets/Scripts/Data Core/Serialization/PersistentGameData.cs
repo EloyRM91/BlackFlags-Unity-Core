@@ -2542,14 +2542,7 @@ namespace GameMechanics.save
             {
                 //extensión de partidas guardadas del mod:
                 var ext = currentMod.gameLogic.modFileExt;
-                if (ext != string.Empty)
-                {
-                    return ext;
-                }
-                else
-                {
-                    return ".mod";
-                }
+                return ext != string.Empty ? ext : ".mod";
             }
             else
             {

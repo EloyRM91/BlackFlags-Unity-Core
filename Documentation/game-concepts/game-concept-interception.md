@@ -1,3 +1,6 @@
+**Versión del juego en la última actualización del documento: v.031**
+**Última revisión del documento: v.0386**
+
 # Intercepción de barcos
 
 La **intercepción** o cálculo de **trayectoria de intercepción** es una mecánica de movimiento introducida desde la alpha v0.0 que permite calcular el rumbo de persecución para alcanzar y atacar un objetivo. El jugador debe de entrar en trayectoria de interceptación si quiere atacar otro navío o convoy, haciendo click derecho sobre el objetivo. Asimismo, el jugador puede ser perseguido o atacado (en cuyo caso, el jugador será el objetivo de la intercepción).

@@ -111,7 +111,6 @@ namespace GameSettings.Loading
 
                 if (savedGameData != null)
                 {
-                    //todo: hacer cosas con los datos obtenidos
                     PersistentGameData.getDataFromSavedFile(savedGameData);
                 }
                 else
@@ -128,14 +127,11 @@ namespace GameSettings.Loading
 
                 //cargar los datos de campaña por defecto
                 Transform[] containers;
-                if (PersistentGameSettings.currentMod != null)
-                {
-                    containers = SerializationUtils.LoadCitiesDataJson("worldData_Campaign_Mod");
-                }
-                else
-                {
-                    containers = SerializationUtils.LoadCitiesDataBin("worldData_Campaign_1720");
-                }
+                string fileName = PersistentGameSettings.currentMod != null
+                ? "worldData_Campaign_Mod"
+                : "worldData_Campaign_1720";
+
+                containers = SerializationUtils.LoadCitiesDataJson(fileName);
 
                 GameObject persistentContainer = new GameObject();
                 persistentContainer.name = "DELIVERY";
