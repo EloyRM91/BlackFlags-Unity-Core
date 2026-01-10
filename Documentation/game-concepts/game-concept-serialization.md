@@ -226,8 +226,8 @@ Como se ha descrito anteriormente, al cargar una partida se están soltando o "e
 
 Un ejemplo de objeto Delivery es la clase **CitiesDataDelivery**.
 Ver más en:
-> [Delivery.cs](https://github.com/EloyRM91/BlackFlags-Unity-Core/blob/DEV/SERIALIZACI%C3%93N/20241022/BlackFlags/Assets/Scripts/Data%20Core/Serialization/Delivery.cs)
-> [CitiesDataDelivery.cs] (https://github.com/EloyRM91/BlackFlags-Unity-Core/blob/DEV/SERIALIZACI%C3%93N/20241022/BlackFlags/Assets/Scripts/Data%20Core/Serialization/CitiesDataDelivery.cs)
+[Delivery.cs](https://github.com/EloyRM91/BlackFlags-Unity-Core/blob/DEV/SERIALIZACI%C3%93N/20241022/BlackFlags/Assets/Scripts/Data%20Core/Serialization/Delivery.cs)
+[CitiesDataDelivery.cs] (https://github.com/EloyRM91/BlackFlags-Unity-Core/blob/DEV/SERIALIZACI%C3%93N/20241022/BlackFlags/Assets/Scripts/Data%20Core/Serialization/CitiesDataDelivery.cs)
 
 Al hacer esto, se vuelcan a escena objetos sensibles a cambios, a existir o no en el juego, y en definitiva, objetos y datos que definen el último estado de la partida antes de guardar. Estos objetos son los refugios, ciudades, etcétera.
 
