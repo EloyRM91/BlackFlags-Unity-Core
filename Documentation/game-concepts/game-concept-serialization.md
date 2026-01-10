@@ -222,11 +222,16 @@ En otras palabras: si en el futuro se pueden arrasar villas, fundar nuevos refug
 
 ### Mapas de Campaña
 
-Como se ha descrito anteriormente, al cargar una partida se están soltando o "entregando" objetos persistentes generados durante la ejecución de la escena de carga asíncrona. Los objetos se instancia, se hacen persistentes entre escena, gestionados por un objeto de una clase "delivery" que tiene un "paquete" de datos que entregar, y que una vez ha entregado los objetos, se destruye.
+Como se ha descrito anteriormente, al cargar una partida se están soltando o "entregando" objetos persistentes generados durante la ejecución de la escena de carga asíncrona. Los objetos se instancian, se hacen persistentes entre escenas (de este modo conservamos el objeto creado en la escena de carga cuando estemos en la escena del juego), y son gestionados por un objeto de una clase "delivery" que tiene un "paquete" de datos que entregar. Una vez se han entregado los objetos, el objeto delivery se destruye.
+
+Un ejemplo de objeto Delivery es la clase **CitiesDataDelivery**.
+Ver más en:
+> [Delivery.cs](https://github.com/EloyRM91/BlackFlags-Unity-Core/blob/DEV/SERIALIZACI%C3%93N/20241022/BlackFlags/Assets/Scripts/Data%20Core/Serialization/Delivery.cs)
+> [CitiesDataDelivery.cs] (https://github.com/EloyRM91/BlackFlags-Unity-Core/blob/DEV/SERIALIZACI%C3%93N/20241022/BlackFlags/Assets/Scripts/Data%20Core/Serialization/CitiesDataDelivery.cs)
 
 Al hacer esto, se vuelcan a escena objetos sensibles a cambios, a existir o no en el juego, y en definitiva, objetos y datos que definen el último estado de la partida antes de guardar. Estos objetos son los refugios, ciudades, etcétera.
 
-Otros objetos se instancia en escena y son parte fija de la escena, ya que son inertes a la carga de partida. Tales elementos son los poolings de objetos, elemento de interfaz, etcétera.
+Otros objetos se instancian en escena y son parte fija de la escena, ya que son inertes a la carga de partida. Tales elementos son los poolings de objetos, elemento de interfaz, etcétera.
 
 En realidad, la carga de objetos la estamos haciendo siempre, ya que la escena del juego ya no contiene ciudades, reinos ni refugios desde la incorporación del sistema de serialización y modding. Entonces, al crear una partida nueva, también debemos de "cargar" una partida. Esta partida tiene los datos iniciales del juego por defecto.
 

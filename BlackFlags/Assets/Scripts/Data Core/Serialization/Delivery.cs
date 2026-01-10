@@ -24,5 +24,4 @@ public abstract class Delivery<T> : MonoBehaviour
         return shipmentData;
     }
     public void Kill() { Destroy(gameObject); } //Destruye el objeto
-
 }
