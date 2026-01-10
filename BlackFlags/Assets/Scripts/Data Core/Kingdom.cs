@@ -205,6 +205,10 @@ namespace GameMechanics.Data
             GENTILISM_MALEPLU = kingdomData.gentilism_MALEPLU;
             GENTILISM_FEMSIN = kingdomData.gentilism_FEMSIN;
             GENTILISM_FEMPLU = kingdomData.gentilism_FEMPLU;
+
+            //Convoyes de este reino:
+            SerializableConvoy[] merchants = kingdomData.countryMerchants;
+            Debug.LogError(merchants.Length);
         }
 
         public void SetFromSerializedData(SerializableKingdom kingdomData, Settlement[] belongings)

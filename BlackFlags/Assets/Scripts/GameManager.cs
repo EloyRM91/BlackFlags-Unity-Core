@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     public static GameManager gm;
 
     //Static Data
-    [SerializeField] private Kingdom[] Kingdoms;
+    [SerializeField] private Kingdom[] kingdoms;
     [SerializeField] private CurrentsMapData currentsMapData; //Mapa de corrientes, que se obtiene en la escena de carga.
 
     public CurrentsMapData CurrentsMapData
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
 
     //Routes
     //[SerializeField] private List<Transform> SpawnOceanPoints;
-    [SerializeField] private List<KeyPoint> PirateShelters;
+    [SerializeField] private List<KeyPoint> pirateShelters;
 
     //Generation
     [SerializeField] private Transform _pooling_Pirate;
@@ -94,11 +94,19 @@ public class GameManager : MonoBehaviour
         }
 
         Transform deliveredKingdoms = elements[0];
-        Kingdoms = new Kingdom[deliveredKingdoms.childCount];
+        kingdoms = new Kingdom[deliveredKingdoms.childCount];
 
         for (int i = 0; i < deliveredKingdoms.childCount; i++)
         {
-            Kingdoms[i] = deliveredKingdoms.GetChild(i).GetComponent<Kingdom>();
+            kingdoms[i] = deliveredKingdoms.GetChild(i).GetComponent<Kingdom>();
+        }
+
+        Transform deliveredShelters = elements[1].GetChild(2); //!esto está muy hardcodeado :(
+        pirateShelters = new List<KeyPoint>();
+        for (int i = 0; i < deliveredShelters.childCount; i++)
+        {
+            var sh = deliveredShelters.GetChild(i).GetComponent<KeyPoint>();
+            pirateShelters.Add(sh);
         }
 
         //----------------------------------------------------
@@ -130,12 +138,13 @@ public class GameManager : MonoBehaviour
     }
     private void CreateArmada_PIRATE()
     {
-        foreach (KeyPoint shelter in PirateShelters)
+        foreach (KeyPoint shelter in pirateShelters)
         {
             for (int i = 0; i < pirateActivity; i++)
             {
                 //New pirate convoy
                 GameObject newCPirate = GetPirateShip();
+                Debug.Log(shelter == null);
                 newCPirate.transform.position = shelter.transform.GetChild(0).position;
                 var data = newCPirate.GetComponent<ConvoyNPC>();
                 data.currentPort = shelter;
@@ -149,7 +158,7 @@ public class GameManager : MonoBehaviour
                 AI_Pirate.CreatePirateCharacter(pirateOrigin);
 
                 var pirate = newCPirate.GetComponent<AI_Pirate>().pirateCharacter;
-                var ship = Kingdoms[(byte)pirateOrigin].shipsGenerator.GenerateShipData(ShipType_ROLE.Pirate, pirateOrigin);
+                var ship = kingdoms[(byte)pirateOrigin].shipsGenerator.GenerateShipData(ShipType_ROLE.Pirate, pirateOrigin);
 
                 ship.name_Ship = WorldGenerator.GiveShipName(pirateOrigin, ShipType_ROLE.Pirate, GenerationMode.Random);
                 ship.name_Captain = pirate.characterName;
@@ -195,23 +204,23 @@ public class GameManager : MonoBehaviour
         //! desde la v0.033 ya no se utilizan tags. En lugar de eso, vamos a usar
         //! un identificador (los mods podrán incluir otros reinos que no sean los establecidos)
 
-        for (int i = 0; i < Kingdoms.Length; i++)
+        for (int i = 0; i < kingdoms.Length; i++)
         {
-            if (Kingdoms[i].tagKey == id)
-                return Kingdoms[i];
+            if (kingdoms[i].tagKey == id)
+                return kingdoms[i];
         }
 
         return null;
     }
     public KeyPoint GetShelter(KeyPoint currentShelter)
     {
-        var ports = new List<KeyPoint>(PirateShelters);
+        var ports = new List<KeyPoint>(pirateShelters);
         ports.Remove(currentShelter);
         return ports[Random.Range(0, ports.Count)];
     }
     public KeyPoint GetCity(KeyPoint currentCity)
     {
-        var list = new List<KeyPoint>(Kingdoms[Random.Range(0, 5)].GetPortsList().Where(p => p is MB_City).ToList());
+        var list = new List<KeyPoint>(kingdoms[Random.Range(0, 5)].GetPortsList().Where(p => p is MB_City).ToList());
         list.Remove(currentCity);
         if (list.Count == 0) return GetCity(currentCity);
         return list[Random.Range(0, list.Count)];
