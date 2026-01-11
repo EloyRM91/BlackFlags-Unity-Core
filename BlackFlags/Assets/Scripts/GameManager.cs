@@ -144,7 +144,6 @@ public class GameManager : MonoBehaviour
             {
                 //New pirate convoy
                 GameObject newCPirate = GetPirateShip();
-                Debug.Log(shelter == null);
                 newCPirate.transform.position = shelter.transform.GetChild(0).position;
                 var data = newCPirate.GetComponent<ConvoyNPC>();
                 data.currentPort = shelter;
@@ -364,12 +363,12 @@ public class GameManager : MonoBehaviour
             //     }
             // }
 
-            var shelters = savedGameData.shelters;
-            print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-            for (int i = 0; i < shelters.Length; i++)
-            {
-                print(shelters[i].cityName);
-            }
+            // var shelters = savedGameData.shelters;
+            // print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+            // for (int i = 0; i < shelters.Length; i++)
+            // {
+            //     print(shelters[i].cityName);
+            // }
         }
         else
         {

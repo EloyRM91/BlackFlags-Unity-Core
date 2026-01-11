@@ -2252,7 +2252,7 @@ namespace GameMechanics.save
         public StartGameData()
         {
             //!el constructor nunca debería de llamarse si no estamos en la escena del juego
-            //!Sin embargo, el deserializar json llama al constructor si cargamos un mod
+            //!Sin embargo, al deserializar json llama al constructor si cargamos un mod
             if (GameObject.FindWithTag("Kingdoms") == null)
                 return;
 
@@ -2623,7 +2623,7 @@ namespace GameMechanics.save
             var stream = new FileStream(path, FileMode.Create);
 
             //Serialización:
-            binaryFormatter.Serialize(stream, this.savedFile);
+            binaryFormatter.Serialize(stream, savedFile);
             stream.Close();
         }
     }
@@ -3130,7 +3130,6 @@ namespace Serialization
                     SerializableCity city = cities[j];
                     var citiesContainer = newKingdom.transform.GetChild(0);
                     MB_City cityComponent = city.Deserialize(citiesContainer);
-                    // belongings.Add(cityComponent);
 
                     //Asigna un banner:
                     Transform bannerTransform = cityComponent.GetKeyPointBanner(citiesBanners.transform).transform;
@@ -3159,6 +3158,14 @@ namespace Serialization
 
                 //Actualia las posesiones del reino:
                 newKingdom.OnCountryTerritoryChanges();
+
+                if (PersistentGameSettings.loadingFile)
+                {
+                    //Una vez creadas las ciudades, creamos los convoyes
+                    SerializableConvoy[] merchants = k.countryMerchants;
+                    Debug.Log(merchants.Length);
+                    //todo: instanciar convoyes
+                }
             }
 
             //Keypoints:

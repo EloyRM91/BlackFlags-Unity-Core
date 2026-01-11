@@ -101,6 +101,7 @@ namespace GameSettings.Loading
 
         void Awake()
         {
+            if (SceneManager.sceneAfterAsynLoad == 2) return;
             if (PersistentGameSettings.loadingFile)
             {
                 //Load saved file data
