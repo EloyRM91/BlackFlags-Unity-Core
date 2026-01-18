@@ -206,13 +206,36 @@ namespace GameMechanics.Data
             GENTILISM_FEMSIN = kingdomData.gentilism_FEMSIN;
             GENTILISM_FEMPLU = kingdomData.gentilism_FEMPLU;
 
-            if (PersistentGameSettings.loadingFile)
+            // if (PersistentGameSettings.loadingFile)
+            // {
+            //     //Convoyes de este reino:
+            //     SerializableConvoy[] merchants = kingdomData.countryMerchants;
+            //     Debug.Log(transform.name);
+            //     Debug.LogError(merchants.Length);
+            // }
+        }
+
+        public void GetArmadaFromSerializedData(SerializableKingdom kingdomData)
+        {
+            //Mercantes 
             {
-                //Convoyes de este reino:
                 SerializableConvoy[] merchants = kingdomData.countryMerchants;
-                Debug.Log(transform.name);
-                Debug.LogError(merchants.Length);
+                Debug.Log(merchants.Length);
+
+                foreach (SerializableConvoy merchant in merchants)
+                {
+                    //¿Cómo instancio los barcos is aún no tengo el pooling de objetos?
+                    //De hecho... ¿Cuando tengo el pooling de objetos?
+
+                    SerializableShip[] ships = merchant.convoyShips;
+
+                    foreach (SerializableShip ship in ships)
+                    {
+                        Debug.Log(ship.shipName);
+                    }
+                }
             }
+
         }
 
         public void SetFromSerializedData(SerializableKingdom kingdomData, Settlement[] belongings)

@@ -32,11 +32,11 @@ namespace GameMechanics.WorldCities
                 //----
                 // CHARACTERS
                 //----
-                CreateSmugglers(Random.Range(2, 4));
+                CreateNewSmugglers(Random.Range(2, 4));
             }
 
         }
-        private void CreateSmugglers(int n)
+        private void CreateNewSmugglers(int n)
         {
             for (int i = 0; i < n; i++)
             {
@@ -120,6 +120,7 @@ namespace GameMechanics.WorldCities
                 if (schar is SerializableSmuggler)
                 {
                     var newSmuggler = (schar as SerializableSmuggler).Deserialize();
+                    charactersInShelter.Add(newSmuggler);
                 }
             }
 

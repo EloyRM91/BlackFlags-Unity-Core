@@ -4,7 +4,7 @@ using GameSettings.Core;
 
 /// <summary>
 /// Clase que contiene temporalmente los datos de la partida cargada,
-/// y que luego se destruye una vez se han iniicalizado todos los compoenntes de escena
+/// y que luego se destruye una vez se han inicializado todos los componentes de escena
 /// </summary>
 public class PersistentSavedFileContainer : Persistent
 {

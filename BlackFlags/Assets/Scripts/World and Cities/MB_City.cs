@@ -9,6 +9,7 @@ using System.Linq;
 
 //Deserialización
 using GameMechanics.save;
+using GameSettings.Core;
 
 namespace GameMechanics.WorldCities
 {
@@ -55,17 +56,22 @@ namespace GameMechanics.WorldCities
             // CHARACTERS
             //----
 
-            //Número de contrabandistas en la ciudad
-            var Smugglers = population > 6000 ? 2 : 1;
-            //Número de armadores en la ciudad
-            var SmugglingRatio = population > 6000 ? (population > 20000 ? 3 : 2) : 1;
+            if (!PersistentGameSettings.loadingFile)
+            {
+                //Número de contrabandistas en la ciudad
+                var Smugglers = population > 6000 ? 2 : 1;
+                //Número de armadores en la ciudad
+                var SmugglingRatio = population > 6000 ? (population > 20000 ? 3 : 2) : 1;
 
-            //Ratio de inventario de contrabandistas
-            var ShipyardMen = population > 2500 ? (population > 20000 ? 2 : 1) : 0; // Número de armadores en la ciudad
+                //Ratio de inventario de contrabandistas
+                var ShipyardMen = population > 2500 ? (population > 20000 ? 2 : 1) : 0; // Número de armadores en la ciudad
 
-            CreateCharacters(Smugglers, ShipyardMen, SmugglingRatio);
+                CreateNewCharacters(Smugglers, ShipyardMen, SmugglingRatio);
+            }
+
+
         }
-        private void CreateCharacters(int nSmug, int nSMen, int ratio)
+        private void CreateNewCharacters(int nSmug, int nSMen, int ratio)
         {
             //! desde la v0.033 ya no se utilizan tags. En lugar de eso, vamos a usar
             //! un identificador (los mods podrían incluir otros reinos que no sean los establecidos)
@@ -102,6 +108,8 @@ namespace GameMechanics.WorldCities
                 newSmuggler.ratio = ratio;
                 newSmuggler.SetInventory(true);
                 charactersInShelter.Add(newSmuggler);
+
+                //todo: crear armadores
             }
             //Create shipyardmen
             for (int i = 0; i < nSMen; i++)
@@ -182,6 +190,21 @@ namespace GameMechanics.WorldCities
             var index = cityData.spriteIndex;
 
             this.exportsIndex = cityData.exports;
+
+            //* Personajes en este enclave:
+            SerializableBaseCharacter[] chs = cityData.serializedCharacters;
+            if (chs == null) return;
+
+            for (int i = 0; i < chs.Length; i++)
+            {
+                SerializableBaseCharacter schar = chs[i];
+
+                if (schar is SerializableSmuggler)
+                {
+                    var newSmuggler = (schar as SerializableSmuggler).Deserialize();
+                    charactersInShelter.Add(newSmuggler);
+                }
+            }
         }
 
         public GameObject GetKeyPointBanner(Transform container)

@@ -322,6 +322,8 @@ public class GameManager : MonoBehaviour
         var loaderBinaryFormat = new GameLoaderBinaryFormat();
         SavedFile savedGameData = loaderBinaryFormat.LoadGame(fileName);
 
+        Debug.LogError("Holi");
+
         if (savedGameData != null)
         {
             //print(savedGameData.onLoadGuns[0] + " " + savedGameData.onLoadGuns[1] + " " + savedGameData.onLoadGuns[2] + " " + savedGameData.onLoadGuns[3]);

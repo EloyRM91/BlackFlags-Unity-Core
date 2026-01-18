@@ -1,7 +1,10 @@
 //Unity
-using System.Collections; using System.Collections.Generic; using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 //Pathfinding
-using UnityEngine.AI; using GameMechanics.AI;
+using UnityEngine.AI;
+using GameMechanics.AI;
 //Cities
 using GameMechanics.WorldCities;
 //Mechanics
@@ -85,9 +88,6 @@ public class PlayerMovement : Convoy
                     playerShipName = PersistentGameData._GData_ShipName;
                     playerName = PersistentGameData._GData_PlayerName;
 
-                    print(playership.GetSubClassName());
-                    print(canMove);
-
                     //Restore player's position
                     var pos = currentLoadedData.playerPosition;
                     transform.position = new Vector3(pos[0], pos[1], pos[2]);
@@ -97,7 +97,8 @@ public class PlayerMovement : Convoy
                 }
             }
 
-        } else
+        }
+        else
         {
             canMove = true;
             //base.Start();
@@ -232,7 +233,7 @@ public class PlayerMovement : Convoy
         {
             if (_clickHit.collider.CompareTag("KeyPoint")) //Hit on Keypoint?
             {
-                if(_clickHit.transform.GetComponent<KeyPoint>() != currentPort)
+                if (_clickHit.transform.GetComponent<KeyPoint>() != currentPort)
                 {
                     if (inPort) ExitCity();
                     currentPort = _clickHit.transform.GetComponent<KeyPoint>();
@@ -246,12 +247,12 @@ public class PlayerMovement : Convoy
             }
             else if (_clickHit.collider.CompareTag("Respawn")) //Hit on Map?
             {
-                if(inPort) ExitCity();
+                if (inPort) ExitCity();
                 currentPort = null;
                 if (thisConvoyTarget != null)
                 {
                     var chas = thisConvoyTarget.GetComponent<IsTarget>();
-                    if(chas != null)
+                    if (chas != null)
                     {
                         if (chas.chasers.Count == 1)
                         {
@@ -379,8 +380,8 @@ public class PlayerMovement : Convoy
                         CreatePath(targetPos + dir * i);
                         return;
                     }
-                    i--;   
-                } 
+                    i--;
+                }
                 playerSetDestination(targetPos);
                 CreatePath(targetPos);
             }
@@ -390,7 +391,7 @@ public class PlayerMovement : Convoy
                 //Stop();
                 //currentPort = null;
             }
-        } 
+        }
     }
     protected override void Move(Vector3[] corners)
     {
@@ -417,7 +418,7 @@ public class PlayerMovement : Convoy
         playerLookRotation(transform.rotation);
 
         pathProgressIndex = 1;
-        while(pathProgressIndex < waypoints.Length)
+        while (pathProgressIndex < waypoints.Length)
         {
             _destination = waypoints[pathProgressIndex];
             transform.rotation = Quaternion.LookRotation(waypoints[pathProgressIndex] - transform.position);
@@ -433,9 +434,9 @@ public class PlayerMovement : Convoy
                         Stop();
                         //print("chased");
                     }
-                    else if(pathProgressIndex < waypoints.Length - 1 && pathProgressIndex != 1)
+                    else if (pathProgressIndex < waypoints.Length - 1 && pathProgressIndex != 1)
                     {
-                        if(Vector3.Distance(_destination, waypoints[pathProgressIndex + 1]) > 0.5f)
+                        if (Vector3.Distance(_destination, waypoints[pathProgressIndex + 1]) > 0.5f)
                         {
                             var tempDest = Intercept(thisConvoyTarget);
                             transform.rotation = Quaternion.LookRotation(waypoints[pathProgressIndex + 1] - transform.position);
@@ -450,7 +451,7 @@ public class PlayerMovement : Convoy
                     transform.rotation = Quaternion.LookRotation(waypoints[pathProgressIndex] - transform.position);
                     _thisConvoySpriteController.SetSprite();
                     playerLookRotation(transform.rotation);
-                }   
+                }
                 else //llega a destino
                 {
                     //Borra la línea de rumbo trazado
@@ -467,7 +468,7 @@ public class PlayerMovement : Convoy
         }
         Stop();
     }
-#region PATH LINE
+    #region PATH LINE
 
     /// <summary>
     /// Set a sprites trail according to the current path
@@ -477,7 +478,7 @@ public class PlayerMovement : Convoy
     {
         ClearDrawing();
         var density = 1.2f;
-        if(positions.Length > 1)
+        if (positions.Length > 1)
         {
             for (int i = 1; i < positions.Length; i++)
             {
@@ -533,9 +534,9 @@ public class PlayerMovement : Convoy
         }
 
     }
-#endregion
+    #endregion
 
-#region ROUTE
+    #region ROUTE
     IEnumerator RefreshRouteTime()
     {
         while (true)
@@ -556,12 +557,12 @@ public class PlayerMovement : Convoy
         onROute = false;
         StopAllCoroutines();
     }
-#endregion
+    #endregion
 
-#region PORT AND CITIES
+    #region PORT AND CITIES
     public MB_City GetPort()
     {
-        if(currentPort is MB_City) return (MB_City)currentPort;
+        if (currentPort is MB_City) return (MB_City)currentPort;
         return null;
     }
 
@@ -579,7 +580,7 @@ public class PlayerMovement : Convoy
             var port = GetPort();
             port.convoysInThisPort.Add(this);
         }
-        else if(currentPort is MB_PirateShelter)
+        else if (currentPort is MB_PirateShelter)
         {
             var shelter = (MB_PirateShelter)currentPort;
             shelter.convoysInThisPort.Add(this);
@@ -606,7 +607,7 @@ public class PlayerMovement : Convoy
         transform.GetChild(0).gameObject.SetActive(true);
         _EVENT_ExitFromPort();
     }
-#endregion
+    #endregion
 }
 
-public enum TerrainType { Coast, Sea, Ocean, Reef, None}
+public enum TerrainType { Coast, Sea, Ocean, Reef, None }

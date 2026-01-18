@@ -113,6 +113,20 @@ namespace GameSettings.Loading
                 if (savedGameData != null)
                 {
                     PersistentGameData.getDataFromSavedFile(savedGameData);
+
+                    //Genera un delivery para los reinos, ciudades, pooling de objetos, etcétera
+                    Transform[] containers;
+                    containers = savedGameData.LoadCitiesData();
+
+                    GameObject persistentContainer = new GameObject();
+                    persistentContainer.name = "DELIVERY";
+                    var delivery = persistentContainer.AddComponent<CitiesDataDelivery>();
+                    delivery.shipmentData = containers;
+
+                    foreach (Transform t in containers)
+                    {
+                        t.parent = persistentContainer.transform;
+                    }
                 }
                 else
                 {

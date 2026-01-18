@@ -16,7 +16,7 @@ public class ButtonLoadLastSavedGame : ButtonIntroAction
     }
     protected override void Start()
     {
-        if(Directory.GetFiles(GetDirectory()).Length != 0)
+        if (Directory.GetFiles(GetDirectory()).Length != 0)
         {
             base.Start();
         }
@@ -32,7 +32,7 @@ public class ButtonLoadLastSavedGame : ButtonIntroAction
 
         PersistentGameSettings.loadingFile = true;
         PersistentGameSettings.selectedFileName = latestFileName;
-        SceneManager.SetAsynSceneAndLoadAsyn(3); //En el futuro, deber�a de emplearse una escena diferente (y en ella crear las ciudades y asentamientos)
+        SceneManager.SetAsynSceneAndLoadAsyn(3);
     }
 
     private string GetDirectory()

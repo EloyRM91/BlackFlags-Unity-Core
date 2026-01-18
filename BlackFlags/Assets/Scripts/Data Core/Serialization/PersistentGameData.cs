@@ -15,6 +15,7 @@ using System.Linq;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using GameMechanics.save;
+using Serialization;
 
 namespace GameMechanics.Data
 {
@@ -1300,7 +1301,7 @@ namespace GameMechanics.Data
         #endregion
 
         #region SET DATA
-        public static void getDataFromSavedFile(SavedFile savedFile)
+        public static PersistentSavedFileContainer getDataFromSavedFile(SavedFile savedFile)
         {
             _GData_PlayerName = savedFile.playerName;
             _GData_ShipName = savedFile.playerShipName;
@@ -1318,6 +1319,7 @@ namespace GameMechanics.Data
             //Creamos una instancia contenedora de los datos que no se destruya al cargar la escena y permita seguir cargando datos.
             var fileContainer = instance.gameObject.AddComponent<PersistentSavedFileContainer>();
             fileContainer.savedFile = savedFile;
+            return fileContainer;
         }
 
         private Sprite GetSpriteFromBytes(byte[] bytes, ushort witdh, ushort height)
@@ -1991,17 +1993,24 @@ namespace GameMechanics.save
         public SerializableInventoryStacking[] smugglerInventory;
         public int[] smugglerGenerationRatio;
 
-        public SerializableSmuggler(SerializableResource[] smugglerOffer, SerializableInventoryStacking[] smugglerInventory, int[] smugglerGenerationRatio)
-        {
-            this.smugglerOffer = smugglerOffer;
-            this.smugglerInventory = smugglerInventory;
-            this.smugglerGenerationRatio = smugglerGenerationRatio;
-        }
+        // public SerializableSmuggler(SerializableResource[] smugglerOffer, SerializableInventoryStacking[] smugglerInventory, int[] smugglerGenerationRatio)
+        // {
+        //     this.smugglerOffer = smugglerOffer;
+        //     this.smugglerInventory = smugglerInventory;
+        //     this.smugglerGenerationRatio = smugglerGenerationRatio;
+        // }
 
         public SerializableSmuggler(Smuggler character)
         {
             characterName = character.GetCharacterName();
             hasMetPlayer = character.hasMetPlayer;
+            var offer = character.SmugglerOffer;
+            smugglerOffer = new SerializableResource[offer.Count];
+
+            for (int i = 0; i < offer.Count; i++)
+            {
+                smugglerOffer[i] = new SerializableResource(offer[i]);
+            }
 
             var inventory = character.SmugglerInventory;
             smugglerInventory = new SerializableInventoryStacking[inventory.Count];
@@ -2387,6 +2396,148 @@ namespace GameMechanics.save
         public SerializablePirateShelter[] shelters;
         //Ships in Game
 
+        public Transform[] LoadCitiesData()
+        {
+            //Reinos
+            var kingdomsContainer = new GameObject();
+            kingdomsContainer.name = "Countries -- from saved game";
+            kingdomsContainer.tag = "Kingdoms";
+            kingdomsContainer.SetActive(false);
+
+            var banners = new GameObject().transform;
+            banners.gameObject.SetActive(false);
+
+            for (int i = 0; i < kingdoms.Length; ++i)
+            {
+                SerializableKingdom k = kingdoms[i];
+                Kingdom newKingdom = k.Deserialize(kingdomsContainer.transform);
+                // var belongings = new List<Settlement>();
+
+                //Ciudades de este reino:
+                SerializableCity[] cities = k.countryCities;
+
+                //Banners
+                var citiesBanners = new GameObject();
+                citiesBanners.name = "Cities - " + k.kingdomName;
+                citiesBanners.transform.SetParent(banners);
+
+                var path = SerializationUtils.getKingdomsSpritePath() + newKingdom.tagKey;
+                var kingdomSprite = Resources.Load<Sprite>(path) as Sprite;
+                newKingdom.spriteSimple = kingdomSprite;
+
+                var pathDetailed = SerializationUtils.getKingdomsDetSpritePath() + newKingdom.tagKey;
+                var kingdomSpriteDetailed = Resources.Load<Sprite>(path) as Sprite;
+                newKingdom.spriteSimple = kingdomSpriteDetailed;
+
+
+                for (int j = 0; j < cities.Length; j++)
+                {
+                    SerializableCity city = cities[j];
+                    var citiesContainer = newKingdom.transform.GetChild(0);
+                    MB_City cityComponent = city.Deserialize(citiesContainer);
+                    // belongings.Add(cityComponent);
+
+                    //Asigna un banner:
+                    Transform bannerTransform = cityComponent.GetKeyPointBanner(citiesBanners.transform).transform;
+                    bannerTransform.GetComponent<UI.WorldMap.BannerController>().SetImage(kingdomSprite);
+                }
+
+                //Villas de este reino:
+                SerializableTown[] villages = k.countryVillages;
+
+                //Banners
+                var townBanners = new GameObject();
+                townBanners.name = "Villages - " + k.kingdomName;
+                townBanners.transform.SetParent(banners);
+
+                for (int j = 0; j < villages.Length; j++)
+                {
+                    SerializableTown town = villages[j];
+                    var villagesContainer = newKingdom.transform.GetChild(1);
+                    MB_Town townComponent = town.Deserialize(villagesContainer);
+                    // belongings.Add(townComponent);
+
+                    //Asigna un banner:
+                    Transform bannerTransform = townComponent.GetKeyPointBanner(townBanners.transform).transform;
+                    bannerTransform.GetComponent<UI.WorldMap.BannerController>().SetImage(kingdomSprite);
+                }
+
+                //Actualia las posesiones del reino:
+                newKingdom.OnCountryTerritoryChanges();
+
+                if (PersistentGameSettings.loadingFile)
+                {
+                    //Una vez creadas las ciudades, creamos los convoyes
+                    // SerializableConvoy[] merchants = k.countryMerchants;
+                    // Debug.Log(merchants.Length);
+                    //todo: instanciar convoyes
+                    newKingdom.GetArmadaFromSerializedData(k);
+                }
+            }
+
+            //Keypoints:
+            var kpsContainer = new GameObject();
+            kpsContainer.name = "World KeyPoints -- from - saved game";
+            kpsContainer.tag = "WorldPlaces";
+            kpsContainer.SetActive(false);
+
+            //Puertos naturales
+            var naturalPortsContainer = new GameObject();
+            naturalPortsContainer.transform.parent = kpsContainer.transform;
+            naturalPortsContainer.name = "Natural Docks";
+
+            //Banners
+            var naturalPortsBanners = new GameObject();
+            naturalPortsBanners.name = "Natural piers";
+            naturalPortsBanners.transform.SetParent(banners);
+            for (int i = 0; i < naturalPorts.Length; ++i)
+            {
+                SerializableNaturalPort port = naturalPorts[i];
+                MB_NaturalPort serializedPort = port.Deserialize(naturalPortsContainer.transform);
+                //Asigna un banner
+                Transform bannerTransform = serializedPort.GetKeyPointBanner(naturalPortsBanners.transform).transform;
+            }
+
+            //Escondites de contrabando
+            var hideOutsContainer = new GameObject();
+            hideOutsContainer.transform.parent = kpsContainer.transform;
+            hideOutsContainer.name = "Smuggglers Posts";
+            hideOutsContainer.tag = "Pirate";
+
+            //Banners
+            var hideOutsBanners = new GameObject();
+            hideOutsBanners.name = "Smuggglers hideout";
+            hideOutsBanners.transform.SetParent(banners);
+            for (int i = 0; i < hideouts.Length; ++i)
+            {
+                SerializableSmugglersPost port = hideouts[i];
+                MB_SmugglersPost deserializedPort = port.Deserialize(hideOutsContainer.transform);
+
+                //Asigna un banner
+                Transform bannerTransform = deserializedPort.GetKeyPointBanner(naturalPortsBanners.transform).transform;
+            }
+
+            //Refugios de piratas
+            var sheltersContainer = new GameObject();
+            sheltersContainer.transform.parent = kpsContainer.transform;
+            sheltersContainer.name = "Pirate Shelters";
+            sheltersContainer.tag = "Pirate";
+
+            var sheltersBanners = new GameObject();
+            sheltersBanners.name = "Pirate Shelters";
+            sheltersBanners.transform.SetParent(banners);
+            for (int i = 0; i < shelters.Length; ++i)
+            {
+                SerializablePirateShelter port = shelters[i];
+                MB_PirateShelter serializedPort = port.Deserialize(sheltersContainer.transform);
+
+                //Asigna un banner
+                Transform bannerTransform = serializedPort.GetKeyPointBanner(naturalPortsBanners.transform).transform;
+            }
+
+            return new Transform[3] { kingdomsContainer.transform, kpsContainer.transform, banners };
+        }
+
 
         public SavedFile()
         {
@@ -2747,6 +2898,7 @@ namespace GameMechanics.save
                 var stream = new FileStream(path, FileMode.Open);
                 StartGameData result = binaryFormatter.Deserialize(stream) as StartGameData;
                 stream.Close();
+                Debug.LogError(result == null);
                 return result;
             }
             return null;
@@ -2947,12 +3099,15 @@ namespace Serialization
 
         public static Transform[] LoadCitiesDataBin(string fileName)
         {
+            Debug.LogError(fileName);
             var loaderBinaryFormat = new CitiesLoaderBinaryFormat();
             StartGameData CampaignCitiesData = loaderBinaryFormat.LoadWorldData(fileName);
 
+            Debug.Log(CampaignCitiesData == null);
+
             //Reinos
             var kingdomsContainer = new GameObject();
-            kingdomsContainer.name = "Countries -- holi";
+            kingdomsContainer.name = "Countries -- from new campaign";
             kingdomsContainer.tag = "Kingdoms";
             kingdomsContainer.SetActive(false);
 
@@ -3022,7 +3177,7 @@ namespace Serialization
 
             //Keypoints:
             var kpsContainer = new GameObject();
-            kpsContainer.name = "World KeyPoints -- holi :3";
+            kpsContainer.name = "World KeyPoints -- from new campaign";
             kpsContainer.tag = "WorldPlaces";
             kpsContainer.SetActive(false);
 
@@ -3064,6 +3219,7 @@ namespace Serialization
                 Transform bannerTransform = serializedPort.GetKeyPointBanner(naturalPortsBanners.transform).transform;
             }
 
+            //Refugios de piratas
             var shelters = CampaignCitiesData.shelters;
             var sheltersContainer = new GameObject();
             sheltersContainer.transform.parent = kpsContainer.transform;
