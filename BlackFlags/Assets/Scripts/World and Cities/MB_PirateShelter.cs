@@ -82,7 +82,7 @@ namespace GameMechanics.WorldCities
             this.alternativeName = portData.alternativeName;
             this.tavernName = portData.tavernName;
             this.revealed = portData.revealed;
-            this.transform.position = SerializationConverter.ToVector3(portData.position);
+            this.transform.position = portData.ToVector3(portData.position);
 
             if (portData.flippedX)
             {
@@ -92,11 +92,11 @@ namespace GameMechanics.WorldCities
 
             //Target Path:
             var entryPoint = this.transform.GetChild(0);
-            entryPoint.position = SerializationConverter.ToVector3(portData.entryPoint);
+            entryPoint.position = portData.ToVector3(portData.entryPoint);
 
             //Banner's Pivot
             var pivot = this.transform.GetChild(1);
-            pivot.position = SerializationConverter.ToVector3(portData.pivotPoint);
+            pivot.position = portData.ToVector3(portData.pivotPoint);
 
             //todo: events point
 

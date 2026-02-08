@@ -40,7 +40,7 @@ namespace GameMechanics.WorldCities
             this.alternativeName = town.alternativeName;
             this.population = town.population;
             this.revealed = town.revealed;
-            this.transform.position = SerializationConverter.ToVector3(town.position);
+            this.transform.position = town.ToVector3(town.position);
 
             if (town.flippedX)
             {
@@ -50,11 +50,11 @@ namespace GameMechanics.WorldCities
 
             //Target Path:
             var entryPoint = this.transform.GetChild(0);
-            entryPoint.position = SerializationConverter.ToVector3(town.entryPoint);
+            entryPoint.position = town.ToVector3(town.entryPoint);
 
             //Banner's Pivot
             var pivot = this.transform.GetChild(1);
-            pivot.position = SerializationConverter.ToVector3(town.pivotPoint);
+            pivot.position = town.ToVector3(town.pivotPoint);
 
             //todo: events point
 

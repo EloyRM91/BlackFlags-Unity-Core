@@ -114,18 +114,34 @@ namespace GameSettings.Loading
                 {
                     PersistentGameData.getDataFromSavedFile(savedGameData);
 
-                    //Genera un delivery para los reinos, ciudades, pooling de objetos, etcétera
                     Transform[] containers;
-                    containers = savedGameData.LoadCitiesData();
-
-                    GameObject persistentContainer = new GameObject();
-                    persistentContainer.name = "DELIVERY";
-                    var delivery = persistentContainer.AddComponent<CitiesDataDelivery>();
-                    delivery.shipmentData = containers;
-
-                    foreach (Transform t in containers)
+                    Transform kingdomsContainer;
+                    //Datos de ciudades, reinos y refugios del mundo:
                     {
-                        t.parent = persistentContainer.transform;
+                        //Genera un delivery para los reinos, ciudades, pooling de objetos, etcétera
+                        containers = savedGameData.LoadCitiesData();
+
+                        GameObject persistentContainer = new GameObject();
+                        persistentContainer.name = "DELIVERY";
+                        var delivery = persistentContainer.AddComponent<CitiesDataDelivery>();
+                        delivery.shipmentData = containers;
+
+                        foreach (Transform t in containers)
+                        {
+                            t.parent = persistentContainer.transform;
+                        }
+                    }
+
+                    //Flotas de los reinos y barcos pirata:
+                    {
+                        //Genera un delivery para crear las flotas cuando la escena esté preparada.
+                        kingdomsContainer = containers[0];
+                        SerializedGameFleetData gameFleetData = savedGameData.LoadFleetsData(kingdomsContainer);
+
+                        GameObject persistentContainer = new GameObject();
+                        persistentContainer.name = "DELIVERY";
+                        var delivery = persistentContainer.AddComponent<FleetsDataDelivery>();
+                        delivery.shipmentData = gameFleetData;
                     }
                 }
                 else

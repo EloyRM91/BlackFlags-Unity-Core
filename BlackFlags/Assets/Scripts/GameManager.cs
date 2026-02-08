@@ -80,33 +80,50 @@ public class GameManager : MonoBehaviour
             return obj.GetComponent<CitiesDataDelivery>() != null;
         }
 
-        var obj = System.Array.Find(GameObject.FindGameObjectsWithTag("Delivery"), IsCitiesDataDelivery);
-        var delivery = obj.GetComponent<CitiesDataDelivery>();
-
-        var elements = delivery.Deliver();
-        var banners = elements[2];
-        Transform ui = UIMap.ui.transform;
-        banners.SetParent(ui.parent.GetChild(1));
-
-        foreach (Transform e in elements)
+        bool IsFleetsDataDelivery(GameObject obj)
         {
-            e.gameObject.SetActive(true);
+            return obj.GetComponent<FleetsDataDelivery>() != null;
         }
 
-        Transform deliveredKingdoms = elements[0];
-        kingdoms = new Kingdom[deliveredKingdoms.childCount];
-
-        for (int i = 0; i < deliveredKingdoms.childCount; i++)
+        //Deliver de ciudades y refugios del mundo
         {
-            kingdoms[i] = deliveredKingdoms.GetChild(i).GetComponent<Kingdom>();
+            var obj = System.Array.Find(GameObject.FindGameObjectsWithTag("Delivery"), IsCitiesDataDelivery);
+            var delivery = obj.GetComponent<CitiesDataDelivery>();
+
+            var elements = delivery.Deliver();
+            var banners = elements[2];
+            Transform ui = UIMap.ui.transform;
+            banners.SetParent(ui.parent.GetChild(1));
+
+            foreach (Transform e in elements)
+            {
+                e.gameObject.SetActive(true);
+            }
+
+            Transform deliveredKingdoms = elements[0];
+            kingdoms = new Kingdom[deliveredKingdoms.childCount];
+
+            for (int i = 0; i < deliveredKingdoms.childCount; i++)
+            {
+                kingdoms[i] = deliveredKingdoms.GetChild(i).GetComponent<Kingdom>();
+            }
+
+            Transform deliveredShelters = elements[1].GetChild(2); //!esto está muy hardcodeado :(
+            pirateShelters = new List<KeyPoint>();
+            for (int i = 0; i < deliveredShelters.childCount; i++)
+            {
+                var sh = deliveredShelters.GetChild(i).GetComponent<KeyPoint>();
+                pirateShelters.Add(sh);
+            }
         }
 
-        Transform deliveredShelters = elements[1].GetChild(2); //!esto está muy hardcodeado :(
-        pirateShelters = new List<KeyPoint>();
-        for (int i = 0; i < deliveredShelters.childCount; i++)
+        //Deliver de barcos
         {
-            var sh = deliveredShelters.GetChild(i).GetComponent<KeyPoint>();
-            pirateShelters.Add(sh);
+            var obj = System.Array.Find(GameObject.FindGameObjectsWithTag("Delivery"), IsFleetsDataDelivery);
+            var delivery = obj.GetComponent<FleetsDataDelivery>();
+            SerializedGameFleetData info = delivery.Deliver();
+
+            //todo: usamos la información del deliver para gestionar los poolings y definir los datos de los barcos
         }
 
         //----------------------------------------------------
@@ -335,35 +352,36 @@ public class GameManager : MonoBehaviour
 
             var kingdoms = savedGameData.kingdoms;
 
-            // for (int i = 0; i < kingdoms.Length; i++)
-            // {
-            //     print("-------------------------------");
-            //     print(kingdoms[i].tagKey);
-            //     print(kingdoms[i].kingdomName);
-            //     // print("convoyes:");
-            //     // var merchants = kingdoms[i].countryMerchants;
-            //     // print(merchants.Length);
-            //     // for (int j = 0; j < merchants.Length; j++)
-            //     // {
-            //     //     print("******");
-            //     //     var convoyShips = merchants[j].convoyShips;
-            //     //     for (int k = 0; k < convoyShips.Length; k++)
-            //     //     {
-            //     //         print("    - " + convoyShips[k].shipName);
-            //     //     }
-            //     // }
+            for (int i = 0; i < kingdoms.Length; i++)
+            {
+                //     print("-------------------------------");
+                //     print(kingdoms[i].tagKey);
+                //     print(kingdoms[i].kingdomName);
+                // print("convoyes:");
+                // var merchants = kingdoms[i].countryMerchants;
+                // print(merchants.Length);
+                // for (int j = 0; j < merchants.Length; j++)
+                // {
+                //     print("******");
+                //     var convoyShips = merchants[j].convoyShips;
+                //     for (int k = 0; k < convoyShips.Length; k++)
+                //     {
+                //         print("    - " + convoyShips[k].shipName);
+                //     }
+                // }
 
-            //     print("ciudades:");
-            //     var cities = kingdoms[i].countryCities;
-            //     print(cities.Length);
-            //     for (int j = 0; j < cities.Length; j++)
-            //     {
-            //         // print("******");
-            //         // var city = cities[j];
-            //         // print(city.cityName);
-            //         // Debug.Log(string.Join(", ", city.exports));
-            //     }
-            // }
+                //     print("ciudades:");
+                //     var cities = kingdoms[i].countryCities;
+                //     print(cities.Length);
+                //     for (int j = 0; j < cities.Length; j++)
+                //     {
+                //         // print("******");
+                //         // var city = cities[j];
+                //         // print(city.cityName);
+                //         // Debug.Log(string.Join(", ", city.exports));
+                //     }
+
+            }
 
             // var shelters = savedGameData.shelters;
             // print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");

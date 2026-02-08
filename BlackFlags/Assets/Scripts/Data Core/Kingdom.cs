@@ -215,8 +215,11 @@ namespace GameMechanics.Data
             // }
         }
 
-        public void GetArmadaFromSerializedData(SerializableKingdom kingdomData)
+        public void GetArmadaFromSerializedData(SerializableKingdom kingdomData, Transform containers)
         {
+            //todo: esta función debe ser llamada cuando ya han sido instanciado los reinos con los
+            //todo: contenedores de pooling y cuando los lugares del mundo han sido cargados en el mundo
+            //todo: para ello debe recibirse un paquete de información de un delivery
             //Mercantes 
             {
                 SerializableConvoy[] merchants = kingdomData.countryMerchants;
@@ -224,14 +227,23 @@ namespace GameMechanics.Data
 
                 foreach (SerializableConvoy merchant in merchants)
                 {
-                    //¿Cómo instancio los barcos is aún no tengo el pooling de objetos?
-                    //De hecho... ¿Cuando tengo el pooling de objetos?
+
+                    GameObject newConvoy = GetConvoy(containers);
+                    Vector3 position = merchant.ToVector3(merchant.position);
+                    newConvoy.transform.position = position;
+
+                    Quaternion rotation = merchant.ToQuaternion(merchant.rotation);
+                    newConvoy.transform.rotation = rotation;
+
+                    var data = newConvoy.GetComponent<ConvoyNPC>();
+
 
                     SerializableShip[] ships = merchant.convoyShips;
 
                     foreach (SerializableShip ship in ships)
                     {
-                        Debug.Log(ship.shipName);
+                        Ship s = ship.GetShipFromSerializedData();
+                        Debug.Log(s.name_Ship);
                     }
                 }
             }

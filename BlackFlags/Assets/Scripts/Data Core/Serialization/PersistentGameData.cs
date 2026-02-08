@@ -1366,12 +1366,12 @@ namespace GameMechanics.save
             return new float[2] { vector.x, vector.y };
         }
 
-        public static Vector3 ToVector3(float[] values)
+        public Vector3 ToVector3(float[] values)
         {
             return new Vector3(values[0], values[1], values[2]);
         }
 
-        public static Vector2 ToVector2(float[] values)
+        public Vector2 ToVector2(float[] values)
         {
             return new Vector3(values[0], values[1]);
         }
@@ -1379,6 +1379,11 @@ namespace GameMechanics.save
         public float[] ConvertQuaternion(Quaternion rot)
         {
             return new float[] { rot.x, rot.y, rot.z, rot.w };
+        }
+
+        public Quaternion ToQuaternion(float[] rot)
+        {
+            return new Quaternion(rot[0], rot[1], rot[2], rot[3]);
         }
     }
 
@@ -2465,14 +2470,23 @@ namespace GameMechanics.save
                 //Actualia las posesiones del reino:
                 newKingdom.OnCountryTerritoryChanges();
 
-                if (PersistentGameSettings.loadingFile)
-                {
-                    //Una vez creadas las ciudades, creamos los convoyes
-                    // SerializableConvoy[] merchants = k.countryMerchants;
-                    // Debug.Log(merchants.Length);
-                    //todo: instanciar convoyes
-                    newKingdom.GetArmadaFromSerializedData(k);
-                }
+                // if (PersistentGameSettings.loadingFile)
+                // {
+                //     //Una vez creadas las ciudades, creamos los convoyes
+                //     //todo: instanciar convoyes
+
+                //     //todo:
+                //     //!esto hay que hacerlo en el deliver, cuando ya podemos posicionar los barcos en el mundo
+                //     //!también hay que recibir algún tipo de aviso cuando las ciudades y refugios han sido cargadas
+                //     var shipsPoolContainer = newKingdom.transform.GetChild(3);
+                //     newKingdom.GetArmadaFromSerializedData(k, shipsPoolContainer);
+
+                //     //todo: algo así:
+                //     GameObject persistentContainer = new GameObject();
+                //     persistentContainer.name = "DELIVERY";
+                //     var delivery = persistentContainer.AddComponent<FleetsDataDelivery>();
+                //     delivery.shipmentData = shipsPoolContainer;
+                // }
             }
 
             //Keypoints:
@@ -2536,6 +2550,35 @@ namespace GameMechanics.save
             }
 
             return new Transform[3] { kingdomsContainer.transform, kpsContainer.transform, banners };
+        }
+
+        public SerializedGameFleetData LoadFleetsData(Transform kingdomsContainer)
+        {
+            var kingdomsFleet = new SerializedKingdomFleetData[kingdomsContainer.childCount];
+            for (int i = 0; i < kingdomsContainer.childCount; i++)
+            {
+                Kingdom kingdom = kingdomsContainer.GetChild(i).GetComponent<Kingdom>();
+                SerializableKingdom k = kingdoms[i];
+
+                //!Opción 1
+                //Inyección directa: asumiendo que tenemos la escena preparada
+                // var shipsPoolContainer = kingdom.transform.GetChild(3);
+                // kingdom.GetArmadaFromSerializedData(k, shipsPoolContainer);
+
+                //!Opción 2:
+                //Usamos un delivery. Devolvemos la información necesaria par el delivery
+                SerializableConvoy[] merchants = k.countryMerchants;
+                SerializableConvoy[] patrols = k.countryPatrols;
+                SerializableConvoy[] europeanConvoys = k.europeanConvoys;
+
+                var kingdomfleetData = new SerializedKingdomFleetData(kingdom, merchants, patrols, europeanConvoys);
+            }
+
+            //todo: flota pirata
+            SerializableConvoy piraFleetData = null;
+
+            var result = new SerializedGameFleetData(kingdomsFleet, piraFleetData);
+            return result;
         }
 
 
@@ -2673,6 +2716,37 @@ namespace GameMechanics.save
                 var p = pirateSheltersContainer.GetChild(i).GetComponent<MB_PirateShelter>();
                 shelters[i] = new SerializablePirateShelter(p);
             }
+        }
+    }
+
+    /** Clase que contiene un reino y la información serializada de la flota*/
+    public class SerializedKingdomFleetData
+    {
+        public Kingdom kingdom;
+        SerializableConvoy[] merchants, countryPatrols, europeanConvoys;
+
+        public SerializedKingdomFleetData(
+            Kingdom k,
+            SerializableConvoy[] m,
+            SerializableConvoy[] p,
+            SerializableConvoy[] c)
+        {
+            kingdom = k;
+            merchants = m;
+            countryPatrols = p;
+            europeanConvoys = c;
+        }
+    }
+
+    public class SerializedGameFleetData
+    {
+        public SerializedKingdomFleetData[] serializedKingdomsFleetData;
+        public SerializableConvoy serializedPirateFleetData;
+
+        public SerializedGameFleetData(SerializedKingdomFleetData[] kd, SerializableConvoy pd)
+        {
+            serializedKingdomsFleetData = kd;
+            serializedPirateFleetData = pd;
         }
     }
 

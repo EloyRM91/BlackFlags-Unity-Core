@@ -73,9 +73,6 @@ namespace GameMechanics.WorldCities
         }
         private void CreateNewCharacters(int nSmug, int nSMen, int ratio)
         {
-            //! desde la v0.033 ya no se utilizan tags. En lugar de eso, vamos a usar
-            //! un identificador (los mods podrían incluir otros reinos que no sean los establecidos)
-            //var kingdom = GameManager.gm.GetKingdombyTag(transform.parent.tag);
             var kingdom = transform.parent.parent.GetComponent<Kingdom>();
 
             //Create smugglers
@@ -100,10 +97,7 @@ namespace GameMechanics.WorldCities
                             r.Add(ar);
                     }
                 }
-                //Construct smuggler
-                //! desde la v0.033 ya no se utiliza el enumerador EntityType_KINGDOM
-                //! (los mods podrán incluir otros reinos que no sean los establecidos)
-                //var newSmuggler = new Smuggler(kingdom.thisKingdom, r);
+
                 var newSmuggler = new Smuggler(kingdom.tagKey, r);
                 newSmuggler.ratio = ratio;
                 newSmuggler.SetInventory(true);
@@ -166,7 +160,7 @@ namespace GameMechanics.WorldCities
             this.population = cityData.population;
             this.tavernName = cityData.tavernName;
             this.revealed = cityData.revealed;
-            this.transform.position = SerializationConverter.ToVector3(cityData.position);
+            this.transform.position = cityData.ToVector3(cityData.position);
 
             if (cityData.flippedX)
             {
@@ -176,11 +170,11 @@ namespace GameMechanics.WorldCities
 
             //Target Path:
             var entryPoint = this.transform.GetChild(0);
-            entryPoint.position = SerializationConverter.ToVector3(cityData.entryPoint);
+            entryPoint.position = cityData.ToVector3(cityData.entryPoint);
 
             //Banner's Pivot
             var pivot = this.transform.GetChild(1);
-            pivot.position = SerializationConverter.ToVector3(cityData.pivotPoint);
+            pivot.position = cityData.ToVector3(cityData.pivotPoint);
 
             //todo: events point
 
