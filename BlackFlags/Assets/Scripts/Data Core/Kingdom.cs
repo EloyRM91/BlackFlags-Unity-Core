@@ -48,6 +48,21 @@ namespace GameMechanics.Data
             set { _spriteDetailed = value; }
         }
 
+        public Transform merchantsPooling
+        {
+            get { return transform.GetChild(2); }
+        }
+
+        public Transform atlanticPooling
+        {
+            get { return transform.GetChild(3); }
+        }
+
+        public Transform patrolsPooling
+        {
+            get { return transform.GetChild(4); }
+        }
+
         //Spawning
         public ShipGenerator shipsGenerator;
         [SerializeField] private Transform _poolContainer_LOC, _poolContainer_EU_M, _poolContainer_PAT;
@@ -69,8 +84,12 @@ namespace GameMechanics.Data
         }
         private void Start()
         {
-            //pooling and generation
-            CreateArmadaV1();
+            if (!PersistentGameSettings.loadingFile)
+            {
+                //pooling and generation
+                CreateArmadaV1();
+            }
+
         }
 
         //Cities and Towns
@@ -105,18 +124,22 @@ namespace GameMechanics.Data
                 {
                     GameObject newConvoy = GetConvoy(_poolContainer_LOC);
                     newConvoy.transform.position = port.transform.GetChild(0).position;
-                    var data = newConvoy.GetComponent<ConvoyNPC>();
-                    data.currentPort = port;
-                    if (newConvoy.GetComponent<AI_LocalMerchant>() == null)
+                    var convoyComponent = newConvoy.GetComponent<ConvoyNPC>();
+                    convoyComponent.currentPort = port;
+                    var ai = newConvoy.GetComponent<AI_LocalMerchant>();
+                    if (ai == null)
                     {
-                        newConvoy.AddComponent<AI_LocalMerchant>();
+                        ai = newConvoy.AddComponent<AI_LocalMerchant>();
                     }
 
                     var ship = shipsGenerator.GenerateShipData(ShipType_ROLE.LocalMerchant, tagKey);
                     ship.name_Ship = WorldGenerator.GiveShipName(tagKey, ShipType_ROLE.LocalMerchant, GenerationMode.Random);
                     ship.name_Captain = WorldGenerator.GetCharacterName(tagKey);
-                    data.thisConvoyShips = new Ship[1] { ship };
-                    data.SetConvoyData(this);
+                    convoyComponent.thisConvoyShips = new Ship[1] { ship };
+                    convoyComponent.SetConvoyData(this);
+
+                    ai.Awake();
+                    ai.SetStateAs_AtPort();
                 }
             }
             //Patrols
@@ -205,21 +228,10 @@ namespace GameMechanics.Data
             GENTILISM_MALEPLU = kingdomData.gentilism_MALEPLU;
             GENTILISM_FEMSIN = kingdomData.gentilism_FEMSIN;
             GENTILISM_FEMPLU = kingdomData.gentilism_FEMPLU;
-
-            // if (PersistentGameSettings.loadingFile)
-            // {
-            //     //Convoyes de este reino:
-            //     SerializableConvoy[] merchants = kingdomData.countryMerchants;
-            //     Debug.Log(transform.name);
-            //     Debug.LogError(merchants.Length);
-            // }
         }
 
         public void GetArmadaFromSerializedData(SerializableKingdom kingdomData, Transform containers)
         {
-            //todo: esta función debe ser llamada cuando ya han sido instanciado los reinos con los
-            //todo: contenedores de pooling y cuando los lugares del mundo han sido cargados en el mundo
-            //todo: para ello debe recibirse un paquete de información de un delivery
             //Mercantes 
             {
                 SerializableConvoy[] merchants = kingdomData.countryMerchants;
@@ -248,6 +260,61 @@ namespace GameMechanics.Data
                 }
             }
 
+        }
+
+        public void GetArmadaFromSerializedData(
+            SerializableConvoy[] merchants,
+            SerializableConvoy[] patrols,
+            SerializableConvoy[] euConvoys)
+        {
+            Transform container = null;
+            //Mercantes 
+            {
+                container = merchantsPooling;
+                foreach (SerializableConvoy merchant in merchants)
+                {
+
+                    GameObject newConvoy = GetConvoy(container);
+                    Vector3 position = merchant.ToVector3(merchant.position);
+                    newConvoy.transform.position = position;
+
+                    Quaternion rotation = merchant.ToQuaternion(merchant.rotation);
+                    newConvoy.transform.rotation = rotation;
+
+                    var convoyComponent = newConvoy.GetComponent<ConvoyNPC>();
+
+                    //todo: establecemos el puerto objetivo
+                    //todo: obtenemos el id y con él la referencia al Keypoint
+                    // convoyComponent.currentPort = 
+
+                    var ai = newConvoy.GetComponent<AI_LocalMerchant>();
+                    if (ai == null)
+                    {
+                        ai = newConvoy.AddComponent<AI_LocalMerchant>();
+                    }
+
+                    SerializableShip[] ships = merchant.convoyShips;
+                    convoyComponent.thisConvoyShips = new Ship[ships.Length];
+                    for (int i = 0; i < ships.Length; i++)
+                    {
+                        SerializableShip ship = ships[i];
+                        Ship s = ship.GetShipFromSerializedData();
+                        Debug.Log(s.name_Ship);
+                        Debug.Log(s.name_Captain);
+                        convoyComponent.thisConvoyShips[i] = s;
+                        convoyComponent.SetConvoyData(this);
+                    }
+
+                    //?pruebas: establecer comportamiento ia en puerto
+                    ai.Awake();
+                    ai.SetStateAs_AtPort();
+                }
+            }
+
+            //Patrullas
+            {
+                container = patrolsPooling;
+            }
         }
 
         public void SetFromSerializedData(SerializableKingdom kingdomData, Settlement[] belongings)

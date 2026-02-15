@@ -118,12 +118,24 @@ public class GameManager : MonoBehaviour
         }
 
         //Deliver de barcos
+        if (PersistentGameSettings.loadingFile)
         {
             var obj = System.Array.Find(GameObject.FindGameObjectsWithTag("Delivery"), IsFleetsDataDelivery);
             var delivery = obj.GetComponent<FleetsDataDelivery>();
             SerializedGameFleetData info = delivery.Deliver();
 
-            //todo: usamos la información del deliver para gestionar los poolings y definir los datos de los barcos
+            SerializedKingdomFleetData[] kingdomsFleets = info.serializedKingdomsFleetData;
+            foreach (SerializedKingdomFleetData kingdomFleetInfo in kingdomsFleets)
+            {
+                Kingdom k = kingdomFleetInfo.kingdom;
+                SerializableConvoy[] merchantsInfo = kingdomFleetInfo.merchants;
+                SerializableConvoy[] patrolsInfo = kingdomFleetInfo.countryPatrols;
+                SerializableConvoy[] europeanFleetInfo = kingdomFleetInfo.europeanConvoys;
+
+                k.GetArmadaFromSerializedData(merchantsInfo, patrolsInfo, europeanFleetInfo);
+            }
+
+
         }
 
         //----------------------------------------------------
@@ -151,7 +163,7 @@ public class GameManager : MonoBehaviour
     {
         var obj = Instantiate(_prefab_Pirate, parent);
         obj.tag = "Untagged";
-        return _prefab_Pirate;
+        return obj;
     }
     private void CreateArmada_PIRATE()
     {

@@ -20,14 +20,14 @@ namespace GameMechanics.Ships
         public void SetConvoyData(Kingdom k)
         {
             convoySpeed = thisConvoyShips[0].GetMinSmoothSpeed();
-            var leadership = thisConvoyShips[0];
+            var leaderShip = thisConvoyShips[0];
             var power = thisConvoyShips[0].GetFirePower();
             for (int i = 1; i < thisConvoyShips.Length; i++)
             {
                 var tempP = thisConvoyShips[i].GetFirePower();
                 if (tempP > power)
                 {
-                    leadership = thisConvoyShips[i];
+                    leaderShip = thisConvoyShips[i];
                     power = tempP;
                 }
                 var tempS = thisConvoyShips[i].GetMinSmoothSpeed();
@@ -35,29 +35,30 @@ namespace GameMechanics.Ships
                     convoySpeed = tempS;
             }
             //convoySpeed = Mathf.Clamp(convoySpeed *= 0.25f, 0.5f, 2); 07/12/2022
-            convoySpeed*= 0.33f;
-            convoyName = leadership.name_Ship;
-            convoyCaptain = leadership.name_Captain;
+            convoySpeed *= 0.33f;
+            convoyName = leaderShip.name_Ship;
+            convoyCaptain = leaderShip.name_Captain;
 
             //GetSprite(transform.tag, (byte)thisConvoyShips.Length);
             GetSprite(
                 k != null ? k.tagKey : (ushort)9999, (byte)thisConvoyShips.Length);
-            _thisConvoySpriteController.SetSpritesSet(leadership.GetSpriteIndex());
+            _thisConvoySpriteController.SetSpritesSet(leaderShip.GetSpriteIndex());
         }
 
         public override Vector3 GetDestination() { return _destination; }
 
-#region Tweening & Effects
+        #region Tweening & Effects
         public override void Appear()
         {
-           if(convoyCurrentState != ConvoyState.AtPort)
+            if (convoyCurrentState != ConvoyState.AtPort)
                 base.Appear();
         }
-#endregion
-#region IA Movement
+        #endregion
+        #region IA Movement
         public void SetIADestination(Vector3 point)
         {
             StopAllCoroutines();
+            gameObject.SetActive(true);
             if (CanGoTo(point))
             {
                 _destination = point;
@@ -124,13 +125,13 @@ namespace GameMechanics.Ships
                 else
                 {
                     yield return new WaitForSeconds(0.04f);
-                }               
+                }
             }
             isOnTarget = false;
             GetComponent<ClassAI>().ArriveToDestination();
             StopAllCoroutines();
         }
-#endregion
+        #endregion
     }
 }
 

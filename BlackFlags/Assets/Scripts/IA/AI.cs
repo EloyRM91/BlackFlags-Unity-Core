@@ -24,7 +24,7 @@ namespace GameMechanics.AI
         protected abstract void SetStateAs_OnCruisse();
         public abstract string GetAIRol();
         public abstract string GetGentilism(Kingdom kingdom);
-        protected virtual void SetStateAs_AtPort()
+        public virtual void SetStateAs_AtPort()
         {
             collider.enabled = false;
             transform.GetChild(0).gameObject.SetActive(false);
@@ -66,7 +66,7 @@ namespace GameMechanics.AI
         public override string GetAIRol() { return "Convoy Europeo"; }
         public override string GetGentilism(Kingdom kingdom) { return kingdom.GENTILISM_MALESIN; }
 
-        //-------------------- DETINATION MANAGING
+        //-------------------- DESTINATION MANAGING
         protected override Vector3 GetDestiation(KeyPoint port)
         {
             return port.transform.GetChild(0).position;
@@ -124,7 +124,7 @@ namespace GameMechanics.AI
             _thisConvoy.convoyCurrentState = ConvoyState.Sailing;
             collider.enabled = true;
         }
-        protected override void SetStateAs_AtPort()
+        public override void SetStateAs_AtPort()
         {
             base.SetStateAs_AtPort();
             CancelInvoke();
@@ -161,7 +161,7 @@ namespace GameMechanics.AI
     {
         private void Start()
         {
-            SetStateAs_AtPort();
+            // SetStateAs_AtPort();
         }
 
         //-------------------- AI CLASS NAME
@@ -186,14 +186,25 @@ namespace GameMechanics.AI
         #region IA STATES
         protected override void SetStateAs_OnCruisse()
         {
-            Kingdom kingdom = transform.parent.parent.GetComponent<Kingdom>();
-            //En el futuro, los mercantes tendrán que poder entrar en puertos con los que se tenga un acuerdo comercial
-            _thisConvoy.currentPort = _thisConvoy.currentPort.NewDestinationFromThisPort(kingdom);
-            _thisConvoy.SetIADestination(GetDestiation(_thisConvoy.currentPort));
-            _thisConvoy.convoyCurrentState = ConvoyState.Sailing;
-            collider.enabled = true;
+            try
+            {
+                Kingdom kingdom = transform.parent.parent.GetComponent<Kingdom>();
+                //En el futuro, los mercantes tendrán que poder entrar en puertos con los que se tenga un acuerdo comercial
+                _thisConvoy.currentPort = _thisConvoy.currentPort.NewDestinationFromThisPort(kingdom);
+                _thisConvoy.SetIADestination(GetDestiation(_thisConvoy.currentPort));
+                _thisConvoy.convoyCurrentState = ConvoyState.Sailing;
+                collider.enabled = true;
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError("error at " + transform.name + " convoy");
+                Debug.Log(GetComponent<ConvoyNPC>().convoyName);
+                Debug.Log(transform.parent);
+                Debug.Log(transform.parent.parent);
+                Debug.LogError(e);
+            }
         }
-        protected override void SetStateAs_AtPort()
+        public override void SetStateAs_AtPort()
         {
             base.SetStateAs_AtPort();
             CancelInvoke();
@@ -258,7 +269,7 @@ namespace GameMechanics.AI
             _thisConvoy.convoyCurrentState = ConvoyState.Sailing;
             collider.enabled = true;
         }
-        protected override void SetStateAs_AtPort()
+        public override void SetStateAs_AtPort()
         {
             base.SetStateAs_AtPort();
             CancelInvoke();
@@ -347,7 +358,7 @@ namespace GameMechanics.AI
             _thisConvoy.convoyCurrentState = ConvoyState.Sailing;
             collider.enabled = true;
         }
-        protected override void SetStateAs_AtPort()
+        public override void SetStateAs_AtPort()
         {
             base.SetStateAs_AtPort();
             CancelInvoke();

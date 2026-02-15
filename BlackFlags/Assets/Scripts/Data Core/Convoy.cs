@@ -31,6 +31,7 @@ namespace GameMechanics.Ships
         //OnGame Dynamic Data
         public bool isOnTarget; //is this group being intercepted?
         public KeyPoint currentPort;
+        public KeyPoint GetCurrentPort() { return currentPort; }
         private Sequence sequence;
         public virtual Convoy ConvoyTarget { get { return null; } }
 

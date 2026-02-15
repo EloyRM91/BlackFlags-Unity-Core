@@ -1391,9 +1391,9 @@ namespace GameMechanics.save
     public abstract class SerializableKeyPoint : SerializationConverter
     {
         public string
-            uuid,
             cityName,
             alternativeName;
+        public ushort id;
         public bool revealed;
         public float[]
             position,
@@ -1403,10 +1403,10 @@ namespace GameMechanics.save
         public byte spriteIndex;
         public bool flippedX;
 
-        public SerializableKeyPoint()
-        {
-            uuid = generateUUID();
-        }
+        // public SerializableKeyPoint()
+        // {
+        //     uuid = generateUUID();
+        // }
     }
 
     [Serializable]
@@ -1432,6 +1432,7 @@ namespace GameMechanics.save
 
         public SerializableCity(MB_City city) : base()
         {
+            id = city.KeyPointID;
             cityName = city.cityName;
             revealed = city.revealed;
 
@@ -1536,6 +1537,7 @@ namespace GameMechanics.save
 
         public SerializableTown(MB_Town town) : base()
         {
+            id = town.KeyPointID;
             cityName = town.cityName;
             alternativeName = town.alternativeName;
             revealed = town.revealed;
@@ -1598,6 +1600,7 @@ namespace GameMechanics.save
 
         public SerializableSmugglersPost(MB_SmugglersPost post) : base()
         {
+            id = post.KeyPointID;
             cityName = post.cityName;
             alternativeName = post.alternativeName;
             revealed = post.revealed;
@@ -1678,6 +1681,7 @@ namespace GameMechanics.save
 
         public SerializablePirateShelter(MB_PirateShelter shelter) : base()
         {
+            id = shelter.KeyPointID;
             cityName = shelter.cityName;
             alternativeName = shelter.alternativeName;
             revealed = shelter.revealed;
@@ -1737,6 +1741,7 @@ namespace GameMechanics.save
 
         public SerializableNaturalPort(MB_NaturalPort port) : base()
         {
+            id = port.KeyPointID;
             cityName = port.cityName;
             alternativeName = port.alternativeName;
             revealed = port.revealed;
@@ -2153,11 +2158,17 @@ namespace GameMechanics.save
                     break;
                 case 7:
                     newShip = new ShipSubCategory_12Brig();
-                    newShip.SetVariant(variant);
+                    if (variant != null)
+                    {
+                        newShip.SetVariant(variant);
+                    }
                     break;
                 case 8:
                     newShip = new ShipSubCategory_16Brig();
-                    newShip.SetVariant(variant);
+                    if (variant != null)
+                    {
+                        newShip.SetVariant(variant);
+                    }
                     break;
                 case 9:
                     newShip = new ShipSubCategory_10Lugger();
@@ -2167,11 +2178,17 @@ namespace GameMechanics.save
                     break;
                 case 11:
                     newShip = new ShipSubCategory_ShoonerPolacre();
-                    newShip.SetVariant(variant);
+                    if (variant != null)
+                    {
+                        newShip.SetVariant(variant);
+                    }
                     break;
                 case 12:
                     newShip = new ShipSubCategory_Polacre();
-                    newShip.SetVariant(variant);
+                    if (variant != null)
+                    {
+                        newShip.SetVariant(variant);
+                    }
                     break;
                 case 13:
                     newShip = new ShipSubCategory_Corvette();
@@ -2196,14 +2213,17 @@ namespace GameMechanics.save
                     break;
                 case 21:
                     newShip = new ShipSubCategory_Urca();
-                    newShip.SetVariant(variant); //En el futuro se introducirá el paquebote como variante de la urca
+                    if (variant != null)
+                    {
+                        newShip.SetVariant(variant); //En el futuro se introducirá el paquebote como variante de la urca
+                    }
                     break;
                 default:
                     newShip = new ShipSubCategory_CoastalSloop();
                     break;
             }
             newShip.name_Ship = shipName;
-            newShip.name_Ship = captainName;
+            newShip.name_Captain = captainName;
 
             newShip.SetImprovementsFromKeys(shipImprovements);
             return newShip;
@@ -2220,6 +2240,7 @@ namespace GameMechanics.save
             destination;
         public ushort
             id,
+            currentPortId,
             targetId; //referencia al convoy/barco al que está persiguiendo
         public bool inOnTarget;
 
@@ -2237,7 +2258,8 @@ namespace GameMechanics.save
             rotation = ConvertQuaternion(tr.rotation);
 
             //todo: id y target id
-
+            id = convoy.ID;
+            currentPortId = convoy.GetCurrentPort().KeyPointID;
             inOnTarget = convoy.isOnTarget;
         }
     }
@@ -2469,24 +2491,6 @@ namespace GameMechanics.save
 
                 //Actualia las posesiones del reino:
                 newKingdom.OnCountryTerritoryChanges();
-
-                // if (PersistentGameSettings.loadingFile)
-                // {
-                //     //Una vez creadas las ciudades, creamos los convoyes
-                //     //todo: instanciar convoyes
-
-                //     //todo:
-                //     //!esto hay que hacerlo en el deliver, cuando ya podemos posicionar los barcos en el mundo
-                //     //!también hay que recibir algún tipo de aviso cuando las ciudades y refugios han sido cargadas
-                //     var shipsPoolContainer = newKingdom.transform.GetChild(3);
-                //     newKingdom.GetArmadaFromSerializedData(k, shipsPoolContainer);
-
-                //     //todo: algo así:
-                //     GameObject persistentContainer = new GameObject();
-                //     persistentContainer.name = "DELIVERY";
-                //     var delivery = persistentContainer.AddComponent<FleetsDataDelivery>();
-                //     delivery.shipmentData = shipsPoolContainer;
-                // }
             }
 
             //Keypoints:
@@ -2560,18 +2564,12 @@ namespace GameMechanics.save
                 Kingdom kingdom = kingdomsContainer.GetChild(i).GetComponent<Kingdom>();
                 SerializableKingdom k = kingdoms[i];
 
-                //!Opción 1
-                //Inyección directa: asumiendo que tenemos la escena preparada
-                // var shipsPoolContainer = kingdom.transform.GetChild(3);
-                // kingdom.GetArmadaFromSerializedData(k, shipsPoolContainer);
-
-                //!Opción 2:
-                //Usamos un delivery. Devolvemos la información necesaria par el delivery
                 SerializableConvoy[] merchants = k.countryMerchants;
                 SerializableConvoy[] patrols = k.countryPatrols;
                 SerializableConvoy[] europeanConvoys = k.europeanConvoys;
 
                 var kingdomfleetData = new SerializedKingdomFleetData(kingdom, merchants, patrols, europeanConvoys);
+                kingdomsFleet[i] = kingdomfleetData;
             }
 
             //todo: flota pirata
@@ -2723,7 +2721,7 @@ namespace GameMechanics.save
     public class SerializedKingdomFleetData
     {
         public Kingdom kingdom;
-        SerializableConvoy[] merchants, countryPatrols, europeanConvoys;
+        public SerializableConvoy[] merchants, countryPatrols, europeanConvoys;
 
         public SerializedKingdomFleetData(
             Kingdom k,
@@ -2735,6 +2733,8 @@ namespace GameMechanics.save
             merchants = m;
             countryPatrols = p;
             europeanConvoys = c;
+
+
         }
     }
 

@@ -68,7 +68,6 @@ public class PlayerMovement : Convoy
     //GetData
     public ConvoyNPC GetTarget() { return thisConvoyTarget; }
     public float GetTime() { return _remainingTime; }
-    public KeyPoint GetCurrentPort() { return currentPort; }
 
     protected override void Start()
     {
