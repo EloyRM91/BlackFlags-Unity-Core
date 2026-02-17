@@ -273,6 +273,10 @@ namespace GameMechanics.Data
                 container = merchantsPooling;
                 foreach (SerializableConvoy merchant in merchants)
                 {
+                    Vector3 GetDestinationFromKeyPoint(KeyPoint port)
+                    {
+                        return port.transform.GetChild(0).position;
+                    }
 
                     GameObject newConvoy = GetConvoy(container);
                     Vector3 position = merchant.ToVector3(merchant.position);
@@ -282,10 +286,6 @@ namespace GameMechanics.Data
                     newConvoy.transform.rotation = rotation;
 
                     var convoyComponent = newConvoy.GetComponent<ConvoyNPC>();
-
-                    //todo: establecemos el puerto objetivo
-                    //todo: obtenemos el id y con él la referencia al Keypoint
-                    // convoyComponent.currentPort = 
 
                     var ai = newConvoy.GetComponent<AI_LocalMerchant>();
                     if (ai == null)
@@ -307,7 +307,24 @@ namespace GameMechanics.Data
 
                     //?pruebas: establecer comportamiento ia en puerto
                     ai.Awake();
-                    ai.SetStateAs_AtPort();
+                    // ai.SetStateAs_AtPort();
+
+                    //Reestablecer el objetivo de la ruta a la que se dirigía este mercante:
+                    ushort currentPortId = merchant.currentPortId;
+                    convoyComponent.currentPort = KeyPoint.GetByID(currentPortId);
+                    if (convoyComponent.currentPort)
+                    {
+                        convoyComponent.SetIADestination(GetDestinationFromKeyPoint(convoyComponent.currentPort));
+                        //todo: modificar el estado de la IA a sailing
+                        //todo: habilitar collider
+
+                        //todo: modificar función SetStateAs_OnCruisse para no externalizar este proceso
+                        //todo: pasar currentport como parámetro. si el parámetro es null, crearun nuevo destino
+                    }
+                    else
+                    {
+                        //algo
+                    }
                 }
             }
 

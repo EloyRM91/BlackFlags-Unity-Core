@@ -71,7 +71,7 @@ public class PlayerMovement : Convoy
 
     protected override void Start()
     {
-        SetID(0);
+        GenerateID(1);
         if (PersistentGameSettings.loadingFile)
         {
             var container = GameObject.FindWithTag("PersistentDataContainer");

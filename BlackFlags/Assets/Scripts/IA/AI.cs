@@ -32,7 +32,7 @@ namespace GameMechanics.AI
             _thisConvoy.convoyCurrentState = ConvoyState.AtPort;
         }
         //Triggers
-        protected abstract Vector3 GetDestiation(KeyPoint port);
+        protected abstract Vector3 GetDestination(KeyPoint port);
         public abstract void ArriveToDestination();
 
         public virtual void Awake()
@@ -67,7 +67,7 @@ namespace GameMechanics.AI
         public override string GetGentilism(Kingdom kingdom) { return kingdom.GENTILISM_MALESIN; }
 
         //-------------------- DESTINATION MANAGING
-        protected override Vector3 GetDestiation(KeyPoint port)
+        protected override Vector3 GetDestination(KeyPoint port)
         {
             return port.transform.GetChild(0).position;
         }
@@ -118,7 +118,7 @@ namespace GameMechanics.AI
             {
                 _thisConvoy.currentPort = convoyRoute[routeIndex];
                 routeIndex++;
-                _thisConvoy.SetIADestination(GetDestiation(_thisConvoy.currentPort));
+                _thisConvoy.SetIADestination(GetDestination(_thisConvoy.currentPort));
             }
 
             _thisConvoy.convoyCurrentState = ConvoyState.Sailing;
@@ -169,7 +169,7 @@ namespace GameMechanics.AI
         public override string GetGentilism(Kingdom kingdom) { return kingdom.GENTILISM_MALESIN; }
 
         //-------------------- DETINATION MANAGING
-        protected override Vector3 GetDestiation(KeyPoint port)
+        protected override Vector3 GetDestination(KeyPoint port)
         {
             return port.transform.GetChild(0).position;
         }
@@ -191,7 +191,7 @@ namespace GameMechanics.AI
                 Kingdom kingdom = transform.parent.parent.GetComponent<Kingdom>();
                 //En el futuro, los mercantes tendrán que poder entrar en puertos con los que se tenga un acuerdo comercial
                 _thisConvoy.currentPort = _thisConvoy.currentPort.NewDestinationFromThisPort(kingdom);
-                _thisConvoy.SetIADestination(GetDestiation(_thisConvoy.currentPort));
+                _thisConvoy.SetIADestination(GetDestination(_thisConvoy.currentPort));
                 _thisConvoy.convoyCurrentState = ConvoyState.Sailing;
                 collider.enabled = true;
             }
@@ -206,6 +206,7 @@ namespace GameMechanics.AI
         }
         public override void SetStateAs_AtPort()
         {
+            //esto es pa que no compile
             base.SetStateAs_AtPort();
             CancelInvoke();
             Invoke("SetStateAs_OnCruisse", Random.Range(90, 180));
@@ -241,7 +242,7 @@ namespace GameMechanics.AI
         public override string GetGentilism(Kingdom kingdom) { return kingdom.GENTILISM_FEMSIN; }
 
         //-------------------- DETINATION MANAGING
-        protected override Vector3 GetDestiation(KeyPoint port)
+        protected override Vector3 GetDestination(KeyPoint port)
         {
             return port.transform.GetChild(0).position;
         }
@@ -265,7 +266,7 @@ namespace GameMechanics.AI
         {
             Kingdom kingdom = transform.parent.parent.GetComponent<Kingdom>();
             _thisConvoy.currentPort = _thisConvoy.currentPort.NewDestinationFromThisPort(kingdom, true, 250);
-            _thisConvoy.SetIADestination(GetDestiation(_thisConvoy.currentPort));
+            _thisConvoy.SetIADestination(GetDestination(_thisConvoy.currentPort));
             _thisConvoy.convoyCurrentState = ConvoyState.Sailing;
             collider.enabled = true;
         }
@@ -310,7 +311,7 @@ namespace GameMechanics.AI
         }
         public override string GetAIRol() { return "Pirata "; }
         public override string GetGentilism(Kingdom kingdom) { return string.Empty; }
-        protected override Vector3 GetDestiation(KeyPoint port)
+        protected override Vector3 GetDestination(KeyPoint port)
         {
             return port.transform.GetChild(0).position;
         }
@@ -354,7 +355,7 @@ namespace GameMechanics.AI
             if (currentPort.cityName == "Belize" && Vector3.Distance(transform.position, currentPort.transform.position) > 150) currentPort = GameManager.gm.GetShelter(currentPort);
 
             _thisConvoy.currentPort = currentPort;
-            _thisConvoy.SetIADestination(GetDestiation(currentPort));
+            _thisConvoy.SetIADestination(GetDestination(currentPort));
             _thisConvoy.convoyCurrentState = ConvoyState.Sailing;
             collider.enabled = true;
         }

@@ -19,15 +19,25 @@ namespace GameMechanics.WorldCities
     /// <summary>
     /// A key point is a physic point in game world where the player and npcs can get into/go out.
     /// </summary>
-    public abstract class KeyPoint : MonoBehaviour, IsSelectable
+    public abstract class KeyPoint : MonoBehaviour, IsSelectable, IDable
     {
         #region VARIABLES
-        //Data & performance
-        private ushort keyPointID;
-        public ushort KeyPointID { get { return keyPointID; } }
+        //Serialization + Ids
+        private ushort _keyPointID = 0; //0 = clave de no asignación
+        public ushort KeyPointID
+        {
+            get { return _keyPointID; }
+            set
+            {
+                _keyPointID = value;
+                registry[_keyPointID] = this;
+            }
+        }
         private static ushort IDCounter;
         public static ushort IDKeyPointCounter { get { return IDCounter; } }
+        private static Dictionary<ushort, KeyPoint> registry = new Dictionary<ushort, KeyPoint>();
 
+        //Keypoint's Data
         public string cityName, alternativeName;
         [SerializeField] private Sprite spriteNonSelected, spriteHighlighted;
         [SerializeField] private GameObject linkedUIBanner;
@@ -41,8 +51,25 @@ namespace GameMechanics.WorldCities
 
         void Awake()
         {
-            keyPointID = IDCounter;
+            if (_keyPointID == 0) { GenerateID(); }
+        }
+
+        public void GenerateID()
+        {
+            _keyPointID = IDCounter;
             IDCounter++;
+            registry[_keyPointID] = this;
+        }
+
+        public static KeyPoint GetByID(ushort id)
+        {
+            registry.TryGetValue(id, out KeyPoint kp);
+            return kp;
+        }
+
+        public void Dispose()
+        {
+            registry.Remove(_keyPointID);
         }
 
         //Unselect

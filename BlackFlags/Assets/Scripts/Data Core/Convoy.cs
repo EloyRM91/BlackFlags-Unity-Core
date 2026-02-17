@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 //Pathfinding
 using UnityEngine.AI;
@@ -14,16 +15,26 @@ using DG.Tweening;
 
 namespace GameMechanics.Ships
 {
-    public abstract class Convoy : MonoBehaviour, IsSelectable
+    public abstract class Convoy : MonoBehaviour, IsSelectable, IDable
     {
         //UI Sprite & Pooling
         protected UIShipSprites _thisConvoySpriteController;
 
-        //Serialization
-        private ushort _ID;
-        public ushort ID { get { return ID; } }
-        private static ushort IDCounter = 1; // El id 0 es el id del jugador;
+        //Serialization + Ids
+        private ushort _id = 0;
+        public ushort ID
+        {
+            get { return _id; }
+            set
+            {
+                _id = value;
+                registry[_id] = this;
+            }
+        }
+        private static ushort IDCounter = 2; // El id es el id de no asignación. El id 1 es el id del jugador.
         public static ushort IDConvoyCounter { get { return IDCounter; } }
+        private static Dictionary<ushort, Convoy> registry = new Dictionary<ushort, Convoy>();
+
 
         //This Convoy Data
         public float convoySpeed;
@@ -58,7 +69,7 @@ namespace GameMechanics.Ships
         #endregion
 
         //------------ BODY
-        protected virtual void Start() { SetID(); }
+        protected virtual void Start() { if (_id == 0) GenerateID(); }
 
         // HUD Pooling
         //public void GetSprite(EntityType_KINGDOM k, byte n)
@@ -68,13 +79,7 @@ namespace GameMechanics.Ships
             _thisConvoySpriteController.SetAsTarget(transform);
             _thisConvoySpriteController.SetValues(UIMap.ui.GetFlag(kingdom), n, GetComponent<ClassAI>());
         }
-        //public void GetSprite(string tag, byte n)
-        //{
-        //    _thisConvoySpriteController = PoolingShipSprites.GetSprite();
-        //    _thisConvoySpriteController.SetAsTarget(transform);
-        //    _thisConvoySpriteController.ForcePosition();
-        //    _thisConvoySpriteController.SetValues(UIMap.ui.GetFlag(tag), n, GetComponent<ClassAI>());
-        //}
+
         public bool HasSprite()
         {
             return _thisConvoySpriteController != null;
@@ -82,16 +87,27 @@ namespace GameMechanics.Ships
 
         //Serialization
         #region serialization
-        public void SetID()
+        public void GenerateID()
         {
-            _ID = IDCounter;
+            _id = IDCounter;
             IDCounter++;
         }
 
-        public void SetID(ushort val)
+        public void GenerateID(ushort val)
         {
-            _ID = val;
+            _id = val;
             if (val > IDCounter) IDCounter = val;
+        }
+
+        public static Convoy GetByID(ushort id)
+        {
+            registry.TryGetValue(id, out Convoy kp);
+            return kp;
+        }
+
+        public void Dispose()
+        {
+            registry.Remove(_id);
         }
 
         #endregion

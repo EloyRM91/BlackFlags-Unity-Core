@@ -19,6 +19,13 @@ using Serialization;
 
 namespace GameMechanics.Data
 {
+
+    public interface IDable
+    {
+        abstract void GenerateID();
+        // abstract void GetById();
+        abstract void Dispose();
+    }
     public class PersistentGameData : Persistent
     {
         #region VARIABLES
