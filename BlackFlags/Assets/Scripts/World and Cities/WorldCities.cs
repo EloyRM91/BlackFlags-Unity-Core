@@ -29,11 +29,12 @@ namespace GameMechanics.WorldCities
             get { return _keyPointID; }
             set
             {
+                if (value != 0) ;
                 _keyPointID = value;
                 registry[_keyPointID] = this;
             }
         }
-        private static ushort IDCounter;
+        private static ushort IDCounter = 1;
         public static ushort IDKeyPointCounter { get { return IDCounter; } }
         private static Dictionary<ushort, KeyPoint> registry = new Dictionary<ushort, KeyPoint>();
 
@@ -63,6 +64,11 @@ namespace GameMechanics.WorldCities
 
         public static KeyPoint GetByID(ushort id)
         {
+            if (id == 0)
+            {
+                Debug.LogError("cannot set key to zero");
+                return null;
+            }
             registry.TryGetValue(id, out KeyPoint kp);
             return kp;
         }

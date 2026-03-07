@@ -21,7 +21,7 @@ namespace GameMechanics.AI
         protected ConvoyNPC _thisConvoy;
         protected Vector3 _destination;
 
-        protected abstract void SetStateAs_OnCruisse();
+        public abstract void SetStateAs_OnCruisse(KeyPoint currentPort = null);
         public abstract string GetAIRol();
         public abstract string GetGentilism(Kingdom kingdom);
         public virtual void SetStateAs_AtPort()
@@ -52,7 +52,7 @@ namespace GameMechanics.AI
     {
         [SerializeField] private Settlement[] convoyRoute;
         public byte routeIndex = 0;
-        private bool toOcean;
+        private bool toOcean; //el convoy vuelve al océano y sale del mapa
 
         private void OnEnable()
         {
@@ -107,7 +107,7 @@ namespace GameMechanics.AI
 
         //-------------------- AI STATES
         #region IA STATES
-        protected override void SetStateAs_OnCruisse()
+        public override void SetStateAs_OnCruisse(KeyPoint currentPort = null)
         {
             if (toOcean)
             {
@@ -128,7 +128,7 @@ namespace GameMechanics.AI
         {
             base.SetStateAs_AtPort();
             CancelInvoke();
-            Invoke("SetStateAs_OnCruisse", 660);
+            Invoke("onCruisseAction", 660);
 
             //Add this convoy to settlement's list
             if (_thisConvoy.currentPort is MB_City)
@@ -136,6 +136,10 @@ namespace GameMechanics.AI
                 var port = (MB_City)_thisConvoy.currentPort;
                 port.convoysInThisPort.Add(_thisConvoy);
             }
+        }
+        private void onCruisseAction()
+        {
+            SetStateAs_OnCruisse();
         }
         IEnumerator SetOnCruisseSync()
         {
@@ -184,13 +188,21 @@ namespace GameMechanics.AI
 
         //-------------------- AI STATES
         #region IA STATES
-        protected override void SetStateAs_OnCruisse()
+        public override void SetStateAs_OnCruisse(KeyPoint currentPort = null)
         {
             try
             {
                 Kingdom kingdom = transform.parent.parent.GetComponent<Kingdom>();
                 //En el futuro, los mercantes tendrán que poder entrar en puertos con los que se tenga un acuerdo comercial
-                _thisConvoy.currentPort = _thisConvoy.currentPort.NewDestinationFromThisPort(kingdom);
+                if (currentPort != null)
+                {
+                    _thisConvoy.currentPort = currentPort;
+                }
+                else
+                {
+                    _thisConvoy.currentPort = _thisConvoy.currentPort.NewDestinationFromThisPort(kingdom);
+                }
+
                 _thisConvoy.SetIADestination(GetDestination(_thisConvoy.currentPort));
                 _thisConvoy.convoyCurrentState = ConvoyState.Sailing;
                 collider.enabled = true;
@@ -209,7 +221,7 @@ namespace GameMechanics.AI
             //esto es pa que no compile
             base.SetStateAs_AtPort();
             CancelInvoke();
-            Invoke("SetStateAs_OnCruisse", Random.Range(90, 180));
+            Invoke("onCruisseAction", Random.Range(90, 180));
 
             //Add this convoy to settlement's list
             if (_thisConvoy.currentPort is MB_City)
@@ -217,6 +229,10 @@ namespace GameMechanics.AI
                 var port = (MB_City)_thisConvoy.currentPort;
                 port.convoysInThisPort.Add(_thisConvoy);
             }
+        }
+        private void onCruisseAction()
+        {
+            SetStateAs_OnCruisse();
         }
         #endregion
     }
@@ -262,7 +278,7 @@ namespace GameMechanics.AI
         }
 
         //-------------------- AI STATES
-        protected override void SetStateAs_OnCruisse()
+        public override void SetStateAs_OnCruisse(KeyPoint currentPort = null)
         {
             Kingdom kingdom = transform.parent.parent.GetComponent<Kingdom>();
             _thisConvoy.currentPort = _thisConvoy.currentPort.NewDestinationFromThisPort(kingdom, true, 250);
@@ -274,11 +290,16 @@ namespace GameMechanics.AI
         {
             base.SetStateAs_AtPort();
             CancelInvoke();
-            Invoke("SetStateAs_OnCruisse", 240);
+            Invoke("onCruisseAction", 240);
 
             //Add this convoy to settlement's list
             var port = (MB_City)_thisConvoy.currentPort;
             port.convoysInThisPort.Add(_thisConvoy);
+        }
+
+        private void onCruisseAction()
+        {
+            SetStateAs_OnCruisse();
         }
     }
     public class AI_Pirate : ClassAI
@@ -330,9 +351,13 @@ namespace GameMechanics.AI
 
         //-------------------- AI STATES
         #region IA STATES
-        protected override void SetStateAs_OnCruisse()
+        public override void SetStateAs_OnCruisse(KeyPoint currentPort = null)
         {
-            var currentPort = _thisConvoy.currentPort;
+            if (currentPort != null)
+            {
+                _thisConvoy.currentPort = currentPort;
+            }
+            currentPort = _thisConvoy.currentPort;
 
             if (currentPort is MB_City)
             {
@@ -373,7 +398,7 @@ namespace GameMechanics.AI
                 var shelter = (MB_PirateShelter)_thisConvoy.currentPort;
                 shelter.GetIn(pirateCharacter);
             }
-            Invoke("SetStateAs_OnCruisse", 480); //pero si el jugador está en puerto vuelve a contar
+            Invoke("onCruisseAction", 480); //pero si el jugador está en puerto vuelve a contar
 
             //Add this convoy to settlement's list
             if (_thisConvoy.currentPort is MB_City)
@@ -386,6 +411,11 @@ namespace GameMechanics.AI
                 var port = (MB_PirateShelter)_thisConvoy.currentPort;
                 port.convoysInThisPort.Add(_thisConvoy);
             }
+        }
+
+        private void onCruisseAction()
+        {
+            SetStateAs_OnCruisse();
         }
         #endregion
     }

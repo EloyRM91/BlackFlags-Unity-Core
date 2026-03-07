@@ -299,8 +299,8 @@ namespace GameMechanics.Data
                     {
                         SerializableShip ship = ships[i];
                         Ship s = ship.GetShipFromSerializedData();
-                        Debug.Log(s.name_Ship);
-                        Debug.Log(s.name_Captain);
+                        // Debug.Log(s.name_Ship);
+                        // Debug.Log(s.name_Captain);
                         convoyComponent.thisConvoyShips[i] = s;
                         convoyComponent.SetConvoyData(this);
                     }
@@ -311,19 +311,25 @@ namespace GameMechanics.Data
 
                     //Reestablecer el objetivo de la ruta a la que se dirigía este mercante:
                     ushort currentPortId = merchant.currentPortId;
-                    convoyComponent.currentPort = KeyPoint.GetByID(currentPortId);
+                    print(currentPortId);
+                    var currentPort = KeyPoint.GetByID(currentPortId);
+                    // convoyComponent.currentPort = currentPort;
+                    // print(currentPort);
+                    var convoyBrain = newConvoy.GetComponent<AI_LocalMerchant>();
+                    convoyBrain.SetStateAs_OnCruisse(currentPort);
                     if (convoyComponent.currentPort)
                     {
-                        convoyComponent.SetIADestination(GetDestinationFromKeyPoint(convoyComponent.currentPort));
-                        //todo: modificar el estado de la IA a sailing
-                        //todo: habilitar collider
-
-                        //todo: modificar función SetStateAs_OnCruisse para no externalizar este proceso
-                        //todo: pasar currentport como parámetro. si el parámetro es null, crearun nuevo destino
+                        convoyComponent.SetIADestination(GetDestinationFromKeyPoint(currentPort));
                     }
                     else
                     {
                         //algo
+                    }
+
+                    var visible = merchant.visibleForPlayer;
+                    if (visible)
+                    {
+                        PlayerExplorer.Visualize(convoyComponent);
                     }
                 }
             }

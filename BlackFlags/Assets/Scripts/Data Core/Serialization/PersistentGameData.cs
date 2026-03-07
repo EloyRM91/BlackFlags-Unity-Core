@@ -2249,7 +2249,7 @@ namespace GameMechanics.save
             id,
             currentPortId,
             targetId; //referencia al convoy/barco al que está persiguiendo
-        public bool inOnTarget;
+        public bool inOnTarget, visibleForPlayer;
 
         public SerializableConvoy(ConvoyNPC convoy)
         {
@@ -2268,6 +2268,9 @@ namespace GameMechanics.save
             id = convoy.ID;
             currentPortId = convoy.GetCurrentPort().KeyPointID;
             inOnTarget = convoy.isOnTarget;
+
+            //todo: tiene que haber una manera mejor de buscar en la lista cada vez que se guarda un barco...
+            visibleForPlayer = PlayerExplorer.IsVisible(convoy.transform);
         }
     }
 

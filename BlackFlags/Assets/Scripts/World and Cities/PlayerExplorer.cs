@@ -32,6 +32,17 @@ public class PlayerExplorer : MonoBehaviour
         PlayerMovement._EVENT_ExitFromPort -= ExitFromPort;
     }
 
+    public static void Visualize(Convoy convoy)
+    {
+        convoy.Appear();
+        visibleConvoys.Add(convoy.transform);
+        var AI = convoy.transform.GetComponent<AI_Pirate>();
+        if (AI != null)
+        {
+            AI.pirateCharacter.seenByPlayer = true;
+        }
+    }
+
     private void ArriveToPort(KeyPoint k)
     {
         GetComponent<SphereCollider>().enabled = false;
@@ -96,8 +107,6 @@ public class PlayerExplorer : MonoBehaviour
                 }
             }
         }
-
-
     }
     private void OnTriggerExit(Collider other)
     {
