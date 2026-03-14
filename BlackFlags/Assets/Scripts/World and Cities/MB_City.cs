@@ -154,12 +154,17 @@ namespace GameMechanics.WorldCities
 
         public void SetFromSerializedData(SerializableCity cityData)
         {
+            //Si deserializo este objeto, significa que eost a a espera de que la escena termine de cargar
+            //Escucho el evento:
+            GameManager._EVENT_OnSceneReady += PrepareKeyPointOnScene;
+
             this.cityName = cityData.cityName;
             gameObject.name = cityData.cityName;
             this.alternativeName = cityData.alternativeName;
             this.population = cityData.population;
-            this.tavernName = cityData.tavernName;
             this.revealed = cityData.revealed;
+            this.tavernName = cityData.tavernName;
+
             this.transform.position = cityData.ToVector3(cityData.position);
 
             if (cityData.flippedX)

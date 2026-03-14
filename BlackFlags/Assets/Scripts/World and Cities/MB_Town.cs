@@ -35,6 +35,10 @@ namespace GameMechanics.WorldCities
 
         public void SetFromSerializedData(SerializableTown town)
         {
+            //Si deserializo este objeto, significa que eost a a espera de que la escena termine de cargar
+            //Escucho el evento:
+            GameManager._EVENT_OnSceneReady += PrepareKeyPointOnScene;
+
             this.cityName = town.cityName;
             gameObject.name = town.cityName;
             this.alternativeName = town.alternativeName;

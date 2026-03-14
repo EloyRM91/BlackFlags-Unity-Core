@@ -41,6 +41,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Events
+    public delegate void OnSceneChange(bool fileLoaded);
+    public static event OnSceneChange _EVENT_OnSceneReady;
+
     //Routes
     //[SerializeField] private List<Transform> SpawnOceanPoints;
     [SerializeField] private List<KeyPoint> pirateShelters;
@@ -134,8 +138,6 @@ public class GameManager : MonoBehaviour
 
                 k.GetArmadaFromSerializedData(merchantsInfo, patrolsInfo, europeanFleetInfo);
             }
-
-
         }
 
         //----------------------------------------------------
@@ -155,6 +157,12 @@ public class GameManager : MonoBehaviour
         // ---- JSON
         // var startGameJSONFormat = new StartGameJSONFormat(new StartGameData());
         // startGameJSONFormat.WorldData("worldData_Campaign_1720");
+
+        if (_EVENT_OnSceneReady != null)
+        {
+            _EVENT_OnSceneReady(PersistentGameSettings.loadingFile);
+        }
+
     }
 
     //Generation

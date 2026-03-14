@@ -119,6 +119,19 @@ namespace GameMechanics.WorldCities
             sequence.Play();
         }
 
+        public virtual void PrepareKeyPointOnScene(bool loadedGameFile)
+        {
+            if (loadedGameFile)
+            {
+                if (revealed)
+                {
+                    Reveal();
+                    //No tengo que escuchar más el evento. Me desuscribo.
+                    GameManager._EVENT_OnSceneReady -= PrepareKeyPointOnScene;
+                }
+            }
+        }
+
         #region INTERFACES
         // As selectable object
         public virtual void OnMouseEnter()
