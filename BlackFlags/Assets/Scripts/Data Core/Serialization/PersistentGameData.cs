@@ -2267,6 +2267,11 @@ namespace GameMechanics.save
             //todo: id y target id
             id = convoy.ID;
             currentPortId = convoy.GetCurrentPort().KeyPointID;
+            if (currentPortId == 0)
+            {
+                Debug.LogError("Corrupción de datos de guardado: una clave vale 0");
+                Debug.LogError(convoy.GetCurrentPort()?.cityName);
+            }
             inOnTarget = convoy.isOnTarget;
 
             //todo: tiene que haber una manera mejor de buscar en la lista cada vez que se guarda un barco...

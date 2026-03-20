@@ -27,12 +27,12 @@ namespace GameMechanics.WorldCities
         public ushort KeyPointID
         {
             get { return _keyPointID; }
-            set
-            {
-                if (value != 0) ;
-                _keyPointID = value;
-                registry[_keyPointID] = this;
-            }
+            // set
+            // {
+            //     if (value != 0) ;
+            //     _keyPointID = value;
+            //     registry[_keyPointID] = this;
+            // }
         }
         private static ushort IDCounter = 1;
         public static ushort IDKeyPointCounter { get { return IDCounter; } }
@@ -50,7 +50,7 @@ namespace GameMechanics.WorldCities
         public static event Selection KPSelected;
         #endregion
 
-        void Awake()
+        protected void Awake()
         {
             if (_keyPointID == 0) { GenerateID(); }
         }

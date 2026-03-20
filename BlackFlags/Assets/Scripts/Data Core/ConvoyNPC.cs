@@ -62,7 +62,15 @@ namespace GameMechanics.Ships
             if (CanGoTo(point))
             {
                 _destination = point;
-                if (point == transform.position) Debug.Log("puto genio");
+                if (point == transform.position)
+                {
+                    Debug.Log("Redundant destination call");
+                    Debug.Log("warn: " + convoyName + " - invalid Destination");
+                    isOnTarget = false;
+                    GetComponent<ClassAI>().ArriveToDestination();
+                    StopAllCoroutines();
+                    return;
+                }
                 if (path.corners.Length == 1) SetIADestination(point);
                 Move(path.corners);
             }

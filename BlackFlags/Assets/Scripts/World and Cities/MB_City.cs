@@ -31,6 +31,7 @@ namespace GameMechanics.WorldCities
 
         private void Awake()
         {
+            base.Awake();
             SetExportsFromIndex();
         }
 
