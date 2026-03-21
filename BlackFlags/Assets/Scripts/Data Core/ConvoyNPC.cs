@@ -59,18 +59,17 @@ namespace GameMechanics.Ships
         {
             StopAllCoroutines();
             gameObject.SetActive(true);
+            if (point == transform.position)
+            {
+                Debug.Log("Redundant destination call");
+                Debug.Log("warn: " + convoyName + " - invalid Destination");
+                Arrive();
+                return;
+            }
             if (CanGoTo(point))
             {
                 _destination = point;
-                if (point == transform.position)
-                {
-                    Debug.Log("Redundant destination call");
-                    Debug.Log("warn: " + convoyName + " - invalid Destination");
-                    isOnTarget = false;
-                    GetComponent<ClassAI>().ArriveToDestination();
-                    StopAllCoroutines();
-                    return;
-                }
+
                 if (path.corners.Length == 1) SetIADestination(point);
                 Move(path.corners);
             }
@@ -123,9 +122,7 @@ namespace GameMechanics.Ships
                     }
                     else //llega a destino
                     {
-                        isOnTarget = false;
-                        GetComponent<ClassAI>().ArriveToDestination();
-                        StopAllCoroutines();
+                        Arrive();
                     }
                 }
                 if (Time.timeScale == 20)
@@ -135,6 +132,11 @@ namespace GameMechanics.Ships
                     yield return new WaitForSeconds(0.04f);
                 }
             }
+            Arrive();
+        }
+
+        public void Arrive()
+        {
             isOnTarget = false;
             GetComponent<ClassAI>().ArriveToDestination();
             StopAllCoroutines();

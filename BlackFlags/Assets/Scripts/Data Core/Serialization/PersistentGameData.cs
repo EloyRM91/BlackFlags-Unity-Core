@@ -1419,15 +1419,12 @@ namespace GameMechanics.save
     [Serializable]
     public abstract class SerializableSettlement : SerializableKeyPoint
     {
-        //public SerializableResource[] exports;
         public int[] exports;
-
         public SerializableBaseCharacter[] serializedCharacters;
 
         public SerializableSettlement() : base()
         {
-            // List<Character> chs = settlement.GetCharacters();
-            //todo: exports?
+
         }
     }
 
@@ -2441,9 +2438,11 @@ namespace GameMechanics.save
         public Transform[] LoadCitiesData()
         {
             //Reinos
-            var kingdomsContainer = new GameObject();
-            kingdomsContainer.name = "Countries -- from saved game";
-            kingdomsContainer.tag = "Kingdoms";
+            var kingdomsContainer = new GameObject
+            {
+                name = "Countries -- from saved game",
+                tag = "Kingdoms"
+            };
             kingdomsContainer.SetActive(false);
 
             var banners = new GameObject().transform;
@@ -2509,9 +2508,11 @@ namespace GameMechanics.save
             }
 
             //Keypoints:
-            var kpsContainer = new GameObject();
-            kpsContainer.name = "World KeyPoints -- from - saved game";
-            kpsContainer.tag = "WorldPlaces";
+            var kpsContainer = new GameObject
+            {
+                name = "World KeyPoints -- from - saved game",
+                tag = "WorldPlaces"
+            };
             kpsContainer.SetActive(false);
 
             //Puertos naturales
@@ -3265,9 +3266,11 @@ namespace Serialization
             }
 
             //Keypoints:
-            var kpsContainer = new GameObject();
-            kpsContainer.name = "World KeyPoints -- from new campaign";
-            kpsContainer.tag = "WorldPlaces";
+            var kpsContainer = new GameObject
+            {
+                name = "World KeyPoints -- from new campaign",
+                tag = "WorldPlaces"
+            };
             kpsContainer.SetActive(false);
 
             //Puertos naturales
@@ -3414,9 +3417,11 @@ namespace Serialization
             }
 
             //Keypoints:
-            var kpsContainer = new GameObject();
-            kpsContainer.name = "World KeyPoints -- holi :3";
-            kpsContainer.tag = "WorldPlaces";
+            var kpsContainer = new GameObject
+            {
+                name = "World KeyPoints -- From Serialization",
+                tag = "WorldPlaces"
+            };
             kpsContainer.SetActive(false);
 
             //Puertos naturales

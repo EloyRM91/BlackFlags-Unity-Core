@@ -305,9 +305,7 @@ namespace GameMechanics.Data
                         convoyComponent.SetConvoyData(this);
                     }
 
-                    //?pruebas: establecer comportamiento ia en puerto
                     ai.Awake();
-                    // ai.SetStateAs_AtPort();
 
                     //Reestablecer el objetivo de la ruta a la que se dirigía este mercante:
                     ushort currentPortId = merchant.currentPortId;
@@ -323,7 +321,9 @@ namespace GameMechanics.Data
                     }
                     else
                     {
-                        //algo
+                        //? De momento, currentPort nunca es nulo, lo cual causa llamadas innecesarias
+                        //todo: crueent port != current Destination
+                        convoyComponent.Arrive();
                     }
 
                     var visible = merchant.visibleForPlayer;
