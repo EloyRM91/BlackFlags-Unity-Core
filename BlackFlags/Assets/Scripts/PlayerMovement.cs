@@ -93,6 +93,8 @@ public class PlayerMovement : Convoy
 
                     var rot = currentLoadedData.playerRotation;
                     transform.rotation = new Quaternion(rot[0], rot[1], rot[2], rot[3]);
+
+                    MapCamera.FocusOnTarget(transform);
                 }
             }
 
