@@ -241,7 +241,7 @@ namespace GameMechanics.AI
     {
         private void Start()
         {
-            StartCoroutine(SetStateAs_AtPortSync());
+            // StartCoroutine(SetStateAs_AtPortSync());
         }
         IEnumerator SetStateAs_AtPortSync()
         {
@@ -280,11 +280,32 @@ namespace GameMechanics.AI
         //-------------------- AI STATES
         public override void SetStateAs_OnCruisse(KeyPoint currentPort = null)
         {
-            Kingdom kingdom = transform.parent.parent.GetComponent<Kingdom>();
-            _thisConvoy.currentPort = _thisConvoy.currentPort.NewDestinationFromThisPort(kingdom, true, 250);
-            _thisConvoy.SetIADestination(GetDestination(_thisConvoy.currentPort));
-            _thisConvoy.convoyCurrentState = ConvoyState.Sailing;
-            collider.enabled = true;
+            try
+            {
+                //En el futuro, las patrullas tendrán que poder ir no sólo a ciudades, si no a keypoints de agua (propias, enemigas o alidas)
+                Kingdom kingdom = transform.parent.parent.GetComponent<Kingdom>();
+                if (currentPort != null)
+                {
+                    _thisConvoy.currentPort = currentPort;
+                }
+                else
+                {
+                    _thisConvoy.currentPort = _thisConvoy.currentPort.NewDestinationFromThisPort(kingdom, true, 250);
+
+                }
+                _thisConvoy.SetIADestination(GetDestination(_thisConvoy.currentPort));
+                _thisConvoy.convoyCurrentState = ConvoyState.Sailing;
+                collider.enabled = true;
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError("error at " + transform.name + " convoy");
+                Debug.Log(GetComponent<ConvoyNPC>().convoyName);
+                Debug.Log(transform.parent);
+                Debug.Log(transform.parent.parent);
+                Debug.LogError(e);
+            }
+
         }
         public override void SetStateAs_AtPort()
         {

@@ -107,9 +107,10 @@ public class PlayerMovement : Convoy
             //Set player ship class
             if (PersistentGameData.currentSceneIsTutorial)
             {
-                playership = new ShipSubCategory_MilitaryBalander();
-                playerShipName = "Joraique";
-                playerName = "Mariel Espinosa";
+                //todo: la tutorial será una partida guardada (un saveFile de tipo campaña)
+                // playership = new ShipSubCategory_MilitaryBalander();
+                // playerShipName = "Joraique";
+                // playerName = "Mariel Espinosa";
             }
             else
             {

@@ -1862,7 +1862,7 @@ namespace GameMechanics.save
             }
             countryMerchants = shipsList.ToArray();
 
-            shipsContainer = kTransform.GetChild(3);
+            shipsContainer = kTransform.GetChild(4);
             shipsList = new List<SerializableConvoy>();
             for (int i = 0; i < shipsContainer.childCount; i++)
             {
@@ -1875,7 +1875,7 @@ namespace GameMechanics.save
             }
             countryPatrols = shipsList.ToArray();
 
-            shipsContainer = kTransform.GetChild(4);
+            shipsContainer = kTransform.GetChild(3);
             shipsList = new List<SerializableConvoy>();
             for (int i = 0; i < shipsContainer.childCount; i++)
             {

@@ -267,17 +267,16 @@ namespace GameMechanics.Data
             SerializableConvoy[] patrols,
             SerializableConvoy[] euConvoys)
         {
+            Vector3 GetDestinationFromKeyPoint(KeyPoint port)
+            {
+                return port.transform.GetChild(0).position;
+            }
             Transform container = null;
             //Mercantes 
             {
                 container = merchantsPooling;
                 foreach (SerializableConvoy merchant in merchants)
                 {
-                    Vector3 GetDestinationFromKeyPoint(KeyPoint port)
-                    {
-                        return port.transform.GetChild(0).position;
-                    }
-
                     GameObject newConvoy = GetConvoy(container);
                     Vector3 position = merchant.ToVector3(merchant.position);
                     newConvoy.transform.position = position;
@@ -309,12 +308,8 @@ namespace GameMechanics.Data
 
                     //Reestablecer el objetivo de la ruta a la que se dirigía este mercante:
                     ushort currentPortId = merchant.currentPortId;
-                    print(currentPortId);
                     var currentPort = KeyPoint.GetByID(currentPortId);
-                    // convoyComponent.currentPort = currentPort;
-                    // print(currentPort);
-                    var convoyBrain = newConvoy.GetComponent<AI_LocalMerchant>();
-                    convoyBrain.SetStateAs_OnCruisse(currentPort);
+                    ai.SetStateAs_OnCruisse(currentPort);
                     if (convoyComponent.currentPort)
                     {
                         convoyComponent.SetIADestination(GetDestinationFromKeyPoint(currentPort));
@@ -322,21 +317,75 @@ namespace GameMechanics.Data
                     else
                     {
                         //? De momento, currentPort nunca es nulo, lo cual causa llamadas innecesarias
-                        //todo: crueent port != current Destination
+                        //? Hay que revisar cómo de complejo sería modificar el código para que el currentPort sea nulo
+                        //? al llegar a destino => Renombrar variable  currentPort --> currentDestinatio
+                        //todo: current port != current Destination
                         convoyComponent.Arrive();
                     }
 
-                    var visible = merchant.visibleForPlayer;
-                    if (visible)
-                    {
-                        PlayerExplorer.Visualize(convoyComponent);
-                    }
+                    //?Redundante?
+                    // var visible = merchant.visibleForPlayer;
+                    // if (visible)
+                    // {
+                    //     PlayerExplorer.Visualize(convoyComponent);
+                    // }
                 }
             }
 
             //Patrullas
             {
                 container = patrolsPooling;
+                foreach (SerializableConvoy patrol in patrols)
+                {
+                    GameObject newConvoy = GetConvoy(container);
+                    Vector3 position = patrol.ToVector3(patrol.position);
+                    newConvoy.transform.position = position;
+
+                    Quaternion rotation = patrol.ToQuaternion(patrol.rotation);
+                    newConvoy.transform.rotation = rotation;
+
+                    var convoyComponent = newConvoy.GetComponent<ConvoyNPC>();
+
+                    var ai = newConvoy.GetComponent<AI_Patrol>();
+                    if (ai == null)
+                    {
+                        ai = newConvoy.AddComponent<AI_Patrol>();
+                    }
+
+                    SerializableShip[] ships = patrol.convoyShips;
+                    convoyComponent.thisConvoyShips = new Ship[ships.Length];
+
+                    for (int i = 0; i < ships.Length; i++)
+                    {
+                        SerializableShip ship = ships[i];
+                        Ship s = ship.GetShipFromSerializedData();
+                        convoyComponent.thisConvoyShips[i] = s;
+                        convoyComponent.SetConvoyData(this);
+                    }
+
+                    ai.Awake();
+
+                    //Reestablecer el objetivo de la ruta a la que se dirigía esta patrulla (puerto o convoy en persecución):
+                    ushort currentPortId = patrol.currentPortId;
+                    var currentPort = KeyPoint.GetByID(currentPortId);
+                    ai.SetStateAs_OnCruisse(currentPort);
+                    if (convoyComponent.currentPort)
+                    {
+                        //?Redundante?
+                        // convoyComponent.SetIADestination(GetDestinationFromKeyPoint(currentPort));
+                    }
+                    else
+                    {
+                        //todo: la patrulla puede estar persiguiendo a un target
+                    }
+
+                    //?Redundante?
+                    // var visible = patrol.visibleForPlayer;
+                    // if (visible)
+                    // {
+                    //     PlayerExplorer.Visualize(convoyComponent);
+                    // }
+                }
             }
         }
 
