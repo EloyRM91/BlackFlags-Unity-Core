@@ -16,6 +16,7 @@ using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using GameMechanics.save;
 using Serialization;
+using GameMechanics.AI;
 
 namespace GameMechanics.Data
 {
@@ -1432,6 +1433,7 @@ namespace GameMechanics.save
     public class SerializableCity : SerializableSettlement
     {
         public int population;
+        public ushort counter_NEXT_CONVOY;
         public string tavernName;
 
         public SerializableCity(MB_City city) : base()
@@ -1450,6 +1452,7 @@ namespace GameMechanics.save
             tavernName = city.tavernName;
             spriteIndex = city.imgIndex;
             flippedX = city.transform.localScale.x < 0;
+            counter_NEXT_CONVOY = city.convoyDaysCounter;
 
             //* Personajes en la ciudad
             List<Character> chs = city.GetCharacters();
@@ -1870,7 +1873,17 @@ namespace GameMechanics.save
                 if (shipObj.gameObject.activeSelf)
                 {
                     var s = shipObj.GetComponent<ConvoyNPC>();
-                    shipsList.Add(new SerializableConvoy(s));
+                    var serialized = new SerializableConvoy(s);
+                    var ai = shipObj.GetComponent<AI_Merchant>();
+
+                    //Ruta de este convoy
+                    Settlement[] routeList = ai.getRemainingRoute;
+                    serialized.convoyRoute = serialized.SerializeRoute(routeList);
+
+                    //¿Este convoy europeo vuelve al océano?
+                    serialized.toOcean = ai.ToOcean;
+
+                    shipsList.Add(serialized);
                 }
             }
             countryPatrols = shipsList.ToArray();
@@ -2246,7 +2259,9 @@ namespace GameMechanics.save
             id,
             currentPortId,
             targetId; //referencia al convoy/barco al que está persiguiendo
-        public bool inOnTarget, visibleForPlayer;
+        public bool inOnTarget, visibleForPlayer, toOcean;
+
+        public ushort[] convoyRoute; //puertos de la ruta del convoy
 
         public SerializableConvoy(ConvoyNPC convoy)
         {
@@ -2273,6 +2288,19 @@ namespace GameMechanics.save
 
             //todo: tiene que haber una manera mejor de buscar en la lista cada vez que se guarda un barco...
             visibleForPlayer = PlayerExplorer.IsVisible(convoy.transform);
+        }
+
+        public ushort[] SerializeRoute(Settlement[] cities)
+        {
+            var result = new ushort[cities.Length];
+
+            for (int i = 0; i < cities.Length; i++)
+            {
+                var city = cities[i];
+                result[i] = city.KeyPointID;
+            }
+
+            return result;
         }
     }
 

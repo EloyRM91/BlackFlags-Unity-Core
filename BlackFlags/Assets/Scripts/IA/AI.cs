@@ -51,8 +51,20 @@ namespace GameMechanics.AI
     public class AI_Merchant : ClassAI
     {
         [SerializeField] private Settlement[] convoyRoute;
+        public Settlement[] getRemainingRoute
+        {
+            get
+            {
+                // return convoyRoute[routeIndex..];
+                return convoyRoute.Skip(routeIndex).ToArray();
+            }
+        }
         public byte routeIndex = 0;
         private bool toOcean; //el convoy vuelve al océano y sale del mapa
+        public bool ToOcean
+        {
+            get { return toOcean; }
+        }
 
         private void OnEnable()
         {

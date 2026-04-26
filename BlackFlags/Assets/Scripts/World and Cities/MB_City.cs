@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+//DateTime
+using System;
 //Mechanics
 using GameMechanics.Data;
 using GameMechanics.Ships;
 //Lists filtering
 using System.Linq;
-
 //Deserialización
 using GameMechanics.save;
 using GameSettings.Core;
@@ -20,6 +21,7 @@ namespace GameMechanics.WorldCities
     public class MB_City : Settlement
     {
         public int population;
+        public ushort convoyDaysCounter; //Contador del convoy europeo
         public string tavernName;
         private Vector3 spawnPoint;
         public Vector3 SpawnPoint { get { return spawnPoint; } }
@@ -42,16 +44,27 @@ namespace GameMechanics.WorldCities
             //---- 
 
             //Set frequency: the more populated is the city, the more traffic from Europe it receives.
-            var ConvoysFrequency = Mathf.Clamp(Mathf.Round(population / 3000), 1, 30);
+            var ConvoysFrequency = updateConvoyFrequency();
 
             //Set entry point for european convoys
             spawnPoint = OceanicRoute.GetOceanicRouteIn(transform.position);
 
             //Adjust the spawn ratio
-            ConvoysFrequency = 52560 / ConvoysFrequency;
+            convoyDaysCounter = (ushort)Mathf.Ceil(365 / ConvoysFrequency);
 
             //Call european convoys
-            InvokeRepeating("CallAtlanticConvoy", ConvoysFrequency / 2, ConvoysFrequency);
+
+            //todo: cambiar el sistema de segundos por un sistema basado en días
+            //todo: escucha el evento que se lanza cada día
+            //todo: al escuchar el evento, el contador de días baja
+            //todo: al llegar a cero, se llama a CallAtlanticConvoy, y se resetea el contador
+            //todo: al guardar partida, el valor del contador se guarda
+            //todo: al cargar partida, se establece el valor del contador
+            // InvokeRepeating("CallAtlanticConvoy", ConvoysFrequency / 2, ConvoysFrequency);
+
+            TimeManager.NewDay += updateConvoyCounter;
+
+            //todo: cada mes se actualiza la frecuencia de convoyes
 
             //----
             // CHARACTERS
@@ -72,6 +85,25 @@ namespace GameMechanics.WorldCities
 
 
         }
+
+        private void updateConvoyCounter(DateTime date)
+        {
+            convoyDaysCounter--;
+
+            if (convoyDaysCounter == 0)
+            {
+                CallAtlanticConvoy();
+                float freq = updateConvoyFrequency();
+                convoyDaysCounter = (ushort)Mathf.Ceil(365 / freq);
+            }
+        }
+
+        private float updateConvoyFrequency()
+        {
+            float ConvoysFrequency = Mathf.Clamp(Mathf.Round(population / 3000), 1, 30);
+            return ConvoysFrequency;
+        }
+
         private void CreateNewCharacters(int nSmug, int nSMen, int ratio)
         {
             var kingdom = transform.parent.parent.GetComponent<Kingdom>();
@@ -115,7 +147,6 @@ namespace GameMechanics.WorldCities
         }
         private void CallAtlanticConvoy()
         {
-            //var kingdom = GameManager.gm.GetKingdombyTag(transform.parent.tag);
             var kingdom = transform.transform.parent.GetComponent<Kingdom>();
             var sc = NewDestinationFromThisPort(kingdom, true, 50);
             var routeCities = sc != null ? new Settlement[2] { this, NewDestinationFromThisPort(kingdom, true, 50) } : new Settlement[1] { this };
@@ -165,6 +196,7 @@ namespace GameMechanics.WorldCities
             this.population = cityData.population;
             this.revealed = cityData.revealed;
             this.tavernName = cityData.tavernName;
+            this.convoyDaysCounter = cityData.counter_NEXT_CONVOY;
 
             this.transform.position = cityData.ToVector3(cityData.position);
 

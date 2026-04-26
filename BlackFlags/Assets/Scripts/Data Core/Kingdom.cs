@@ -239,7 +239,6 @@ namespace GameMechanics.Data
 
                 foreach (SerializableConvoy merchant in merchants)
                 {
-
                     GameObject newConvoy = GetConvoy(containers);
                     Vector3 position = merchant.ToVector3(merchant.position);
                     newConvoy.transform.position = position;
@@ -298,8 +297,6 @@ namespace GameMechanics.Data
                     {
                         SerializableShip ship = ships[i];
                         Ship s = ship.GetShipFromSerializedData();
-                        // Debug.Log(s.name_Ship);
-                        // Debug.Log(s.name_Captain);
                         convoyComponent.thisConvoyShips[i] = s;
                         convoyComponent.SetConvoyData(this);
                     }
@@ -312,7 +309,8 @@ namespace GameMechanics.Data
                     ai.SetStateAs_OnCruisse(currentPort);
                     if (convoyComponent.currentPort)
                     {
-                        convoyComponent.SetIADestination(GetDestinationFromKeyPoint(currentPort));
+                        //?Redundante
+                        // convoyComponent.SetIADestination(GetDestinationFromKeyPoint(currentPort));
                     }
                     else
                     {
@@ -322,13 +320,6 @@ namespace GameMechanics.Data
                         //todo: current port != current Destination
                         convoyComponent.Arrive();
                     }
-
-                    //?Redundante?
-                    // var visible = merchant.visibleForPlayer;
-                    // if (visible)
-                    // {
-                    //     PlayerExplorer.Visualize(convoyComponent);
-                    // }
                 }
             }
 
@@ -371,20 +362,54 @@ namespace GameMechanics.Data
                     ai.SetStateAs_OnCruisse(currentPort);
                     if (convoyComponent.currentPort)
                     {
-                        //?Redundante?
+                        //?Redundante
                         // convoyComponent.SetIADestination(GetDestinationFromKeyPoint(currentPort));
                     }
                     else
                     {
                         //todo: la patrulla puede estar persiguiendo a un target
                     }
+                }
+            }
 
-                    //?Redundante?
-                    // var visible = patrol.visibleForPlayer;
-                    // if (visible)
-                    // {
-                    //     PlayerExplorer.Visualize(convoyComponent);
-                    // }
+            //Convoyes Europeos
+            {
+                container = atlanticPooling;
+                foreach (SerializableConvoy convoy in euConvoys)
+                {
+                    GameObject newConvoy = GetConvoy(container);
+                    Vector3 position = convoy.ToVector3(convoy.position);
+                    newConvoy.transform.position = position;
+
+                    Quaternion rotation = convoy.ToQuaternion(convoy.rotation);
+                    newConvoy.transform.rotation = rotation;
+
+                    var convoyComponent = newConvoy.GetComponent<ConvoyNPC>();
+
+                    var ai = newConvoy.GetComponent<AI_Merchant>();
+                    if (ai == null)
+                    {
+                        ai = newConvoy.AddComponent<AI_Merchant>();
+                    }
+
+                    SerializableShip[] ships = convoy.convoyShips;
+                    convoyComponent.thisConvoyShips = new Ship[ships.Length];
+                    for (int i = 0; i < ships.Length; i++)
+                    {
+                        SerializableShip ship = ships[i];
+                        Ship s = ship.GetShipFromSerializedData();
+                        convoyComponent.thisConvoyShips[i] = s;
+                        convoyComponent.SetConvoyData(this);
+                    }
+
+                    ai.Awake();
+
+                    //Reestablecer el objetivo de la ruta a la que se dirigía el convoy:
+                    ushort currentPortId = convoy.currentPortId;
+                    var currentPort = KeyPoint.GetByID(currentPortId);
+
+                    //todo: y si vuelvo al oceano?
+                    var toOcean = convoy.toOcean;
                 }
             }
         }
