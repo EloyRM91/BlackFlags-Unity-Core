@@ -349,8 +349,21 @@ public class GameManager : MonoBehaviour
 
     public void SaveGame(string fileName)
     {
-        var savedGameBinaryFormat = new SavedGameBinaryFormat(new SavedFile());
+        var savedGameBinaryFormat = new SavedGameBinaryFormat(new SavedFile(), new SavedMetaFile());
         savedGameBinaryFormat.SaveGame(fileName);
+    }
+
+    public void QuickSave()
+    {
+        string GenerateName()
+        {
+            var playerName = PlayerMovement.playerName;
+            var date = TimeManager.WorldDate.ToString();
+            return $"QuickSave - Partida de {playerName} - {date}";
+        }
+
+        string fileName = GenerateName();
+        SaveGame(fileName);
     }
 
     //? Sólo para pruebas (El game manager no se encarga de gestionar la des-serialización)

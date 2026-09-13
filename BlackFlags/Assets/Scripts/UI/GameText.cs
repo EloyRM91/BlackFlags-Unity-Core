@@ -16,22 +16,14 @@ namespace UI
             set { fontMode = value; _EVENT_SetMode(); }
         }
 
-        [SerializeField]private FontType fontType;
+        [SerializeField] private FontType fontType;
 
         //Data
         private static Color nightColor = new Color(0.905f, 0.878f, 0.772f);
 
-        //private static Font
-        //    pirate,
-        //    caligraf,
-        //    regular;
-
-        //public static Font Pirate { set { pirate = value; } }
-        //public static Font Caligraf { set { pirate = value; } }
-        //public static Font Regular { set { regular = value; } }
-
         public static bool canUpdate = false;
         public static Dictionary<FontType, FontStyle[]> _D_FontStyles = new Dictionary<FontType, FontStyle[]>();
+        // private bool isInputFieldText;
 
         //Events
         public delegate void Change();
@@ -40,12 +32,16 @@ namespace UI
         protected override void OnEnable()
         {
             base.OnEnable();
+
+            InputField inputField = GetComponentInParent<InputField>();
+            // isInputFieldText = inputField != null && inputField.textComponent == this;
+
             if (canUpdate)
             {
                 SetFontMode();
             }
 
-            if(color == Color.white || color == nightColor)
+            if (color == Color.white || color == nightColor)
             {
                 SetNightColor();
             }
@@ -57,10 +53,16 @@ namespace UI
             SetFontMode();
             _EVENT_SetMode += SetFontMode;
 
-            if(color == Color.white || color == nightColor)
+            if (color == Color.white || color == nightColor)
             {
                 GraphicSettings.lightNightChange += SetNightColor;
             }
+
+            // Fix para impedir que un inputField se cargue la configuración del texto
+            // if (isInputFieldText)
+            // {
+            //     StartCoroutine(ApplyInputFieldFontNextFrame());
+            // }
         }
 
         protected override void OnDestroy()
@@ -82,6 +84,14 @@ namespace UI
         {
             color = GraphicSettings.NightLight ? nightColor : Color.white;
         }
+
+        private System.Collections.IEnumerator ApplyInputFieldFontNextFrame()
+        {
+            yield return null;
+
+            SetFontMode();
+            // SetAllDirty();
+        }
     }
 
     public class FontStyle
@@ -96,7 +106,7 @@ namespace UI
         }
     }
 
-    public enum GameFontsMode {normal, overSize, dislexic}
+    public enum GameFontsMode { normal, overSize, dislexic }
 
     public enum FontType { mainTitle, mainMenuButton, subButton, text22, text27, title, caligraf }
 }

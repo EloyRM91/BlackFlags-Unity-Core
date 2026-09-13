@@ -18,6 +18,9 @@ using GameMechanics.save;
 using Serialization;
 using GameMechanics.AI;
 
+//Fechas:
+using System.Globalization;
+
 namespace GameMechanics.Data
 {
 
@@ -1876,12 +1879,15 @@ namespace GameMechanics.save
                     var serialized = new SerializableConvoy(s);
                     var ai = shipObj.GetComponent<AI_Merchant>();
 
-                    //Ruta de este convoy
-                    Settlement[] routeList = ai.getRemainingRoute;
-                    serialized.convoyRoute = serialized.SerializeRoute(routeList);
+                    if (ai != null)
+                    {
+                        //Ruta de este convoy
+                        Settlement[] routeList = ai.getRemainingRoute;
+                        serialized.convoyRoute = serialized.SerializeRoute(routeList);
 
-                    //¿Este convoy europeo vuelve al océano?
-                    serialized.toOcean = ai.ToOcean;
+                        //¿Este convoy europeo vuelve al océano?
+                        serialized.toOcean = ai.ToOcean;
+                    }
 
                     shipsList.Add(serialized);
                 }
@@ -2381,6 +2387,7 @@ namespace GameMechanics.save
     #endregion
     #region SAVE GAME
 
+    /** Clase que contiene toda la información de la partida guardada*/
     [Serializable]
     public class SavedFile : SerializationConverter
     {
@@ -2761,6 +2768,74 @@ namespace GameMechanics.save
         }
     }
 
+    /** Clase que contiene metadatos de una partida guardada, que constituyen la información
+    básica de la partida.
+    */
+    [Serializable]
+    public class SavedMetaFile : SerializationConverter
+    {
+        public string WorldDate;
+        public string
+            playerName,
+            playerShipName,
+            gameVersion;
+
+        public byte[] playerFlag_Meta; //Sprite a menor resolución
+
+        public SavedMetaFile()
+        {
+            playerName = PersistentGameData._GData_PlayerName;
+            playerShipName = PersistentGameData._GData_ShipName;
+            WorldDate = TimeManager.WorldDate.ToString("d MMM yyyy", new CultureInfo("es-ES"));
+            gameVersion = $"v{Application.version}";
+
+            //Imagen de bandera sampleada para una previsualización:
+            // Texture2D texture = PersistentGameData._GData_PlayerFlag.texture;
+            // Texture2D resized = texture.Resize(source, 128, 128);
+            // playerFlag = resized.GetRawTextureData();
+        }
+
+        public void setResizedFlagFromBytes(byte[] bytes)
+        {
+            // Texture2D texture = new Texture2D(600, 400);
+            // texture.LoadImage(bytes);
+            // texture.Resize(200, 133);//! nofunciona
+            // playerFlag_Meta = texture.GetRawTextureData();
+
+            //-------------------------------
+
+            // Texture2D texture = new Texture2D(2, 2);
+            // texture.LoadImage(bytes);
+
+            // ScaleTexture(texture, 200, 133);
+            // playerFlag_Meta = texture.EncodeToPNG(); //!genera una textura errónea
+
+            //------------------------------
+
+            Texture2D texture = new Texture2D(600, 400, TextureFormat.RGBA32, false);
+            texture.LoadRawTextureData(bytes);
+            texture.Apply();
+
+            Texture2D resizedTex = ScaleTexture(texture, 200, 133);
+            playerFlag_Meta = resizedTex.EncodeToPNG();
+        }
+
+        private Texture2D ScaleTexture(Texture2D source, int targetWidth, int targetHeight)
+        {
+            Texture2D result = new Texture2D(targetWidth, targetHeight, source.format, false);
+            RenderTexture rt = RenderTexture.GetTemporary(targetWidth, targetHeight);
+            rt.filterMode = FilterMode.Bilinear;
+            source.filterMode = FilterMode.Bilinear;
+
+            RenderTexture.active = rt;
+            Graphics.Blit(source, rt);
+            result.ReadPixels(new Rect(0, 0, targetWidth, targetHeight), 0, 0);
+            result.Apply();
+
+            RenderTexture.ReleaseTemporary(rt);
+            return result;
+        }
+    }
     /** Clase que contiene un reino y la información serializada de la flota*/
     public class SerializedKingdomFleetData
     {
@@ -2839,26 +2914,21 @@ namespace GameMechanics.save
     public class SavedGameBinaryFormat : SerializationUtilities
     {
         public SavedFile savedFile;
+        public SavedMetaFile metaFile;
 
-        public SavedGameBinaryFormat(SavedFile savedFile)
+        public SavedGameBinaryFormat(SavedFile savedFile, SavedMetaFile metaFile)
         {
             this.savedFile = savedFile;
+            this.metaFile = metaFile;
+            //* guardo una imagen sampleada en el archivo meta:
+            metaFile.setResizedFlagFromBytes(savedFile.playerFlag);
         }
 
         public void SaveGame(string fileName, bool overWrite = false)
         {
-            var path = getRoute() + fileName + getFileExtension();
-            // Debug.Log("saving: " + path);
-
-            if (File.Exists(path) && !overWrite)
+            //Archivo de guardado:
             {
-                //Vamos a sobreescribir, lanzamos aviso al jugador
-
-                //Ahora mismo lo que voy a hacer es sobreescribir:
-                SaveGame(fileName, true);
-            }
-            else
-            {
+                var path = getRoute() + fileName + getFileExtension();
                 var binaryFormatter = new BinaryFormatter();
                 var stream = new FileStream(path, FileMode.Create);
 
@@ -2866,6 +2936,18 @@ namespace GameMechanics.save
                 binaryFormatter.Serialize(stream, this.savedFile);
                 stream.Close();
             }
+
+            //Archivo meta:
+            {
+                var path = getRoute() + fileName + ".meta";
+                var binaryFormatter = new BinaryFormatter();
+                var stream = new FileStream(path, FileMode.Create);
+
+                //Serialización:
+                binaryFormatter.Serialize(stream, this.metaFile);
+                stream.Close();
+            }
+
         }
     }
 
@@ -3017,6 +3099,26 @@ namespace GameMechanics.save
                 StartGameData result = binaryFormatter.Deserialize(stream) as StartGameData;
                 stream.Close();
                 Debug.LogError(result == null);
+                return result;
+            }
+            return null;
+        }
+    }
+
+    [Serializable]
+    public class MetaLoaderBinaryFormat : SerializationUtilities
+    {
+        public SavedMetaFile LoadMeta(string fileName)
+        {
+            // var path = getRoute() + fileName + ".meta";
+            var path = fileName;
+            Debug.Log(path);
+            if (File.Exists(path))
+            {
+                var binaryFormatter = new BinaryFormatter();
+                var stream = new FileStream(path, FileMode.Open);
+                SavedMetaFile result = binaryFormatter.Deserialize(stream) as SavedMetaFile;
+                stream.Close();
                 return result;
             }
             return null;
