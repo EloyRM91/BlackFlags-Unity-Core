@@ -14,7 +14,22 @@ namespace UI.Files
         [SerializeField] private Text _TEXT_fileSize;
         [SerializeField] Image _IMG_Flag;
 
+        //Events
+        public delegate void Selection(SavedFileRow row);
+        public static event Selection SelectFile;
+
         private string errorCause;
+
+        void Start()
+        {
+            var btn = GetComponent<Button>();
+            btn.onClick.AddListener(() => OnFileSelected());
+        }
+
+        public string GetFileName()
+        {
+            return _TEXT_fileName.text.Split('.')[0];
+        }
 
         public void SetData(SavedFileInfo file, SavedMetaInfo meta)
         {
@@ -55,6 +70,17 @@ namespace UI.Files
             var flagTex = new Texture2D(2, 2);
             flagTex.LoadImage(bytes);
             return Sprite.Create(flagTex, new Rect(0, 0, flagTex.width, flagTex.height), new Vector2(0.5f, 0.5f), 100);
+        }
+
+        private void OnFileSelected()
+        {
+            SelectFile(this);
+            GetComponent<Image>().enabled = true;
+        }
+
+        public void UnselectThisRow()
+        {
+            GetComponent<Image>().enabled = false;
         }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 using GameSettings.Core;
 using GameMechanics.save;
 
@@ -9,10 +10,36 @@ namespace UI.Files
 {
     public class SavedFilesDisplayMenu : MonoBehaviour
     {
-        [SerializeField] private GameObject savedFileRow;
+        [SerializeField] private GameObject _PREFAB_savedFileRow;
         [SerializeField] private Transform container;
+        [SerializeField] private Button _BUTTON_deleteButton;
+        private SavedFileRow selectedRow = null;
+
+        protected virtual void OnEnable()
+        {
+            clearList();
+            createFilesList();
+        }
 
         protected virtual void Start()
+        {
+            SavedFileRow.SelectFile += Select;
+        }
+
+        void OnDestroy()
+        {
+            SavedFileRow.SelectFile -= Select;
+        }
+
+        private void clearList()
+        {
+            while (container.childCount != 0)
+            {
+                DestroyImmediate(container.GetChild(container.childCount - 1).gameObject);
+            }
+        }
+
+        private void createFilesList()
         {
             string[] savedFiles = GetSavedFiles();
             var dir = GetDirectory();
@@ -43,7 +70,7 @@ namespace UI.Files
                 }
 
                 //Crea una fila en el layout de partidas:
-                var row = GameObject.Instantiate(savedFileRow, container);
+                var row = GameObject.Instantiate(_PREFAB_savedFileRow, container);
                 var rowComponent = row.GetComponent<SavedFileRow>();
                 rowComponent.SetData(fileInfo, metaInfo);
             }
@@ -97,6 +124,51 @@ namespace UI.Files
             var loaderBinaryFormat = new MetaLoaderBinaryFormat();
             SavedMetaFile savedMetaData = loaderBinaryFormat.LoadMeta(fileName);
             return savedMetaData;
+        }
+
+        protected virtual void Select(SavedFileRow fileRow)
+        {
+            Unselect();
+            selectedRow = fileRow;
+            _BUTTON_deleteButton.interactable = true;
+        }
+
+        protected virtual void Unselect()
+        {
+            if (selectedRow)
+            {
+                selectedRow.UnselectThisRow();
+                selectedRow = null;
+            }
+
+            _BUTTON_deleteButton.interactable = false;
+        }
+
+        public void Delete()
+        {
+            if (selectedRow == null) return;
+
+            var currentFileName = GetDirectory() + selectedRow.GetFileName();
+
+            //Borra el archivo
+            var filePath = currentFileName + GetExtension();
+            File.Delete(filePath);
+
+            //Borra el metadato
+            var metaPath = currentFileName + ".meta";
+            File.Delete(metaPath);
+
+            //Borra la instancia de la fila
+
+            foreach (Transform row in container)
+            {
+                var savedFileRow = row.GetComponent<SavedFileRow>();
+                if (savedFileRow == selectedRow)
+                {
+                    GameObject.Destroy(savedFileRow.gameObject);
+                }
+            }
+            Unselect();
         }
     }
 

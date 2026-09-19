@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using GameMechanics.Data;
 
+using UnityEngine.EventSystems;
+
 namespace UI.Files
 {
     public class SaveMenu : SavedFilesDisplayMenu
@@ -23,7 +25,10 @@ namespace UI.Files
             }
 
             fieldText.text = GetFileName();
+
+            fieldText.onValueChanged.AddListener(OnInputFieldSelected);
         }
+
         public void Save()
         {
             //todo: detectar si ya existe una partida con ese nombre
@@ -36,6 +41,23 @@ namespace UI.Files
             GameManager.gm.SaveGame(fileName);
             print("Guardando: " + fileName);
             Invoke("done", 150);
+        }
+
+        protected override void Select(SavedFileRow fileRow)
+        {
+            var currentFileName = fileRow.GetFileName();
+            fieldText.text = currentFileName;
+            base.Select(fileRow);
+        }
+
+        protected override void Unselect()
+        {
+            base.Unselect();
+        }
+
+        private void OnInputFieldSelected(string text)
+        {
+            Unselect();
         }
 
         private void done()
