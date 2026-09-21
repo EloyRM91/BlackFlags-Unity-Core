@@ -50,11 +50,6 @@ namespace UI.Files
             base.Select(fileRow);
         }
 
-        protected override void Unselect()
-        {
-            base.Unselect();
-        }
-
         private void OnInputFieldSelected(string text)
         {
             Unselect();
