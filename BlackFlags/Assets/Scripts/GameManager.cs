@@ -147,7 +147,7 @@ public class GameManager : MonoBehaviour
         ShipInventory.Crew = 5;
 
         // ---- AUTOLOAD QUICKSAVE
-        LoadGame("hola");
+        // LoadGame("hola");
 
         //DEV
         // ---- BINARY
@@ -373,6 +373,7 @@ public class GameManager : MonoBehaviour
         SavedFile savedGameData = loaderBinaryFormat.LoadGame(fileName);
 
         Debug.LogError("Holi");
+        Debug.LogError(fileName);
 
         if (savedGameData != null)
         {

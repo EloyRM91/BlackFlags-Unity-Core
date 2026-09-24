@@ -172,7 +172,8 @@ namespace UI.Files
         }
     }
 
-    /** Clase que contiene los datos que se necesitan de un archivo guardado*/
+    /** Clase que contiene los datos que se necesitan de un archivo guardado
+    (se usa como una interface para forzar una estructura de parámetros)*/
     public class SavedFileInfo
     {
         public string name;
@@ -191,7 +192,8 @@ namespace UI.Files
         }
     }
 
-    /** Clase que contiene los datos que se necesitan de un archivo meta*/
+    /** Clase que contiene los datos que se necesitan de un archivo meta
+    (se usa como una interface para forzar una estructura de parámetros)*/
     public class SavedMetaInfo
     {
         public string version;
@@ -204,7 +206,7 @@ namespace UI.Files
         {
             version = file.gameVersion;
             gameDate = file.WorldDate;
-            location = "texto prueba";
+            location = file.playerLocation;
             bytes = file.playerFlag_Meta;
         }
     }

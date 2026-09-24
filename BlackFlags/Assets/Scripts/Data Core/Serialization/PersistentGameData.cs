@@ -2778,7 +2778,8 @@ namespace GameMechanics.save
         public string
             playerName,
             playerShipName,
-            gameVersion;
+            gameVersion,
+            playerLocation;
 
         public byte[] playerFlag_Meta; //Sprite a menor resolución
 
@@ -2793,6 +2794,10 @@ namespace GameMechanics.save
             // Texture2D texture = PersistentGameData._GData_PlayerFlag.texture;
             // Texture2D resized = texture.Resize(source, 128, 128);
             // playerFlag = resized.GetRawTextureData();
+
+            var player = GameObject.FindWithTag("Player").transform;
+            var playerMovement = player.GetComponent<PlayerMovement>();
+            playerLocation = playerMovement.GetLocation();
         }
 
         public void setResizedFlagFromBytes(byte[] bytes)

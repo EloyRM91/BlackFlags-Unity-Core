@@ -5,7 +5,7 @@ namespace UI.WorldMap
     [DisallowMultipleComponent]
     public class ButtonInfo : Info
     {
-        [SerializeField] protected string txt;
+        [SerializeField] public string txt;
 
         public override void DisplayInfo()
         {

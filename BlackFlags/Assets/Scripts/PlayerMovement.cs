@@ -573,6 +573,11 @@ public class PlayerMovement : Convoy
         return inPort;
     }
 
+    public string GetLocation()
+    {
+        return inPort ? currentPort.cityName : "En el mar";
+    }
+
     private void EnterCity()
     {
         inPort = true;

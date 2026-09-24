@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 1217861446397364075}
   - component: {fileID: 1217861446397364077}
   - component: {fileID: 1217861446397364076}
+  - component: {fileID: 9173204225680016000}
   m_Layer: 5
   m_Name: Image - Error
   m_TagString: Untagged
@@ -155,6 +156,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &9173204225680016000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217861446397364074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8af088a138931ee42aa8e3514a4f9902, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  txt: 
 --- !u!1 &6868967554752594138
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,10 +361,10 @@ RectTransform:
   m_Father: {fileID: 6868967556241742797}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.36114007, y: 1}
-  m_AnchorMax: {x: 0.4004202, y: 1}
-  m_AnchoredPosition: {x: 171, y: -13.6}
-  m_SizeDelta: {x: 1.0130005, y: 46.832}
+  m_AnchorMin: {x: 0.50600004, y: 1}
+  m_AnchorMax: {x: 0.50600004, y: 1}
+  m_AnchoredPosition: {x: 24, y: -13.6}
+  m_SizeDelta: {x: 47.013, y: 46.832}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6868967555507088140
 CanvasRenderer:
@@ -687,10 +701,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _TEXT_version: {fileID: 1217861445943961000}
   _TEXT_fileName: {fileID: 6868967556461284988}
+  _TEXT_fileLocation: {fileID: 6868967555646567102}
+  _IMG_LocIcon: {fileID: 6868967555507088143}
   _TEXT_gameDate: {fileID: 6868967555212642000}
   _TEXT_fileDate: {fileID: 6868967554752594136}
   _TEXT_fileSize: {fileID: 6868967556156702379}
   _IMG_Flag: {fileID: 6868967555762064005}
+  _IMG_WarningSprite: {fileID: 1217861446397364076}
+  spriteCatalog: {fileID: 11400000, guid: 4fd83529df354a844a8dfd017ffca4c0, type: 2}
 --- !u!114 &5477296697736475514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -731,7 +749,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 6109714246103013752}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
