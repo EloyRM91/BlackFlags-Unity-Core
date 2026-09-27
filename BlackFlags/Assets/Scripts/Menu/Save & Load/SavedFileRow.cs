@@ -18,32 +18,15 @@ namespace UI.Files
         [SerializeField] Image _IMG_Flag;
         [SerializeField] Image _IMG_WarningSprite;
 
-        [SerializeField]
-        private SpriteCatalog spriteCatalog;
+        //Catálogos
+        [SerializeField] private SpriteCatalog spriteCatalog;
+        [SerializeField] private WarningsCatalog warningsCatalog;
 
         //Events
         public delegate void Selection(SavedFileRow row);
         public static event Selection SelectFile;
 
-        private byte errorCause;
-        /**
-        0 - ok
-        1 - no meta
-        2 - old version
-        **/
-
-        private static Dictionary<byte, string> _D_ErrorMsgs = new Dictionary<byte, string>() {
-            {1, "No se encontró el archivo meta asociado a la partida"},
-            {2, "La partida fue creada en una versión distinta"}
-        };
-
-        //todo: esto está muy harcodeado, ya que requiero directamente el path
-        //todo: crear un scriptable object
-        // private static Dictionary<string, string> _D_Sprites = new Dictionary<string, string>()
-        // {
-        //     {"onSail", "UI/Icons/icon - rudder"},
-        //     {"onPort", "UI/Icons/icon - on port"}
-        // };
+        private string errorCause = "";
 
         void Start()
         {
@@ -58,61 +41,60 @@ namespace UI.Files
 
         public void SetData(SavedFileInfo file, SavedMetaInfo meta)
         {
-            _TEXT_fileName.text = file.name;
-            _TEXT_fileDate.text = file.modifiedDate;
-            _TEXT_fileSize.text = file.size;
+            _TEXT_fileName.text = file.Name;
+            _TEXT_fileDate.text = file.ModifiedDate;
+            _TEXT_fileSize.text = file.Size;
 
             if (meta != null)
             {
                 //Comprueba la versión
-                _TEXT_version.text = meta.version;
+                _TEXT_version.text = meta.Version;
                 var currentVersion = $"v{Application.version}";
 
-                if (currentVersion != meta.version)
+                if (currentVersion != meta.Version)
                 {
-                    SetError(2);
+                    SetError("oldVersion");
                     _IMG_WarningSprite.enabled = true;
                 }
 
-                _TEXT_fileLocation.text = meta.location;
+                _TEXT_fileLocation.text = meta.Location;
 
-                //!muy harcodeado
-                //todo: arreglar esto
-                var key = meta.location == "En el mar" ? "OnSail" : "OnPort";
+                //Accede a sprite por catálogo
+                var key = meta.Location == "En el mar" ? "OnSail" : "OnPort";
                 _IMG_LocIcon.sprite = spriteCatalog.Get(key);
 
 
                 //Crea el sprite de la bandera sampleada:
-                byte[] flagMeta = meta.bytes;
+                byte[] flagMeta = meta.Bytes;
                 Sprite sp = GetSpriteFromBytes(flagMeta, 200, 133);
 
                 _IMG_Flag.sprite = sp;
 
-                _TEXT_gameDate.text = meta.gameDate;
+                _TEXT_gameDate.text = meta.GameDate;
             }
             else
             {
-                // Debug.Log(file.name + " has no meta");
-                if (_IMG_WarningSprite == null)
-                {
-                    Debug.LogError("_IMG_WarningSprite es NULL");
-                }
-                SetError(1);
+                SetError("noMeta");
             }
 
-            _IMG_WarningSprite.enabled = errorCause != 0;
+            _IMG_WarningSprite.enabled = errorCause != "";
         }
 
-        public byte getErrorCause()
+        public bool isOk()
         {
-            return errorCause;
+            return errorCause == "";
         }
 
-        private void SetError(byte code)
+        public string getErrorMsg()
+        {
+            return warningsCatalog.GetText(errorCause);
+        }
+
+        private void SetError(string code)
         {
             errorCause = code;
             var ButtonInfo = _IMG_WarningSprite.transform.GetComponent<ButtonInfo>();
-            var message = _D_ErrorMsgs[code];
+            var message = warningsCatalog.GetWarn(code);
             ButtonInfo.txt = message;
         }
 

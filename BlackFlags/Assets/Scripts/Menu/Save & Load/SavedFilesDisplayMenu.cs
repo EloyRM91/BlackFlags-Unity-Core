@@ -13,7 +13,7 @@ namespace UI.Files
         [SerializeField] private GameObject _PREFAB_savedFileRow;
         [SerializeField] private Transform container;
         [SerializeField] private Button _BUTTON_deleteButton;
-        private SavedFileRow selectedRow = null;
+        protected SavedFileRow selectedRow = null;
 
         protected virtual void OnEnable()
         {
@@ -50,7 +50,7 @@ namespace UI.Files
                 SavedMetaInfo metaInfo = null;
 
                 //Para cada archivo, busca sus metadatos:
-                var name = fileInfo.name.Split('.')[0];
+                var name = fileInfo.Name.Split('.')[0];
                 string[] metaResult = Directory.GetFiles(dir, $"{name}.meta");
                 string metaFile = null;
 
@@ -176,19 +176,19 @@ namespace UI.Files
     (se usa como una interface para forzar una estructura de parámetros)*/
     public class SavedFileInfo
     {
-        public string name;
-        public string modifiedDate;
-        public string size;
+        public string Name { get; }
+        public string ModifiedDate { get; }
+        public string Size { get; }
 
         public SavedFileInfo(string filePath)
         {
             //Obtiene la información del archivo
             // name = Path.GetFileName(file).Split('.')[0];
-            modifiedDate = File.GetLastWriteTime(filePath).ToString();
+            ModifiedDate = File.GetLastWriteTime(filePath).ToString();
 
             FileInfo fileInfo = new FileInfo(filePath);
-            name = fileInfo.Name;
-            size = (fileInfo.Length / 1024.0).ToString("F0") + "kb";
+            Name = fileInfo.Name;
+            Size = (fileInfo.Length / 1024.0).ToString("F0") + "kb";
         }
     }
 
@@ -196,18 +196,17 @@ namespace UI.Files
     (se usa como una interface para forzar una estructura de parámetros)*/
     public class SavedMetaInfo
     {
-        public string version;
-        public string gameDate;
-        public string location;
-
-        public byte[] bytes;
+        public string Version { get; }
+        public string GameDate { get; }
+        public string Location { get; }
+        public byte[] Bytes { get; }
 
         public SavedMetaInfo(SavedMetaFile file)
         {
-            version = file.gameVersion;
-            gameDate = file.WorldDate;
-            location = file.playerLocation;
-            bytes = file.playerFlag_Meta;
+            Version = file.gameVersion;
+            GameDate = file.WorldDate;
+            Location = file.playerLocation;
+            Bytes = file.playerFlag_Meta;
         }
     }
 }

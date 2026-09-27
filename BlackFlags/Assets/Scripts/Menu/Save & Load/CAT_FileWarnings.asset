@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14e62f9bdba90804792ea654fe69c94d, type: 3}
+  m_Name: CAT_FileWarnings
+  m_EditorClassIdentifier: 
+  entries:
+  - key: oldVersion
+    warn: "La partida fue creada en una versi\xF3n distinta"
+    details: "Est\xE1s intentando cargar una partida que fue guardada en una versi\xF3n
+      diferente del juego. Cargar una partida de una versi\xF3n deprecada puede causar
+      errores inesperados"
+  - key: noMeta
+    warn: "No se encontr\xF3 el archivo meta asociado a la partida"
+    details: "Est\xE1s intentando cargar una partida cuyo archivo .meta no ha sido
+      encontrado. Esto puede ocurrir cuando los archivos se modifican o eliminan
+      fuera del juego, o al realizar una copia de seguridad sin copiar los arhivos
+      meta. "

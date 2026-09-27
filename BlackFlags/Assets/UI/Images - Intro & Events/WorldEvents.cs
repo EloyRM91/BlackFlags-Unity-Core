@@ -9,7 +9,7 @@ using DG.Tweening;
 public class WorldEvents : MonoBehaviour
 {
     [SerializeField] private Sprite[] _EventSprites;
-    [Header ("Registro de Eventos del Mundo")]
+    [Header("Registro de Eventos del Mundo")]
     [SerializeField] private Transform _TR_WorldEventsContainer;
     [SerializeField] private GameObject _PREFAB_EventRow;
     //World Events
@@ -22,7 +22,7 @@ public class WorldEvents : MonoBehaviour
     [SerializeField] private Image _IMG_kindOfEvent, _IMG_BackgroundEvent;
 
     //References (External components)
-    [Header("Componentes: Vista inferior de información")]
+    [Header("Componentes: Vista inferior de informaciï¿½n")]
     [SerializeField] private Text _TEXT_LastEventSummary;
 
 
@@ -30,15 +30,15 @@ public class WorldEvents : MonoBehaviour
     {
         _D_WorldEvents = new Dictionary<int, Event>()
         {
-            { 0, new NoEffectsEvent("Un Nuevo Pirata", $"El pirata {PersistentGameData._GData_PlayerName} inicia su carrera de fechorías y pillaje",
-                $"La vida al servicio de la marina fue de lo más miserable: Leva forzada, vituallas en mal estado, y costear armas y uniforme a la par con tu propio dinero cuando el salario se atrasa durante meses." +
-                $"\n\nTras un tiempo en servicio, tú y tus hombres lleváis a cabo un motín a bordo, haciendo acopio de un destartalado {PersistentGameData._GData_PlayerShip.GetModelName()} de cabotaje, más presto a perseguir a metedores por un río a tiro de mosquete, que a prestar batalla real ante fuego de cañón. Aún así, lo apodásteis con orgullo con el nombre de {PersistentGameData._GData_PlayerShip.name_Ship}." +
-                $"\n\nCapitán {PersistentGameData._GData_PlayerName}, ante vos se extiene un mar de tempestades y enemigos. Conocerás a convictos, cimarrones y a los piratas más temidos que navegan los mares. Que tu nombre y tu bandera sean reconocidos en cada punta y cabo de la creación, y sean recordados durante siglos.",
+            { 0, new NoEffectsEvent("Un Nuevo Pirata", $"El pirata {PersistentGameData._GData_PlayerName} inicia su carrera de fechorï¿½as y pillaje",
+                $"La vida al servicio de la marina fue de lo mÃ¡s miserable: Leva forzada, vituallas en mal estado, y costear armas y uniforme a la par con tu propio dinero cuando el salario se atrasa durante meses." +
+                $"\n\nTras un tiempo en servicio, tÃº y tus hombres llevÃ¡is a cabo un motÃ­n a bordo, haciendo acopio de un destartalado {PersistentGameData._GData_PlayerShip.GetModelName()} de cabotaje, mï¿½s presto a perseguir a metedores por un rï¿½o a tiro de mosquete, que a prestar batalla real ante fuego de caï¿½ï¿½n. Aï¿½n asï¿½, lo apodï¿½steis con orgullo con el nombre de {PersistentGameData._GData_PlayerShip.name_Ship}." +
+                $"\n\nCapitÃ¡n {PersistentGameData._GData_PlayerName}, ante vos se extiene un mar de tempestades y enemigos. Conocerï¿½s a convictos, cimarrones y a los piratas mï¿½s temidos que navegan los mares. Que tu nombre y tu bandera sean reconocidos en cada punta y cabo de la creaciï¿½n, y sean recordados durante siglos.",
                 GetPathByShipModel(PersistentGameData._GData_PlayerShip.GetModelName()[0]))
             }
         };
 
-        if(PersistentGameSettings.loadingFile)
+        if (PersistentGameSettings.loadingFile)
         {
             //algo
         }
@@ -66,13 +66,13 @@ public class WorldEvents : MonoBehaviour
         //Establece datos en el hud
         //---------------------------------------
 
-        //Título de evento
+        //Tï¿½tulo de evento
         _TEXT_Label.text = currentEvent.title;
 
-        //Descripción del evento
+        //Descripciï¿½n del evento
         _TEXT_bodyText.text = currentEvent.body;
 
-        //Imágenes de fonto y tipo de evento
+        //Imï¿½genes de fonto y tipo de evento
         _IMG_BackgroundEvent.sprite = Resources.Load<Sprite>($"Events/{currentEvent.sprite_Background_Index}");
         _IMG_kindOfEvent.sprite = customEventOnPanelSprite;
 
@@ -82,14 +82,14 @@ public class WorldEvents : MonoBehaviour
         UIMap.panelON = true;
 
 
-        //Crea una nueva fila en la lista de eventos en el panel "Información del Mundo"
+        //Crea una nueva fila en la lista de eventos en el panel "Informaciï¿½n del Mundo"
         //---------------------------------------
-        GameObject row = Instantiate(_PREFAB_EventRow,_TR_WorldEventsContainer);
+        GameObject row = Instantiate(_PREFAB_EventRow, _TR_WorldEventsContainer);
         var spr = customEventSprite ??= _EventSprites[currentEvent.sprite_News_Index];
         var date = TimeManager.GetDateString();
         row.GetComponent<RowEventsList>().SetRowData(spr, date, currentEvent.summary);
 
-        //Actualiza la información de último evento:
+        //Actualiza la informaciï¿½n de ï¿½ltimo evento:
         //---------------------------------------
         FadeText(_TEXT_LastEventSummary, $"{TimeManager.GetDateString()}: {currentEvent.summary}");
     }
@@ -100,7 +100,7 @@ public class WorldEvents : MonoBehaviour
         Sequence sequence = DOTween.Sequence();
         sequence.Append(text.DOFade(0, 2.2f).SetUpdate(true));
         sequence.AppendInterval(0.6f).SetUpdate(true);
-        sequence.AppendCallback(() => { text.text = str;});
+        sequence.AppendCallback(() => { text.text = str; });
         sequence.Append(text.DOFade(1, 2.2f).SetUpdate(true));
 
         sequence.Play();
@@ -113,12 +113,12 @@ public class WorldEvents : MonoBehaviour
             _PANEL_messagePanel.gameObject.SetActive(false);
             TimeManager.NormalizeST();
         }
-        
+
     }
 
     private byte GetPathByShipModel(char c)
     {
-        switch(c)
+        switch (c)
         {
             case 'B': return 1;
             case 'F': return 2;
@@ -145,7 +145,7 @@ public abstract class Event
 public class NoEffectsEvent : Event
 {
     public override void Effects() { }
-    public NoEffectsEvent(string tt, string ss, string bb, byte bgIndex = 1,byte indexNews = 0, byte indexImg = 0)
+    public NoEffectsEvent(string tt, string ss, string bb, byte bgIndex = 1, byte indexNews = 0, byte indexImg = 0)
     {
         title = tt;
         summary = ss;

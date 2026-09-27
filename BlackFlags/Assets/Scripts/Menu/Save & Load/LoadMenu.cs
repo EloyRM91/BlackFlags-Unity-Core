@@ -10,7 +10,31 @@ namespace UI.Files
     public class LoadMenu : SavedFilesDisplayMenu
     {
         [SerializeField] private InputField fieldText;
+        [SerializeField] private GameObject warningsPanel;
+
+        [SerializeField] private SavedFileError errorRow;
+
+        protected virtual void OnEnable()
+        {
+            base.OnEnable();
+            warningsPanel.SetActive(false);
+        }
         public void Load()
+        {
+            var statusOK = selectedRow.isOk();
+
+            if (statusOK)
+            {
+                Load_Force();
+            }
+            else
+            {
+                // var message = selectedRow.getErrorMsg();
+                warningsPanel.SetActive(true);
+            }
+        }
+
+        public void Load_Force()
         {
             string fileName = fieldText.text;
             print(fileName);
@@ -24,6 +48,7 @@ namespace UI.Files
         {
             var currentFileName = fileRow.GetFileName();
             fieldText.text = currentFileName;
+            errorRow.updateErrorCause(fileRow.getErrorMsg());
             base.Select(fileRow);
         }
     }

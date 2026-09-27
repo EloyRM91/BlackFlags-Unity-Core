@@ -709,6 +709,7 @@ MonoBehaviour:
   _IMG_Flag: {fileID: 6868967555762064005}
   _IMG_WarningSprite: {fileID: 1217861446397364076}
   spriteCatalog: {fileID: 11400000, guid: 4fd83529df354a844a8dfd017ffca4c0, type: 2}
+  warningsCatalog: {fileID: 11400000, guid: 20d8dfe2de9bbb7408a95d807b54fe86, type: 2}
 --- !u!114 &5477296697736475514
 MonoBehaviour:
   m_ObjectHideFlags: 0
