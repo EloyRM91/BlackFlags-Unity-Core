@@ -13,6 +13,8 @@ using Generation.Generators;
 using GameMechanics.Data;
 using GameMechanics.save;
 using Serialization;
+using GameMechanics.Ships;
+using GameMechanics.WorldCities;
 
 
 namespace GameSettings.Loading
@@ -113,6 +115,8 @@ namespace GameSettings.Loading
                 if (savedGameData != null)
                 {
                     PersistentGameData.getDataFromSavedFile(savedGameData);
+                    Convoy.getDataFromSavedFile(savedGameData);
+                    KeyPoint.getDataFromSavedFile(savedGameData);
 
                     Transform[] containers;
                     Transform kingdomsContainer;

@@ -58,11 +58,11 @@ namespace GameMechanics.Data
         /// </summary>
         //public static OnTimeScaleChange onTimeScaleChange;
 
-        private float[] _speed = new float[] {0, 0.5f, 1, 2, 5, 20};  //Speed modes: (x0 = pause)
+        private float[] _speed = new float[] { 0, 0.5f, 1, 2, 5, 20 };  //Speed modes: (x0 = pause)
         private byte currentIndex = 2;
         private static float _currentspeed = 1;
         private float timer = 0;
-        public float Timer { get { return timer;}}
+        public float Timer { get { return timer; } }
         private float playedTime = 0;
         public uint PlayedTime { get { return (uint)playedTime; } }
         private byte counter20;
@@ -80,7 +80,7 @@ namespace GameMechanics.Data
 
         private void OnDestroy()
         {
-            if(UnsubscribeMarketEvent != null)
+            if (UnsubscribeMarketEvent != null)
                 UnsubscribeMarketEvent();
         }
         private void Start()
@@ -97,6 +97,7 @@ namespace GameMechanics.Data
                     NewDay(WorldDate);
                     timer = currentLoadedData.deltaWorldDate;
                     counter20 = currentLoadedData.marketTimer;
+                    playedTime = currentLoadedData.playedTime;
 
                     //Establece fecha de desbloqueo de racionamiento de ron y de carne:
                     for (int i = 0; i < rationingToggles.Length; i++)
@@ -104,7 +105,7 @@ namespace GameMechanics.Data
                         var ratToggle = rationingToggles[i];
                         if (ratToggle.Index == 10)
                         {
-                            if(currentLoadedData.rationingRum)
+                            if (currentLoadedData.rationingRum)
                             {
                                 ratToggle.LockedByTiming = currentLoadedData.rationingRum_TimerLock;
                                 ratToggle.UnlockerDate = currentLoadedData.unlockDate_RumRationing;
@@ -137,13 +138,13 @@ namespace GameMechanics.Data
         }
         private void LateUpdate()
         {
-            if(timer < 144) //10 mis/s at timespeed = 1 -- (1 day at 144 sec)
+            if (timer < 144) //10 mis/s at timespeed = 1 -- (1 day at 144 sec)
             {
                 timer += Time.deltaTime;
             }
             else
             {
-                //Transcurre un día
+                //Transcurre un dï¿½a
                 timer = 0;
                 WorldDate = WorldDate.AddDays(1);
 
@@ -151,7 +152,7 @@ namespace GameMechanics.Data
                 NewDay(WorldDate);
                 DailyConsumptionEvent();
 
-                //Actualiza mercados cada veinte días
+                //Actualiza mercados cada veinte dï¿½as
                 counter20++;
                 if (counter20 == 20)
                 {
@@ -187,8 +188,8 @@ namespace GameMechanics.Data
             return date.ToString("d MMMM yyyy");
         }
 
-        public void SetTimeSpeed(float val) 
-        { 
+        public void SetTimeSpeed(float val)
+        {
             _currentspeed = val;
             Time.timeScale = val;
         }
@@ -196,7 +197,7 @@ namespace GameMechanics.Data
         {
             if (!GameManager.forcedPause)
             {
-                if(Time.timeScale == 0)
+                if (Time.timeScale == 0)
                 {
                     currentIndex = 1;
                     TimeManager.PauseST();
@@ -270,7 +271,7 @@ namespace GameMechanics.Data
         /// </summary>
         public void Normalize()
         {
-            currentIndex = 2; //Modificación:
+            currentIndex = 2; //Modificaciï¿½n:
             SetTimeSpeed(1);
             UIMap.ui.UpdateSpeed(1);
             if (pausePanel.activeSelf) pausePanel.SetActive(false);
@@ -295,7 +296,7 @@ namespace GameMechanics.Data
         /// <summary>
         /// a previous speed time setter singleton call
         /// </summary>
-        public static void RestartTimeST() {instance.RestartTime(); }
+        public static void RestartTimeST() { instance.RestartTime(); }
         IEnumerator TimeCount()
         {
             while (true)

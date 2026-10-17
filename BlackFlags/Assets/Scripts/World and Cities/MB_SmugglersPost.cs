@@ -81,6 +81,8 @@ namespace GameMechanics.WorldCities
 
         public void SetFromSerializedData(SerializableSmugglersPost portData)
         {
+            SetID(portData.id);
+
             //Si deserializo este objeto, significa que eost a a espera de que la escena termine de cargar
             //Escucho el evento:
             GameManager._EVENT_OnSceneReady += PrepareKeyPointOnScene;

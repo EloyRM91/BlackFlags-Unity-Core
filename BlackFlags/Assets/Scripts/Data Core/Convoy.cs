@@ -10,6 +10,7 @@ using GameMechanics.Data;
 using GameMechanics.WorldCities;
 using UI.WorldMap;
 using GameMechanics.AI;
+using GameMechanics.save;
 //Tweening
 using DG.Tweening;
 
@@ -31,7 +32,7 @@ namespace GameMechanics.Ships
                 registry[_id] = this;
             }
         }
-        private static ushort IDCounter = 2; // El id es el id de no asignación. El id 1 es el id del jugador.
+        private static ushort IDCounter = 2; // El id 0 es el id de no asignación. El id 1 es el id del jugador.
         public static ushort IDConvoyCounter { get { return IDCounter; } }
         private static Dictionary<ushort, Convoy> registry = new Dictionary<ushort, Convoy>();
 
@@ -103,6 +104,13 @@ namespace GameMechanics.Ships
         {
             registry.TryGetValue(id, out Convoy kp);
             return kp;
+        }
+
+        public static void getDataFromSavedFile(SavedFile savedFile)
+        {
+            IDCounter = savedFile.IDCounter; //reestablece el contador de ids para que no se repitan.
+
+            //todo: cualquier otro cambio se debería cargar aquí.
         }
 
         public void Dispose()

@@ -87,7 +87,7 @@ namespace GameMechanics.Data
             if (!PersistentGameSettings.loadingFile)
             {
                 //pooling and generation
-                CreateArmadaV1();
+                CreateArmada();
             }
 
         }
@@ -114,7 +114,7 @@ namespace GameMechanics.Data
         }
 
         //Generation
-        public void CreateArmadaV1()
+        public void CreateArmada()
         {
             var cityList = countryPossessions.Where(s => s is MB_City).ToList();
             //Local Merchants
@@ -152,18 +152,22 @@ namespace GameMechanics.Data
                     GameObject newPatrol = GetConvoy(_poolContainer_PAT);
                     newPatrol.transform.position = port.transform.GetChild(0).position;
 
-                    var data = newPatrol.GetComponent<ConvoyNPC>();
-                    data.currentPort = port;
-                    if (newPatrol.GetComponent<AI_Patrol>() == null)
+                    var convoy = newPatrol.GetComponent<ConvoyNPC>();
+                    convoy.currentPort = port;
+                    var ai = newPatrol.GetComponent<AI_Patrol>();
+                    if (ai == null)
                     {
-                        newPatrol.AddComponent<AI_Patrol>();
+                        ai = newPatrol.AddComponent<AI_Patrol>();
                     }
 
                     var ship = shipsGenerator.GenerateShipData(ShipType_ROLE.Patrol, tagKey);
                     ship.name_Ship = WorldGenerator.GiveShipName(tagKey, ShipType_ROLE.Patrol, GenerationMode.Random);
                     ship.name_Captain = WorldGenerator.GetCharacterName(tagKey);
-                    data.thisConvoyShips = new Ship[1] { ship };
-                    data.SetConvoyData(this);
+                    convoy.thisConvoyShips = new Ship[1] { ship };
+                    convoy.SetConvoyData(this);
+
+                    ai.Awake();
+                    ai.SetStateAs_AtPort();
                 }
             }
 
@@ -172,22 +176,22 @@ namespace GameMechanics.Data
         {
             GameObject newConvoy = GetConvoy(_poolContainer_EU_M);
             newConvoy.transform.position = spawnOrigin;
-            var data = newConvoy.GetComponent<ConvoyNPC>();
-            data.currentPort = route[0];
+            var convoy = newConvoy.GetComponent<ConvoyNPC>();
+            convoy.currentPort = route[0];
             if (newConvoy.GetComponent<AI_Merchant>() == null)
             {
                 newConvoy.AddComponent<AI_Merchant>();
-                data.thisConvoyShips = new Ship[Random.Range(2, 5)];
-                for (int i = 0; i < data.thisConvoyShips.Length; i++)
+                convoy.thisConvoyShips = new Ship[Random.Range(2, 5)];
+                for (int i = 0; i < convoy.thisConvoyShips.Length; i++)
                 {
                     var ship = shipsGenerator.GenerateShipData(ShipType_ROLE.Merchant, tagKey);
                     ship.name_Ship = WorldGenerator.GiveShipName(tagKey, ShipType_ROLE.Merchant, GenerationMode.Random);
                     ship.name_Captain = WorldGenerator.GetCharacterName(tagKey);
-                    data.thisConvoyShips[i] = ship;
+                    convoy.thisConvoyShips[i] = ship;
                 }
-                data.SetConvoyData(this);
+                convoy.SetConvoyData(this);
             }
-            data.SetConvoyData(this);
+            convoy.SetConvoyData(this);
             newConvoy.GetComponent<AI_Merchant>().SetRoute(route);
         }
         //Pooling

@@ -4,6 +4,7 @@ using UnityEngine;
 using GameMechanics.Data;
 using GameMechanics.Ships;
 using UI.WorldMap;
+using GameMechanics.save;
 
 //Lists
 using System.Linq;
@@ -27,12 +28,6 @@ namespace GameMechanics.WorldCities
         public ushort KeyPointID
         {
             get { return _keyPointID; }
-            // set
-            // {
-            //     if (value != 0) ;
-            //     _keyPointID = value;
-            //     registry[_keyPointID] = this;
-            // }
         }
         private static ushort IDCounter = 1;
         public static ushort IDKeyPointCounter { get { return IDCounter; } }
@@ -62,6 +57,19 @@ namespace GameMechanics.WorldCities
             registry[_keyPointID] = this;
         }
 
+        public void SetID(ushort id)
+        {
+            if (_keyPointID != 0 &&
+                registry.TryGetValue(_keyPointID, out KeyPoint registeredKeyPoint) &&
+                registeredKeyPoint == this)
+            {
+                registry.Remove(_keyPointID);
+            }
+
+            _keyPointID = id;
+            registry[_keyPointID] = this;
+        }
+
         public static KeyPoint GetByID(ushort id)
         {
             if (id == 0)
@@ -73,9 +81,20 @@ namespace GameMechanics.WorldCities
             return kp;
         }
 
+        public static void getDataFromSavedFile(SavedFile savedFile)
+        {
+            IDCounter = savedFile.IDKeyPointCounter; //reestablece el contador de ids para que no se repitan.
+
+            //todo: cualquier otro cambio se debería cargar aquí.
+        }
+
         public void Dispose()
         {
-            registry.Remove(_keyPointID);
+            if (registry.TryGetValue(_keyPointID, out KeyPoint registeredKeyPoint) &&
+                registeredKeyPoint == this)
+            {
+                registry.Remove(_keyPointID);
+            }
         }
 
         //Unselect
@@ -322,4 +341,3 @@ namespace GameMechanics.WorldCities
         }
     }
 }
-

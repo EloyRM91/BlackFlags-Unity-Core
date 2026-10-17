@@ -62,7 +62,7 @@ namespace GameMechanics.Ships
             if (point == transform.position)
             {
                 Debug.Log("Redundant destination call");
-                Debug.Log("warn: " + convoyName + " - invalid Destination");
+                Debug.LogWarning("warn: " + convoyName + " - invalid Destination");
                 Arrive();
                 return;
             }

@@ -10,6 +10,7 @@ using GameMechanics.WorldCities;
 //Mechanics
 using GameMechanics.Ships;
 using GameMechanics.Data;
+using GameMechanics.save;
 
 //Load
 using GameSettings.Core;
@@ -77,8 +78,8 @@ public class PlayerMovement : Convoy
             var container = GameObject.FindWithTag("PersistentDataContainer");
             if (container.TryGetComponent<PersistentSavedFileContainer>(out PersistentSavedFileContainer c))
             {
-                var currentLoadedData = c.savedFile;
-                if (!c.ignoreInventoryData)
+                SavedFile currentLoadedData = c.savedFile;
+                if (!c.ignorePlayerConvoyData)
                 {
                     canMove = currentLoadedData.playerCanMove;
                     inPort = currentLoadedData.playerIsInPort;
@@ -94,7 +95,26 @@ public class PlayerMovement : Convoy
                     var rot = currentLoadedData.playerRotation;
                     transform.rotation = new Quaternion(rot[0], rot[1], rot[2], rot[3]);
 
+                    if (currentLoadedData.portID > 0)
+                        currentPort = KeyPoint.GetByID((ushort)currentLoadedData.portID);
+
+                    //! Añado un retardo con la corrutina
+                    // var destination = currentLoadedData.playerDestination;
+                    // if (!currentLoadedData.playerIsInPort && destination != null && destination.Length >= 3)
+                    // {
+                    //     var point = new Vector3(destination[0], destination[1], destination[2]);
+                    //     if ((point - transform.position).sqrMagnitude >= 0.25f)
+                    //         CreatePath(point);
+                    // }
+                    // c.OnLoadPlayerRoute();
+
+                    StartCoroutine(RestorePlayerRoute(currentLoadedData, c));
+
                     MapCamera.FocusOnTarget(transform);
+                }
+                else
+                {
+                    c.OnIgnorePlayerRoute();
                 }
             }
 
@@ -149,6 +169,23 @@ public class PlayerMovement : Convoy
         //Events 
         MoraleModifier.onSpeedModifier += SetPlayerParameters;
     }
+
+    private IEnumerator RestorePlayerRoute(SavedFile savedFile, PersistentSavedFileContainer container)
+    {
+        // Let scene components subscribe to the movement events before recreating the route.
+        yield return null;
+
+        var destination = savedFile.playerDestination;
+        if (!savedFile.playerIsInPort && destination != null && destination.Length >= 3)
+        {
+            var point = new Vector3(destination[0], destination[1], destination[2]);
+            if ((point - transform.position).sqrMagnitude >= 0.25f)
+                CreatePath(point);
+        }
+
+        container.OnLoadPlayerRoute();
+    }
+
     private void OnDestroy()
     {
         //Events 

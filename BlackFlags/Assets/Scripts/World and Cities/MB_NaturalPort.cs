@@ -56,6 +56,8 @@ namespace GameMechanics.WorldCities
 
         public void SetFromSerializedData(SerializableNaturalPort portData)
         {
+            SetID(portData.id);
+
             //Si deserializo este objeto, significa que eost a a espera de que la escena termine de cargar
             //Escucho el evento:
             GameManager._EVENT_OnSceneReady += PrepareKeyPointOnScene;

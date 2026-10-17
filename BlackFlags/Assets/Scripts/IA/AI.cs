@@ -230,7 +230,6 @@ namespace GameMechanics.AI
         }
         public override void SetStateAs_AtPort()
         {
-            //esto es pa que no compile
             base.SetStateAs_AtPort();
             CancelInvoke();
             Invoke("onCruisseAction", Random.Range(90, 180));
@@ -303,7 +302,6 @@ namespace GameMechanics.AI
                 else
                 {
                     _thisConvoy.currentPort = _thisConvoy.currentPort.NewDestinationFromThisPort(kingdom, true, 250);
-
                 }
                 _thisConvoy.SetIADestination(GetDestination(_thisConvoy.currentPort));
                 _thisConvoy.convoyCurrentState = ConvoyState.Sailing;

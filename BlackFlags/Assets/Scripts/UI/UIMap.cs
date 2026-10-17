@@ -175,6 +175,10 @@ public class UIMap : MonoBehaviour //, UIDetectable
 
         //Custom flag
         customFlag.sprite = PersistentGameData._GData_PlayerFlag;
+
+        //Hemos iniciado el juego, actualizamos la información de oro y reputación del jugador para estar seguros de que la UI está actualizada
+        UpdateGold(PersistentGameData._GData_Gold);
+        UpdateReputation(PersistentGameData._GData_Reputation);
     }
     private void OnDestroy()
     {

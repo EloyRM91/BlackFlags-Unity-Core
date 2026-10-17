@@ -143,7 +143,12 @@ public class GameManager : MonoBehaviour
         //----------------------------------------------------
         CreateArmada_PIRATE();
         PersistentGameData.CallUpdate();
-        PersistentGameData._GData_Reputation = 55;
+
+        if (PersistentGameData._GData_Reputation == -1)
+        {
+            PersistentGameData._GData_Reputation = 55;
+        }
+
         ShipInventory.Crew = 5;
 
         // ---- AUTOLOAD QUICKSAVE

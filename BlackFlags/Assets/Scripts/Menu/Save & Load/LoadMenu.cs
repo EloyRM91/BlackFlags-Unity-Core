@@ -29,7 +29,6 @@ namespace UI.Files
             }
             else
             {
-                // var message = selectedRow.getErrorMsg();
                 warningsPanel.SetActive(true);
             }
         }

@@ -63,11 +63,16 @@ namespace GameMechanics.Data
             set { _gold = value; if (updateGold != null) updateGold(value); }
         }
 
-        private static int _reputation;
-        public static int _GData_Reputation
+        private static short _reputation = -1;
+        public static short _GData_Reputation
         {
             get { return _reputation; }
-            set { _reputation = value; UIMap.ui.UpdateReputation(value); }
+            set
+            {
+                _reputation = value;
+                if (UIMap.ui != null)
+                    UIMap.ui.UpdateReputation(value);
+            }
         }
 
 
@@ -1318,6 +1323,8 @@ namespace GameMechanics.Data
             _GData_ShipName = savedFile.playerShipName;
             _GData_PlayerShip = GetShipDataFromSerializedInfo(savedFile.playerShipData);
             _GData_Gold = savedFile.playerGold;
+            //!aquí no puedo cargar aún el nivel de reputación del jugador, porque no se ha cargado aún la escena
+            // _GData_Reputation = savedFile.playerReputation;
 
             _GData_PlayerFlag = instance.GetSpriteFromBytes(savedFile.playerFlag, 600, 400);
             _GData_PlayerAvatar = instance.GetSpriteFromBytes(savedFile.playerAvatar, 300, 300);
@@ -2421,7 +2428,7 @@ namespace GameMechanics.save
 
         public SerializableShip playerShipData;
         public int playerGold;
-        public float playerReputation;
+        public short playerReputation;
         public float[] playerPosition;
         public float[] playerRotation;
         public bool
@@ -2681,7 +2688,6 @@ namespace GameMechanics.save
 
             if (rationingRum || rationingMeat)
             {
-                //var toggles = TimeManager.instance.RationingManagers;
                 var toggles = GameObject.FindObjectsOfType<UI.WorldMap.ToggleRationing>(true);
 
                 if (rationingRum)
@@ -2857,8 +2863,6 @@ namespace GameMechanics.save
             merchants = m;
             countryPatrols = p;
             europeanConvoys = c;
-
-
         }
     }
 
@@ -2952,7 +2956,6 @@ namespace GameMechanics.save
                 binaryFormatter.Serialize(stream, this.metaFile);
                 stream.Close();
             }
-
         }
     }
 
@@ -3036,7 +3039,6 @@ namespace GameMechanics.save
         public SavedFile LoadGame(string fileName)
         {
             var path = getRoute() + fileName + getFileExtension();
-            Debug.Log(path);
             if (File.Exists(path))
             {
                 var binaryFormatter = new BinaryFormatter();
