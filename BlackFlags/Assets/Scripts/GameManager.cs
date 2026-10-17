@@ -142,6 +142,10 @@ public class GameManager : MonoBehaviour
 
         //----------------------------------------------------
         CreateArmada_PIRATE();
+
+        // TODO: Aquí se han cargado ya todos los convoyes de los reinos
+        // TODO: --> Restaurar los targets guardados de los convoyes cuando todos los convoyes
+        // TODO: (incluidos los piratas) y el jugador tengan sus IDs registrados.
         PersistentGameData.CallUpdate();
 
         if (PersistentGameData._GData_Reputation == -1)

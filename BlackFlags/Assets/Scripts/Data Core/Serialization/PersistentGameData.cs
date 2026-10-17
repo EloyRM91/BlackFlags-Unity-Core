@@ -1322,9 +1322,8 @@ namespace GameMechanics.Data
             _GData_PlayerName = savedFile.playerName;
             _GData_ShipName = savedFile.playerShipName;
             _GData_PlayerShip = GetShipDataFromSerializedInfo(savedFile.playerShipData);
-            _GData_Gold = savedFile.playerGold;
-            //!aquí no puedo cargar aún el nivel de reputación del jugador, porque no se ha cargado aún la escena
-            // _GData_Reputation = savedFile.playerReputation;
+            _GData_Gold = savedFile.playerGold; //!Posteriormente hay que actualizar la ui
+            _GData_Reputation = savedFile.playerReputation; //!Posteriormente hay que actualizar la ui          
 
             _GData_PlayerFlag = instance.GetSpriteFromBytes(savedFile.playerFlag, 600, 400);
             _GData_PlayerAvatar = instance.GetSpriteFromBytes(savedFile.playerAvatar, 300, 300);
@@ -3636,4 +3635,3 @@ namespace Serialization
         }
     }
 }
-

@@ -17,7 +17,7 @@ namespace GameMechanics.Data
         private int[] items = new int[21];
         private float[] averageCost = new float[21];
         private float[] surplus = new float[6];
-        
+
 
         //Morale and crew
         private ushort crew;
@@ -135,10 +135,15 @@ namespace GameMechanics.Data
                 if (container.TryGetComponent<PersistentSavedFileContainer>(out PersistentSavedFileContainer c))
                 {
                     var currentLoadedData = c.savedFile;
-                    if(!c.ignoreInventoryData)
+                    if (!c.ignoreInventoryData)
                     {
+
                         items = currentLoadedData.inventoryItems;
+                        crew = currentLoadedData.crew;
                         surplus = currentLoadedData.surplus;
+                        onLoad = currentLoadedData.onLoadGuns;
+                        equipment = currentLoadedData.onEquipmentGuns;
+                        onUseWeaponsSlots = currentLoadedData.onUseWeaponsSlots;
                         UpdateLoad();
                         morale_BYSUPPLIES = currentLoadedData.moraleSupplies;
                         morale_BYRESTING = currentLoadedData.moraleResting;
@@ -152,7 +157,6 @@ namespace GameMechanics.Data
                     {
                         StartingInventory(PersistentGameData._GData_Difficulty);
                         StartingArmory();
-                        //armoryCapacity = PlayerMovement.playership.GetPowerCapacity();
                         UpdateLoad();
 
                         morale_BYSUPPLIES = 0.8f;
@@ -161,7 +165,7 @@ namespace GameMechanics.Data
                         SetMorale_Global();
                     }
 
-                    if(!c.ignoreMoraleData)
+                    if (!c.ignoreMoraleData)
                     {
                         var modifiersList = currentLoadedData.moraleModifiers;
 
@@ -171,6 +175,11 @@ namespace GameMechanics.Data
                             MoraleModifier.Add(modifiers[modifierIndex]);
                         }
 
+                        //Booleanos de modificadores de moral
+                        disentryCounter = currentLoadedData.disentryCounter;
+                        rationingRum = currentLoadedData.rationingRum;
+                        rationingMeat = currentLoadedData.rationingMeat;
+
                         //Hemos terminado de cargar los datos
                         c.OnLoadMorale();
                     }
@@ -178,7 +187,7 @@ namespace GameMechanics.Data
                     {
                         c.OnImportantDataLoaded();
                     }
-                }     
+                }
             }
             else
             {
@@ -218,7 +227,7 @@ namespace GameMechanics.Data
         //Supply
         public static float GetNecessarySupplies7(byte key)
         {
-            return D_SupplyConsumption[key]/2 * Crew;
+            return D_SupplyConsumption[key] / 2 * Crew;
         }
         public static float GetNecessarySupplies15(byte key)
         {
@@ -227,14 +236,14 @@ namespace GameMechanics.Data
 
         public static int GetNecessaryGuns(byte index)
         {
-            if(index == 16)
+            if (index == 16)
             {
                 return Mathf.Clamp(2 * Crew - instance.items[index], 0, 999);
             }
             else
             {
                 int capacity = PersistentGameData._GData_PlayerShip.GetPowerCapacity()[index - 17];
-                return Mathf.Clamp(capacity - instance.items[index], 0,999);
+                return Mathf.Clamp(capacity - instance.items[index], 0, 999);
             }
         }
 
@@ -250,7 +259,7 @@ namespace GameMechanics.Data
                     //Coste de mantenimiento por navegar:
                     if (i == 6) consumptionValue += PersistentGameData._GData_PlayerShip.GetManteinance() / 45;
 
-                    if(consumptionValue <= surplus[i])
+                    if (consumptionValue <= surplus[i])
                     {
                         //Resta del excedentes
                         surplus[i] -= consumptionValue;
@@ -270,7 +279,7 @@ namespace GameMechanics.Data
 
                         moralBySupplies[i] = items[i] + surplus[i] < 0 ? 0 : D_MoralBySupplies[i];
 
-                        if(items[i] < 0)
+                        if (items[i] < 0)
                         {
                             items[i] = 0;
                             surplus[i] = 0;
@@ -324,7 +333,7 @@ namespace GameMechanics.Data
                     {
                         disentryCounter = 8;
                         MoraleModifier.Add(modifiers[1]);
-                    }     
+                    }
                 }
             }
             else
@@ -337,7 +346,7 @@ namespace GameMechanics.Data
             //Scurvy
             if (!MoraleModifier.Contains(modifiers[2]))
             {
-                if(moralBySupplies[1] == 0)
+                if (moralBySupplies[1] == 0)
                     if (UnityEngine.Random.Range(0, 10) == 0)
                         MoraleModifier.Add(modifiers[2]);
             }
@@ -351,8 +360,8 @@ namespace GameMechanics.Data
             //Drunken
             if (!MoraleModifier.Contains(modifiers[3]))
             {
-                if(!MoraleModifier.Contains(modifiers[11]))
-                    if(items[4] > 15)
+                if (!MoraleModifier.Contains(modifiers[11]))
+                    if (items[4] > 15)
                         if (UnityEngine.Random.Range(0, 6) == 0)
                             MoraleModifier.Add(modifiers[3]);
             }
@@ -368,11 +377,11 @@ namespace GameMechanics.Data
             else MoraleModifier.Remove(instance.modifiers[modifierIndex]);
 
             //todo: esto se puede reffactorizar (ya tengo el array de modificadores, esto es una redundancia para agilizar)
-            if(modifierIndex == 10 )
+            if (modifierIndex == 10)
             {
                 instance.rationingRum = isOn;
             }
-            else if(modifierIndex == 11)
+            else if (modifierIndex == 11)
             {
                 instance.rationingMeat = isOn;
             }
@@ -401,17 +410,17 @@ namespace GameMechanics.Data
 
         private void SetMorale_Global()
         {
-            morale_GLOBAL = (morale_BYSUPPLIES + morale_BYPILLAGE + morale_BYRESTING)/3;
+            morale_GLOBAL = (morale_BYSUPPLIES + morale_BYPILLAGE + morale_BYRESTING) / 3;
         }
 
-//Trading
-#region TRADING
+        //Trading
+        #region TRADING
         public static void SetInventoryChange(int resourceIndex, int amount)
         {
             if (amount < 0) //vende o consume
                 instance.RemoveItem(resourceIndex, amount);
             else           //compra u obtiene
-                instance.AddItem(resourceIndex,amount);
+                instance.AddItem(resourceIndex, amount);
         }
 
         public static void SetInventoryChange(int resourceIndex, int amount, int cost)
@@ -475,7 +484,7 @@ namespace GameMechanics.Data
             return newVal < instance.maxCapacity;
         }
         public bool HasCapacity(float weight) { return shipLoad + weight < maxCapacity; }
-#endregion
+        #endregion
 
         //Armory & set up equipment
         #region ARMORY: ONLOAD & EQUIPMENT
@@ -536,7 +545,7 @@ namespace GameMechanics.Data
                     ToEquipment(i, (byte)equipmentBackUp[i]);
                 }
             }
-        } 
+        }
         public static void ToLoad(byte index, byte amount)
         {
             var onLoad = instance.onLoad;
@@ -603,7 +612,7 @@ namespace GameMechanics.Data
                     {
                         equipment[index] += amount;
                         onLoad[index] = (byte)(onLoad[index] - amount);
-                        onUseWeaponsSlots[index] = (byte)(onUseWeaponsSlots[index] + amount); //no tendremos problemas de desbordamiento porque ningún barco va a tener más de 256 cañones
+                        onUseWeaponsSlots[index] = (byte)(onUseWeaponsSlots[index] + amount); //no tendremos problemas de desbordamiento porque ningï¿½n barco va a tener mï¿½s de 256 caï¿½ones
                         OnEquipmentEditRefresh(index);
                         //print($"{onUseWeaponsSlots[0]}  {onUseWeaponsSlots[1]}  {onUseWeaponsSlots[2]}  {onUseWeaponsSlots[3]} // {equipment[index]}");
                     }
@@ -612,7 +621,7 @@ namespace GameMechanics.Data
                         ncaliber++;
                         while (ncaliber < 4)
                         {
-                            if(armoryCapacity[ncaliber] > 0)
+                            if (armoryCapacity[ncaliber] > 0)
                             {
                                 slotsVal = onUseWeaponsSlots[ncaliber] + amount;
 
@@ -620,7 +629,7 @@ namespace GameMechanics.Data
                                 {
                                     equipment[index] += amount;
                                     onLoad[index] -= amount;
-                                    onUseWeaponsSlots[ncaliber] = (byte)(onUseWeaponsSlots[ncaliber] + amount); //no tendremos problemas de desbordamiento porque ningún barco va a tener más de 256 cañones
+                                    onUseWeaponsSlots[ncaliber] = (byte)(onUseWeaponsSlots[ncaliber] + amount); //no tendremos problemas de desbordamiento porque ningï¿½n barco va a tener mï¿½s de 256 caï¿½ones
                                     OnEquipmentEditRefresh(index);
                                     //print($"{onUseWeaponsSlots[0]}  {onUseWeaponsSlots[1]}  {onUseWeaponsSlots[2]}  {onUseWeaponsSlots[3]} // {equipment[index]}");
                                     return;
@@ -639,10 +648,10 @@ namespace GameMechanics.Data
                 }
             }
 
-            
+
 
         }
-#endregion
+        #endregion
     }
 }
 
