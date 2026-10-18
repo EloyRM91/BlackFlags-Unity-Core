@@ -59,8 +59,7 @@ public class GameManager : MonoBehaviour
     //City List
     public List<MB_City> Cities;
 
-    //ForcedPause
-    public static bool forcedPause;
+    public bool forcedPause;
 
     private void Awake()
     {

@@ -278,8 +278,8 @@ public class UIMap : MonoBehaviour //, UIDetectable
         }
         _WINDOW_Zoom.SetActive(false);
     }
-    public void LockCamera() { MapCamera.isLocked = true; }
-    public void UnlockCamera() { MapCamera.isLocked = false; }
+    public void LockCamera() { MapCamera.cameraLocked = true; }
+    public void UnlockCamera() { MapCamera.cameraLocked = false; }
     #endregion
 
     #region WORLD POINTS INFO
@@ -541,8 +541,13 @@ public class UIMap : MonoBehaviour //, UIDetectable
                 if (!_UIConvoyHUD.IsShowingPanel)
                     UIMinimap.SliceDownST();
             }
-            else
+            else 
+            {
                 ClearPanels();
+            }
+                
+            MapCamera.inputsLocked = _WINDOW_Menu.activeSelf;
+            MapCamera.cameraLocked = _WINDOW_Menu.activeSelf;
         }
     }
 

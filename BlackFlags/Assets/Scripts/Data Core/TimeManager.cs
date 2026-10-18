@@ -195,7 +195,7 @@ namespace GameMechanics.Data
         }
         public void SpeedUp()
         {
-            if (!GameManager.forcedPause)
+            if (!GameManager.gm.forcedPause)
             {
                 if (Time.timeScale == 0)
                 {
@@ -222,7 +222,7 @@ namespace GameMechanics.Data
         }
         public void SpeedDown()
         {
-            if (!GameManager.forcedPause)
+            if (!GameManager.gm.forcedPause)
             {
                 if (currentIndex > 0 && Time.timeScale != 0)
                 {
@@ -240,7 +240,7 @@ namespace GameMechanics.Data
         /// </summary>
         public void Pause()
         {
-            if (!GameManager.forcedPause)
+            if (!GameManager.gm.forcedPause)
             {
                 SetTimeSpeed(0);
                 UIMap.ui.UpdateSpeed(0);
@@ -253,7 +253,7 @@ namespace GameMechanics.Data
         /// </summary>
         public static void PauseST()
         {
-            if (!GameManager.forcedPause)
+            if (!GameManager.gm.forcedPause)
             {
                 if (_currentspeed == 0)
                 {

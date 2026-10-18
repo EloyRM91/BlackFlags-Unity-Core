@@ -116,7 +116,7 @@ public class UI_SpecialViewsHUD : MonoBehaviour
     }
     private void Action_TALK_SMUGGLER()
     {
-        //¿Hablo con el contrabandista en una taberna?
+        //ï¿½Hablo con el contrabandista en una taberna?
         if (UI_TavernView.activeSelf)
         {
             //Desactiva cabecera de la interfaz
@@ -126,7 +126,7 @@ public class UI_SpecialViewsHUD : MonoBehaviour
             //Activa acciones con este personaje
             UI_TAVERN_SmugglerActions.SetActive(true);
         }
-        //¿Hablo con el contrabandista en un escondite de contrabando?
+        //ï¿½Hablo con el contrabandista en un escondite de contrabando?
         else
         {
 
@@ -135,7 +135,7 @@ public class UI_SpecialViewsHUD : MonoBehaviour
 
     private void Action_TALK_PIRATE()
     {
-        //¿Hablo con el pirata en una taberna?
+        //ï¿½Hablo con el pirata en una taberna?
         if (UI_TavernView.activeSelf)
         {
             //Desactiva cabecera de la interfaz
@@ -192,7 +192,7 @@ public class UI_SpecialViewsHUD : MonoBehaviour
     }
     private static void _ExtendedViewPause(bool val)
     {
-        GameManager.forcedPause = val;
+        GameManager.gm.forcedPause = val;
         if (val)
         {
             Time.timeScale = 0;
@@ -217,7 +217,7 @@ public class UI_SpecialViewsHUD : MonoBehaviour
 
     public static void StartTavernView()
     {
-        MapCamera.isLocked = true;
+        MapCamera.cameraLocked = true;
         PlayerMovement.canMove = false;
         TimeManager.NormalizeST();
         FadeOn(0.6f);
@@ -245,7 +245,7 @@ public class UI_SpecialViewsHUD : MonoBehaviour
         sequence.AppendCallback(() => { Cameras.ScenicViewMode(false); SetUIMode_ST(true); });
         sequence.AppendCallback(() => { UI_TavernView.SetActive(false); SetTavernViewDetails(); });
         sequence.AppendCallback(() => { FadeOff(.7f); EndOfView(false, 0); });
-        sequence.InsertCallback(1.6f, () => { Ambience.TransitionToAmbience(false, AmbientType.OnTavern); MapCamera.isLocked = false; });
+        sequence.InsertCallback(1.6f, () => { Ambience.TransitionToAmbience(false, AmbientType.OnTavern); MapCamera.cameraLocked = false; });
         sequence.Play();
     }
 

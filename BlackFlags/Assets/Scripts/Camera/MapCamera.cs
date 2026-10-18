@@ -39,7 +39,8 @@ public class MapCamera : MonoBehaviour
     //Camera Data
     private Camera _camera;
     private float _ortographicInitialSize;
-    public static bool isLocked;
+    public static bool cameraLocked;
+    public static bool inputsLocked;
 
     //Minimap frame
     private Transform _minimapFrame;
@@ -47,6 +48,12 @@ public class MapCamera : MonoBehaviour
 
     [DllImport("user32.dll")]
     public static extern bool SetCursorPos(int X, int Y);
+
+    void OnEnable()
+    {
+        inputsLocked = false;
+        cameraLocked = false;
+    }
 
     void Start()
     {
@@ -63,49 +70,54 @@ public class MapCamera : MonoBehaviour
     void Update()
     {
         GetInputs();
-        if (!isLocked) Zoom();
+        if (!cameraLocked) Zoom();
     }
     private void FixedUpdate()
     {
-        if (!isLocked) Move();
+        if (!cameraLocked) Move();
     }
     private void GetInputs()
     {
-        _inputX = Input.GetAxisRaw("Horizontal");
-        _inputY = Input.GetAxisRaw("Vertical");
-        _MouseX = Input.GetAxisRaw("Mouse X");
-        _MouseY = Input.GetAxisRaw("Mouse Y");
-        _deltaScroll = Input.mouseScrollDelta.y;
-        _deltaPress = Input.GetMouseButton(2);
-
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //Close UI elements
-           
-            if (UIMap.ui.gameObject.activeSelf)
-            {
-                UIMap.ui.ClearPanels();
-                //Adjust Camera
-                FocusOnTarget(_playerRef);
-                //Select player
-                UISelector.instance.SetTarget(_playerRef);
-                //Sound
-                GameMechanics.Sound.Ambience.SelectionSails_ST();
-            }
-
-        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             UIMap.ui.OpenGameMenu();
         }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            TimeManager.PauseST();
+
+        if(!cameraLocked) {
+            _inputX = Input.GetAxisRaw("Horizontal");
+            _inputY = Input.GetAxisRaw("Vertical");
+            _MouseX = Input.GetAxisRaw("Mouse X");
+            _MouseY = Input.GetAxisRaw("Mouse Y");
+            _deltaScroll = Input.mouseScrollDelta.y;
+            _deltaPress = Input.GetMouseButton(2);
         }
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            UIMap.ui.DisplayWorldInfoPanel();
+
+
+        //todo: esta arquitectura de inputs es un poco rara.
+        if(!inputsLocked) {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                //Close UI elements
+            
+                if (UIMap.ui.gameObject.activeSelf)
+                {
+                    UIMap.ui.ClearPanels();
+                    //Adjust Camera
+                    FocusOnTarget(_playerRef);
+                    //Select player
+                    UISelector.instance.SetTarget(_playerRef);
+                    //Sound
+                    GameMechanics.Sound.Ambience.SelectionSails_ST();
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                TimeManager.PauseST();
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                UIMap.ui.DisplayWorldInfoPanel();
+            }
         }
     }
 
@@ -171,7 +183,7 @@ public class MapCamera : MonoBehaviour
 
     private void Zoom()
     {
-        if (!GameManager.forcedPause)
+        if (!GameManager.gm.forcedPause)
         {
             if (_deltaScroll != 0)
             {
