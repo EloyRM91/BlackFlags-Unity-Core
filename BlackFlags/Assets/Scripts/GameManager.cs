@@ -194,6 +194,7 @@ public class GameManager : MonoBehaviour
                 data.currentPort = shelter;
                 var AI_Pirate = newCPirate.GetComponent<AI_Pirate>();
                 AI_Pirate ??= newCPirate.AddComponent<AI_Pirate>();
+                AI_Pirate.SetDefaultBehaviour();
 
                 //Set Convoy's Data
                 //todo: en caso de mods, hay que cambiar esto (por ahora se tomará Gran Bretaña como ptarget principal)

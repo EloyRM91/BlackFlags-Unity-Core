@@ -21,6 +21,22 @@ namespace GameMechanics.AI
         protected ConvoyNPC _thisConvoy;
         protected Vector3 _destination;
 
+        //Serialización
+        protected bool loaded;
+        public virtual void SetDefaultBehaviour() {}
+        public virtual void loadAIData(GameMechanics.save.SerializableConvoy convoyInfo) {
+            loaded = true;
+        }
+
+        // private void OnEnable() 
+        // {
+        //     if(!loaded) 
+        //     {
+        //         SetDefaultBehaviour();
+        //     }
+        // }
+
+
         public abstract void SetStateAs_OnCruisse(KeyPoint currentPort = null);
         public abstract string GetAIRol();
         public abstract string GetGentilism(Kingdom kingdom);
@@ -50,28 +66,41 @@ namespace GameMechanics.AI
 
     public class AI_Merchant : ClassAI
     {
-        [SerializeField] private Settlement[] convoyRoute;
+        [SerializeField] public Settlement[] convoyRoute;
+
+        // private void OnEnable() {
+        //     routeIndex = 0;
+        // }
+
         public Settlement[] getRemainingRoute
         {
             get
             {
-                // return convoyRoute[routeIndex..];
                 return convoyRoute.Skip(routeIndex).ToArray();
             }
         }
         public byte routeIndex = 0;
-        private bool toOcean; //el convoy vuelve al océano y sale del mapa
+        public bool toOcean; //el convoy vuelve al océano y sale del mapa
         public bool ToOcean
         {
             get { return toOcean; }
         }
 
-        private void OnEnable()
+        public override void SetDefaultBehaviour() 
         {
             routeIndex = 0;
             convoyRoute = null;
             toOcean = false;
             StartCoroutine("SetOnCruisseSync");
+        }
+
+        public override void loadAIData(GameMechanics.save.SerializableConvoy convoyInfo) {
+            base.loadAIData(convoyInfo);
+            if(convoyInfo.convoyRoute != null) {
+                convoyRoute = convoyInfo.DeserializeRoute(convoyInfo.convoyRoute);
+            }
+
+            loaded = true;
         }
 
         //-------------------- AI CLASS NAME
@@ -339,7 +368,7 @@ namespace GameMechanics.AI
 
         public Pirate pirateCharacter;
 
-        private void OnEnable()
+        public override void SetDefaultBehaviour()
         {
             StartCoroutine("OnEnableSync");
         }
@@ -459,6 +488,7 @@ namespace GameMechanics.AI
         {
             GetComponent<Convoy>().isOnTarget = true;
         }
+        
         public void MakeChasersRecalculatePath()
         {
             var temp = new List<Convoy>(chasers);

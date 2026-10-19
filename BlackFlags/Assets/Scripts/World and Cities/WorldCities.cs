@@ -24,7 +24,7 @@ namespace GameMechanics.WorldCities
     {
         #region VARIABLES
         //Serialization + Ids
-        private ushort _keyPointID = 0; //0 = clave de no asignación
+        private ushort _keyPointID = 0; //0 = clave de no asignación - va al océano o persigue a un enemigo
         public ushort KeyPointID
         {
             get { return _keyPointID; }

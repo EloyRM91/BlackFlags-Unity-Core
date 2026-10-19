@@ -109,8 +109,6 @@ namespace GameMechanics.Ships
         public static void getDataFromSavedFile(SavedFile savedFile)
         {
             IDCounter = savedFile.IDCounter; //reestablece el contador de ids para que no se repitan.
-
-            //todo: cualquier otro cambio se debería cargar aquí.
         }
 
         public void Dispose()

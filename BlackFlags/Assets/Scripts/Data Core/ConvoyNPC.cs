@@ -14,7 +14,20 @@ namespace GameMechanics.Ships
         private Convoy thisConvoyTarget;
         public string convoyName, convoyCaptain;
 
-        protected override void Start() { }
+        //Serialization
+        public void LoadConvoyData(GameMechanics.save.SerializableConvoy convoyInfo)
+        {
+            //todo: estoy cogiendo una instancia y metiéndole datos guardados
+            //En el futuro, debo de des-serializar todo directamente desde un objeto
+            //SerializableConvoy a una instancia de objeto ConvoyNPC
+            Vector3 position = convoyInfo.ToVector3(convoyInfo.position);
+            transform.position = position;
+
+            Quaternion rotation = convoyInfo.ToQuaternion(convoyInfo.rotation);
+            transform.rotation = rotation;
+
+            convoyCurrentState = (ConvoyState)convoyInfo.convoyState;
+        }
 
         //Set data from ships convoy
         public void SetConvoyData(Kingdom k)

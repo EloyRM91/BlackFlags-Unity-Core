@@ -139,6 +139,7 @@ namespace GameMechanics.Data
                     convoyComponent.SetConvoyData(this);
 
                     ai.Awake();
+                    ai.SetDefaultBehaviour();
                     ai.SetStateAs_AtPort();
                 }
             }
@@ -167,6 +168,7 @@ namespace GameMechanics.Data
                     convoy.SetConvoyData(this);
 
                     ai.Awake();
+                    ai.SetDefaultBehaviour();
                     ai.SetStateAs_AtPort();
                 }
             }
@@ -178,9 +180,10 @@ namespace GameMechanics.Data
             newConvoy.transform.position = spawnOrigin;
             var convoy = newConvoy.GetComponent<ConvoyNPC>();
             convoy.currentPort = route[0];
-            if (newConvoy.GetComponent<AI_Merchant>() == null)
+            var ai = newConvoy.GetComponent<AI_Merchant>();
+            if (ai == null)
             {
-                newConvoy.AddComponent<AI_Merchant>();
+                ai = newConvoy.AddComponent<AI_Merchant>();
                 convoy.thisConvoyShips = new Ship[Random.Range(2, 5)];
                 for (int i = 0; i < convoy.thisConvoyShips.Length; i++)
                 {
@@ -191,6 +194,7 @@ namespace GameMechanics.Data
                 }
                 convoy.SetConvoyData(this);
             }
+            ai.SetDefaultBehaviour();
             convoy.SetConvoyData(this);
             newConvoy.GetComponent<AI_Merchant>().SetRoute(route);
         }
@@ -234,36 +238,36 @@ namespace GameMechanics.Data
             GENTILISM_FEMPLU = kingdomData.gentilism_FEMPLU;
         }
 
-        public void GetArmadaFromSerializedData(SerializableKingdom kingdomData, Transform containers)
-        {
-            //Mercantes 
-            {
-                SerializableConvoy[] merchants = kingdomData.countryMerchants;
-                Debug.Log(merchants.Length);
+        // public void GetArmadaFromSerializedData(SerializableKingdom kingdomData, Transform containers)
+        // {
+        //     //Mercantes 
+        //     {
+        //         SerializableConvoy[] merchants = kingdomData.countryMerchants;
+        //         Debug.Log(merchants.Length);
 
-                foreach (SerializableConvoy merchant in merchants)
-                {
-                    GameObject newConvoy = GetConvoy(containers);
-                    Vector3 position = merchant.ToVector3(merchant.position);
-                    newConvoy.transform.position = position;
+        //         foreach (SerializableConvoy merchant in merchants)
+        //         {
+        //             GameObject newConvoy = GetConvoy(containers);
+        //             Vector3 position = merchant.ToVector3(merchant.position);
+        //             newConvoy.transform.position = position;
 
-                    Quaternion rotation = merchant.ToQuaternion(merchant.rotation);
-                    newConvoy.transform.rotation = rotation;
+        //             Quaternion rotation = merchant.ToQuaternion(merchant.rotation);
+        //             newConvoy.transform.rotation = rotation;
 
-                    var data = newConvoy.GetComponent<ConvoyNPC>();
+        //             var data = newConvoy.GetComponent<ConvoyNPC>();
+        //             data.convoyCurrentState = (ConvoyState)merchant.convoyState;
 
+        //             SerializableShip[] ships = merchant.convoyShips;
 
-                    SerializableShip[] ships = merchant.convoyShips;
+        //             foreach (SerializableShip ship in ships)
+        //             {
+        //                 Ship s = ship.GetShipFromSerializedData();
+        //                 Debug.Log(s.name_Ship);
+        //             }
+        //         }
+        //     }
 
-                    foreach (SerializableShip ship in ships)
-                    {
-                        Ship s = ship.GetShipFromSerializedData();
-                        Debug.Log(s.name_Ship);
-                    }
-                }
-            }
-
-        }
+        // }
 
         public void GetArmadaFromSerializedData(
             SerializableConvoy[] merchants,
@@ -275,19 +279,15 @@ namespace GameMechanics.Data
                 return port.transform.GetChild(0).position;
             }
             Transform container = null;
-            //Mercantes 
+            //Mercantes locales
             {
                 container = merchantsPooling;
                 foreach (SerializableConvoy merchant in merchants)
                 {
                     GameObject newConvoy = GetConvoy(container);
-                    Vector3 position = merchant.ToVector3(merchant.position);
-                    newConvoy.transform.position = position;
-
-                    Quaternion rotation = merchant.ToQuaternion(merchant.rotation);
-                    newConvoy.transform.rotation = rotation;
 
                     var convoyComponent = newConvoy.GetComponent<ConvoyNPC>();
+                    convoyComponent.LoadConvoyData(merchant);
 
                     var ai = newConvoy.GetComponent<AI_LocalMerchant>();
                     if (ai == null)
@@ -304,26 +304,40 @@ namespace GameMechanics.Data
                         convoyComponent.thisConvoyShips[i] = s;
                         convoyComponent.SetConvoyData(this);
                     }
-
+                    ai.loadAIData(merchant);
                     ai.Awake();
 
                     //Reestablecer el objetivo de la ruta a la que se dirigía este mercante:
                     ushort currentPortId = merchant.currentPortId;
                     var currentPort = KeyPoint.GetByID(currentPortId);
-                    ai.SetStateAs_OnCruisse(currentPort);
-                    if (convoyComponent.currentPort)
+                    convoyComponent.currentPort = currentPort;
+
+                    if(convoyComponent.convoyCurrentState == ConvoyState.AtPort)
                     {
-                        //?Redundante
-                        // convoyComponent.SetIADestination(GetDestinationFromKeyPoint(currentPort));
+                        ai.SetStateAs_AtPort();
                     }
                     else
                     {
-                        //? De momento, currentPort nunca es nulo, lo cual causa llamadas innecesarias
-                        //? Hay que revisar cómo de complejo sería modificar el código para que el currentPort sea nulo
-                        //? al llegar a destino => Renombrar variable  currentPort --> currentDestinatio
-                        //todo: current port != current Destination
-                        convoyComponent.Arrive();
+                        if (currentPort)
+                        {
+                            ai.SetStateAs_OnCruisse(currentPort);
+                            // convoyComponent.SetIADestination(GetDestinationFromKeyPoint(currentPort));
+                        }
                     }
+                    // ai.SetStateAs_OnCruisse(currentPort);
+                    // if (convoyComponent.currentPort)
+                    // {
+                    //     //?Redundante
+                    //     // convoyComponent.SetIADestination(GetDestinationFromKeyPoint(currentPort));
+                    // }
+                    // else
+                    // {
+                    //     //? De momento, currentPort nunca es nulo, lo cual causa llamadas innecesarias
+                    //     //? Hay que revisar cómo de complejo sería modificar el código para que el currentPort sea nulo
+                    //     //? al llegar a destino => Renombrar variable  currentPort --> currentDestination
+                    //     //todo: current port != current Destination
+                    //     convoyComponent.Arrive();
+                    // }
                 }
             }
 
@@ -333,13 +347,9 @@ namespace GameMechanics.Data
                 foreach (SerializableConvoy patrol in patrols)
                 {
                     GameObject newConvoy = GetConvoy(container);
-                    Vector3 position = patrol.ToVector3(patrol.position);
-                    newConvoy.transform.position = position;
-
-                    Quaternion rotation = patrol.ToQuaternion(patrol.rotation);
-                    newConvoy.transform.rotation = rotation;
 
                     var convoyComponent = newConvoy.GetComponent<ConvoyNPC>();
+                    convoyComponent.LoadConvoyData(patrol);
 
                     var ai = newConvoy.GetComponent<AI_Patrol>();
                     if (ai == null)
@@ -357,22 +367,40 @@ namespace GameMechanics.Data
                         convoyComponent.thisConvoyShips[i] = s;
                         convoyComponent.SetConvoyData(this);
                     }
-
+                    ai.loadAIData(patrol);
                     ai.Awake();
 
                     //Reestablecer el objetivo de la ruta a la que se dirigía esta patrulla (puerto o convoy en persecución):
                     ushort currentPortId = patrol.currentPortId;
                     var currentPort = KeyPoint.GetByID(currentPortId);
-                    ai.SetStateAs_OnCruisse(currentPort);
-                    if (convoyComponent.currentPort)
+                    convoyComponent.currentPort = currentPort;
+
+                    if(convoyComponent.convoyCurrentState == ConvoyState.AtPort)
                     {
-                        //?Redundante
-                        // convoyComponent.SetIADestination(GetDestinationFromKeyPoint(currentPort));
+                        ai.SetStateAs_AtPort();
                     }
                     else
                     {
-                        //todo: la patrulla puede estar persiguiendo a un target
+                        if (currentPort)
+                        {
+                            ai.SetStateAs_OnCruisse(currentPort);
+                            // convoyComponent.SetIADestination(GetDestinationFromKeyPoint(currentPort));
+                        }
+                        else
+                        {
+                            //Está persiguiendo, pero aún no están todos los ids de convoyes cargados.
+                        }
                     }
+                    // ai.SetStateAs_OnCruisse(currentPort);
+                    // if (convoyComponent.currentPort)
+                    // {
+                    //     //?Redundante
+                    //     // convoyComponent.SetIADestination(GetDestinationFromKeyPoint(currentPort));
+                    // }
+                    // else
+                    // {
+                    //     //todo: la patrulla puede estar persiguiendo a un target
+                    // }
                 }
             }
 
@@ -382,13 +410,9 @@ namespace GameMechanics.Data
                 foreach (SerializableConvoy convoy in euConvoys)
                 {
                     GameObject newConvoy = GetConvoy(container);
-                    Vector3 position = convoy.ToVector3(convoy.position);
-                    newConvoy.transform.position = position;
-
-                    Quaternion rotation = convoy.ToQuaternion(convoy.rotation);
-                    newConvoy.transform.rotation = rotation;
 
                     var convoyComponent = newConvoy.GetComponent<ConvoyNPC>();
+                    convoyComponent.LoadConvoyData(convoy);
 
                     var ai = newConvoy.GetComponent<AI_Merchant>();
                     if (ai == null)
@@ -405,15 +429,28 @@ namespace GameMechanics.Data
                         convoyComponent.thisConvoyShips[i] = s;
                         convoyComponent.SetConvoyData(this);
                     }
-
+                    ai.loadAIData(convoy);
                     ai.Awake();
 
                     //Reestablecer el objetivo de la ruta a la que se dirigía el convoy:
                     ushort currentPortId = convoy.currentPortId;
                     var currentPort = KeyPoint.GetByID(currentPortId);
+                    convoyComponent.currentPort = currentPort;
+                    ai.convoyRoute = convoy.DeserializeRoute(convoy.convoyRoute);
+                    ai.toOcean = convoy.toOcean;
 
-                    //todo: y si vuelvo al oceano?
-                    var toOcean = convoy.toOcean;
+                    if(convoyComponent.convoyCurrentState == ConvoyState.AtPort)
+                    {
+                        ai.SetStateAs_AtPort();
+                    }
+                    else
+                    {
+                        if (currentPort)
+                        {
+                            ai.SetStateAs_OnCruisse(currentPort);
+                            // convoyComponent.SetIADestination(GetDestinationFromKeyPoint(currentPort));
+                        }
+                    }
                 }
             }
         }

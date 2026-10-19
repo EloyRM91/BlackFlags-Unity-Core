@@ -1861,6 +1861,8 @@ namespace GameMechanics.save
                 countryVillages[i] = new SerializableTown(town);
             }
 
+            //CONVOYES
+
             var shipsContainer = kTransform.GetChild(2);
             var shipsList = new List<SerializableConvoy>();
             for (int i = 0; i < shipsContainer.childCount; i++)
@@ -1874,7 +1876,25 @@ namespace GameMechanics.save
             }
             countryMerchants = shipsList.ToArray();
 
+            //-----------------------------------
+
             shipsContainer = kTransform.GetChild(4);
+            shipsList = new List<SerializableConvoy>();
+            for (int i = 0; i < shipsContainer.childCount; i++)
+            {
+                var shipObj = shipsContainer.GetChild(i);
+                if (shipObj.gameObject.activeSelf)
+                {
+                    var s = shipObj.GetComponent<ConvoyNPC>();
+                    shipsList.Add(new SerializableConvoy(s));
+                }
+
+            }
+            countryPatrols = shipsList.ToArray();
+
+            //-----------------------------------
+
+            shipsContainer = kTransform.GetChild(3);
             shipsList = new List<SerializableConvoy>();
             for (int i = 0; i < shipsContainer.childCount; i++)
             {
@@ -1888,27 +1908,22 @@ namespace GameMechanics.save
                     if (ai != null)
                     {
                         //Ruta de este convoy
-                        Settlement[] routeList = ai.getRemainingRoute;
-                        serialized.convoyRoute = serialized.SerializeRoute(routeList);
+                        var routeList = ai.getRemainingRoute.ToList();
+                        if (s.convoyCurrentState == ConvoyState.Sailing &&
+                            !ai.ToOcean &&
+                            s.currentPort is Settlement currentDestination)
+                        {
+                            //Fix que asegura que no se pierde el destino actual.
+                            //!fix de la ia
+                            routeList.Insert(0, currentDestination);
+                        }
+                        serialized.convoyRoute = serialized.SerializeRoute(routeList.ToArray());
 
                         //¿Este convoy europeo vuelve al océano?
                         serialized.toOcean = ai.ToOcean;
                     }
 
                     shipsList.Add(serialized);
-                }
-            }
-            countryPatrols = shipsList.ToArray();
-
-            shipsContainer = kTransform.GetChild(3);
-            shipsList = new List<SerializableConvoy>();
-            for (int i = 0; i < shipsContainer.childCount; i++)
-            {
-                var shipObj = shipsContainer.GetChild(i);
-                if (shipObj.gameObject.activeSelf)
-                {
-                    var s = shipObj.GetComponent<ConvoyNPC>();
-                    shipsList.Add(new SerializableConvoy(s));
                 }
             }
             europeanConvoys = shipsList.ToArray();
@@ -2272,6 +2287,7 @@ namespace GameMechanics.save
             currentPortId,
             targetId; //referencia al convoy/barco al que está persiguiendo
         public bool inOnTarget, visibleForPlayer, toOcean;
+        public byte convoyState;
 
         public ushort[] convoyRoute; //puertos de la ruta del convoy
 
@@ -2288,15 +2304,19 @@ namespace GameMechanics.save
             position = ConvertV3(tr.position);
             rotation = ConvertQuaternion(tr.rotation);
 
-            //todo: id y target id
+            //!los convoyes europeos pueden tener el puerto actual en null
             id = convoy.ID;
-            currentPortId = convoy.GetCurrentPort().KeyPointID;
-            if (currentPortId == 0)
-            {
-                Debug.LogError("Corrupción de datos de guardado: una clave vale 0");
-                Debug.LogError(convoy.GetCurrentPort()?.cityName);
-            }
+            var port = convoy.GetCurrentPort();
+            currentPortId = port == null ? (ushort)0 : convoy.GetCurrentPort().KeyPointID;
+
+            // if (currentPortId == 0)
+            // {
+            //     Debug.LogError("Corrupción de datos de guardado: una clave vale 0");
+            //     Debug.LogError(convoy.GetCurrentPort()?.cityName);
+            // }
+
             inOnTarget = convoy.isOnTarget;
+            convoyState = (byte)convoy.convoyCurrentState;
 
             //todo: tiene que haber una manera mejor de buscar en la lista cada vez que se guarda un barco...
             visibleForPlayer = PlayerExplorer.IsVisible(convoy.transform);
@@ -2310,6 +2330,18 @@ namespace GameMechanics.save
             {
                 var city = cities[i];
                 result[i] = city.KeyPointID;
+            }
+
+            return result;
+        }
+
+        public Settlement[] DeserializeRoute(ushort[] cities) {
+            var result = new Settlement[cities.Length];
+
+            for (int i = 0; i < cities.Length; i++)
+            {
+                Settlement city = (Settlement) KeyPoint.GetByID(cities[i]);
+                result[i] = city; 
             }
 
             return result;
