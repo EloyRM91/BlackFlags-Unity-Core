@@ -612,7 +612,7 @@ namespace GameMechanics.Data
                     {
                         equipment[index] += amount;
                         onLoad[index] = (byte)(onLoad[index] - amount);
-                        onUseWeaponsSlots[index] = (byte)(onUseWeaponsSlots[index] + amount); //no tendremos problemas de desbordamiento porque ning�n barco va a tener m�s de 256 ca�ones
+                        onUseWeaponsSlots[index] = (byte)(onUseWeaponsSlots[index] + amount); //no tendremos problemas de desbordamiento porque ningún barco va a tener más de 256 cañones
                         OnEquipmentEditRefresh(index);
                         //print($"{onUseWeaponsSlots[0]}  {onUseWeaponsSlots[1]}  {onUseWeaponsSlots[2]}  {onUseWeaponsSlots[3]} // {equipment[index]}");
                     }
@@ -629,7 +629,7 @@ namespace GameMechanics.Data
                                 {
                                     equipment[index] += amount;
                                     onLoad[index] -= amount;
-                                    onUseWeaponsSlots[ncaliber] = (byte)(onUseWeaponsSlots[ncaliber] + amount); //no tendremos problemas de desbordamiento porque ning�n barco va a tener m�s de 256 ca�ones
+                                    onUseWeaponsSlots[ncaliber] = (byte)(onUseWeaponsSlots[ncaliber] + amount); //no tendremos problemas de desbordamiento porque ningún barco va a tener más de 256 cañones
                                     OnEquipmentEditRefresh(index);
                                     //print($"{onUseWeaponsSlots[0]}  {onUseWeaponsSlots[1]}  {onUseWeaponsSlots[2]}  {onUseWeaponsSlots[3]} // {equipment[index]}");
                                     return;

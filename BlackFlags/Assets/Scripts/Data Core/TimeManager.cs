@@ -144,7 +144,7 @@ namespace GameMechanics.Data
             }
             else
             {
-                //Transcurre un d�a
+                //Transcurre un día
                 timer = 0;
                 WorldDate = WorldDate.AddDays(1);
 
@@ -152,7 +152,7 @@ namespace GameMechanics.Data
                 NewDay(WorldDate);
                 DailyConsumptionEvent();
 
-                //Actualiza mercados cada veinte d�as
+                //Actualiza mercados cada veinte días
                 counter20++;
                 if (counter20 == 20)
                 {
@@ -271,7 +271,7 @@ namespace GameMechanics.Data
         /// </summary>
         public void Normalize()
         {
-            currentIndex = 2; //Modificaci�n:
+            currentIndex = 2; //Modificación:
             SetTimeSpeed(1);
             UIMap.ui.UpdateSpeed(1);
             if (pausePanel.activeSelf) pausePanel.SetActive(false);

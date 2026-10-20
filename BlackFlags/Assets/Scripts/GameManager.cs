@@ -181,6 +181,7 @@ public class GameManager : MonoBehaviour
         obj.tag = "Untagged";
         return obj;
     }
+
     private void CreateArmada_PIRATE()
     {
         foreach (KeyPoint shelter in pirateShelters)
@@ -228,6 +229,7 @@ public class GameManager : MonoBehaviour
         }
         GameObject newCon = Instantiate(_prefab_Pirate, _pooling_Pirate);
         newCon.tag = "Pirate";
+        newCon.SetActive(true);
         return newCon;
     }
     #endregion
@@ -236,19 +238,6 @@ public class GameManager : MonoBehaviour
     #region DATA ACCESS
     public Kingdom GetKingdombyTag(ushort id)
     {
-        //switch (tag)
-        //{
-        //    case "KingdomSpain": return Kingdoms[0];
-        //    case "KingdomPortugal": return Kingdoms[1];
-        //    case "KingdomFrance": return Kingdoms[2];
-        //    case "KingdomDutch": return Kingdoms[3];
-        //    case "KingdomBritain": return Kingdoms[4];
-        //}
-        //return null;
-
-        //! desde la v0.033 ya no se utilizan tags. En lugar de eso, vamos a usar
-        //! un identificador (los mods podrán incluir otros reinos que no sean los establecidos)
-
         for (int i = 0; i < kingdoms.Length; i++)
         {
             if (kingdoms[i].tagKey == id)
@@ -257,12 +246,14 @@ public class GameManager : MonoBehaviour
 
         return null;
     }
+
     public KeyPoint GetShelter(KeyPoint currentShelter)
     {
         var ports = new List<KeyPoint>(pirateShelters);
         ports.Remove(currentShelter);
         return ports[Random.Range(0, ports.Count)];
     }
+
     public KeyPoint GetCity(KeyPoint currentCity)
     {
         var list = new List<KeyPoint>(kingdoms[Random.Range(0, 5)].GetPortsList().Where(p => p is MB_City).ToList());
@@ -270,6 +261,7 @@ public class GameManager : MonoBehaviour
         if (list.Count == 0) return GetCity(currentCity);
         return list[Random.Range(0, list.Count)];
     }
+    
     #endregion
 
     //Currents

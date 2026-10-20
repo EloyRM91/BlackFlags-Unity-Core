@@ -1995,24 +1995,6 @@ namespace GameMechanics.save
         public byte key;
         public int amount;
 
-        //public SerializableInventoryStacking(Resource r, int n)
-        //{
-        //    resource = new SerializableResource(r);
-        //    amount = n;
-        //}
-
-        //public SerializableInventoryStacking(SerializableResource r, int n)
-        //{
-        //    resource = r;
-        //    amount = n;
-        //}
-
-        //public SerializableInventoryStacking(InventoryItemStacking inv)
-        //{
-        //    resource = new SerializableResource(inv.resource);
-        //    amount = inv.amount;
-        //}
-
         public SerializableInventoryStacking(Resource r, int n)
         {
             key = r.Key;
@@ -2038,6 +2020,8 @@ namespace GameMechanics.save
     {
         public float friendshipLevel;
         public bool hasMetPlayer;
+
+        public ushort convoy_ID = 0; //id del convoy en el que navega (id 0 si no está embarcado)
     }
 
     [Serializable]
@@ -2046,13 +2030,6 @@ namespace GameMechanics.save
         public SerializableResource[] smugglerOffer;
         public SerializableInventoryStacking[] smugglerInventory;
         public int[] smugglerGenerationRatio;
-
-        // public SerializableSmuggler(SerializableResource[] smugglerOffer, SerializableInventoryStacking[] smugglerInventory, int[] smugglerGenerationRatio)
-        // {
-        //     this.smugglerOffer = smugglerOffer;
-        //     this.smugglerInventory = smugglerInventory;
-        //     this.smugglerGenerationRatio = smugglerGenerationRatio;
-        // }
 
         public SerializableSmuggler(Smuggler character)
         {

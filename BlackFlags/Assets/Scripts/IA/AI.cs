@@ -68,10 +68,6 @@ namespace GameMechanics.AI
     {
         [SerializeField] public Settlement[] convoyRoute;
 
-        // private void OnEnable() {
-        //     routeIndex = 0;
-        // }
-
         public Settlement[] getRemainingRoute
         {
             get

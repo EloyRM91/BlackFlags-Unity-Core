@@ -64,20 +64,20 @@ namespace GameMechanics.Data
         {
             Resource thisResource = fatherRow.GetStock().resource;
 
-            //Máximo según capacidad de carga
+            //MÃ¡ximo segÃºn capacidad de carga
             var shipCapacity = PersistentGameData._GData_PlayerShip.GetCapacity();
             var playerLoad = ShipInventory.shipLoad;
             float remainingCapacity = shipCapacity - playerLoad;
             int amountByCapacity = (int)Mathf.Floor(remainingCapacity / thisResource.weight); //Max value by capacity
 
-            //Máximo según dinero del jugador
+            //MÃ¡ximo segÃºn dinero del jugador
             var money = PersistentGameData._GData_Gold;
             int amountByGold = money / value ; //Max value by price
 
-            //Máximo por stock del comerciante
+            //MÃ¡ximo por stock del comerciante
             int amountByStock = fatherRow.GetStock().amount;
 
-            //Selecciona el valor más bajo
+            //Selecciona el valor mÃ¡s bajo
             var n = new int[3] { amountByCapacity, amountByGold, amountByStock };
             //print(amountByCapacity + " - " + amountByGold + " - " + amountByStock);
             int minimum = 999;

@@ -54,6 +54,7 @@ namespace GameMechanics.Data
     {
         public float friendshipLevel;
         public bool hasMetPlayer; //has this charecter seen the player before?
+        public ushort convoyID; //0 si no está embarcado
         //todo: esto tendrá que poder cambiarse a través de mods:
         protected static readonly Dictionary<AttributeType, List<string>> D_Presentations = new Dictionary<AttributeType, List<string>>()
         {
@@ -262,14 +263,6 @@ namespace GameMechanics.Data
         }
         public virtual void ModifyFriendship() { }
     }
-    /// <summary>
-    /// Baddies are smugglers, pirates and criminals. This class allows an easy tavern-view filtering 
-    /// </summary>
-    public abstract class Baddy : Character { }
-    /// <summary>
-    /// Goodies are neutral non-criminal characters
-    /// </summary>
-    public abstract class Goody : Character { }
 
     /// <summary>
     /// Contrabandista: Personaje que posee una lista de inventario.
@@ -538,6 +531,7 @@ namespace GameMechanics.Data
         //Variables
         public string shipName;
         private static List<Pirate> _pirateList = new List<Pirate>();
+        public static List<Pirate> GetPiratesList() { return _pirateList; }
         public int reputation;
         public CharacterAttribute[] attributes = new CharacterAttribute[2];
         public bool seenByPlayer;
@@ -547,7 +541,7 @@ namespace GameMechanics.Data
         private static readonly int[] seedLength = new int[10] { 9, 5, 5, 4, 1, 5, 9, 5, 10, 4 };
         private static readonly int[] seedLengthBIG = new int[10] { 9, 5, 1, 5, 1, 3, 9, 4, 10, 3 };
         public bool big;
-        public static List<Pirate> GetPiratesList() { return _pirateList; }
+
         private void SetRandomAttributes()
         {
             attributes[0] = CharacterAttribute.D_Attributes_Pirate1[Random.Range(0, 12)];
@@ -757,7 +751,7 @@ namespace GameMechanics.Data
     ///          public Criminal(EntityType_KINGDOM country)
     /// </summary>
     [System.Serializable]
-    public class Criminal : Baddy
+    public class Criminal : Character
     {
         //Constructor
         public Criminal(string name)

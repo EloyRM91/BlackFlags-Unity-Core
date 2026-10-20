@@ -116,7 +116,7 @@ public class UI_SpecialViewsHUD : MonoBehaviour
     }
     private void Action_TALK_SMUGGLER()
     {
-        //�Hablo con el contrabandista en una taberna?
+        //¿Hablo con el contrabandista en una taberna?
         if (UI_TavernView.activeSelf)
         {
             //Desactiva cabecera de la interfaz
@@ -126,7 +126,7 @@ public class UI_SpecialViewsHUD : MonoBehaviour
             //Activa acciones con este personaje
             UI_TAVERN_SmugglerActions.SetActive(true);
         }
-        //�Hablo con el contrabandista en un escondite de contrabando?
+        //¿Hablo con el contrabandista en un escondite de contrabando?
         else
         {
 
@@ -135,7 +135,7 @@ public class UI_SpecialViewsHUD : MonoBehaviour
 
     private void Action_TALK_PIRATE()
     {
-        //�Hablo con el pirata en una taberna?
+        //¿Hablo con el pirata en una taberna?
         if (UI_TavernView.activeSelf)
         {
             //Desactiva cabecera de la interfaz

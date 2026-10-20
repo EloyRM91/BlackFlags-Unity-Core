@@ -336,17 +336,17 @@ namespace GameMechanics.Data
                 }
 
                 if (lack > 1)
-                    txt = $"Faltan suministros b�sicos a bordo";
+                    txt = $"Faltan suministros básicos a bordo";
                 else if (lack == 1)
                     txt = $"Es preciso abastecerse de {D_WorldResources[lackOf].resourceName}.";
                 else
-                    txt = $"Hay suministros a bordo para mantener a la tripulaci�n {0} d�as.";
+                    txt = $"Hay suministros a bordo para mantener a la tripulación {0} días.";
 
                 var n = ShipInventory.Items[5];
                 txt +=
                     n > 25 ? " Hay herramientas de sobra para reparos y carenado" :
                     n > 16 ? " Las herramientas y materiales a bordo son suficientes." :
-                    n > 9 ? " La reserva de herramientas podr�a ser mayor." :
+                    n > 9 ? " La reserva de herramientas podría ser mayor." :
                     " Los materiales y herramientas son insuficientes";
 
             }
