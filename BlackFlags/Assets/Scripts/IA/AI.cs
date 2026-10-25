@@ -377,21 +377,27 @@ namespace GameMechanics.AI
             }
             SetStateAs_AtPort();
         }
+
         private void Start()
         {
             SetStateAs_AtPort();
         }
+
         public void CreatePirateCharacter(ushort k)
         {
             //pirateCharacter = new Pirate(Random.Range(16, 90), k); //Karma aleatorio?
             pirateCharacter = new Pirate(k);
         }
+
         public override string GetAIRol() { return "Pirata "; }
+
         public override string GetGentilism(Kingdom kingdom) { return string.Empty; }
+
         protected override Vector3 GetDestination(KeyPoint port)
         {
             return port.transform.GetChild(0).position;
         }
+
         public override void ArriveToDestination()
         {
             //¿Qué hago si llego a destino?
@@ -400,6 +406,7 @@ namespace GameMechanics.AI
             if (iT != null)
                 iT.Safe();
         }
+
         public void ChaseTarget(Convoy target)
         {
             //¿Cómo establezco el destino?
@@ -425,6 +432,7 @@ namespace GameMechanics.AI
                 var shelter = (MB_PirateShelter)currentPort;
                 shelter.GetOut(pirateCharacter);
             }
+            //todo: retrasar la salida un día
             //Si el jugador está en puerto el convoy no se va
             //if ()
             //{
@@ -432,7 +440,7 @@ namespace GameMechanics.AI
             //}
             currentPort = Random.Range(0, 2) == 1 ? GameManager.gm.GetCity(currentPort) : GameManager.gm.GetShelter(currentPort);
 
-            //PARCHE: ESTABLECER RUTA A BELIZE DA ERRORES DE PATHFINDING AL SALIR DE LOS PUERTOS DE LAS ANTILLAS
+            //!PARCHE: ESTABLECER RUTA A BELIZE DA ERRORES DE PATHFINDING AL SALIR DE LOS PUERTOS DE LAS ANTILLAS
             if (currentPort.cityName == "Belize" && Vector3.Distance(transform.position, currentPort.transform.position) > 150) currentPort = GameManager.gm.GetShelter(currentPort);
 
             _thisConvoy.currentPort = currentPort;
@@ -440,6 +448,7 @@ namespace GameMechanics.AI
             _thisConvoy.convoyCurrentState = ConvoyState.Sailing;
             collider.enabled = true;
         }
+        
         public override void SetStateAs_AtPort()
         {
             base.SetStateAs_AtPort();

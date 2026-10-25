@@ -20,8 +20,54 @@ namespace GameMechanics.Data
     ///         public Character() { }
     /// </summary>
 
-    public abstract class BASE_Character
+    public abstract class BASE_Character : IDable
     {
+        private ushort _characterID = 0; //0 = clave de no asignación - va al océano o persigue a un enemigo
+        public ushort CharacterID
+        {
+            get { return _characterID; }
+        }
+
+        private static ushort IDCounter = 1; // El id 0 es el id de no asignación.
+        public static ushort IDConvoyCounter { get { return IDCounter; } }
+        private static Dictionary<ushort, BASE_Character> registry = new Dictionary<ushort, BASE_Character>();
+
+        public void GenerateID()
+        {
+            _characterID = IDCounter;
+            IDCounter++;
+            registry[_characterID] = this;
+        }
+
+        public void SetID(ushort id)
+        {
+            if (_characterID != 0 &&
+                registry.TryGetValue(_characterID, out BASE_Character registeredCharacter) &&
+                registeredCharacter == this)
+            {
+                registry.Remove(_characterID);
+            }
+
+            _characterID = id;
+            registry[_characterID] = this;
+        }
+
+        public static BASE_Character GetByID(ushort id)
+        {
+            if (id == 0)
+            {
+                Debug.LogError("cannot set key to zero");
+                return null;
+            }
+            registry.TryGetValue(id, out BASE_Character ch);
+            return ch;
+        }
+
+        public void Dispose()
+        {
+            registry.Remove(_characterID);
+        }
+
         //Salutations
         //protected static Dictionary<EntityType_KINGDOM, string> D_Hello = new Dictionary<EntityType_KINGDOM, string>()
         //todo: en el caso de cargar un mod, el diccionario se debe sobre-escribir
@@ -54,7 +100,7 @@ namespace GameMechanics.Data
     {
         public float friendshipLevel;
         public bool hasMetPlayer; //has this charecter seen the player before?
-        public ushort convoyID; //0 si no está embarcado
+        // public ushort convoyID; //0 si no está embarcado
         //todo: esto tendrá que poder cambiarse a través de mods:
         protected static readonly Dictionary<AttributeType, List<string>> D_Presentations = new Dictionary<AttributeType, List<string>>()
         {
@@ -337,8 +383,6 @@ namespace GameMechanics.Data
             response = new List<string>() { "Como sigáis rimando os pego un tiro en la cara." };
 
             return new List<string>() { $"{GetSalutation()} Capitán {PersistentGameData._GData_PlayerName}. No seáis testarudos y no os quedéis mudos. Sed amable y sensato, puede que hagamos un trato." };
-
-
         }
 
         private string GetSalutation()
@@ -360,10 +404,12 @@ namespace GameMechanics.Data
         {
             return Mathf.Clamp(1 + (friendshipLevel - 0.4f) / 2, 1, 1.2f);
         }
+
         public override void ModifyFriendship(float amount)
         {
             ModifyFriendship_ByTrading(amount);
         }
+
         public void ModifyFriendship_ByTrading(float money)
         {
             friendshipLevel = Mathf.Clamp(friendshipLevel + money / 15000, 0, 1);
@@ -377,16 +423,6 @@ namespace GameMechanics.Data
             //UI_TavernView.SetFriendshipLevelST(this);
         }
 
-        //Constructor
-        //public Smuggler(string name, List<Resource> resources)
-        //{
-        //    CharacterName = name;
-        //    SmugglerOffer = resources;
-        //    SmugglerInventory = new List<InventoryItemStacking>();
-        //    SetFriendshipLevel();
-        //    SetGenerationRatio();
-        //    GetEvents();
-        //}
         //Constructor
         public Smuggler(ushort countryTag, List<Resource> resources)
         {

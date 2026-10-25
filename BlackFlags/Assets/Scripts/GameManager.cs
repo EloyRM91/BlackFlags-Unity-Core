@@ -52,6 +52,11 @@ public class GameManager : MonoBehaviour
     //Generation
     [SerializeField] private Transform _pooling_Pirate;
     [SerializeField] private GameObject _prefab_Pirate;
+    private List<ConvoyNPC> globalePirateConvoysList = new List<ConvoyNPC>();
+    public List<ConvoyNPC> PirateFleet
+    {
+        get { return globalePirateConvoysList;}
+    }
 
     //Settings
     public byte pirateActivity;
@@ -224,12 +229,14 @@ public class GameManager : MonoBehaviour
             if (!c.activeSelf)
             {
                 c.gameObject.SetActive(true);
+                globalePirateConvoysList.Add(c.GetComponent<ConvoyNPC>());
                 return c;
             }
         }
         GameObject newCon = Instantiate(_prefab_Pirate, _pooling_Pirate);
         newCon.tag = "Pirate";
         newCon.SetActive(true);
+        globalePirateConvoysList.Add(newCon.GetComponent<ConvoyNPC>());
         return newCon;
     }
     #endregion

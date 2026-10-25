@@ -32,7 +32,7 @@ namespace GameMechanics.WorldCities
         private static ushort IDCounter = 1;
         public static ushort IDKeyPointCounter { get { return IDCounter; } }
         private static Dictionary<ushort, KeyPoint> registry = new Dictionary<ushort, KeyPoint>();
-
+    
         //Keypoint's Data
         public string cityName, alternativeName;
         [SerializeField] private Sprite spriteNonSelected, spriteHighlighted;

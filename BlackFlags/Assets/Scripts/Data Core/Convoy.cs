@@ -92,6 +92,7 @@ namespace GameMechanics.Ships
         {
             _id = IDCounter;
             IDCounter++;
+            registry[_id] = this;
         }
 
         public void GenerateID(ushort val)
