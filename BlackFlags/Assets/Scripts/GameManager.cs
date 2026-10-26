@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     private List<ConvoyNPC> globalePirateConvoysList = new List<ConvoyNPC>();
     public List<ConvoyNPC> PirateFleet
     {
-        get { return globalePirateConvoysList;}
+        get { return globalePirateConvoysList; }
     }
 
     //Settings
@@ -142,10 +142,17 @@ public class GameManager : MonoBehaviour
 
                 k.GetArmadaFromSerializedData(merchantsInfo, patrolsInfo, europeanFleetInfo);
             }
+
+            //Convoyes pirata:
+            SerializablePirateConvoy[] serializedPirateData = info.serializedPirateFleetData;
+            GetPirateArmadaFromSerializedData(serializedPirateData);
+        }
+        else
+        {
+            CreateArmada_PIRATE();
         }
 
         //----------------------------------------------------
-        CreateArmada_PIRATE();
 
         // TODO: Aquí se han cargado ya todos los convoyes de los reinos
         // TODO: --> Restaurar los targets guardados de los convoyes cuando todos los convoyes
@@ -220,6 +227,56 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void GetPirateArmadaFromSerializedData(SerializablePirateConvoy[] pirates)
+    {
+        foreach (SerializablePirateConvoy convoy in pirates)
+        {
+            GameObject newCPirate = GetPirateShip();
+            var convoyComponent = newCPirate.GetComponent<ConvoyNPC>();
+            convoyComponent.LoadConvoyData(convoy);
+
+            var ai = newCPirate.GetComponent<AI_Pirate>();
+            if (ai == null)
+            {
+                ai = newCPirate.AddComponent<AI_Pirate>();
+            }
+
+            SerializableShip[] ships = convoy.convoyShips;
+            convoyComponent.thisConvoyShips = new Ship[ships.Length];
+            for (int i = 0; i < ships.Length; i++)
+            {
+                SerializableShip ship = ships[i];
+                Ship s = ship.GetShipFromSerializedData();
+                convoyComponent.thisConvoyShips[i] = s;
+            }
+            convoyComponent.SetConvoyData(null);
+            ai.loadAIData(convoy);
+            ai.Awake();
+
+            //Reestablecer el objetivo de la ruta a la que se dirigía este convoy:
+            ushort currentPortId = convoy.currentPortId;
+            var currentPort = KeyPoint.GetByID(currentPortId);
+            convoyComponent.currentPort = currentPort;
+
+            if (convoyComponent.convoyCurrentState == ConvoyState.AtPort)
+            {
+                ai.SetStateAs_AtPort();
+            }
+            else
+            {
+                if (currentPort)
+                {
+                    ai.SetStateAs_OnCruisse(currentPort);
+                    // convoyComponent.SetIADestination(GetDestinationFromKeyPoint(currentPort));
+                }
+            }
+
+            //Añade el personaje pirata:
+            ushort id = convoy.characterID;
+            //todo: crea el personaje
+        }
+    }
+
     //Pooling
     public GameObject GetPirateShip()
     {
@@ -268,7 +325,7 @@ public class GameManager : MonoBehaviour
         if (list.Count == 0) return GetCity(currentCity);
         return list[Random.Range(0, list.Count)];
     }
-    
+
     #endregion
 
     //Currents

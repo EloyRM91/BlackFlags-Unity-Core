@@ -103,7 +103,14 @@ public class PlayerExplorer : MonoBehaviour
                 var AI = other.GetComponent<AI_Pirate>();
                 if (AI != null)
                 {
-                    AI.pirateCharacter.seenByPlayer = true;
+                    if (AI.pirateCharacter != null)
+                    {
+                        AI.pirateCharacter.seenByPlayer = true;
+                    }
+                    else
+                    {
+                        Debug.LogError("el barco debe tener un personaje");
+                    }
                 }
             }
         }

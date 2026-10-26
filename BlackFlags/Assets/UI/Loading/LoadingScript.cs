@@ -146,6 +146,9 @@ namespace GameSettings.Loading
                         persistentContainer.name = "DELIVERY";
                         var delivery = persistentContainer.AddComponent<FleetsDataDelivery>();
                         delivery.shipmentData = gameFleetData;
+
+                        //Piratas:
+                        // SerializableConvoy[] serializedPirateData = gameFleetData.serializedPirateFleetData;
                     }
                 }
                 else

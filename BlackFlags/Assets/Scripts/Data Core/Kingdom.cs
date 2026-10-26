@@ -238,37 +238,6 @@ namespace GameMechanics.Data
             GENTILISM_FEMPLU = kingdomData.gentilism_FEMPLU;
         }
 
-        // public void GetArmadaFromSerializedData(SerializableKingdom kingdomData, Transform containers)
-        // {
-        //     //Mercantes 
-        //     {
-        //         SerializableConvoy[] merchants = kingdomData.countryMerchants;
-        //         Debug.Log(merchants.Length);
-
-        //         foreach (SerializableConvoy merchant in merchants)
-        //         {
-        //             GameObject newConvoy = GetConvoy(containers);
-        //             Vector3 position = merchant.ToVector3(merchant.position);
-        //             newConvoy.transform.position = position;
-
-        //             Quaternion rotation = merchant.ToQuaternion(merchant.rotation);
-        //             newConvoy.transform.rotation = rotation;
-
-        //             var data = newConvoy.GetComponent<ConvoyNPC>();
-        //             data.convoyCurrentState = (ConvoyState)merchant.convoyState;
-
-        //             SerializableShip[] ships = merchant.convoyShips;
-
-        //             foreach (SerializableShip ship in ships)
-        //             {
-        //                 Ship s = ship.GetShipFromSerializedData();
-        //                 Debug.Log(s.name_Ship);
-        //             }
-        //         }
-        //     }
-
-        // }
-
         public void GetArmadaFromSerializedData(
             SerializableConvoy[] merchants,
             SerializableConvoy[] patrols,
@@ -302,8 +271,8 @@ namespace GameMechanics.Data
                         SerializableShip ship = ships[i];
                         Ship s = ship.GetShipFromSerializedData();
                         convoyComponent.thisConvoyShips[i] = s;
-                        convoyComponent.SetConvoyData(this);
                     }
+                    convoyComponent.SetConvoyData(this);
                     ai.loadAIData(merchant);
                     ai.Awake();
 
@@ -312,7 +281,7 @@ namespace GameMechanics.Data
                     var currentPort = KeyPoint.GetByID(currentPortId);
                     convoyComponent.currentPort = currentPort;
 
-                    if(convoyComponent.convoyCurrentState == ConvoyState.AtPort)
+                    if (convoyComponent.convoyCurrentState == ConvoyState.AtPort)
                     {
                         ai.SetStateAs_AtPort();
                     }
@@ -365,8 +334,8 @@ namespace GameMechanics.Data
                         SerializableShip ship = ships[i];
                         Ship s = ship.GetShipFromSerializedData();
                         convoyComponent.thisConvoyShips[i] = s;
-                        convoyComponent.SetConvoyData(this);
                     }
+                    convoyComponent.SetConvoyData(this);
                     ai.loadAIData(patrol);
                     ai.Awake();
 
@@ -375,7 +344,7 @@ namespace GameMechanics.Data
                     var currentPort = KeyPoint.GetByID(currentPortId);
                     convoyComponent.currentPort = currentPort;
 
-                    if(convoyComponent.convoyCurrentState == ConvoyState.AtPort)
+                    if (convoyComponent.convoyCurrentState == ConvoyState.AtPort)
                     {
                         ai.SetStateAs_AtPort();
                     }
@@ -427,8 +396,8 @@ namespace GameMechanics.Data
                         SerializableShip ship = ships[i];
                         Ship s = ship.GetShipFromSerializedData();
                         convoyComponent.thisConvoyShips[i] = s;
-                        convoyComponent.SetConvoyData(this);
                     }
+                    convoyComponent.SetConvoyData(this);
                     ai.loadAIData(convoy);
                     ai.Awake();
 
@@ -439,7 +408,7 @@ namespace GameMechanics.Data
                     ai.convoyRoute = convoy.DeserializeRoute(convoy.convoyRoute);
                     ai.toOcean = convoy.toOcean;
 
-                    if(convoyComponent.convoyCurrentState == ConvoyState.AtPort)
+                    if (convoyComponent.convoyCurrentState == ConvoyState.AtPort)
                     {
                         ai.SetStateAs_AtPort();
                     }

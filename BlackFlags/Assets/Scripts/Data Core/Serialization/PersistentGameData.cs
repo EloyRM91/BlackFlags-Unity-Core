@@ -31,7 +31,7 @@ namespace GameMechanics.Data
         // abstract T GetById(ushort key) where T : IDable;
         abstract void Dispose();
     }
-    
+
     public class PersistentGameData : Persistent
     {
         #region VARIABLES
@@ -2312,13 +2312,14 @@ namespace GameMechanics.save
             return result;
         }
 
-        public Settlement[] DeserializeRoute(ushort[] cities) {
+        public Settlement[] DeserializeRoute(ushort[] cities)
+        {
             var result = new Settlement[cities.Length];
 
             for (int i = 0; i < cities.Length; i++)
             {
-                Settlement city = (Settlement) KeyPoint.GetByID(cities[i]);
-                result[i] = city; 
+                Settlement city = (Settlement)KeyPoint.GetByID(cities[i]);
+                result[i] = city;
             }
 
             return result;
@@ -2326,16 +2327,19 @@ namespace GameMechanics.save
     }
 
     [Serializable]
-    public class SerializablePirateConvoy : SerializableConvoy {
+    public class SerializablePirateConvoy : SerializableConvoy
+    {
         public ushort characterID;
 
         public SerializablePirateConvoy(ConvoyNPC convoy) : base(convoy)
         {
             var t = convoy.transform;
-            if(t.TryGetComponent<AI_Pirate>(out AI_Pirate pirateAI)) {
+            if (t.TryGetComponent<AI_Pirate>(out AI_Pirate pirateAI))
+            {
                 characterID = pirateAI.pirateCharacter.CharacterID;
             }
-            else {
+            else
+            {
                 Debug.LogError("err");
             }
 
@@ -2500,9 +2504,9 @@ namespace GameMechanics.save
         public SerializableNaturalPort[] naturalPorts;
         public SerializableSmugglersPost[] hideouts;
         public SerializablePirateShelter[] shelters;
-        
+
         //Pirate ships in Game
-        public SerializableConvoy[] pirates;
+        public SerializablePirateConvoy[] piratesFleet;
 
         public Transform[] LoadCitiesData()
         {
@@ -2657,10 +2661,7 @@ namespace GameMechanics.save
                 kingdomsFleet[i] = kingdomfleetData;
             }
 
-            //todo: flota pirata
-            SerializableConvoy pirateFleetData = null;
-
-            var result = new SerializedGameFleetData(kingdomsFleet, pirateFleetData);
+            var result = new SerializedGameFleetData(kingdomsFleet, piratesFleet);
             return result;
         }
 
@@ -2759,11 +2760,12 @@ namespace GameMechanics.save
 
             // Pirate fleet:
             ConvoyNPC[] pirateConvoys = GameManager.gm.PirateFleet.ToArray();
-            pirates = new SerializablePirateConvoy[pirateConvoys.Length];
-            for(int i = 0; i < pirateConvoys.Length; i++) {
+            piratesFleet = new SerializablePirateConvoy[pirateConvoys.Length];
+            for (int i = 0; i < pirateConvoys.Length; i++)
+            {
                 var convoy = pirateConvoys[i];
                 var serializedPirateFleet = new SerializablePirateConvoy(convoy);
-                pirates[i] = serializedPirateFleet;
+                piratesFleet[i] = serializedPirateFleet;
             }
 
             //* World, kingdoms and cities:
@@ -2905,9 +2907,9 @@ namespace GameMechanics.save
     public class SerializedGameFleetData
     {
         public SerializedKingdomFleetData[] serializedKingdomsFleetData;
-        public SerializableConvoy serializedPirateFleetData;
+        public SerializablePirateConvoy[] serializedPirateFleetData;
 
-        public SerializedGameFleetData(SerializedKingdomFleetData[] kd, SerializableConvoy pd)
+        public SerializedGameFleetData(SerializedKingdomFleetData[] kd, SerializablePirateConvoy[] pd)
         {
             serializedKingdomsFleetData = kd;
             serializedPirateFleetData = pd;

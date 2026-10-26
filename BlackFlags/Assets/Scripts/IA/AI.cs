@@ -23,8 +23,9 @@ namespace GameMechanics.AI
 
         //Serialización
         protected bool loaded;
-        public virtual void SetDefaultBehaviour() {}
-        public virtual void loadAIData(GameMechanics.save.SerializableConvoy convoyInfo) {
+        public virtual void SetDefaultBehaviour() { }
+        public virtual void loadAIData(GameMechanics.save.SerializableConvoy convoyInfo)
+        {
             loaded = true;
         }
 
@@ -56,6 +57,7 @@ namespace GameMechanics.AI
             _thisConvoy = GetComponent<ConvoyNPC>();
             collider = GetComponent<Collider>();
         }
+
         public void SetTag(string tag)
         {
             transform.tag = tag;
@@ -82,7 +84,7 @@ namespace GameMechanics.AI
             get { return toOcean; }
         }
 
-        public override void SetDefaultBehaviour() 
+        public override void SetDefaultBehaviour()
         {
             routeIndex = 0;
             convoyRoute = null;
@@ -90,9 +92,11 @@ namespace GameMechanics.AI
             StartCoroutine("SetOnCruisseSync");
         }
 
-        public override void loadAIData(GameMechanics.save.SerializableConvoy convoyInfo) {
+        public override void loadAIData(GameMechanics.save.SerializableConvoy convoyInfo)
+        {
             base.loadAIData(convoyInfo);
-            if(convoyInfo.convoyRoute != null) {
+            if (convoyInfo.convoyRoute != null)
+            {
                 convoyRoute = convoyInfo.DeserializeRoute(convoyInfo.convoyRoute);
             }
 
@@ -380,7 +384,10 @@ namespace GameMechanics.AI
 
         private void Start()
         {
-            SetStateAs_AtPort();
+            if (!loaded)
+            {
+                SetStateAs_AtPort();
+            }
         }
 
         public void CreatePirateCharacter(ushort k)
@@ -420,7 +427,6 @@ namespace GameMechanics.AI
             {
                 _thisConvoy.currentPort = currentPort;
             }
-            currentPort = _thisConvoy.currentPort;
 
             if (currentPort is MB_City)
             {
@@ -438,17 +444,21 @@ namespace GameMechanics.AI
             //{
             //    SetStateAs_AtPort();
             //}
-            currentPort = Random.Range(0, 2) == 1 ? GameManager.gm.GetCity(currentPort) : GameManager.gm.GetShelter(currentPort);
 
-            //!PARCHE: ESTABLECER RUTA A BELIZE DA ERRORES DE PATHFINDING AL SALIR DE LOS PUERTOS DE LAS ANTILLAS
-            if (currentPort.cityName == "Belize" && Vector3.Distance(transform.position, currentPort.transform.position) > 150) currentPort = GameManager.gm.GetShelter(currentPort);
+            if (currentPort == null)
+            {
+                currentPort = Random.Range(0, 2) == 1 ? GameManager.gm.GetCity(currentPort) : GameManager.gm.GetShelter(currentPort);
+
+                //!PARCHE: ESTABLECER RUTA A BELIZE DA ERRORES DE PATHFINDING AL SALIR DE LOS PUERTOS DE LAS ANTILLAS
+                if (currentPort.cityName == "Belize" && Vector3.Distance(transform.position, currentPort.transform.position) > 150) currentPort = GameManager.gm.GetShelter(currentPort);
+            }
 
             _thisConvoy.currentPort = currentPort;
             _thisConvoy.SetIADestination(GetDestination(currentPort));
             _thisConvoy.convoyCurrentState = ConvoyState.Sailing;
             collider.enabled = true;
         }
-        
+
         public override void SetStateAs_AtPort()
         {
             base.SetStateAs_AtPort();
@@ -493,7 +503,7 @@ namespace GameMechanics.AI
         {
             GetComponent<Convoy>().isOnTarget = true;
         }
-        
+
         public void MakeChasersRecalculatePath()
         {
             var temp = new List<Convoy>(chasers);
@@ -517,6 +527,5 @@ namespace GameMechanics.AI
         }
     }
 }
-
 
 
