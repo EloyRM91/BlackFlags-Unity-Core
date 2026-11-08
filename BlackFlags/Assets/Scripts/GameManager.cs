@@ -272,8 +272,11 @@ public class GameManager : MonoBehaviour
             }
 
             //Añade el personaje pirata:
-            ushort id = convoy.characterID;
+            // ushort id = convoy.characterID;
             //todo: crea el personaje
+            SerializablePirate serializedCharacterInfo = convoy.serializedCharacter;
+            Pirate thisConovyCaptain = serializedCharacterInfo.Deserialize();
+            ai.pirateCharacter = thisConovyCaptain;
         }
     }
 

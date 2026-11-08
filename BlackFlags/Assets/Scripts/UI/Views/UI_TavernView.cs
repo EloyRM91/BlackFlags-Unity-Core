@@ -169,7 +169,7 @@ public class UI_TavernView : UI_ScenicView<UI_TavernView>
             var layers = pirate.big ? _CharacterLayersBIG : _CharacterLayers;
 
             //Get character custom seed
-            int[] seeds = pirate.GetSeed();
+            ushort[] seeds = pirate.GetSeed();
             for (int i = 0; i < layers.Length; i++)
             {
 

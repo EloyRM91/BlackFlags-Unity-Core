@@ -5,6 +5,7 @@ using UnityEngine;
 using GameMechanics.WorldCities;
 using GameMechanics.Ships;
 using GameMechanics.AI;
+using GameSettings.Core;
 //UI
 using UI.WorldMap;
 
@@ -101,16 +102,9 @@ public class PlayerExplorer : MonoBehaviour
             {
                 visibleConvoys.Add(other.transform);
                 var AI = other.GetComponent<AI_Pirate>();
-                if (AI != null)
+                if (AI != null && AI.pirateCharacter != null && !PersistentGameSettings.loadingFile)
                 {
-                    if (AI.pirateCharacter != null)
-                    {
-                        AI.pirateCharacter.seenByPlayer = true;
-                    }
-                    else
-                    {
-                        Debug.LogError("el barco debe tener un personaje");
-                    }
+                    AI.pirateCharacter.seenByPlayer = true;
                 }
             }
         }

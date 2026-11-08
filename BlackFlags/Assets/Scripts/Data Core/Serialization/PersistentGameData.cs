@@ -2064,16 +2064,21 @@ namespace GameMechanics.save
     public class SerializablePirate : SerializableCharacter
     {
         public string shipName;
+        public ushort characterID;
         public int reputation;
         public bool seenByPlayer;
+        public bool big;
         public ushort[] attributesIndices, characterAspectSeeds;
 
         public SerializablePirate(Pirate character)
         {
             characterName = character.GetCharacterName();
+            characterID = character.CharacterID;
             hasMetPlayer = character.hasMetPlayer;
+            friendshipLevel = character.friendshipLevel;
             seenByPlayer = character.seenByPlayer;
             reputation = character.reputation;
+            big = character.big;
 
             //Atributos de personaje:
             {
@@ -2087,9 +2092,14 @@ namespace GameMechanics.save
 
             //Aspecto físico del personaje:
             {
-                int[] characterSeeds = character.GetSeed();
-                characterAspectSeeds = new ushort[characterSeeds.Length];
+                ushort[] characterSeeds = character.GetSeed();
+                characterAspectSeeds = characterSeeds.ToArray();
             }
+        }
+
+        public Pirate Deserialize()
+        {
+            return new Pirate(this);
         }
     }
 
@@ -2329,14 +2339,18 @@ namespace GameMechanics.save
     [Serializable]
     public class SerializablePirateConvoy : SerializableConvoy
     {
-        public ushort characterID;
+        // public ushort characterID;
+        public SerializablePirate serializedCharacter;
 
         public SerializablePirateConvoy(ConvoyNPC convoy) : base(convoy)
         {
             var t = convoy.transform;
             if (t.TryGetComponent<AI_Pirate>(out AI_Pirate pirateAI))
             {
-                characterID = pirateAI.pirateCharacter.CharacterID;
+                var pirate = pirateAI.pirateCharacter;
+                // characterID = pirate.CharacterID;
+
+                serializedCharacter = new SerializablePirate(pirate);
             }
             else
             {

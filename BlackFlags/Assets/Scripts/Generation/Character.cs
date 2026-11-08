@@ -7,7 +7,7 @@ using Generation.Generators;
 
 //Serialization
 using GameMechanics.save;
-
+using System.Linq;
 namespace GameMechanics.Data
 {
     //--------------------------------
@@ -28,8 +28,15 @@ namespace GameMechanics.Data
             get { return _characterID; }
         }
 
+        public string characterName;
+        public ushort kingdomTag = 9999;
+        public string GetCharacterName()
+        {
+            return characterName;
+        }
+
         private static ushort IDCounter = 1; // El id 0 es el id de no asignación.
-        public static ushort IDConvoyCounter { get { return IDCounter; } }
+        public static ushort IDCharacterCounter { get { return IDCounter; } }
         private static Dictionary<ushort, BASE_Character> registry = new Dictionary<ushort, BASE_Character>();
 
         public void GenerateID()
@@ -80,14 +87,6 @@ namespace GameMechanics.Data
             {4, "How do you do?,"}
         };
 
-
-        public string characterName;
-        public ushort kingdomTag = 9999;
-        public string GetCharacterName()
-        {
-            return characterName;
-        }
-        //public void SetNameByGeneration(EntityType_KINGDOM nationality, bool isPirate = false)
         public void SetNameByGeneration(ushort nationality, bool isPirate = false)
         {
             characterName = WorldGenerator.GetCharacterName(nationality, isPirate);
@@ -573,7 +572,7 @@ namespace GameMechanics.Data
         public bool seenByPlayer;
 
         //Seed Generation (Pirate aspect)
-        private int[] characterSeed = new int[10];
+        private ushort[] characterSeed = new ushort[10];
         private static readonly int[] seedLength = new int[10] { 9, 5, 5, 4, 1, 5, 9, 5, 10, 4 };
         private static readonly int[] seedLengthBIG = new int[10] { 9, 5, 1, 5, 1, 3, 9, 4, 10, 3 };
         public bool big;
@@ -590,10 +589,10 @@ namespace GameMechanics.Data
             int[] seedL = big ? seedLengthBIG : seedLength;
             for (int i = 0; i < 10; i++)
             {
-                characterSeed[i] = Random.Range(0, seedL[i]);
+                characterSeed[i] = (ushort)Random.Range(0, seedL[i]);
             }
         }
-        public int[] GetSeed() { return characterSeed; }
+        public ushort[] GetSeed() { return characterSeed; }
 
         //Overrides
         public override string GetRoleName() { return "Pirata"; }
@@ -721,7 +720,6 @@ namespace GameMechanics.Data
             UI_TavernView.SetFriendshipLevelST(this);
         }
 
-        //Constructor
         public Pirate(string name, int Karma)
         {
             characterName = name;
@@ -730,8 +728,7 @@ namespace GameMechanics.Data
             SetFriendshipLevel();
             _pirateList.Add(this);
         }
-        //Constructor
-        //public Pirate (int karma, EntityType_KINGDOM country)
+
         public Pirate(int karma, ushort country)
         {
             SetNameByGeneration(country, true);
@@ -740,7 +737,7 @@ namespace GameMechanics.Data
             SetFriendshipLevel();
             _pirateList.Add(this);
         }
-        //Constructor
+
         public Pirate()
         {
             var n = (ushort)Random.Range(0, 6);
@@ -751,14 +748,42 @@ namespace GameMechanics.Data
             SetFriendshipLevel();
             _pirateList.Add(this);
         }
-        //Constructor
-        //public Pirate( EntityType_KINGDOM country)
+
         public Pirate(ushort country)
         {
             SetNameByGeneration(country, true);
             SetRandomAttributes();
             SetFriendshipLevel();
             _pirateList.Add(this);
+        }
+
+        public Pirate(SerializablePirate serializedInfo)
+        {
+            characterName = serializedInfo.characterName;
+            var id = serializedInfo.characterID;
+            SetID(id);
+            hasMetPlayer = serializedInfo.hasMetPlayer;
+            friendshipLevel = serializedInfo.friendshipLevel;
+            seenByPlayer = serializedInfo.seenByPlayer;
+            reputation = serializedInfo.reputation;
+            big = serializedInfo.big;
+
+            //Atributos de personaje:
+            ushort[] attributesIndices = serializedInfo.attributesIndices;
+            attributes = new CharacterAttribute[attributesIndices.Length];
+            Debug.Log("-------------------------");
+            for (int i = 0; i < attributesIndices.Length; i++)
+            {
+                var attributeType = (AttributeType)attributesIndices[i];
+                Debug.Log(i);
+                Debug.Log(attributeType);
+                var dicTarget = i == 0 ? CharacterAttribute.D_Attributes_Pirate1 : CharacterAttribute.D_Attributes_Pirate2;
+                attributes[i] = dicTarget.Values.First(attribute => attribute.attribute == attributeType);
+            }
+
+            //Aspecto físico del personaje:
+            ushort[] serializedSeedsArray = serializedInfo.characterAspectSeeds;
+            characterSeed = serializedSeedsArray.ToArray();
         }
 
         private void SetFriendshipLevel()
@@ -919,27 +944,27 @@ namespace GameMechanics.Data
         //Bebedor colérico: Rasgo negativo. El nivel de amistad puede aumentar o disminuir al beber con el personaje.
         BebedorColérico = 7,
         //Agresivo: Se requiere menos afinidad y nivel de amistad para aceptar ataques en grupo
-        Agresivo,
+        Agresivo = 8,
         //Prudente: Rasgo negativo. Se requiere más afinidad y nivel de amistad para aceptar ataques en grupo.
-        Prudente,
+        Prudente = 9,
         //Callado. Rasgo negativo. El nivel de amistad aumenta más lentamente al beber con el personaje.
-        Callado,
+        Callado = 10,
         //Cruel: El nivel de amistad no aumenta si tu lealtad al código es mayor al 80%
-        Cruel,
+        Cruel = 11,
         //Caballeroso: El nivel de amistad no aumenta si tu lealtad al código es menor al 30%
-        Caballeroso,
+        Caballeroso = 12,
         //Desconfiado: Rasgo negativo. El nivel de amistad no puede superar el 80%
-        Desconfiado,
+        Desconfiado = 13,
         //Diligente: Rasgo Negativo. Como callado
-        Diligente,
+        Diligente = 14,
         //Tiene migrañas: Sin efecto
-        TieneMigrañas,
+        TieneMigrañas = 15,
         //Sanguinario: como cruel, pero más
-        Sanguinario,
+        Sanguinario = 16,
         //Orgulloso: Sin efecto
-        Orgulloso,
+        Orgulloso = 17,
         //Colecciona trofeos: Sin efecto
-        ColeccionaTrofeos
+        ColeccionaTrofeos = 18
     }
     #endregion
     /// <summary>
@@ -981,4 +1006,3 @@ namespace GameMechanics.Data
         }
     }
 }
-
